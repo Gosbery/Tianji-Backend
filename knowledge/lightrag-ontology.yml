@@ -1,0 +1,16 @@
+entity_types:
+  - 五行
+  - 天干
+  - 地支
+  - 十神
+  - 柱位
+  - 条件
+  - 结论
+  - 流派
+  - 出处
+relationship_policy:
+  authoritative_sources: [reviewed_knowledge_card, source_passage]
+  graph_relationships_are_retrieval_hints_only: true
+  namespace_pattern: "{school}:{entity_type}:{entity_name}"
+  require_source_reference_for_answer: true
+

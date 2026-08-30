@@ -1,0 +1,305 @@
+cards:
+  - id: element-wood
+    title: 木的基础象义
+    content: 木常被用来描述生发、伸展与条达的倾向。它是一种关系语言，不等同于现实中的树木，也不能单独推出性格或职业。
+    concepts: [五行, 木]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 五行是关系模型}]
+  - id: element-fire
+    title: 火的基础象义
+    content: 火常被用来描述温热、显现与向外传递的倾向，但不能只解释成热情。判断时仍要看它在四时和整体关系中的位置。
+    concepts: [五行, 火]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 五行是关系模型}]
+  - id: element-earth
+    title: 土的基础象义
+    content: 土常被用来描述承载、转化与居中协调的倾向。土并非一律代表稳定，具体含义取决于组合与时令。
+    concepts: [五行, 土]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 五行是关系模型}]
+  - id: element-metal
+    title: 金的基础象义
+    content: 金常被用来描述收敛、界定与取舍的倾向。它不能脱离生克关系被直接解释为强硬或财富。
+    concepts: [五行, 金]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 五行是关系模型}]
+  - id: element-water
+    title: 水的基础象义
+    content: 水常被用来描述流动、润下与信息汇聚的倾向。水多或水少都必须结合季节、位置和其他干支讨论。
+    concepts: [五行, 水]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 五行是关系模型}]
+
+  - id: stem-jia
+    title: 甲木
+    content: 甲是阳木。基础学习中可借高直、生发的意象理解，但实际解读必须回到甲与月令、地支和其他天干的关系。
+    concepts: [天干, 甲, 木, 阳]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十天干}]
+  - id: stem-yi
+    title: 乙木
+    content: 乙是阴木。常借柔韧、曲直的意象帮助记忆，但阴阳只描述作用方式，不直接等于好坏或性格。
+    concepts: [天干, 乙, 木, 阴]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十天干}]
+  - id: stem-bing
+    title: 丙火
+    content: 丙是阳火。常借光明、外显的意象帮助理解；是否表现为主动或显达，需要整体命盘证据。
+    concepts: [天干, 丙, 火, 阳]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十天干}]
+  - id: stem-ding
+    title: 丁火
+    content: 丁是阴火。常借聚焦、持续照明的意象记忆；不能仅凭丁火就断言情绪、关系或职业。
+    concepts: [天干, 丁, 火, 阴]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十天干}]
+  - id: stem-wu
+    title: 戊土
+    content: 戊是阳土。常借厚重、承载的意象理解；其作用仍随燥湿、季节与生克关系变化。
+    concepts: [天干, 戊, 土, 阳]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十天干}]
+  - id: stem-ji
+    title: 己土
+    content: 基础分类中己是阴土。常借整理、培育的意象理解；不能把这一意象直接写成固定人格标签。
+    concepts: [天干, 己, 土, 阴]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十天干}]
+  - id: stem-geng
+    title: 庚金
+    content: 庚是阳金。常借整肃、裁断的意象记忆；具体表达要看是否得令、得地及与其他元素的关系。
+    concepts: [天干, 庚, 金, 阳]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十天干}]
+  - id: stem-xin
+    title: 辛金
+    content: 辛是阴金。常借精细、界定的意象记忆；不可由此直接推断审美、财富或人际结果。
+    concepts: [天干, 辛, 金, 阴]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十天干}]
+  - id: stem-ren
+    title: 壬水
+    content: 壬是阳水。常借江海、流动范围大的意象理解；其现实表现仍需结合全盘条件。
+    concepts: [天干, 壬, 水, 阳]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十天干}]
+  - id: stem-gui
+    title: 癸水
+    content: 癸是阴水。常借润泽、细密流动的意象记忆；不能单独据此判断隐秘、智慧或情绪。
+    concepts: [天干, 癸, 水, 阴]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十天干}]
+
+  - id: branch-zi
+    title: 子支
+    content: 子属水，常作为十二地支的起点之一。地支还包含藏干与节令信息，不能只按一个五行字解释。
+    concepts: [地支, 子, 水]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十二地支}]
+  - id: branch-chou
+    title: 丑支
+    content: 丑属土，内部藏干使它并非单一的土。基础解读应同时保留季节和藏干层次。
+    concepts: [地支, 丑, 土, 藏干]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十二地支}]
+  - id: branch-yin
+    title: 寅支
+    content: 寅属木，并含有多重藏干。它既是五行位置也是节令位置，不能仅以生肖含义代替。
+    concepts: [地支, 寅, 木, 藏干]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十二地支}]
+  - id: branch-mao
+    title: 卯支
+    content: 卯属木。解释卯时要区分其五行、所在柱位和与其他地支的关系。
+    concepts: [地支, 卯, 木]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十二地支}]
+  - id: branch-chen
+    title: 辰支
+    content: 辰属土并含多重藏干。所谓辰土的作用不能脱离季节、透干和组合直接确定。
+    concepts: [地支, 辰, 土, 藏干]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十二地支}]
+  - id: branch-si
+    title: 巳支
+    content: 巳属火并含多重藏干。理解时要同时看火的节令背景与干支关系。
+    concepts: [地支, 巳, 火, 藏干]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十二地支}]
+  - id: branch-wu
+    title: 午支
+    content: 午属火。它在不同柱位和不同季节中的含义不同，不能简化为热情等单一人格词。
+    concepts: [地支, 午, 火]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十二地支}]
+  - id: branch-wei
+    title: 未支
+    content: 未属土并含多重藏干。分析时需要保留其中不同五行的层次，而非视作纯土。
+    concepts: [地支, 未, 土, 藏干]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十二地支}]
+  - id: branch-shen
+    title: 申支
+    content: 申属金并含多重藏干。它的意义由节令、藏干是否透出及其他关系共同限定。
+    concepts: [地支, 申, 金, 藏干]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十二地支}]
+  - id: branch-you
+    title: 酉支
+    content: 酉属金。分析时应区分五行属性、柱位与地支间关系，避免以生肖故事替代命盘证据。
+    concepts: [地支, 酉, 金]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十二地支}]
+  - id: branch-xu
+    title: 戌支
+    content: 戌属土并含多重藏干。它不是单一的燥土标签，具体解释要由全盘关系支持。
+    concepts: [地支, 戌, 土, 藏干]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十二地支}]
+  - id: branch-hai
+    title: 亥支
+    content: 亥属水并含藏干。其水与木的内部层次需要结合所在柱位和全盘关系理解。
+    concepts: [地支, 亥, 水, 藏干]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十二地支}]
+
+  - id: god-bijian
+    title: 比肩
+    content: 比肩表示与日主同五行、同阴阳的关系。常用于讨论同类、自我支持与并行关系，但不能单独断定竞争或朋友状况。
+    concepts: [十神, 比肩, 日主]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十神是相对关系}]
+  - id: god-jiecai
+    title: 劫财
+    content: 劫财表示与日主同五行、异阴阳的关系。名称不等于必然破财，需结合位置、强弱与其他十神讨论。
+    concepts: [十神, 劫财, 日主]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十神是相对关系}]
+  - id: god-shishen
+    title: 食神
+    content: 食神表示日主所生、同阴阳的关系。常用于描述输出与表达路径，但不能单独推出才艺、福气或职业结果。
+    concepts: [十神, 食神, 日主]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十神是相对关系}]
+  - id: god-shangguan
+    title: 伤官
+    content: 伤官表示日主所生、异阴阳的关系。名称不表示必然伤害官职，其作用必须放回具体结构理解。
+    concepts: [十神, 伤官, 日主]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十神是相对关系}]
+  - id: god-piancai
+    title: 偏财
+    content: 偏财表示日主所克、同阴阳的关系。它是关系标签，不等同于意外之财，也不能独立预测财富水平。
+    concepts: [十神, 偏财, 日主]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十神是相对关系}]
+  - id: god-zhengcai
+    title: 正财
+    content: 正财表示日主所克、异阴阳的关系。名称便于分类，不意味着稳定收入或固定婚姻结论。
+    concepts: [十神, 正财, 日主]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十神是相对关系}]
+  - id: god-qisha
+    title: 七杀
+    content: 七杀表示克日主、同阴阳的关系。它可提示压力与约束主题，但“有七杀”不等于灾祸或危险。
+    concepts: [十神, 七杀, 日主]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十神是相对关系}]
+  - id: god-zhengguan
+    title: 正官
+    content: 正官表示克日主、异阴阳的关系。常用于讨论规范与责任主题，但不能单独推断职位或婚姻。
+    concepts: [十神, 正官, 日主]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十神是相对关系}]
+  - id: god-pianyin
+    title: 偏印
+    content: 偏印表示生日主、同阴阳的关系。可用于讨论非直接支持与学习路径，但不能单独判断孤僻或偏门。
+    concepts: [十神, 偏印, 日主]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十神是相对关系}]
+  - id: god-zhengyin
+    title: 正印
+    content: 正印表示生日主、异阴阳的关系。常用于讨论支持与吸收主题，但不能直接等同于学历、母亲或好运。
+    concepts: [十神, 正印, 日主]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 十神是相对关系}]
+
+  - id: concept-yinyang
+    title: 阴阳描述作用方式
+    content: 阴阳用于描述同一五行的不同作用方式。它不是积极与消极、男性与女性或好与坏的简单二分。
+    concepts: [阴阳, 天干]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 阴阳不是价值判断}]
+  - id: concept-day-master
+    title: 日主是十神关系的参照点
+    content: 日柱天干称为日主。十神名称由其他干支与日主的生克及阴阳关系计算，因此更换日主后同一干支的十神名称可能改变。
+    concepts: [日主, 十神, 日柱]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 日主与十神}]
+  - id: concept-four-pillars
+    title: 四柱需要共同阅读
+    content: 年、月、日、时四柱提供不同位置和时间层次。单独抽取一柱或一个字，只能得到局部事实，不能代表完整命盘。
+    concepts: [四柱, 年柱, 月柱, 日柱, 时柱]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 四柱是位置结构}]
+  - id: concept-year-pillar
+    title: 年柱是命盘的一处位置
+    content: 年柱常被用于观察较早、较外层或家族背景主题，但这种映射属于解释框架，必须与其他柱交叉验证。
+    concepts: [四柱, 年柱]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 四柱是位置结构}]
+  - id: concept-month-pillar
+    title: 月柱与节令背景
+    content: 月柱尤其是月支提供出生季节的重要背景。月柱很重要，但仍不能脱离全盘直接决定人格或人生层级。
+    concepts: [四柱, 月柱, 月令]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 月令与季节}]
+  - id: concept-day-pillar
+    title: 日柱包含日主
+    content: 日柱天干是日主，日支是与日主相邻的重要位置。所谓日柱含义仍须与月令和其他干支共同分析。
+    concepts: [四柱, 日柱, 日主]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 日主与十神}]
+  - id: concept-time-pillar
+    title: 时柱依赖出生时间准确度
+    content: 时柱由出生时刻计算。时间记录误差、真太阳时校正和子时换日规则都可能造成边界差异，应主动展示不确定性。
+    concepts: [四柱, 时柱, 出生时间]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 时间边界}]
+  - id: concept-hidden-stems
+    title: 藏干提供地支内部层次
+    content: 地支并非只有表面的五行标签，藏干用于描述其内部包含的天干层次。藏干不等同于天干透出，解读时应区分显隐位置。
+    concepts: [地支, 藏干, 天干]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 藏干与显隐}]
+  - id: concept-month-command
+    title: 月令用于描述季节环境
+    content: 月支常称月令，是观察季节气候和五行状态的重要入口。它提供权重背景，但不应被简化为唯一强弱判据。
+    concepts: [月令, 月支, 五行]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 月令与季节}]
+  - id: concept-strength-boundary
+    title: 旺衰需要多条件判断
+    content: 旺衰不是数一数某个五行出现几次。月令、根气、透干、组合和具体流派都会影响判断，首版不自动给出身强身弱结论。
+    concepts: [旺衰, 月令, 流派]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 为什么首版不判旺衰}]
+  - id: concept-relations
+    title: 合冲刑害是关系信息
+    content: 合、冲、刑、害描述干支之间的特定关系。有冲不等于一定发生坏事，关系出现也不自动等于吉凶事件，其是否成立及作用方向需要更多条件。
+    concepts: [合, 冲, 刑, 害, 干支关系]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 关系不等于事件}]
+  - id: concept-schools
+    title: 不同流派可能使用不同权重
+    content: 子平等传统内部也存在取用、旺衰、格局和换日规则差异。回答应标注采用的流派，并把分歧作为不确定性而非强行统一。
+    concepts: [流派, 旺衰, 格局]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 流派与分歧}]
+  - id: concept-evidence-boundary
+    title: 命理解释必须保留证据边界
+    content: 命盘事实、命理规则与现实建议是三个层次。回答应分别展示依据和不确定性，不能只看一个五行就预测健康、财富或婚姻结果。
+    concepts: [证据, 不确定性, 解读边界]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 三层证据}]
