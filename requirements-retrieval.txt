@@ -1,4 +1,2 @@
 bm25s>=0.2.14
 numpy>=2.1.0
-qdrant-client>=1.15.0
-

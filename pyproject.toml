@@ -18,6 +18,17 @@ dev = [
   "pytest-asyncio>=1.1.0",
   "ruff>=0.12.0",
 ]
+retrieval = [
+  "bm25s>=0.2.14",
+  "numpy>=2.1.0",
+]
+local-ml = [
+  "sentence-transformers>=5.0.0",
+  "torch>=2.2.0",
+]
+qdrant = [
+  "qdrant-client>=1.15.0",
+]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

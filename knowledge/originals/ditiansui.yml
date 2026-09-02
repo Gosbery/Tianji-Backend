@@ -1,0 +1,20 @@
+work:
+  id: work-ditiansui
+  title: 滴天髓
+  attributed_author: 京图
+  dynasty: 宋（传统题署，作者归属待考）
+  edition: 待指定底本
+  edition_notes: 本文件仅演示四层格式；指定影印底本并逐字校勘后方可改为 reviewed。
+  rights: public_domain
+  status: draft
+
+passages:
+  - id: ditiansui-tongshen-001
+    volume: 通神论
+    chapter_path: [通神论, 天道]
+    sequence: 1
+    text: 欲识三元万法宗，先观帝载与神功。
+    locator: 通神论·天道·第1条
+    concepts: [三元, 天道]
+    graph_refs: [work:ditiansui]
+    status: draft

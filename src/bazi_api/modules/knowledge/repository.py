@@ -1,26 +1,68 @@
 from __future__ import annotations
 
+import hashlib
 import re
+from collections import defaultdict
+from collections.abc import Iterable
 from pathlib import Path
 
 import yaml
 
 from bazi_api.modules.retrieval.schemas import RetrievalDocument
 
-from .schemas import KnowledgeCard, SourcePassage
+from .schemas import (
+    CanonicalPassage,
+    CanonicalWork,
+    EvidenceScope,
+    GraphEdge,
+    GraphNode,
+    KnowledgeCard,
+    KnowledgeOverview,
+    ModernAnnotation,
+    SourceRef,
+)
 
 
 class KnowledgeRepository:
     def __init__(self, root: Path) -> None:
         self.root = root
+        self.works: list[CanonicalWork] = []
+        self.original_passages: list[CanonicalPassage] = []
+        self.annotations: list[ModernAnnotation] = []
         self.cards: list[KnowledgeCard] = []
-        self.passages: list[SourcePassage] = []
+        self.graph_nodes: list[GraphNode] = []
+        self.graph_edges: list[GraphEdge] = []
+        self._overview: KnowledgeOverview | None = None
 
     def load(self) -> None:
+        self._overview = None
+        self.works, self.original_passages = self._load_originals()
         self.cards = self._load_cards()
-        self.passages = self._load_sources()
+        self.graph_nodes, self.graph_edges = self._load_graph()
+        self.annotations = [*self._load_annotations(), *self._load_legacy_sources()]
         if not self.cards:
             raise RuntimeError(f"No knowledge cards found under {self.root / 'cards'}")
+        self._validate()
+        self._overview = self._calculate_overview()
+
+    def _load_originals(self) -> tuple[list[CanonicalWork], list[CanonicalPassage]]:
+        works: list[CanonicalWork] = []
+        passages: list[CanonicalPassage] = []
+        for path in sorted((self.root / "originals").glob("*.y*ml")):
+            payload = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+            work = CanonicalWork.model_validate(payload["work"])
+            works.append(work)
+            for item in payload.get("passages", []):
+                passages.append(CanonicalPassage.model_validate({"work_id": work.id, **item}))
+        return works, passages
+
+    def _load_annotations(self) -> list[ModernAnnotation]:
+        annotations: list[ModernAnnotation] = []
+        for path in sorted((self.root / "annotations").glob("*.y*ml")):
+            payload = yaml.safe_load(path.read_text(encoding="utf-8")) or []
+            items = payload.get("annotations", []) if isinstance(payload, dict) else payload
+            annotations.extend(ModernAnnotation.model_validate(item) for item in items)
+        return annotations
 
     def _load_cards(self) -> list[KnowledgeCard]:
         cards: list[KnowledgeCard] = []
@@ -30,13 +72,24 @@ class KnowledgeRepository:
             cards.extend(KnowledgeCard.model_validate(item) for item in items)
         return cards
 
-    def _load_sources(self) -> list[SourcePassage]:
-        passages: list[SourcePassage] = []
+    def _load_graph(self) -> tuple[list[GraphNode], list[GraphEdge]]:
+        nodes: list[GraphNode] = []
+        edges: list[GraphEdge] = []
+        for path in sorted((self.root / "graph").glob("*.y*ml")):
+            payload = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+            nodes.extend(GraphNode.model_validate(item) for item in payload.get("nodes", []))
+            edges.extend(GraphEdge.model_validate(item) for item in payload.get("edges", []))
+        return nodes, edges
+
+    def _load_legacy_sources(self) -> list[ModernAnnotation]:
+        """Treat existing Markdown research files as layer-2 research notes."""
+
+        annotations: list[ModernAnnotation] = []
         for path in sorted((self.root / "sources").glob("*.md")):
             text = path.read_text(encoding="utf-8")
             source_id = path.stem
-            title = source_id
-            chapter = "正文"
+            document_title = source_id
+            headings: list[str] = []
             buffer: list[str] = []
             index = 0
 
@@ -46,16 +99,24 @@ class KnowledgeRepository:
                 if not body:
                     return
                 index += 1
-                concepts = sorted({term for term in CONCEPT_TERMS if term in f"{chapter}{body}"})
-                passages.append(
-                    SourcePassage(
-                        id=f"{source_id}:{index}",
-                        source_id=source_id,
-                        title=title,
-                        chapter_path=chapter,
-                        text=body,
-                        locator=f"段落 {index}",
+                section = " / ".join(headings) or "正文"
+                concepts = self._extract_graph_concepts(f"{section}{body}")
+                annotations.append(
+                    ModernAnnotation(
+                        id=f"annotation:{source_id}:{index}",
+                        title=f"{document_title} · {section}",
+                        kind="research_note",
+                        content=body,
+                        publication=document_title,
                         concepts=concepts,
+                        source_refs=[
+                            SourceRef(
+                                source_id=source_id,
+                                section=headings[-1] if headings else section,
+                                locator=f"段落 {index}",
+                            )
+                        ],
+                        status="reviewed",
                     )
                 )
                 buffer = []
@@ -64,101 +125,443 @@ class KnowledgeRepository:
                 heading = re.match(r"^(#{1,4})\s+(.+)$", line)
                 if heading:
                     flush()
-                    chapter = heading.group(2).strip()
-                    if len(heading.group(1)) == 1:
-                        title = chapter
+                    level = len(heading.group(1))
+                    heading_text = heading.group(2).strip()
+                    if level == 1:
+                        document_title = heading_text
+                    headings[:] = headings[: max(0, level - 1)]
+                    headings.append(heading_text)
                     continue
                 if line.strip() == "---":
                     continue
                 buffer.append(line)
             flush()
-        return passages
+        return annotations
 
-    def documents(self) -> list[RetrievalDocument]:
-        docs: list[RetrievalDocument] = []
-        for card in self.cards:
-            if card.status != "reviewed":
-                continue
-            source = (
-                ", ".join(f"{ref.source_id} · {ref.section}" for ref in card.source_refs)
-                or "项目种子知识卡"
+    def _validate(self) -> None:
+        self._require_unique("work", (item.id for item in self.works))
+        self._require_unique("canonical passage", (item.id for item in self.original_passages))
+        self._require_unique("annotation", (item.id for item in self.annotations))
+        self._require_unique("knowledge card", (item.id for item in self.cards))
+        self._require_unique("graph node", (item.id for item in self.graph_nodes))
+        self._require_unique("graph edge", (item.id for item in self.graph_edges))
+
+        work_ids = {item.id for item in self.works}
+        work_status = {item.id: item.status for item in self.works}
+        passage_ids = {item.id for item in self.original_passages}
+        passage_status = {item.id: item.status for item in self.original_passages}
+        annotation_ids = {item.id for item in self.annotations}
+        annotation_status = {item.id: item.status for item in self.annotations}
+        node_ids = {item.id for item in self.graph_nodes}
+        node_status = {item.id: item.status for item in self.graph_nodes}
+        source_ids = {
+            ref.source_id
+            for annotation in self.annotations
+            for ref in annotation.source_refs
+            if ref.source_id
+        }
+
+        for passage in self.original_passages:
+            self._require_reference("work", passage.work_id, work_ids, passage.id)
+            self._require_status_dependency(
+                passage.status, work_status[passage.work_id], passage.id, passage.work_id
             )
+            self._validate_content_hash(passage.id, passage.text, passage.content_sha256)
+            self._require_graph_refs(passage.graph_refs, node_ids, passage.id)
+        for annotation in self.annotations:
+            for passage_id in annotation.passage_refs:
+                self._require_reference("passage", passage_id, passage_ids, annotation.id)
+                self._require_status_dependency(
+                    annotation.status, passage_status[passage_id], annotation.id, passage_id
+                )
+            self._validate_content_hash(
+                annotation.id, annotation.content, annotation.content_sha256
+            )
+            self._validate_source_refs(
+                annotation.source_refs, source_ids, passage_ids, annotation_ids, annotation.id
+            )
+            self._validate_ref_statuses(
+                annotation.status,
+                annotation.source_refs,
+                passage_status,
+                annotation_status,
+                annotation.id,
+            )
+            self._require_graph_refs(annotation.graph_refs, node_ids, annotation.id)
+        for card in self.cards:
+            for annotation_id in card.annotation_refs:
+                self._require_reference("annotation", annotation_id, annotation_ids, card.id)
+                self._require_status_dependency(
+                    card.status, annotation_status[annotation_id], card.id, annotation_id
+                )
+            self._validate_content_hash(card.id, card.content, card.content_sha256)
+            self._validate_source_refs(
+                card.source_refs, source_ids, passage_ids, annotation_ids, card.id
+            )
+            self._validate_ref_statuses(
+                card.status, card.source_refs, passage_status, annotation_status, card.id
+            )
+            self._require_graph_refs(card.graph_refs, node_ids, card.id)
+        for node in self.graph_nodes:
+            self._validate_source_refs(
+                node.source_refs, source_ids, passage_ids, annotation_ids, node.id
+            )
+            self._validate_ref_statuses(
+                node.status, node.source_refs, passage_status, annotation_status, node.id
+            )
+        for edge in self.graph_edges:
+            self._require_reference("graph node", edge.source, node_ids, edge.id)
+            self._require_reference("graph node", edge.target, node_ids, edge.id)
+            self._require_status_dependency(
+                edge.status, node_status[edge.source], edge.id, edge.source
+            )
+            self._require_status_dependency(
+                edge.status, node_status[edge.target], edge.id, edge.target
+            )
+            self._validate_source_refs(
+                edge.source_refs, source_ids, passage_ids, annotation_ids, edge.id
+            )
+            self._validate_ref_statuses(
+                edge.status, edge.source_refs, passage_status, annotation_status, edge.id
+            )
+
+        passages_by_work: defaultdict[str, list[CanonicalPassage]] = defaultdict(list)
+        for passage in self.original_passages:
+            passages_by_work[passage.work_id].append(passage)
+        for work in self.works:
+            ordered = sorted(passages_by_work[work.id], key=lambda item: item.sequence)
+            self._validate_content_hash(
+                work.id, "\n".join(item.text for item in ordered), work.content_sha256
+            )
+
+    @staticmethod
+    def _require_unique(kind: str, identifiers: Iterable[str]) -> None:
+        seen: set[str] = set()
+        duplicates: set[str] = set()
+        for identifier in identifiers:
+            if identifier in seen:
+                duplicates.add(identifier)
+            seen.add(identifier)
+        if duplicates:
+            raise ValueError(f"Duplicate {kind} ids: {', '.join(sorted(duplicates))}")
+
+    @staticmethod
+    def _require_reference(kind: str, target: str, known: set[str], owner: str) -> None:
+        if target not in known:
+            raise ValueError(f"{owner} references unknown {kind}: {target}")
+
+    @classmethod
+    def _validate_source_refs(
+        cls,
+        refs: Iterable[SourceRef],
+        source_ids: set[str],
+        passage_ids: set[str],
+        annotation_ids: set[str],
+        owner: str,
+    ) -> None:
+        for ref in refs:
+            if ref.source_id:
+                cls._require_reference("source", ref.source_id, source_ids, owner)
+            if ref.passage_id:
+                cls._require_reference("passage", ref.passage_id, passage_ids, owner)
+            if ref.annotation_id:
+                cls._require_reference("annotation", ref.annotation_id, annotation_ids, owner)
+
+    @classmethod
+    def _require_graph_refs(cls, refs: Iterable[str], node_ids: set[str], owner: str) -> None:
+        for node_id in refs:
+            cls._require_reference("graph node", node_id, node_ids, owner)
+
+    @staticmethod
+    def _require_status_dependency(
+        owner_status: str, target_status: str, owner: str, target: str
+    ) -> None:
+        allowed = {
+            "reviewed": {"reviewed"},
+            "machine_verified": {"machine_verified", "reviewed"},
+        }
+        if owner_status in allowed and target_status not in allowed[owner_status]:
+            raise ValueError(
+                f"{owner} ({owner_status}) cannot cite {target} ({target_status})"
+            )
+
+    @classmethod
+    def _validate_ref_statuses(
+        cls,
+        owner_status: str,
+        refs: Iterable[SourceRef],
+        passage_status: dict[str, str],
+        annotation_status: dict[str, str],
+        owner: str,
+    ) -> None:
+        for ref in refs:
+            if ref.passage_id:
+                cls._require_status_dependency(
+                    owner_status, passage_status[ref.passage_id], owner, ref.passage_id
+                )
+            if ref.annotation_id:
+                cls._require_status_dependency(
+                    owner_status, annotation_status[ref.annotation_id], owner, ref.annotation_id
+                )
+
+    @staticmethod
+    def _validate_content_hash(owner: str, content: str, expected: str) -> None:
+        if not expected:
+            return
+        actual = hashlib.sha256(content.encode("utf-8")).hexdigest()
+        if actual != expected:
+            raise ValueError(f"{owner} content_sha256 mismatch: {expected} != {actual}")
+
+    def overview(self) -> KnowledgeOverview:
+        if self._overview is None:
+            self._overview = self._calculate_overview()
+        return self._overview.model_copy(deep=True)
+
+    def _calculate_overview(self) -> KnowledgeOverview:
+        layers = {
+            "canonical_passages": len(self.original_passages),
+            "modern_annotations": len(self.annotations),
+            "knowledge_cards": len(self.cards),
+            "graph_nodes": len(self.graph_nodes),
+            "graph_edges": len(self.graph_edges),
+        }
+        reviewed = {
+            "canonical_passages": sum(item.status == "reviewed" for item in self.original_passages),
+            "modern_annotations": sum(item.status == "reviewed" for item in self.annotations),
+            "knowledge_cards": sum(item.status == "reviewed" for item in self.cards),
+            "graph_nodes": sum(item.status == "reviewed" for item in self.graph_nodes),
+            "graph_edges": sum(item.status == "reviewed" for item in self.graph_edges),
+        }
+        machine_verified = {
+            "canonical_passages": sum(
+                item.status == "machine_verified" for item in self.original_passages
+            ),
+            "modern_annotations": sum(
+                item.status == "machine_verified" for item in self.annotations
+            ),
+            "knowledge_cards": sum(item.status == "machine_verified" for item in self.cards),
+            "graph_nodes": sum(item.status == "machine_verified" for item in self.graph_nodes),
+            "graph_edges": sum(item.status == "machine_verified" for item in self.graph_edges),
+        }
+        return KnowledgeOverview(
+            layers=layers,
+            reviewed=reviewed,
+            machine_verified=machine_verified,
+            retrieval_documents=len(self.documents()),
+            preview_documents=len(self.documents("personal_preview")),
+        )
+
+    def _extract_graph_concepts(self, text: str) -> list[str]:
+        return sorted(
+            {
+                node.name
+                for node in self.graph_nodes
+                if node.type == "concept"
+                and any(term and term in text for term in [node.name, *node.aliases])
+            }
+        )
+
+    def documents(self, scope: EvidenceScope = "reviewed_only") -> list[RetrievalDocument]:
+        docs: list[RetrievalDocument] = []
+        works = {item.id: item for item in self.works}
+        passages = {item.id: item for item in self.original_passages}
+
+        for passage in self.original_passages:
+            if not self._status_allowed(passage.status, scope):
+                continue
+            work = works[passage.work_id]
+            graph_refs, graph_terms = self._graph_context(
+                passage.graph_refs, passage.concepts, scope
+            )
+            docs.append(
+                RetrievalDocument(
+                    id=passage.id,
+                    kind="canonical_passage",
+                    layer=1,
+                    title=f"{work.title} · {' / '.join(passage.chapter_path)}",
+                    text=passage.text,
+                    source=f"{work.title}（{work.edition}）· {passage.locator}",
+                    school="基础共识",
+                    concepts=passage.concepts,
+                    trace_refs=[passage.id, passage.work_id],
+                    graph_refs=graph_refs,
+                    retrieval_terms=graph_terms,
+                    normalized_text=passage.normalized_text,
+                    review_status=passage.status,
+                    verification_level=passage.verification_level,
+                    confidence=passage.confidence,
+                    warning=self._warning(passage.status, passage.unresolved_variants),
+                    unresolved_variants=passage.unresolved_variants,
+                    content_sha256=passage.content_sha256
+                    or self._content_sha256(passage.text),
+                )
+            )
+
+        for annotation in self.annotations:
+            if not self._status_allowed(annotation.status, scope):
+                continue
+            graph_refs, graph_terms = self._graph_context(
+                annotation.graph_refs, annotation.concepts, scope
+            )
+            passage_citations = [
+                f"{works[passages[item].work_id].title} · {passages[item].locator}"
+                for item in annotation.passage_refs
+            ]
+            source = "；".join(passage_citations) or self._format_refs(annotation.source_refs)
+            docs.append(
+                RetrievalDocument(
+                    id=annotation.id,
+                    kind="modern_annotation",
+                    layer=2,
+                    title=annotation.title,
+                    text=annotation.content,
+                    source=source or annotation.publication or "现代注释",
+                    school=annotation.school,
+                    concepts=annotation.concepts,
+                    trace_refs=[annotation.id, *annotation.passage_refs],
+                    graph_refs=graph_refs,
+                    retrieval_terms=graph_terms,
+                    review_status=annotation.status,
+                    verification_level=annotation.verification_level,
+                    confidence=annotation.confidence,
+                    warning=self._warning(annotation.status, annotation.unresolved_variants),
+                    unresolved_variants=annotation.unresolved_variants,
+                    content_sha256=annotation.content_sha256
+                    or self._content_sha256(annotation.content),
+                    version=annotation.version,
+                )
+            )
+
+        for card in self.cards:
+            if not self._status_allowed(card.status, scope):
+                continue
+            graph_refs, graph_terms = self._graph_context(card.graph_refs, card.concepts, scope)
+            text_parts = [card.content]
+            if card.rule:
+                text_parts.append(f"规则：{card.rule}")
+            if card.exceptions:
+                text_parts.append(f"例外：{'；'.join(card.exceptions)}")
+            if card.disagreements:
+                positions = "；".join(
+                    f"{position.school}：{position.claim}" for position in card.disagreements
+                )
+                text_parts.append(f"流派分歧：{positions}")
+            if card.prohibited_uses:
+                text_parts.append(f"禁用范围：{'；'.join(card.prohibited_uses)}")
             docs.append(
                 RetrievalDocument(
                     id=card.id,
                     kind="knowledge_card",
+                    layer=3,
                     title=card.title,
-                    text=card.content,
-                    source=source,
+                    text="\n".join(text_parts),
+                    source=self._format_refs(card.source_refs) or "项目种子知识卡",
                     school=card.school,
                     concepts=card.concepts,
                     conditions=card.conditions,
                     exclusions=card.exclusions,
-                )
-            )
-        for passage in self.passages:
-            docs.append(
-                RetrievalDocument(
-                    id=passage.id,
-                    kind="source_passage",
-                    title=f"{passage.title} · {passage.chapter_path}",
-                    text=passage.text,
-                    source=f"{passage.source_id} · {passage.locator}",
-                    school="基础共识",
-                    concepts=passage.concepts,
+                    trace_refs=[
+                        card.id,
+                        *card.annotation_refs,
+                        *self._trace_ref_ids(card.source_refs),
+                    ],
+                    graph_refs=graph_refs,
+                    retrieval_terms=graph_terms,
+                    review_status=card.status,
+                    verification_level=card.verification_level,
+                    confidence=card.confidence,
+                    warning=self._warning(card.status, card.unresolved_variants),
+                    unresolved_variants=card.unresolved_variants,
+                    content_sha256=card.content_sha256 or self._content_sha256(card.content),
+                    version=card.version,
                 )
             )
         return docs
 
+    def _graph_context(
+        self,
+        explicit_refs: Iterable[str],
+        concepts: Iterable[str],
+        scope: EvidenceScope,
+    ) -> tuple[list[str], list[str]]:
+        nodes = {item.id: item for item in self.graph_nodes}
+        label_to_id = {
+            label: node.id
+            for node in self.graph_nodes
+            if self._status_allowed(node.status, scope)
+            for label in [node.name, *node.aliases]
+        }
+        allowed_nodes = {
+            node.id for node in self.graph_nodes if self._status_allowed(node.status, scope)
+        }
+        refs = set(explicit_refs).intersection(allowed_nodes)
+        refs.update(label_to_id[item] for item in concepts if item in label_to_id)
+        adjacent: defaultdict[str, set[str]] = defaultdict(set)
+        for edge in self.graph_edges:
+            if not self._status_allowed(edge.status, scope):
+                continue
+            adjacent[edge.source].add(edge.target)
+            adjacent[edge.target].add(edge.source)
+        related = set(refs)
+        for node_id in refs:
+            related.update(adjacent[node_id])
+        terms = sorted(
+            {
+                term
+                for node_id in related
+                if node_id in nodes
+                for term in [nodes[node_id].name, *nodes[node_id].aliases]
+            }
+        )
+        return sorted(refs), terms
 
-CONCEPT_TERMS = [
-    "阴阳",
-    "五行",
-    "木",
-    "火",
-    "土",
-    "金",
-    "水",
-    "甲",
-    "乙",
-    "丙",
-    "丁",
-    "戊",
-    "己",
-    "庚",
-    "辛",
-    "壬",
-    "癸",
-    "子",
-    "丑",
-    "寅",
-    "卯",
-    "辰",
-    "巳",
-    "午",
-    "未",
-    "申",
-    "酉",
-    "戌",
-    "亥",
-    "日主",
-    "十神",
-    "比肩",
-    "劫财",
-    "食神",
-    "伤官",
-    "偏财",
-    "正财",
-    "七杀",
-    "正官",
-    "偏印",
-    "正印",
-    "藏干",
-    "月令",
-    "旺衰",
-    "合",
-    "冲",
-    "刑",
-    "害",
-    "流派",
-]
+    @staticmethod
+    def _status_allowed(status: str, scope: EvidenceScope) -> bool:
+        if scope == "reviewed_only":
+            return status == "reviewed"
+        return status in {"reviewed", "machine_verified"}
+
+    @staticmethod
+    def _content_sha256(content: str) -> str:
+        return hashlib.sha256(content.encode("utf-8")).hexdigest()
+
+    @staticmethod
+    def _warning(status: str, variants: list[str]) -> str:
+        if status != "machine_verified":
+            return ""
+        warning = "机器校勘资料：已通过自动完整性检查，尚未经人工逐字校勘。"
+        if variants:
+            warning += f"仍有 {len(variants)} 项未解决异文。"
+        return warning
+
+    @staticmethod
+    def _format_refs(refs: Iterable[SourceRef]) -> str:
+        labels: list[str] = []
+        for ref in refs:
+            if ref.passage_id:
+                labels.append(ref.passage_id)
+            elif ref.annotation_id:
+                labels.append(ref.annotation_id)
+            else:
+                label = " · ".join(part for part in [ref.source_id, ref.section] if part)
+                labels.append(label + (f" · {ref.locator}" if ref.locator else ""))
+        return "；".join(labels)
+
+    @staticmethod
+    def _direct_ref_ids(refs: Iterable[SourceRef]) -> list[str]:
+        return [target for ref in refs for target in [ref.passage_id, ref.annotation_id] if target]
+
+    def _trace_ref_ids(self, refs: Iterable[SourceRef]) -> list[str]:
+        refs = list(refs)
+        targets = self._direct_ref_ids(refs)
+        legacy_targets = {
+            (ref.source_id, ref.section)
+            for ref in refs
+            if ref.source_id and not ref.passage_id and not ref.annotation_id
+        }
+        for annotation in self.annotations:
+            if any(
+                (ref.source_id, ref.section) in legacy_targets for ref in annotation.source_refs
+            ):
+                targets.append(annotation.id)
+        return list(dict.fromkeys(targets))

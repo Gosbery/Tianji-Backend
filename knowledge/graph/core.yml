@@ -1,0 +1,401 @@
+nodes:
+- id: person:project-editors
+  type: person
+  name: 项目编审组
+  description: 负责项目种子资料录入、校勘与审核的内部角色。
+  status: reviewed
+  verification_level: human_review
+  confidence: 0.95
+  content_sha256: a3996f3dd4bd03cb69bf382abdc0116eab075d00316b5853aaa0cfe8533240e4
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: []
+  source_pages: []
+- id: school:basic-consensus
+  type: school
+  name: 基础共识
+  aliases:
+  - 基础层
+  description: 用于保存跨流派的基础定义和解释边界。
+  status: reviewed
+  verification_level: human_review
+  confidence: 0.95
+  content_sha256: d345d449c0253f6468d8bbf5d2a429f4c30ca6820178645ab83b1118f8e83b58
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: []
+  source_pages: []
+- id: concept:yinyang
+  type: concept
+  name: 阴阳
+  description: 描述作用方式的基础概念。
+  status: reviewed
+  verification_level: human_review
+  confidence: 0.95
+  content_sha256: 2280ee21f5cf902b61a99dcc271560592c32f1687d9401aa936b8038a302169f
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: []
+  source_pages: []
+- id: rule:yinyang-not-value
+  type: rule
+  name: 阴阳不是价值判断
+  description: 不把阴阳直接映射为好坏、男女或积极消极。
+  source_refs:
+  - source_id: project-foundation
+    section: 阴阳不是价值判断
+  status: reviewed
+  verification_level: human_review
+  confidence: 0.95
+  content_sha256: 0a43c88410fb1670fc1327d4166d86e7e5b1cfc8993fde8d5bd6b30d8fb65d60
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: []
+  source_pages: []
+- id: source:project-foundation
+  type: source
+  name: 八字基础概念说明
+  aliases:
+  - project-foundation
+  source_refs:
+  - source_id: project-foundation
+    section: 阴阳不是价值判断
+  status: reviewed
+  verification_level: human_review
+  confidence: 0.95
+  content_sha256: 244c8156282233cac4d62a7674606ad3458b942ec46133e1fcd9532e3d684021
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: []
+  source_pages: []
+- id: work:ditiansui
+  type: work
+  name: 滴天髓
+  status: draft
+- id: person:shen-xiaozhan
+  type: person
+  name: 沈孝瞻
+  aliases:
+  - 沈燡燔
+  description: 《子平真诠》传统归属作者；清乾隆四十一年序称其讳燡燔。
+  source_refs:
+  - passage_id: ziping-zhenquan-preface-p002
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  content_sha256: a71d8fc48a561d51f4a0030199c8606ab9695d473179dc27c2f27bf284952097
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: &id001
+  - 未获得可合法公开下载的第二底本，潜在异文尚无法逐字确认。
+  source_pages:
+  - https://www.diancangwang.cn/xuanxuewushu/03cf53eede8a/70dc3cc969b1.html
+- id: work:ziping-zhenquan
+  type: work
+  name: 子平真诠
+  aliases:
+  - 子平手录
+  - 耕寸集
+  description: 本项目当前保存的网络录入本为草稿，正文按四十七篇组织。
+  source_refs:
+  - passage_id: ziping-zhenquan-preface-p002
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  content_sha256: 085b3c6d5b2aae38b1bb7a34a7533c748b43b0466f94aced2d06a39b26df9ec6
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+  source_pages:
+  - https://www.diancangwang.cn/xuanxuewushu/03cf53eede8a/70dc3cc969b1.html
+- id: source:diancang-ziping
+  type: source
+  name: 中华典藏网《子平真诠》公开阅读页
+  aliases:
+  - ziping-zhenquan-web
+  source_refs:
+  - source_id: ziping-zhenquan-web
+    section: 书目页与章节页
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  content_sha256: 2225e5e6f2a8364481846bb720cf12434c15307ac6f87d401a7a1391fbbbb205
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+  source_pages: []
+- id: school:ziping-pattern
+  type: school
+  name: 子平格局法
+  aliases:
+  - 月令格局法
+  description: 以月令、用神、相神及格局成败为主要组织线索的解释体系。
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  content_sha256: 9044dd72de6504a7471ec93be35475ed85fceb0efaee15338cefceaebf598c20
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+  source_pages: []
+- id: concept:five-elements
+  type: concept
+  name: 五行
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  content_sha256: 0a59deda4f0481f19e0348ad0e469b394a5214d42cdd223627dffba1e26972ce
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+  source_pages: []
+- id: concept:stems-branches
+  type: concept
+  name: 干支
+  aliases:
+  - 十干十二支
+  - 天干地支
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  content_sha256: d2bd14bac733cd1db5dd76b03152c3e5cf4da41d450dda93826ea0ea5e8a822b
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+  source_pages: []
+- id: concept:generation-control
+  type: concept
+  name: 生克
+  aliases:
+  - 五行生克
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  content_sha256: 772a6d63503ff35b835346f2413680a468424dcee93587c24d2a8094de8ddbdf
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+  source_pages: []
+- id: concept:month-command
+  type: concept
+  name: 月令
+  aliases:
+  - 提纲
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  content_sha256: 5b91096f458c827b2c98258ddfd5b00ec34cecc544af71047c60b1b2550a9973
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+  source_pages: []
+- id: concept:yongshen
+  type: concept
+  name: 用神
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  content_sha256: e361847a9b3a9b6bca2ff791a37965bc7537961514df8e3010feb2a357194d0e
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+  source_pages: []
+- id: concept:pattern
+  type: concept
+  name: 格局
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  content_sha256: d58ad62ab6c79eda8a1a25ff9975a0b9d1798f65245bc6d65a4b1dba2f40b5c9
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+  source_pages: []
+- id: concept:xiangshen
+  type: concept
+  name: 相神
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  content_sha256: 963d632ab3e827e64dc5c882b9622e464ba206a99847e86f6c8e9146ae5e5ae3
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+  source_pages: []
+- id: concept:luck-cycle
+  type: concept
+  name: 行运
+  aliases:
+  - 大运
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  content_sha256: 7b74f24d3c98f41dee8dfb226edb6e8a8521a3a21b459057686fb2e0477e10ec
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+  source_pages: []
+edges:
+- id: edge-yinyang-rule-about-concept
+  source: rule:yinyang-not-value
+  target: concept:yinyang
+  relation: defines_boundary_for
+  description: 该规则限定阴阳概念的解释边界。
+  school: 基础共识
+  source_refs:
+  - source_id: project-foundation
+    section: 阴阳不是价值判断
+  status: reviewed
+- id: edge-foundation-supports-yinyang-rule
+  source: source:project-foundation
+  target: rule:yinyang-not-value
+  relation: supports
+  school: 基础共识
+  source_refs:
+  - source_id: project-foundation
+    section: 阴阳不是价值判断
+  status: reviewed
+- id: edge-basic-school-adopts-yinyang-rule
+  source: school:basic-consensus
+  target: rule:yinyang-not-value
+  relation: adopts
+  school: 基础共识
+  source_refs:
+  - source_id: project-foundation
+    section: 阴阳不是价值判断
+  status: reviewed
+- id: edge-shen-authored-ziping
+  source: person:shen-xiaozhan
+  target: work:ziping-zhenquan
+  relation: attributed_author_of
+  description: 乾隆四十一年序称所得手录为沈孝瞻先生所著。
+  source_refs:
+  - passage_id: ziping-zhenquan-preface-p002
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+- id: edge-diancang-hosts-ziping
+  source: source:diancang-ziping
+  target: work:ziping-zhenquan
+  relation: hosts_transcription_of
+  description: 公开网页录入本，尚未与影印底本逐字校勘。
+  source_refs:
+  - source_id: ziping-zhenquan-web
+    section: 书目页与章节页
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+- id: edge-ziping-foundational-for-pattern-school
+  source: work:ziping-zhenquan
+  target: school:ziping-pattern
+  relation: foundational_for
+  source_refs:
+  - passage_id: ziping-zhenquan-preface-p003
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+- id: edge-ziping-discusses-five-elements
+  source: work:ziping-zhenquan
+  target: concept:five-elements
+  relation: discusses
+  source_refs:
+  - passage_id: ziping-zhenquan-ch01-p001
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+- id: edge-ziping-discusses-stems-branches
+  source: work:ziping-zhenquan
+  target: concept:stems-branches
+  relation: discusses
+  source_refs:
+  - passage_id: ziping-zhenquan-ch01-p002
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+- id: edge-ziping-discusses-generation-control
+  source: work:ziping-zhenquan
+  target: concept:generation-control
+  relation: discusses
+  source_refs:
+  - passage_id: ziping-zhenquan-ch02-p001
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+- id: edge-ziping-discusses-month-command
+  source: work:ziping-zhenquan
+  target: concept:month-command
+  relation: discusses
+  source_refs:
+  - passage_id: ziping-zhenquan-ch08-p001
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+- id: edge-ziping-discusses-yongshen
+  source: work:ziping-zhenquan
+  target: concept:yongshen
+  relation: discusses
+  source_refs:
+  - passage_id: ziping-zhenquan-ch08-p001
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+- id: edge-ziping-discusses-pattern
+  source: work:ziping-zhenquan
+  target: concept:pattern
+  relation: discusses
+  source_refs:
+  - passage_id: ziping-zhenquan-ch08-p001
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+- id: edge-ziping-discusses-xiangshen
+  source: work:ziping-zhenquan
+  target: concept:xiangshen
+  relation: discusses
+  source_refs:
+  - passage_id: ziping-zhenquan-ch15-p001
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001
+- id: edge-ziping-discusses-luck-cycle
+  source: work:ziping-zhenquan
+  target: concept:luck-cycle
+  relation: discusses
+  source_refs:
+  - passage_id: ziping-zhenquan-ch25-p001
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  unresolved_variants: *id001

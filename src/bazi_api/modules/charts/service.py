@@ -1,6 +1,7 @@
 from datetime import datetime
+from typing import Literal, assert_never
 
-from lunar_python import Solar
+from lunar_python import EightChar, Solar
 
 from .schemas import BirthInput, ChartFacts, PillarFacts
 
@@ -67,14 +68,49 @@ class ChartCalculator:
             day_master=day_master,
             day_master_element=element,
             day_master_yin_yang=yin_yang,
-            calculation_basis="lunar-python 节气历法；按民用出生时间计算，不由大模型推算",
+            calculation_basis=(
+                "lunar-python 节气历法；"
+                f"按 {birth.timezone} 当地民用时间计算，未校正真太阳时；不由大模型推算"
+            ),
             uncertainties=uncertainties,
         )
 
-    def _pillar(self, eight_char: object, key: str, label: str) -> PillarFacts:
-        prefix = key.capitalize()
-        stem = getattr(eight_char, f"get{prefix}Gan")()
-        branch = getattr(eight_char, f"get{prefix}Zhi")()
+    def _pillar(
+        self,
+        eight_char: EightChar,
+        key: Literal["year", "month", "day", "time"],
+        label: str,
+    ) -> PillarFacts:
+        if key == "year":
+            stem = eight_char.getYearGan()
+            branch = eight_char.getYearZhi()
+            hidden_stems = eight_char.getYearHideGan()
+            ten_god_stem = eight_char.getYearShiShenGan()
+            ten_god_branches = eight_char.getYearShiShenZhi()
+            nayin = eight_char.getYearNaYin()
+        elif key == "month":
+            stem = eight_char.getMonthGan()
+            branch = eight_char.getMonthZhi()
+            hidden_stems = eight_char.getMonthHideGan()
+            ten_god_stem = eight_char.getMonthShiShenGan()
+            ten_god_branches = eight_char.getMonthShiShenZhi()
+            nayin = eight_char.getMonthNaYin()
+        elif key == "day":
+            stem = eight_char.getDayGan()
+            branch = eight_char.getDayZhi()
+            hidden_stems = eight_char.getDayHideGan()
+            ten_god_stem = eight_char.getDayShiShenGan()
+            ten_god_branches = eight_char.getDayShiShenZhi()
+            nayin = eight_char.getDayNaYin()
+        elif key == "time":
+            stem = eight_char.getTimeGan()
+            branch = eight_char.getTimeZhi()
+            hidden_stems = eight_char.getTimeHideGan()
+            ten_god_stem = eight_char.getTimeShiShenGan()
+            ten_god_branches = eight_char.getTimeShiShenZhi()
+            nayin = eight_char.getTimeNaYin()
+        else:
+            assert_never(key)
         stem_element, yin_yang = STEM_META[stem]
         return PillarFacts(
             key=key,
@@ -84,8 +120,8 @@ class ChartCalculator:
             stem_element=stem_element,
             stem_yin_yang=yin_yang,
             branch_element=BRANCH_ELEMENT[branch],
-            hidden_stems=list(getattr(eight_char, f"get{prefix}HideGan")()),
-            ten_god_stem=str(getattr(eight_char, f"get{prefix}ShiShenGan")()),
-            ten_god_branches=list(getattr(eight_char, f"get{prefix}ShiShenZhi")()),
-            nayin=str(getattr(eight_char, f"get{prefix}NaYin")()),
+            hidden_stems=list(hidden_stems),
+            ten_god_stem=str(ten_god_stem),
+            ten_god_branches=list(ten_god_branches),
+            nayin=str(nayin),
         )

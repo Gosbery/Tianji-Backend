@@ -1,16 +1,25 @@
 from __future__ import annotations
 
+import asyncio
 import hashlib
+import logging
 import math
+import threading
 from typing import Protocol
 
 import httpx
 
 from bazi_api.core.config import Settings
+from bazi_api.core.errors import InvalidUpstreamResponseError, UpstreamServiceError
+
+from .http import post_with_retries
+
+logger = logging.getLogger(__name__)
 
 
 class EmbeddingProvider(Protocol):
     dimension: int
+    model_version: str
 
     async def embed(self, texts: list[str]) -> list[list[float]]: ...
 
@@ -20,9 +29,10 @@ class HashEmbeddingProvider:
 
     def __init__(self, dimension: int = 384) -> None:
         self.dimension = dimension
+        self.model_version = f"hash-blake2b-char-ngram-v1-d{dimension}"
 
     async def embed(self, texts: list[str]) -> list[list[float]]:
-        return [self._vector(text) for text in texts]
+        return await asyncio.to_thread(lambda: [self._vector(text) for text in texts])
 
     def _vector(self, text: str) -> list[float]:
         compact = "".join(text.lower().split())
@@ -42,46 +52,97 @@ class HashEmbeddingProvider:
 
 class SentenceTransformerEmbeddingProvider:
     def __init__(self, model_name: str) -> None:
-        try:
-            from sentence_transformers import SentenceTransformer
-        except ImportError as exc:
-            raise RuntimeError(
-                "sentence-transformers 未安装，请安装 requirements-local-ml.txt"
-            ) from exc
-        self.model = SentenceTransformer(model_name)
-        self.dimension = int(self.model.get_sentence_embedding_dimension())
+        self.model_name = model_name
+        self.model_version = f"sentence-transformers:{model_name}"
+        self.model = None
+        self.dimension = 0
+        self._model_lock = threading.Lock()
 
     async def embed(self, texts: list[str]) -> list[list[float]]:
-        vectors = self.model.encode(texts, normalize_embeddings=True)
+        vectors = await asyncio.to_thread(self._encode, texts)
         return vectors.tolist()
+
+    def _encode(self, texts: list[str]):  # type: ignore[no-untyped-def]
+        with self._model_lock:
+            if self.model is None:
+                try:
+                    from sentence_transformers import SentenceTransformer
+                except ImportError as exc:
+                    raise RuntimeError(
+                        "sentence-transformers 未安装，请安装 requirements-local-ml.txt"
+                    ) from exc
+                logger.info(
+                    "embedding_model_loading",
+                    extra={"provider": self.model_version},
+                )
+                self.model = SentenceTransformer(self.model_name)
+                get_dimension = getattr(self.model, "get_embedding_dimension", None)
+                if get_dimension is None:
+                    get_dimension = self.model.get_sentence_embedding_dimension
+                self.dimension = int(get_dimension())
+            return self.model.encode(
+                texts,
+                normalize_embeddings=True,
+                show_progress_bar=False,
+            )
 
 
 class RemoteEmbeddingProvider:
-    def __init__(self, settings: Settings) -> None:
+    def __init__(self, settings: Settings, http_client: httpx.AsyncClient) -> None:
         if not settings.openai_api_key or not settings.remote_embedding_model:
             raise RuntimeError("远程 embedding 需要 OPENAI_API_KEY 和 REMOTE_EMBEDDING_MODEL")
         self.api_key = settings.openai_api_key
         self.base_url = settings.openai_base_url.rstrip("/")
         self.model = settings.remote_embedding_model
+        self.model_version = f"remote:{self.base_url}:{self.model}"
         self.dimension = 0
+        self.http_client = http_client
+        self.timeout = settings.embedding_timeout_seconds
+        self.max_retries = settings.http_request_retries
 
     async def embed(self, texts: list[str]) -> list[list[float]]:
-        async with httpx.AsyncClient(timeout=60) as client:
-            response = await client.post(
+        try:
+            response = await post_with_retries(
+                self.http_client,
                 f"{self.base_url}/embeddings",
                 headers={"Authorization": f"Bearer {self.api_key}"},
-                json={"model": self.model, "input": texts},
+                payload={"model": self.model, "input": texts},
+                timeout=self.timeout,
+                max_retries=self.max_retries,
+                operation=self.model_version,
             )
             response.raise_for_status()
-        vectors = [item["embedding"] for item in response.json()["data"]]
+        except httpx.HTTPError as exc:
+            logger.warning(
+                "embedding_request_failed",
+                extra={"provider": self.model_version},
+            )
+            raise UpstreamServiceError("远程向量服务暂时不可用") from exc
+
+        try:
+            payload = response.json()
+            data = payload["data"]
+            vectors = [
+                [float(value) for value in item["embedding"]]
+                for item in data
+            ]
+        except (KeyError, TypeError, ValueError) as exc:
+            raise InvalidUpstreamResponseError("远程向量服务返回了无法识别的响应") from exc
+        if len(vectors) != len(texts):
+            raise InvalidUpstreamResponseError("远程向量服务返回的向量数量不匹配")
         if vectors and not self.dimension:
             self.dimension = len(vectors[0])
         return vectors
 
 
-def create_embedding_provider(settings: Settings) -> EmbeddingProvider:
+def create_embedding_provider(
+    settings: Settings,
+    http_client: httpx.AsyncClient | None = None,
+) -> EmbeddingProvider:
     if settings.embedding_provider == "sentence_transformer":
         return SentenceTransformerEmbeddingProvider(settings.embedding_model)
     if settings.embedding_provider == "remote":
-        return RemoteEmbeddingProvider(settings)
+        if http_client is None:
+            raise RuntimeError("远程 embedding 需要由应用容器提供共享 HTTP client")
+        return RemoteEmbeddingProvider(settings, http_client)
     return HashEmbeddingProvider()

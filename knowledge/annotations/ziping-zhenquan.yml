@@ -1,0 +1,63 @@
+annotations:
+- id: annotation:ziping-zhenquan:provenance
+  title: 《子平真诠》网络底本与导入边界
+  kind: research_note
+  content: 本次底本来自中华典藏网公开在线阅读页。网站目录包含清乾隆四十一年胡焜序、徐乐吾凡例、正文四十七篇及徐乐吾附篇； 原典层只纳入清代序与正文第一至四十七篇。第二篇网页末尾夹带的《滴天髓》天干篇及《渊海子平》干支体象篇也已从派生正文排除，
+    但原始 HTML 完整保留。当前文本仅移除隐藏水印并归一化空白，尚未与馆藏影印本逐字校勘。
+  passage_refs:
+  - ziping-zhenquan-preface-p002
+  author: 项目编审组
+  publication: 《子平真诠》网络底本导入记录
+  school: 版本研究
+  concepts:
+  - 版本
+  - 校勘
+  - 子平真诠
+  source_refs:
+  - source_id: ziping-zhenquan-web
+    section: 书目页与章节页
+    locator: 2026-08-31 下载清单
+  graph_refs:
+  - person:shen-xiaozhan
+  - source:diancang-ziping
+  - work:ziping-zhenquan
+  status: machine_verified
+  content_sha256: 58a1ddd52c7b7e627cf6cd23aa5f7c331f063966236293ae6b18de8bb5e1b64d
+  source_pages:
+  - https://www.diancangwang.cn/xuanxuewushu/03cf53eede8a/70dc3cc969b1.html
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  verification_level: single_source_integrity
+  confidence: 0.56
+  unresolved_variants: &id001
+  - 未获得可合法公开下载的第二底本，潜在异文尚无法逐字确认。
+- id: annotation:ziping-zhenquan:yongshen-scope
+  title: 《子平真诠》“用神”术语范围待审说明
+  kind: research_note
+  content: 第八篇把“用神”与月令、格局及顺逆使用连在一起。建立现代知识卡时，应先核对这里的术语范围， 不宜未经论证就与后世其他流派的扶抑、调候等“用神”概念合并。
+  passage_refs:
+  - ziping-zhenquan-ch08-p001
+  - ziping-zhenquan-ch08-p004
+  author: 项目编审组
+  publication: 《子平真诠》术语校勘笔记
+  school: 子平格局法
+  concepts:
+  - 月令
+  - 用神
+  - 格局
+  - 流派分歧
+  graph_refs:
+  - concept:month-command
+  - concept:pattern
+  - concept:yongshen
+  - school:ziping-pattern
+  - work:ziping-zhenquan
+  status: machine_verified
+  content_sha256: 4eefcfda28036273bc3ef1d5e36ec75574d3a618fbb47d8be68ef41db12a29d3
+  source_pages:
+  - https://www.diancangwang.cn/xuanxuewushu/03cf53eede8a/c153372d65e9.html
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  verification_level: single_source_integrity
+  confidence: 0.56
+  unresolved_variants: *id001

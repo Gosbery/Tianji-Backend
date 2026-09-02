@@ -9,14 +9,21 @@ from pydantic import BaseModel, Field, field_validator
 class BirthInput(BaseModel):
     date: date
     time: time
-    timezone: str = "Asia/Shanghai"
-    name: str = "访客"
+    timezone: str = Field(default="Asia/Shanghai", min_length=1, max_length=64)
+    name: str = Field(default="访客", max_length=100)
 
     @field_validator("date")
     @classmethod
     def supported_date(cls, value: date) -> date:
         if not 1900 <= value.year <= 2100:
             raise ValueError("首版支持 1900 至 2100 年的出生日期")
+        return value
+
+    @field_validator("timezone")
+    @classmethod
+    def supported_timezone(cls, value: str) -> str:
+        if value != "Asia/Shanghai":
+            raise ValueError("首版排盘仅支持 Asia/Shanghai 时区")
         return value
 
 

@@ -1,0 +1,182 @@
+cards:
+- id: candidate-ziping-yongshen-month-command
+  title: 候选规则：用神先从月令讨论
+  card_type: rule
+  content: 《子平真诠》第八篇把月令作为讨论用神和格局的起点，并说明月令本身无可用者仍需结合四柱另取。
+  rule: 依《子平真诠》的格局语境，先以日干配月令辨别结构；月令无可用时，再结合四柱透干会支另取。
+  school: 子平格局法
+  concepts:
+  - 月令
+  - 用神
+  - 格局
+  conditions:
+  - 采用《子平真诠》的月令格局语境
+  exceptions:
+  - 建禄月劫等月令本身不可直接为用的情形
+  disagreements:
+  - school: 其他用神体系
+    claim: “用神”术语可能指扶抑、调候或其他取用方法，不能与本卡自动合并。
+    source_refs:
+    - annotation_id: annotation:ziping-zhenquan:yongshen-scope
+  prohibited_uses:
+  - 不得只凭月令一项下完整命局结论
+  - 未校勘前不得作为正式规则发布
+  annotation_refs:
+  - annotation:ziping-zhenquan:yongshen-scope
+  source_refs:
+  - passage_id: ziping-zhenquan-ch08-p001
+  - passage_id: ziping-zhenquan-ch08-p004
+  graph_refs:
+  - concept:month-command
+  - concept:pattern
+  - concept:yongshen
+  - school:ziping-pattern
+  status: machine_verified
+  content_sha256: 2827255bfe4227a566f0bf38afb3ff95db60d900b18a510137cc2481aeb318c8
+  source_pages:
+  - https://www.diancangwang.cn/xuanxuewushu/03cf53eede8a/c153372d65e9.html
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  verification_level: single_source_integrity
+  confidence: 0.56
+  unresolved_variants: &id001
+  - 未获得可合法公开下载的第二底本，潜在异文尚无法逐字确认。
+- id: candidate-ziping-xiangshen-role
+  title: 候选概念：相神是成格所赖的辅助要素
+  card_type: concept
+  content: 第十五篇将使全局格局得以成立的关键辅助要素称为“相”，其角色随具体结构变化。
+  rule: 只有在具体格局中识别出“全局之格赖此而成”的要素后，才讨论相神；不可预设某一固定十神恒为相神。
+  school: 子平格局法
+  concepts:
+  - 相神
+  - 用神
+  - 格局
+  conditions:
+  - 已经说明月令用神和全局成格关系
+  exceptions:
+  - 原文明确要求随地换形，不能用单一固定表套用
+  prohibited_uses:
+  - 不得把相神固定映射为某一个十神
+  - 未校勘前不得作为正式规则发布
+  source_refs:
+  - passage_id: ziping-zhenquan-ch15-p001
+  - passage_id: ziping-zhenquan-ch15-p005
+  graph_refs:
+  - concept:pattern
+  - concept:xiangshen
+  - concept:yongshen
+  - school:ziping-pattern
+  status: machine_verified
+  content_sha256: bce72c2063bfa60d6b94c60b1f3d03a0da2b270b442c1d4dd0dce44ba7e3bbfc
+  source_pages:
+  - https://www.diancangwang.cn/xuanxuewushu/03cf53eede8a/751ad9247246.html
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  verification_level: single_source_integrity
+  confidence: 0.56
+  unresolved_variants: *id001
+- id: candidate-ziping-stars-boundary
+  title: 候选边界：星辰不单独决定格局成败
+  card_type: boundary
+  content: 第二十一篇把格局的生克配合与星辰神煞区分开，不以吉星或凶星替代格局分析。
+  rule: 在本书体系内，星辰只能作为附加观察，不能越过月令、四柱和生克关系直接决定格局成败。
+  school: 子平格局法
+  concepts:
+  - 星辰
+  - 格局
+  - 生克
+  - 月令
+  conditions:
+  - 讨论神煞或星辰对格局的影响
+  exceptions:
+  - 本卡不评价其他流派对神煞的独立用法
+  prohibited_uses:
+  - 不得仅凭吉神断富贵
+  - 不得仅凭凶煞断灾祸
+  - 未校勘前不得作为正式规则发布
+  source_refs:
+  - passage_id: ziping-zhenquan-ch21-p001
+  graph_refs:
+  - concept:generation-control
+  - concept:month-command
+  - concept:pattern
+  - school:ziping-pattern
+  status: machine_verified
+  content_sha256: 1672d85a75dc4623bb0f30623d4d87b2dc53106551c220efccd97cd8231b9123
+  source_pages:
+  - https://www.diancangwang.cn/xuanxuewushu/03cf53eede8a/f70908457572.html
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  verification_level: single_source_integrity
+  confidence: 0.56
+  unresolved_variants: *id001
+- id: candidate-ziping-external-pattern-scope
+  title: 候选规则：外格只在月令无用时讨论
+  card_type: boundary
+  content: 第二十二篇把外格限定为月令无用时的权宜取法；月令或干头已有可用结构时，不应舍近求远另立外格。
+  rule: 先检查月令及透干是否已有可用结构；只有月令本无用神且无更直接结构时，才进入外格候选。
+  school: 子平格局法
+  concepts:
+  - 外格
+  - 月令
+  - 用神
+  - 格局
+  conditions:
+  - 采用《子平真诠》的月令格局语境
+  exceptions:
+  - 用神已破不等于月令本无用，不能因此改取外格
+  prohibited_uses:
+  - 不得为迁就结论强立外格
+  - 未校勘前不得作为正式规则发布
+  source_refs:
+  - passage_id: ziping-zhenquan-ch22-p001
+  - passage_id: ziping-zhenquan-ch22-p004
+  graph_refs:
+  - concept:month-command
+  - concept:pattern
+  - concept:yongshen
+  - school:ziping-pattern
+  status: machine_verified
+  content_sha256: 68e926df8d1ca4bf3978f73d5bfebba47ac3839aa6d3b3a36d2042136c366105
+  source_pages:
+  - https://www.diancangwang.cn/xuanxuewushu/03cf53eede8a/2f544d3ed289.html
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  verification_level: single_source_integrity
+  confidence: 0.56
+  unresolved_variants: *id001
+- id: candidate-ziping-luck-context
+  title: 候选方法：行运必须与原局喜忌合看
+  card_type: method
+  content: 第二十五篇要求把每一步运的干支放回原命局和月令喜忌中统观，并区分干支、冲合与原局条件。
+  rule: 行运判断以原局已经建立的喜忌为前提，逐一检查运干、运支与原局的生克冲合，不能只按单字固定吉凶。
+  school: 子平格局法
+  concepts:
+  - 行运
+  - 喜忌
+  - 月令
+  - 干支关系
+  conditions:
+  - 原局结构和喜忌已有可追溯依据
+  exceptions:
+  - 同类干支、同为冲合，仍可能因原局配合而结果不同
+  prohibited_uses:
+  - 不得脱离原局把某一步运固定判为吉或凶
+  - 未校勘前不得作为正式规则发布
+  source_refs:
+  - passage_id: ziping-zhenquan-ch25-p001
+  - passage_id: ziping-zhenquan-ch25-p004
+  - passage_id: ziping-zhenquan-ch25-p005
+  graph_refs:
+  - concept:luck-cycle
+  - concept:month-command
+  - school:ziping-pattern
+  status: machine_verified
+  content_sha256: fea5c08a07b2ae544d3c7750ad044dd280de9a75f96e4b56613b6bc874d8c651
+  source_pages:
+  - https://www.diancangwang.cn/xuanxuewushu/03cf53eede8a/650802671b4f.html
+  collation_method: archive_sha256+chapter_sequence+paragraph_integrity+hidden_watermark_removal+embedded_material_boundary+citation_locator
+  source_count: 1
+  verification_level: single_source_integrity
+  confidence: 0.56
+  unresolved_variants: *id001

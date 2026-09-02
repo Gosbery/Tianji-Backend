@@ -1,0 +1,38 @@
+name: Backend CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install dependencies
+        run: uv sync --frozen --extra dev --extra retrieval
+      - name: Ruff
+        run: uv run ruff check src tests scripts
+      - name: Pytest
+        run: uv run python -m pytest -q
+      - name: Offline retrieval quality gate
+        env:
+          EMBEDDING_PROVIDER: hash
+          RERANKER_PROVIDER: lexical
+          PYTHONPATH: src
+        run: >-
+          uv run python -m bazi_api.cli.evaluate
+          --mode hybrid
+          --limit 10
+          --answer-mode offline
+          --baseline evals/baselines/questions.hash.hybrid.json

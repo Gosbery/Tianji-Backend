@@ -228,7 +228,14 @@ cards:
   - id: concept-yinyang
     title: 阴阳描述作用方式
     content: 阴阳用于描述同一五行的不同作用方式。它不是积极与消极、男性与女性或好与坏的简单二分。
+    card_type: boundary
+    rule: 阴阳只能作为作用方式的分类使用，不能单独转换成价值、性别或吉凶判断。
     concepts: [阴阳, 天干]
+    conditions: [讨论五行或天干的阴阳分类时]
+    exceptions: []
+    disagreements: []
+    prohibited_uses: [仅凭阴阳推断性别气质, 仅凭阴阳判断吉凶]
+    graph_refs: [concept:yinyang, rule:yinyang-not-value, school:basic-consensus]
     status: reviewed
     source_refs: [{source_id: project-foundation, section: 阴阳不是价值判断}]
   - id: concept-day-master
