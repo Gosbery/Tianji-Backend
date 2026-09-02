@@ -3,6 +3,8 @@ from __future__ import annotations
 import asyncio
 import logging
 import time
+from collections.abc import AsyncIterator, Awaitable, Callable
+from contextlib import suppress
 
 from bazi_api.integrations.llm import AnswerGenerator
 from bazi_api.modules.charts.service import ChartCalculator
@@ -32,12 +34,24 @@ class ChatService:
         self.charts = charts
 
     async def answer(self, request: ChatRequest) -> ChatResponse:
+        return await self._answer(request)
+
+    async def _answer(
+        self,
+        request: ChatRequest,
+        on_answer_chunk: Callable[[str], Awaitable[None]] | None = None,
+        on_progress: Callable[[str], Awaitable[None]] | None = None,
+    ) -> ChatResponse:
         started = time.perf_counter()
+        if on_progress is not None:
+            await on_progress("正在核验命盘信息")
         chart = self.charts.calculate(request.chart.birth)
         requested_session_id = str(request.session_id) if request.session_id else None
         session_id, is_new_session = await asyncio.to_thread(
             self.conversations.resolve_session, requested_session_id
         )
+        if on_progress is not None:
+            await on_progress("命盘信息已核验，正在检索相关资料")
         retrieval_started = time.perf_counter()
         hits = await self.retrieval.search(
             query=request.question,
@@ -55,7 +69,16 @@ class ChatService:
                 "mode": request.mode,
             },
         )
-        generated = await self.generator.generate(request.question, chart, hits)
+        if on_progress is not None:
+            await on_progress(f"已检索到 {len(hits)} 条相关依据，正在组织分析")
+        if on_answer_chunk is None:
+            generated = await self.generator.generate(request.question, chart, hits)
+        else:
+            generated = await self.generator.generate_stream(
+                request.question, chart, hits, on_answer_chunk
+            )
+        if on_progress is not None:
+            await on_progress("回答已生成，正在整理引用与不确定性")
         evidence = [
             Evidence(
                 id=hit.document.id,
@@ -94,6 +117,8 @@ class ChatService:
             )
         )
         latency_ms = int((time.perf_counter() - started) * 1000)
+        if on_progress is not None:
+            await on_progress("资料整理完成，正在保存本次分析")
         message_id = await asyncio.to_thread(
             self._persist_answer,
             session_id,
@@ -109,6 +134,8 @@ class ChatService:
             "chat_answer_persisted",
             extra={"duration_ms": latency_ms, "hits": len(hits), "mode": request.mode},
         )
+        if on_progress is not None:
+            await on_progress("分析完成")
         return ChatResponse(
             session_id=session_id,
             message_id=message_id,
@@ -124,6 +151,38 @@ class ChatService:
             latency_ms=latency_ms,
             token_usage=generated.token_usage,
         )
+
+    async def answer_stream(self, request: ChatRequest) -> AsyncIterator[dict[str, object]]:
+        queue: asyncio.Queue[dict[str, object] | BaseException] = asyncio.Queue()
+
+        async def on_chunk(content: str) -> None:
+            await queue.put({"type": "chunk", "content": content})
+
+        async def on_progress(message: str) -> None:
+            await queue.put({"type": "progress", "message": message})
+
+        async def produce() -> None:
+            try:
+                response = await self._answer(request, on_chunk, on_progress)
+                await queue.put({"type": "done", "response": response.model_dump(mode="json")})
+            except BaseException as exc:
+                await queue.put(exc)
+
+        producer = asyncio.create_task(produce())
+        yield {"type": "start"}
+        try:
+            while True:
+                event = await queue.get()
+                if isinstance(event, BaseException):
+                    raise event
+                yield event
+                if event["type"] == "done":
+                    break
+        finally:
+            if not producer.done():
+                producer.cancel()
+            with suppress(asyncio.CancelledError):
+                await producer
 
     def _persist_answer(
         self,

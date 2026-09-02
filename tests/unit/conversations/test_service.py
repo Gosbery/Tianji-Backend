@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Awaitable, Callable
 from datetime import date, time
 from pathlib import Path
 from types import SimpleNamespace
@@ -33,6 +34,17 @@ class FakeGenerator:
             followups=["测试追问"],
             token_usage=12,
         )
+
+    async def generate_stream(
+        self,
+        _question: object,
+        _chart: object,
+        _hits: object,
+        on_chunk: Callable[[str], Awaitable[None]],
+    ) -> GenerationResult:
+        await on_chunk("测试")
+        await on_chunk("回答")
+        return await self.generate()
 
 
 def chat_request() -> ChatRequest:
@@ -76,6 +88,27 @@ async def test_chat_persists_complete_exchange_and_trace_atomically(tmp_path: Pa
             row["id"] for row in messages if row["role"] == "assistant"
         )
         assert trace_count == 1
+    finally:
+        database.close()
+
+
+@pytest.mark.asyncio
+async def test_chat_stream_emits_chunks_and_terminal_response(tmp_path: Path) -> None:
+    database = SQLiteDatabase(tmp_path / "app.db")
+    try:
+        service, _ = build_service(database)
+
+        events = [event async for event in service.answer_stream(chat_request())]
+
+        assert events[0] == {"type": "start"}
+        assert events[-1]["type"] == "done"
+        assert events[-1]["response"]["answer"] == "测试回答"  # type: ignore[index]
+        chunks = [event["content"] for event in events if event["type"] == "chunk"]
+        assert "".join(chunks) == "测试回答"
+        progress = [event["message"] for event in events if event["type"] == "progress"]
+        assert progress[0] == "正在核验命盘信息"
+        assert "已检索到 0 条相关依据" in str(progress[2])
+        assert progress[-1] == "分析完成"
     finally:
         database.close()
 

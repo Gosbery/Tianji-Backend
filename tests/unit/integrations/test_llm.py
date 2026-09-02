@@ -156,6 +156,53 @@ async def test_anthropic_provider_uses_messages_protocol() -> None:
 
 
 @pytest.mark.asyncio
+async def test_openai_streams_answer_field_and_returns_terminal_metadata() -> None:
+    captured: dict[str, object] = {}
+    model_chunks = [
+        '{"answer":"有依据',
+        '的回答 [1]","uncertainties":["仍有边界"],',
+        '"followups":["继续追问"]}',
+    ]
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        captured["payload"] = json.loads(request.content)
+        events = [
+            "data: "
+            + json.dumps({"choices": [{"delta": {"content": chunk}}]}, ensure_ascii=False)
+            + "\n\n"
+            for chunk in model_chunks
+        ]
+        events.append(
+            f"data: {json.dumps({'choices': [], 'usage': {'total_tokens': 42}})}\n\n"
+        )
+        events.append("data: [DONE]\n\n")
+        return httpx.Response(
+            200,
+            text="".join(events),
+            headers={"Content-Type": "text/event-stream"},
+        )
+
+    settings = Settings(llm_provider="openai", openai_api_key="test-key")
+    streamed: list[str] = []
+
+    async def collect(chunk: str) -> None:
+        streamed.append(chunk)
+
+    async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+        result = await AnswerGenerator(settings, client).generate_stream(
+            "如何理解正官？", chart(), [hit()], collect
+        )
+
+    assert "".join(streamed) == "有依据的回答 [1]"
+    assert result.answer == "有依据的回答 [1]"
+    assert result.uncertainties == ["仍有边界"]
+    assert result.followups == ["继续追问"]
+    assert result.token_usage == 42
+    assert isinstance(captured["payload"], dict)
+    assert captured["payload"]["stream"] is True  # type: ignore[index]
+
+
+@pytest.mark.asyncio
 async def test_anthropic_retries_when_thinking_exhausts_output_tokens() -> None:
     payloads: list[dict[str, object]] = []
     idempotency_keys: list[str] = []

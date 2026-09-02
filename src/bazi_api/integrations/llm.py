@@ -4,6 +4,7 @@ import json
 import logging
 import re
 import uuid
+from collections.abc import Awaitable, Callable
 from dataclasses import dataclass
 from typing import Literal
 
@@ -159,6 +160,164 @@ class AnswerGenerator:
             token_usage=token_usage,
         )
         return self._validate_model_generation(generated)
+
+    async def generate_stream(
+        self,
+        question: str,
+        chart: ChartFacts,
+        hits: list[RetrievalHit],
+        on_answer_chunk: Callable[[str], Awaitable[None]],
+    ) -> GenerationResult:
+        if not self.api_key:
+            generated = self._extractive_demo(question, chart, hits)
+            await on_answer_chunk(generated.answer)
+            return generated
+
+        context = "\n\n".join(
+            f"[{index}] 第{hit.document.layer}层 · {hit.document.title}\n"
+            f"来源：{hit.document.source}\n"
+            f"追溯：{', '.join(hit.document.trace_refs) or hit.document.id}\n"
+            f"内容：{hit.document.text}"
+            for index, hit in enumerate(hits, start=1)
+        )
+        chart_json = chart.model_dump_json(exclude={"birth": {"name"}})
+        system = (
+            "你是一名八字研究助手。请结合命盘 JSON、用户问题和资料片段进行完整分析。"
+            "只返回 JSON，字段为 answer、uncertainties、followups，并且 answer 必须是第一个字段。"
+        )
+        user = f"命盘：\n{chart_json}\n\n用户问题：{question}\n\n资料：\n{context}"
+        request_payload, headers, endpoint = self._model_request(system, user)
+        request_payload["stream"] = True
+        if self.provider == "openai":
+            request_payload["stream_options"] = {"include_usage": True}
+
+        try:
+            content, usage_payload = await self._consume_model_stream(
+                endpoint, headers, request_payload, on_answer_chunk
+            )
+        except httpx.HTTPStatusError as exc:
+            if self.provider != "openai" or exc.response.status_code not in {400, 422}:
+                raise UpstreamServiceError() from exc
+            request_payload.pop("response_format", None)
+            content, usage_payload = await self._consume_model_stream(
+                endpoint,
+                {**headers, "Idempotency-Key": str(uuid.uuid4())},
+                request_payload,
+                on_answer_chunk,
+            )
+        except httpx.HTTPError as exc:
+            raise UpstreamServiceError() from exc
+
+        parsed = self._parse_model_json(content)
+        generated = GenerationResult(
+            answer=str(parsed.get("answer", "证据不足，暂时无法回答。")),
+            uncertainties=self._string_list(parsed.get("uncertainties")),
+            followups=self._string_list(parsed.get("followups")),
+            token_usage=self._token_usage(usage_payload),
+        )
+        return self._validate_model_generation(generated)
+
+    async def _consume_model_stream(
+        self,
+        endpoint: str,
+        headers: dict[str, str],
+        payload: dict[str, object],
+        on_answer_chunk: Callable[[str], Awaitable[None]],
+    ) -> tuple[str, object]:
+        content = ""
+        emitted_answer = ""
+        usage: object = None
+        async with self.http_client.stream(
+            "POST", endpoint, headers=headers, json=payload, timeout=self.timeout
+        ) as response:
+            response.raise_for_status()
+            async for line in response.aiter_lines():
+                if not line.startswith("data:"):
+                    continue
+                data = line[5:].strip()
+                if not data or data == "[DONE]":
+                    continue
+                try:
+                    event = json.loads(data)
+                except json.JSONDecodeError as exc:
+                    raise InvalidUpstreamResponseError() from exc
+                if not isinstance(event, dict):
+                    continue
+                event_usage = event.get("usage")
+                if isinstance(event_usage, dict):
+                    usage = {**(usage if isinstance(usage, dict) else {}), **event_usage}
+                message = event.get("message")
+                if isinstance(message, dict) and isinstance(message.get("usage"), dict):
+                    usage = {
+                        **(usage if isinstance(usage, dict) else {}),
+                        **message["usage"],
+                    }
+                delta = self._stream_text_delta(event)
+                if not delta:
+                    continue
+                content += delta
+                answer_prefix = self._partial_answer(content)
+                if len(answer_prefix) > len(emitted_answer):
+                    await on_answer_chunk(answer_prefix[len(emitted_answer) :])
+                    emitted_answer = answer_prefix
+        return content, usage
+
+    def _stream_text_delta(self, event: dict[str, object]) -> str:
+        if self.provider == "anthropic":
+            delta = event.get("delta")
+            if isinstance(delta, dict) and delta.get("type") == "text_delta":
+                text = delta.get("text")
+                return text if isinstance(text, str) else ""
+            return ""
+        choices = event.get("choices")
+        if not isinstance(choices, list) or not choices or not isinstance(choices[0], dict):
+            return ""
+        delta = choices[0].get("delta")
+        if not isinstance(delta, dict):
+            return ""
+        text = delta.get("content")
+        return text if isinstance(text, str) else ""
+
+    @staticmethod
+    def _partial_answer(content: str) -> str:
+        match = re.search(r'"answer"\s*:\s*"', content)
+        if not match:
+            return ""
+        result: list[str] = []
+        index = match.end()
+        escapes = {
+            "n": "\n",
+            "r": "\r",
+            "t": "\t",
+            "b": "\b",
+            "f": "\f",
+            '"': '"',
+            "\\": "\\",
+            "/": "/",
+        }
+        while index < len(content):
+            char = content[index]
+            if char == '"':
+                break
+            if char != "\\":
+                result.append(char)
+                index += 1
+                continue
+            if index + 1 >= len(content):
+                break
+            escaped = content[index + 1]
+            if escaped == "u":
+                code = content[index + 2 : index + 6]
+                if len(code) < 4 or not all(item in "0123456789abcdefABCDEF" for item in code):
+                    break
+                result.append(chr(int(code, 16)))
+                index += 6
+                continue
+            if escaped not in escapes:
+                break
+            result.append(escapes[escaped])
+            index += 2
+        return "".join(result)
 
     def _model_request(
         self, system: str, user: str
