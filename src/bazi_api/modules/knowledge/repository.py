@@ -152,6 +152,7 @@ class KnowledgeRepository:
         passage_status = {item.id: item.status for item in self.original_passages}
         annotation_ids = {item.id for item in self.annotations}
         annotation_status = {item.id: item.status for item in self.annotations}
+        card_by_id = {item.id: item for item in self.cards}
         node_ids = {item.id for item in self.graph_nodes}
         node_status = {item.id: item.status for item in self.graph_nodes}
         source_ids = {
@@ -202,6 +203,7 @@ class KnowledgeRepository:
                 card.status, card.source_refs, passage_status, annotation_status, card.id
             )
             self._require_graph_refs(card.graph_refs, node_ids, card.id)
+            self._validate_card_refs(card, card_by_id)
         for node in self.graph_nodes:
             self._validate_source_refs(
                 node.source_refs, source_ids, passage_ids, annotation_ids, node.id
@@ -311,6 +313,23 @@ class KnowledgeRepository:
         actual = hashlib.sha256(content.encode("utf-8")).hexdigest()
         if actual != expected:
             raise ValueError(f"{owner} content_sha256 mismatch: {expected} != {actual}")
+
+    @classmethod
+    def _validate_card_refs(
+        cls, card: KnowledgeCard, cards: dict[str, KnowledgeCard]
+    ) -> None:
+        for ref_id in card.rule_refs:
+            cls._require_reference("knowledge card", ref_id, set(cards), card.id)
+            target = cards[ref_id]
+            if target.card_type not in {"rule", "method", "boundary", "dispute"}:
+                raise ValueError(f"{card.id} rule_refs non-rule card: {ref_id}")
+            cls._require_status_dependency(card.status, target.status, card.id, ref_id)
+        for ref_id in card.case_refs:
+            cls._require_reference("knowledge card", ref_id, set(cards), card.id)
+            target = cards[ref_id]
+            if target.card_type != "case":
+                raise ValueError(f"{card.id} case_refs non-case card: {ref_id}")
+            cls._require_status_dependency(card.status, target.status, card.id, ref_id)
 
     def overview(self) -> KnowledgeOverview:
         if self._overview is None:
@@ -439,8 +458,26 @@ class KnowledgeRepository:
             text_parts = [card.content]
             if card.rule:
                 text_parts.append(f"规则：{card.rule}")
+            if card.premises:
+                text_parts.append(f"前提：{'；'.join(card.premises)}")
+            if card.conditions:
+                text_parts.append(f"条件：{'；'.join(card.conditions)}")
+            if card.conclusion:
+                text_parts.append(f"结论：{card.conclusion}")
             if card.exceptions:
                 text_parts.append(f"例外：{'；'.join(card.exceptions)}")
+            if card.break_conditions:
+                text_parts.append(f"破格条件：{'；'.join(card.break_conditions)}")
+            if card.rescue_conditions:
+                text_parts.append(f"救应条件：{'；'.join(card.rescue_conditions)}")
+            if card.priority_note:
+                text_parts.append(f"优先级 {card.priority}：{card.priority_note}")
+            if card.counterexamples:
+                text_parts.append(f"反例：{'；'.join(card.counterexamples)}")
+            if card.case_pillars:
+                text_parts.append(f"命例四柱：{' / '.join(card.case_pillars)}")
+            if card.application_steps:
+                text_parts.append(f"应用步骤：{'；'.join(card.application_steps)}")
             if card.disagreements:
                 positions = "；".join(
                     f"{position.school}：{position.claim}" for position in card.disagreements

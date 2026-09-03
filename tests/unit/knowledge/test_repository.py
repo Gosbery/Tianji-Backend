@@ -4,9 +4,10 @@ from pathlib import Path
 
 import pytest
 import yaml
+from pydantic import ValidationError
 
 from bazi_api.modules.knowledge.repository import KnowledgeRepository
-from bazi_api.modules.knowledge.schemas import GraphEdge, SourceRef
+from bazi_api.modules.knowledge.schemas import GraphEdge, KnowledgeCard, SourceRef
 
 BACKEND_ROOT = Path(__file__).resolve().parents[3]
 
@@ -99,9 +100,7 @@ def test_only_reviewed_evidence_enters_retrieval() -> None:
     assert any(document.id.startswith("candidate-ziping-") for document in preview)
     assert not any(document.review_status in {"draft", "retired"} for document in preview)
     assert all(
-        document.warning
-        for document in preview
-        if document.review_status == "machine_verified"
+        document.warning for document in preview if document.review_status == "machine_verified"
     )
 
 
@@ -132,8 +131,7 @@ def test_ziping_source_archive_is_complete_and_hash_verified() -> None:
     assert all(passage["verification_level"] == "single_source_integrity" for passage in passages)
     assert all(passage["source_count"] == 1 for passage in passages)
     assert not any(
-        "刘基注" in passage["text"] or "干支体象" in passage["text"]
-        for passage in passages
+        "刘基注" in passage["text"] or "干支体象" in passage["text"] for passage in passages
     )
 
     assert manifest["selection"]["chapter_count"] == 47
@@ -152,6 +150,62 @@ def test_ziping_source_archive_is_complete_and_hash_verified() -> None:
     clean_text = (raw_root / derived["path"]).read_bytes()
     assert len(clean_text) == derived["bytes"]
     assert hashlib.sha256(clean_text).hexdigest() == derived["sha256"]
+
+
+def test_ziping_v2_cards_cover_all_chapters_with_explicit_reasoning_fields() -> None:
+    repository = KnowledgeRepository(BACKEND_ROOT / "knowledge")
+    repository.load()
+    cards = [
+        card
+        for card in repository.cards
+        if card.schema_version == 2 and card.id.startswith("ziping-")
+    ]
+    rules = [card for card in cards if card.card_type != "case"]
+    cases = [card for card in cards if card.card_type == "case"]
+    chapters = {
+        int(match.group(1)) for card in rules if (match := re.search(r"-ch(\d+)-", card.id))
+    }
+
+    assert 150 <= len(cards) <= 250
+    assert len(rules) == 231
+    assert len(cases) == 12
+    assert chapters == set(range(1, 48))
+    assert sum(f"-ch{chapter:02d}-" in card.id for chapter in range(8, 21) for card in rules) >= 71
+    assert (
+        sum(f"-ch{chapter:02d}-" in card.id for chapter in range(31, 48) for card in rules) >= 143
+    )
+    assert all(card.status == "machine_verified" for card in cards)
+    assert all(
+        card.premises
+        and card.conclusion
+        and card.conditions
+        and card.exceptions
+        and card.break_conditions
+        and card.rescue_conditions
+        and card.priority_note
+        and card.counterexamples
+        and any(ref.passage_id for ref in card.source_refs)
+        for card in rules
+    )
+    assert all(
+        len(card.case_pillars) == 4
+        and card.application_steps
+        and card.rule_refs
+        and card.conclusion
+        for card in cases
+    )
+
+
+def test_v2_rule_card_rejects_incomplete_reasoning_shape() -> None:
+    with pytest.raises(ValidationError, match="v2 rule card missing"):
+        KnowledgeCard(
+            id="incomplete-v2",
+            title="不完整规则",
+            content="只有摘要",
+            schema_version=2,
+            card_type="rule",
+            concepts=["格局"],
+        )
 
 
 def test_graph_edges_must_reference_existing_nodes() -> None:

@@ -94,9 +94,7 @@ def normalize_retrieval_text(text: str) -> str:
 
 
 def tokenize_zh(text: str) -> list[str]:
-    words = re.findall(
-        r"[A-Za-z0-9]+|[\u3400-\u9fff]", normalize_retrieval_text(text)
-    )
+    words = re.findall(r"[A-Za-z0-9]+|[\u3400-\u9fff]", normalize_retrieval_text(text))
     chinese = [token for token in words if len(token) == 1 and "\u3400" <= token <= "\u9fff"]
     compact = "".join(chinese)
     bigrams = [compact[index : index + 2] for index in range(max(0, len(compact) - 1))]
@@ -388,15 +386,16 @@ class LexicalReranker:
             lexical = overlap / math.sqrt(max(1, len(query_tokens) * len(doc_tokens)))
             # The offline fallback should refine a strong fused ranking, not replace it.
             rank_prior = 1 - index / (total + 1)
-            scores.append(
-                rank_prior * self.rank_weight + lexical * self.lexical_weight
-            )
+            scores.append(rank_prior * self.rank_weight + lexical * self.lexical_weight)
         return scores
 
 
 class CrossEncoderReranker:
-    def __init__(self, model_name: str, fallback: LexicalReranker) -> None:
+    def __init__(
+        self, model_name: str, fallback: LexicalReranker, local_files_only: bool = False
+    ) -> None:
         self.model_name = model_name
+        self.local_files_only = local_files_only
         self.model = None
         self.fallback = fallback
         self._lock = threading.Lock()
@@ -407,11 +406,18 @@ class CrossEncoderReranker:
                 if self.model is None:
                     from sentence_transformers import CrossEncoder
 
-                    self.model = CrossEncoder(self.model_name)
-                pairs = [(query, f"{doc.title}\n{doc.text}") for doc in documents]
+                    self.model = CrossEncoder(
+                        self.model_name, local_files_only=self.local_files_only
+                    )
+                pairs = [
+                    (
+                        query,
+                        f"{doc.title}\n{' '.join(doc.concepts)}\n{doc.text[:256]}",
+                    )
+                    for doc in documents
+                ]
                 return [
-                    float(value)
-                    for value in self.model.predict(pairs, show_progress_bar=False)
+                    float(value) for value in self.model.predict(pairs, show_progress_bar=False)
                 ]
         except Exception:  # Local model absence must not make the knowledge base unavailable.
             logger.warning(
@@ -429,21 +435,14 @@ class KnowledgeGraphIndex:
 
     def expand(self, query: str, scope: EvidenceScope) -> tuple[list[str], set[str]]:
         allowed_statuses = (
-            {"reviewed"}
-            if scope == "reviewed_only"
-            else {"reviewed", "machine_verified"}
+            {"reviewed"} if scope == "reviewed_only" else {"reviewed", "machine_verified"}
         )
-        allowed_nodes = {
-            node.id for node in self.nodes.values() if node.status in allowed_statuses
-        }
+        allowed_nodes = {node.id for node in self.nodes.values() if node.status in allowed_statuses}
         direct = {
             node.id
             for node in self.nodes.values()
             if node.id in allowed_nodes
-            and any(
-                query_mentions_term(query, label)
-                for label in [node.name, *node.aliases]
-            )
+            and any(query_mentions_term(query, label) for label in [node.name, *node.aliases])
         }
         adjacent: defaultdict[str, set[str]] = defaultdict(set)
         for edge in self.edges:
@@ -504,9 +503,7 @@ class RetrievalService:
     ) -> RetrievalService:
         texts = [cls._embedding_text(doc) for doc in documents]
         content_hashes = [
-            hashlib.sha256(
-                f"{doc.content_sha256}\n{text}".encode()
-            ).hexdigest()
+            hashlib.sha256(f"{doc.content_sha256}\n{text}".encode()).hexdigest()
             for doc, text in zip(documents, texts, strict=True)
         ]
         cache = await asyncio.to_thread(EmbeddingCache, settings.embedding_cache_path)
@@ -535,18 +532,18 @@ class RetrievalService:
         )
         reranker: LexicalReranker | CrossEncoderReranker
         if settings.reranker_provider == "cross_encoder":
-            reranker = CrossEncoderReranker(settings.reranker_model, lexical_reranker)
+            reranker = CrossEncoderReranker(
+                settings.reranker_model,
+                lexical_reranker,
+                settings.local_models_only,
+            )
         else:
             reranker = lexical_reranker
         tuning_payload = json.dumps(
             retrieval_tuning(settings), sort_keys=True, separators=(",", ":")
         )
-        vector_payload = "\n".join(
-            [embedding_provider.model_version, *sorted(content_hashes)]
-        )
-        vector_index_version = hashlib.sha256(
-            vector_payload.encode("utf-8")
-        ).hexdigest()[:16]
+        vector_payload = "\n".join([embedding_provider.model_version, *sorted(content_hashes)])
+        vector_index_version = hashlib.sha256(vector_payload.encode("utf-8")).hexdigest()[:16]
         index_payload = "\n".join(
             [embedding_provider.model_version, *sorted(content_hashes), tuning_payload]
         )
@@ -604,16 +601,17 @@ class RetrievalService:
         }
         if mode == "lightrag":
             return await self._search_lightrag(query, allowed, limit)
-        expanded_terms, related_nodes = self.graph.expand(query, evidence_scope)
-        retrieval_query = normalize_retrieval_text(" ".join([query, *expanded_terms]))
+        chart_terms = self._chart_query_terms(query, chart)
+        graph_query = " ".join([query, *chart_terms])
+        expanded_terms, related_nodes = self.graph.expand(graph_query, evidence_scope)
+        retrieval_query = normalize_retrieval_text(" ".join([query, *chart_terms, *expanded_terms]))
         if mode == "dense":
             dense = await self._dense_search(retrieval_query, allowed)
             if dense:
                 hits = self._hits_from_single(dense, "dense", limit)
             else:
                 sparse_fallback = await asyncio.to_thread(
-                    self.bm25.search,
-                    retrieval_query, allowed, self.settings.sparse_recall_limit
+                    self.bm25.search, retrieval_query, allowed, self.settings.sparse_recall_limit
                 )
                 hits = self._hits_from_single(sparse_fallback, "bm25-fallback", limit)
             return self._expand_evidence_chain(hits, allowed, limit)
@@ -626,9 +624,7 @@ class RetrievalService:
                 self.settings.sparse_recall_limit,
             ),
         )
-        fused = self._rrf(
-            {"dense": dense, "bm25": sparse}, self.settings.retrieval_rrf_k
-        )
+        fused = self._rrf({"dense": dense, "bm25": sparse}, self.settings.retrieval_rrf_k)
         hits = [
             RetrievalHit(
                 document=self.documents[document_id],
@@ -641,6 +637,7 @@ class RetrievalService:
         self._apply_title_boost(query, hits)
         self._apply_concept_boost(query, hits)
         self._apply_graph_boost(related_nodes, hits)
+        self._apply_chart_context_boost(chart_terms, chart, hits)
         if mode == "hybrid_rerank" and hits:
             candidates = hits[: self.settings.rerank_limit]
             remainder = hits[self.settings.rerank_limit :]
@@ -658,9 +655,62 @@ class RetrievalService:
             hits = [*candidates, *remainder]
         return self._expand_evidence_chain(hits, allowed, limit)
 
-    async def _dense_search(
-        self, query: str, allowed: set[str]
-    ) -> list[tuple[str, float]]:
+    @staticmethod
+    def _chart_query_terms(query: str, chart: ChartFacts) -> list[str]:
+        applied_markers = (
+            "这个命格",
+            "我的命格",
+            "命格如何",
+            "这个格局",
+            "我的格局",
+            "格局如何",
+            "这个八字",
+            "我的八字",
+            "这个命局",
+            "我的命局",
+            "命局如何",
+            "这个命盘",
+            "我的命盘",
+            "这盘",
+            "此盘",
+            "本盘",
+            "帮我看",
+            "分析命盘",
+        )
+        if not any(marker in query for marker in applied_markers):
+            return []
+        terms = [
+            "月令",
+            chart.month_command.branch,
+            chart.month_command.main_hidden_stem,
+            chart.month_command.ten_god,
+            *(candidate.name for candidate in chart.pattern_candidates),
+            *(relation.label for relation in chart.structural_relations),
+        ]
+        return list(dict.fromkeys(term for term in terms if term))
+
+    @staticmethod
+    def _apply_chart_context_boost(
+        chart_terms: list[str], chart: ChartFacts, hits: list[RetrievalHit]
+    ) -> None:
+        if not chart_terms:
+            return
+        candidate_terms = {
+            term
+            for candidate in chart.pattern_candidates
+            for term in (candidate.name, candidate.ten_god)
+        }
+        for hit in hits:
+            matched = [term for term in candidate_terms if term in hit.document.title]
+            if not matched:
+                continue
+            bonus = 0.2
+            hit.score += bonus
+            hit.component_scores["chart_context"] = bonus
+            hit.matched_by.append("chart_context")
+        hits.sort(key=lambda hit: hit.score, reverse=True)
+
+    async def _dense_search(self, query: str, allowed: set[str]) -> list[tuple[str, float]]:
         try:
             query_vector = (await self.embedding_provider.embed([query]))[0]
             return await asyncio.to_thread(
@@ -741,9 +791,7 @@ class RetrievalService:
             source = chunk.get("file_path", "")
             if not isinstance(item_id, str) or not isinstance(source, str):
                 raise InvalidUpstreamResponseError("LightRAG chunk 标识格式无效")
-            candidates.append(
-                (item_id, source)
-            )
+            candidates.append((item_id, source))
         if not candidates:
             for entity in entities:
                 if not isinstance(entity, dict):
@@ -758,11 +806,7 @@ class RetrievalService:
         rejected = 0
         for rank, (item_id, source) in enumerate(candidates, start=1):
             document = self._resolve_lightrag_document(item_id, source)
-            if (
-                document is None
-                or document.id not in allowed
-                or document.id in selected
-            ):
+            if document is None or document.id not in allowed or document.id in selected:
                 rejected += 1
                 continue
             selected.add(document.id)
@@ -797,9 +841,7 @@ class RetrievalService:
                     aliases[alias] = document.id
         return aliases
 
-    def _resolve_lightrag_document(
-        self, item_id: str, source: str
-    ) -> RetrievalDocument | None:
+    def _resolve_lightrag_document(self, item_id: str, source: str) -> RetrievalDocument | None:
         filename = source.replace("\\", "/").rsplit("/", 1)[-1]
         source_alias = filename[:-3] if filename.lower().endswith(".md") else filename
         for alias in (item_id, source_alias):
@@ -808,9 +850,7 @@ class RetrievalService:
                 return self.documents[document_id]
         return None
 
-    def _apply_graph_boost(
-        self, related_nodes: set[str], hits: list[RetrievalHit]
-    ) -> None:
+    def _apply_graph_boost(self, related_nodes: set[str], hits: list[RetrievalHit]) -> None:
         if not related_nodes:
             return
         for hit in hits:
@@ -830,29 +870,32 @@ class RetrievalService:
         self, hits: list[RetrievalHit], allowed: set[str], limit: int
     ) -> list[RetrievalHit]:
         base = hits[:limit]
-        selected = {hit.document.id for hit in base}
-        if any(hit.document.kind == "canonical_passage" for hit in base):
-            return base
         parent = next(
-            (
-                hit
-                for hit in base
-                if hit.document.kind in {"knowledge_card", "modern_annotation"}
-            ),
+            (hit for hit in base if hit.document.kind in {"knowledge_card", "modern_annotation"}),
             None,
         )
         if parent is None:
             return base
         canonical = self._find_canonical_reference(parent.document, allowed)
-        if canonical is None or canonical.id in selected:
+        if canonical is None:
             return base
-        linked = RetrievalHit(
-            document=canonical,
-            score=parent.score * self.settings.evidence_chain_score_ratio,
-            matched_by=["evidence_chain"],
-            component_scores={"evidence_chain": parent.score},
+        linked = next(
+            (hit for hit in base if hit.document.id == canonical.id),
+            RetrievalHit(
+                document=canonical,
+                score=parent.score * self.settings.evidence_chain_score_ratio,
+                matched_by=["evidence_chain"],
+                component_scores={"evidence_chain": parent.score},
+            ),
         )
-        return [*base[: max(1, limit - 1)], linked][:limit]
+        without_linked = [hit for hit in base if hit.document.id != canonical.id]
+        parent_index = without_linked.index(parent)
+        ordered = [
+            *without_linked[: parent_index + 1],
+            linked,
+            *without_linked[parent_index + 1 :],
+        ]
+        return ordered[:limit]
 
     def _find_canonical_reference(
         self, document: RetrievalDocument, allowed: set[str]
@@ -900,9 +943,7 @@ class RetrievalService:
     def _apply_concept_boost(self, query: str, hits: list[RetrievalHit]) -> None:
         for hit in hits:
             matched = [
-                concept
-                for concept in hit.document.concepts
-                if query_mentions_term(query, concept)
+                concept for concept in hit.document.concepts if query_mentions_term(query, concept)
             ]
             if not matched:
                 continue
@@ -953,18 +994,12 @@ class RetrievalService:
         evidence_scope: EvidenceScope,
     ) -> bool:
         allowed_statuses = (
-            {"reviewed"}
-            if evidence_scope == "reviewed_only"
-            else {"reviewed", "machine_verified"}
+            {"reviewed"} if evidence_scope == "reviewed_only" else {"reviewed", "machine_verified"}
         )
         if document.review_status not in allowed_statuses:
             return False
-        if (
-            document.school not in {school, "基础共识"}
-            and not (
-                evidence_scope == "personal_preview"
-                and document.review_status == "machine_verified"
-            )
+        if document.school not in {school, "基础共识"} and not (
+            evidence_scope == "personal_preview" and document.review_status == "machine_verified"
         ):
             return False
         facts = {

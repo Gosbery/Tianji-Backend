@@ -116,6 +116,32 @@ class ChatService:
                 matched_by=["deterministic-chart"],
             )
         )
+        relation_labels = "、".join(item.label for item in chart.structural_relations) or "未检出"
+        pattern_labels = "、".join(item.name for item in chart.pattern_candidates) or "未提出"
+        day_roots = (
+            "、".join(
+                f"{item.branch}({item.relation})"
+                for item in chart.roots
+                if item.stem_position == "day"
+            )
+            or "未检出"
+        )
+        evidence.append(
+            Evidence(
+                id="chart-fact:structure",
+                kind="chart_fact",
+                title="命盘事实 · 月令与结构关系",
+                quote=(
+                    f"月令{chart.month_command.branch}，本气{chart.month_command.main_hidden_stem}"
+                    f"（{chart.month_command.ten_god}）；格局候选：{pattern_labels}；"
+                    f"日主根气：{day_roots}；结构关系：{relation_labels}。"
+                    "以上只确认结构出现，不代表合化成功、身强身弱或已经成格。"
+                ),
+                source=chart.calculation_basis,
+                score=1.0,
+                matched_by=["deterministic-chart"],
+            )
+        )
         latency_ms = int((time.perf_counter() - started) * 1000)
         if on_progress is not None:
             await on_progress("资料整理完成，正在保存本次分析")

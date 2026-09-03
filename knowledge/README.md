@@ -53,10 +53,10 @@ passages:
 .venv/bin/python scripts/verify_ziping_knowledge.py
 ```
 
-当前导入保留目录、序文和 47 章原始 HTML，并生成清理后的 TXT 与 310 条段落。
+当前导入保留目录、序文和 47 章原始 HTML，并生成清理后的 TXT 与 310 条正文段落。
 徐乐吾凡例、第 48 篇附文，以及第二篇网页夹带的其他典籍材料只在清单中记录，不进入原典层。
 自动校验覆盖归档哈希、结构连续性、隐藏水印、夹带材料边界和引用定位。因未找到可合法公开下载的
-赵展如原刊影印本，当前作品、段落、2 条注释、5 张候选卡及相关图谱均标记为
+赵展如原刊影印本，当前作品、段落、2 条注释、248 张候选卡及相关图谱均标记为
 `machine_verified + single_source_integrity`，只进入个人预览通道。
 
 ## Layer 2：现代注释
@@ -82,19 +82,29 @@ annotations:
 
 ## Layer 3：结构化知识卡
 
-知识卡不是摘要，而是可执行、可审核的规则单元。`content` 供人阅读，`rule` 表达规则；成立条件、例外、流派分歧和禁用范围必须拆开。
+知识卡不是摘要，而是可执行、可审核的规则单元。`schema_version: 1` 保留旧卡兼容；
+`schema_version: 2` 的规则卡必须明确前提、结论、条件、例外、破格、救应、优先级、
+反例和原典出处，缺一项仓储就拒绝加载。命例卡必须有四柱、应用步骤、所引规则和原典出处。
 
 ```yaml
 cards:
   - id: rule-example
     title: 规则名称
+    schema_version: 2
     card_type: rule
     content: 对规则的简明解释
     rule: 满足 A 且不满足 B 时，才可讨论 C
     school: 流派甲
     concepts: [概念甲]
+    premises: [已按月令提出格局候选]
+    conclusion: 满足 A 且不存在 B 时，C 才可进入下一步判断
     conditions: [条件 A]
     exceptions: [例外 B]
+    break_conditions: [关键相神被合去]
+    rescue_conditions: [另有制忌或合忌]
+    priority: 80
+    priority_note: 先于行运规则，后于确定性命盘事实
+    counterexamples: [只见某十神就直接定格]
     exclusions: [day_master_element=水]
     disagreements:
       - school: 流派乙
@@ -106,6 +116,18 @@ cards:
     graph_refs: [rule:example, school:example]
     status: reviewed
 ```
+
+当前《子平真诠》v2 内容由 `scripts/build_ziping_rule_cards.py` 从稳定原典段落生成：
+231 张规则卡覆盖全部 47 章，其中第 8 至 20 章逐段 71 张、第 31 至 47 章逐段 143 张；
+另有 12 张跨正官、财、印、食神、七杀、伤官、阳刃、建禄与外格的原典命例卡。
+这些卡保留原文作为内容与结论断点，结构字段负责约束应用顺序，不把生成内容冒充现代权威注释。
+
+```bash
+uv run python scripts/build_ziping_rule_cards.py
+```
+
+命例卡的定位是“展示规则怎样落到四柱”，不是相似命盘预测器。检索命例后仍须先算当前命盘，
+只比较相同的结构事实，并明确不同条件；不得因一柱或一字相同照搬古人的身份、财富或吉凶评价。
 
 `exclusions` 中的 `day_master=甲`、`day_master_element=木`、`day_master_yin_yang=阳` 可由检索器执行过滤；自然语言限制应写入 `conditions`、`exceptions` 或 `prohibited_uses`。
 
@@ -127,7 +149,8 @@ edges:
     status: reviewed
 ```
 
-仓储在启动时校验重复 ID、内容哈希、原文/注释引用、卡片引用、图谱端点、状态信任级别和显式图谱引用。
+仓储在启动时校验重复 ID、内容哈希、原文/注释引用、规则与命例互引、图谱端点、
+状态信任级别、v2 必填推理字段和显式图谱引用。
 正式内容只能引用 `reviewed` 来源；机器校勘内容只能引用 `machine_verified` 或 `reviewed` 来源。
 默认只有 `reviewed` 进入检索；个人预览额外纳入 `machine_verified`。
 

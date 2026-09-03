@@ -65,18 +65,9 @@ class AnswerGenerator:
             logger.info("llm_extractive_demo", extra={"provider": "extractive-demo"})
             return self._extractive_demo(question, chart, hits)
 
-        context = "\n\n".join(
-            f"[{index}] 第{hit.document.layer}层 · {hit.document.title}\n"
-            f"来源：{hit.document.source}\n"
-            f"追溯：{', '.join(hit.document.trace_refs) or hit.document.id}\n"
-            f"内容：{hit.document.text}"
-            for index, hit in enumerate(hits, start=1)
-        )
+        context = self._evidence_context(hits)
         chart_json = chart.model_dump_json(exclude={"birth": {"name"}})
-        system = (
-            "你是一名八字研究助手。请结合命盘 JSON、用户问题和资料片段进行完整分析。"
-            "只返回 JSON，字段为 answer、uncertainties、followups。"
-        )
+        system = self._system_prompt(streaming=False)
         user = f"命盘：\n{chart_json}\n\n用户问题：{question}\n\n资料：\n{context}"
         request_payload, headers, endpoint = self._model_request(system, user)
         logger.info("llm_request_started", extra={"provider": self.model})
@@ -154,12 +145,12 @@ class AnswerGenerator:
         usage_payload = payload.get("usage")
         token_usage = self._token_usage(usage_payload)
         generated = GenerationResult(
-            answer=str(parsed.get("answer", "证据不足，暂时无法回答。")),
+            answer=str(parsed.get("answer") or "证据不足，暂时无法回答。"),
             uncertainties=self._string_list(parsed.get("uncertainties")),
             followups=self._string_list(parsed.get("followups")),
             token_usage=token_usage,
         )
-        return self._validate_model_generation(generated)
+        return self._validate_model_generation(generated, len(hits))
 
     async def generate_stream(
         self,
@@ -173,18 +164,9 @@ class AnswerGenerator:
             await on_answer_chunk(generated.answer)
             return generated
 
-        context = "\n\n".join(
-            f"[{index}] 第{hit.document.layer}层 · {hit.document.title}\n"
-            f"来源：{hit.document.source}\n"
-            f"追溯：{', '.join(hit.document.trace_refs) or hit.document.id}\n"
-            f"内容：{hit.document.text}"
-            for index, hit in enumerate(hits, start=1)
-        )
+        context = self._evidence_context(hits)
         chart_json = chart.model_dump_json(exclude={"birth": {"name"}})
-        system = (
-            "你是一名八字研究助手。请结合命盘 JSON、用户问题和资料片段进行完整分析。"
-            "只返回 JSON，字段为 answer、uncertainties、followups，并且 answer 必须是第一个字段。"
-        )
+        system = self._system_prompt(streaming=True)
         user = f"命盘：\n{chart_json}\n\n用户问题：{question}\n\n资料：\n{context}"
         request_payload, headers, endpoint = self._model_request(system, user)
         request_payload["stream"] = True
@@ -210,12 +192,48 @@ class AnswerGenerator:
 
         parsed = self._parse_model_json(content)
         generated = GenerationResult(
-            answer=str(parsed.get("answer", "证据不足，暂时无法回答。")),
+            answer=str(parsed.get("answer") or "证据不足，暂时无法回答。"),
             uncertainties=self._string_list(parsed.get("uncertainties")),
             followups=self._string_list(parsed.get("followups")),
             token_usage=self._token_usage(usage_payload),
         )
-        return self._validate_model_generation(generated)
+        return self._validate_model_generation(generated, len(hits))
+
+    @staticmethod
+    def _evidence_context(hits: list[RetrievalHit]) -> str:
+        def bounded_text(hit: RetrievalHit) -> str:
+            text = hit.document.text
+            return text if len(text) <= 1400 else text[:1397].rstrip() + "……"
+
+        return "\n\n".join(
+            f"[{index}] 第{hit.document.layer}层 · {hit.document.title}\n"
+            f"状态：{hit.document.review_status}；校验：{hit.document.verification_level}；"
+            f"置信度：{hit.document.confidence:.2f}\n"
+            f"风险提示：{hit.document.warning or '无'}\n"
+            f"来源：{hit.document.source}\n"
+            f"追溯：{', '.join(hit.document.trace_refs) or hit.document.id}\n"
+            f"内容：{bounded_text(hit)}"
+            for index, hit in enumerate(hits, start=1)
+        )
+
+    @staticmethod
+    def _system_prompt(streaming: bool) -> str:
+        ordering = "，并且 answer 必须是第一个字段" if streaming else ""
+        return (
+            "你是采用《子平真诠》月令格局法的研究助手。命盘 JSON 中的四柱、月令、透干、"
+            "根气、合冲刑害是程序计算的事实；pattern_candidates 只是待验证候选，绝不等于成格。"
+            "回答须按以下顺序推理：一、列出与问题有关的命盘事实；二、提出候选格局及其依据；"
+            "三、逐项套用资料中的前提和条件；四、检查破格、救应、例外、力量与位置先后；"
+            "五、给出分层结论与尚缺信息。知识性结论必须紧跟有效引用 [n]，不得引用不存在的编号。"
+            "方括号只允许写资料编号 [1]、[2]，命盘程序事实直接称为“程序事实”，不得写文字标签引用。"
+            "原典、现代注释、规则卡各司其职；machine_verified 只能称机器校勘候选，"
+            "不得说成人工定论。"
+            "绝对不得从通根数量直接推断身强、身弱、身旺或身轻；当前程序没有计算旺衰。"
+            "绝对不得把格局候选说成成立、成格或定格，也不得把合冲刑害候选说成合化成功。"
+            "资料不足以完成某一步时明确停止，不凭常识补造规则，不把格局术语直接预测为财富、婚姻、"
+            "健康或具体事件。只返回 JSON，字段为 answer、uncertainties、followups"
+            f"{ordering}。"
+        )
 
     async def _consume_model_stream(
         self,
@@ -328,6 +346,7 @@ class AnswerGenerator:
                 "model": self.model,
                 "max_tokens": self.max_tokens,
                 "temperature": self.temperature,
+                "thinking": {"type": "disabled"},
                 "system": system,
                 "messages": [{"role": "user", "content": user}],
             }
@@ -475,9 +494,21 @@ class AnswerGenerator:
         )
 
     @staticmethod
-    def _validate_model_generation(generated: GenerationResult) -> GenerationResult:
+    def _validate_model_generation(
+        generated: GenerationResult, evidence_count: int
+    ) -> GenerationResult:
+        generated.answer = re.sub(
+            r"\[([^\]]+)\]",
+            lambda match: match.group(0) if match.group(1).isdigit() else f"（{match.group(1)}）",
+            generated.answer,
+        )
         citations = [int(item) for item in re.findall(r"\[(\d+)\]", generated.answer)]
-        generated.citations_validated = bool(citations)
+        bracket_labels = re.findall(r"\[([^\]]+)\]", generated.answer)
+        generated.citations_validated = (
+            bool(citations)
+            and all(1 <= citation <= evidence_count for citation in citations)
+            and all(label.isdigit() for label in bracket_labels)
+        )
         generated.uncertainty_validated = bool(generated.uncertainties)
         return generated
 

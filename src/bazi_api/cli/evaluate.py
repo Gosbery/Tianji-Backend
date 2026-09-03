@@ -399,11 +399,18 @@ async def _evaluate_cases(
         )
         expected = set(case["expected_ids"])
         ranked_ids = [result.document.id for result in results]
-        success = bool(set(ranked_ids[:5]) & expected)
+        ranked_targets = [
+            {result.document.id, *result.document.trace_refs} for result in results
+        ]
+        success = any(targets & expected for targets in ranked_targets[:5])
         recall_hits += int(success)
         per_category[str(case["category"])].append(int(success))
         rank = next(
-            (index for index, item in enumerate(ranked_ids[:10], start=1) if item in expected),
+            (
+                index
+                for index, targets in enumerate(ranked_targets[:10], start=1)
+                if targets & expected
+            ),
             None,
         )
         if rank is not None:
@@ -467,6 +474,7 @@ async def _evaluate_cases(
         "evidence_text_consistency": round(quote_consistency, 4),
         "evidence_id_resolution": round(citation_resolution, 4),
         "citation_chain_rate": round(citation_chain_rate, 4),
+        "retrieval_match_policy": "document_id_or_resolvable_trace_ref",
         "by_category": {
             category: round(sum(values) / len(values), 4)
             for category, values in per_category.items()

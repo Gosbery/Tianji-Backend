@@ -139,10 +139,47 @@ async def test_evidence_scopes_are_isolated_and_preview_keeps_canonical_chain(
     assert not any(hit.document.review_status in {"draft", "retired"} for hit in preview)
     assert any(hit.document.kind == "canonical_passage" for hit in preview)
     assert all(
-        hit.document.warning
-        for hit in preview
-        if hit.document.review_status == "machine_verified"
+        hit.document.warning for hit in preview if hit.document.review_status == "machine_verified"
     )
+
+
+@pytest.mark.asyncio
+async def test_generic_chart_question_retrieves_its_pattern_candidate_rules(
+    tmp_path: Path,
+) -> None:
+    settings = Settings(
+        knowledge_path=BACKEND_ROOT / "knowledge",
+        vector_backend="memory",
+        database_path=tmp_path / "app.db",
+        qdrant_path=tmp_path / "qdrant",
+        embedding_provider="hash",
+        reranker_provider="lexical",
+        embedding_cache_path=tmp_path / "embedding-cache.sqlite3",
+    )
+    repository = KnowledgeRepository(settings.knowledge_path)
+    repository.load()
+    service = await RetrievalService.create(
+        settings,
+        repository.documents("personal_preview"),
+        HashEmbeddingProvider(),
+        repository.graph_nodes,
+        repository.graph_edges,
+    )
+    chart = ChartCalculator().calculate(BirthInput(date=date(1990, 1, 1), time=time(12, 0)))
+
+    terms = service._chart_query_terms("这个命格如何？", chart)
+    hits = await service.search(
+        "这个命格如何？",
+        chart,
+        "基础共识",
+        "hybrid_rerank",
+        6,
+        "personal_preview",
+    )
+
+    assert {"正官", "正官格候选", "子午冲"}.issubset(terms)
+    assert any("ch31" in hit.document.id for hit in hits)
+    assert any(hit.document.kind == "canonical_passage" for hit in hits)
 
 
 def test_traditional_and_variant_terms_are_normalized() -> None:

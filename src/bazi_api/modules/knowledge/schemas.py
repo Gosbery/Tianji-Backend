@@ -116,21 +116,75 @@ class KnowledgeCard(VerificationMetadata):
     id: str
     title: str
     content: str
-    card_type: Literal["concept", "rule", "method", "boundary", "dispute"] = "concept"
+    schema_version: int = Field(default=1, ge=1)
+    card_type: Literal["concept", "rule", "method", "boundary", "dispute", "case"] = (
+        "concept"
+    )
     rule: str = ""
     school: str = "基础共识"
     concepts: list[str]
+    premises: list[str] = Field(default_factory=list)
+    conclusion: str = ""
     conditions: list[str] = Field(default_factory=list)
     exceptions: list[str] = Field(default_factory=list)
+    break_conditions: list[str] = Field(default_factory=list)
+    rescue_conditions: list[str] = Field(default_factory=list)
+    priority: int = Field(default=50, ge=1, le=100)
+    priority_note: str = ""
+    counterexamples: list[str] = Field(default_factory=list)
     exclusions: list[str] = Field(default_factory=list)
     disagreements: list[SchoolPosition] = Field(default_factory=list)
     prohibited_uses: list[str] = Field(default_factory=list)
     source_refs: list[SourceRef] = Field(default_factory=list)
     annotation_refs: list[str] = Field(default_factory=list)
+    case_refs: list[str] = Field(default_factory=list)
+    rule_refs: list[str] = Field(default_factory=list)
+    case_pillars: list[str] = Field(default_factory=list)
+    application_steps: list[str] = Field(default_factory=list)
     graph_refs: list[str] = Field(default_factory=list)
     version: int = Field(default=1, ge=1)
     reviewed_by: str = ""
     reviewed_at: date | None = None
+
+    @model_validator(mode="after")
+    def validate_versioned_card_shape(self) -> KnowledgeCard:
+        if self.schema_version < 2:
+            return self
+
+        if self.card_type in {"rule", "method", "boundary", "dispute"}:
+            required_lists = {
+                "premises": self.premises,
+                "conditions": self.conditions,
+                "exceptions": self.exceptions,
+                "break_conditions": self.break_conditions,
+                "rescue_conditions": self.rescue_conditions,
+                "counterexamples": self.counterexamples,
+            }
+            missing = [name for name, values in required_lists.items() if not values]
+            if not self.conclusion:
+                missing.append("conclusion")
+            if not self.priority_note:
+                missing.append("priority_note")
+            if not any(ref.passage_id for ref in self.source_refs):
+                missing.append("source_refs.passage_id")
+            if missing:
+                raise ValueError(f"v2 {self.card_type} card missing: {', '.join(missing)}")
+
+        if self.card_type == "case":
+            missing = []
+            if len(self.case_pillars) != 4:
+                missing.append("exactly four case_pillars")
+            if not self.application_steps:
+                missing.append("application_steps")
+            if not self.rule_refs:
+                missing.append("rule_refs")
+            if not self.conclusion:
+                missing.append("conclusion")
+            if not any(ref.passage_id for ref in self.source_refs):
+                missing.append("source_refs.passage_id")
+            if missing:
+                raise ValueError(f"v2 case card missing: {', '.join(missing)}")
+        return self
 
 
 class GraphNode(VerificationMetadata):

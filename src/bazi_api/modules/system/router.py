@@ -13,6 +13,11 @@ async def health(
     container: ApplicationContainer = Depends(get_container),
 ) -> HealthResponse:
     overview = container.knowledge.overview()
+    llm_configured = bool(
+        container.settings.anthropic_auth_token
+        if container.settings.llm_provider == "anthropic"
+        else container.settings.openai_api_key
+    )
     return HealthResponse(
         status="ok",
         cards=len(container.knowledge.cards),
@@ -20,7 +25,7 @@ async def health(
         knowledge_layers=overview.layers,
         retrieval_documents=overview.retrieval_documents,
         preview_retrieval_documents=overview.preview_documents,
-        llm_configured=bool(container.settings.openai_api_key),
+        llm_configured=llm_configured,
         embedding_provider=container.settings.embedding_provider,
         embedding_model=container.retrieval.model_version,
         vector_backend=container.settings.vector_backend,

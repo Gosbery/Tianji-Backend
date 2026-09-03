@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     openai_chat_model: str = "gpt-4o-mini"
     anthropic_auth_token: str = ""
     anthropic_base_url: str = "https://api.anthropic.com"
-    anthropic_chat_model: str = "claude-opus-5"
+    anthropic_chat_model: str = "claude-sonnet-4-6"
     llm_temperature: float = Field(default=0.2, ge=0.0, le=2.0)
     llm_max_tokens: int = Field(default=4096, ge=256, le=16_384)
     llm_timeout_seconds: float = Field(default=90.0, gt=0.0, le=600.0)
@@ -35,9 +35,7 @@ class Settings(BaseSettings):
     http_max_connections: int = Field(default=50, ge=1, le=500)
     http_max_keepalive_connections: int = Field(default=20, ge=0, le=500)
 
-    embedding_provider: Literal["sentence_transformer", "remote", "hash"] = (
-        "sentence_transformer"
-    )
+    embedding_provider: Literal["sentence_transformer", "remote", "hash"] = "sentence_transformer"
     embedding_model: str = "BAAI/bge-m3"
     remote_embedding_model: str = ""
     vector_backend: Literal["memory", "qdrant"] = "memory"
@@ -46,6 +44,7 @@ class Settings(BaseSettings):
     qdrant_api_key: str = ""
     reranker_provider: Literal["cross_encoder", "lexical"] = "cross_encoder"
     reranker_model: str = "BAAI/bge-reranker-v2-m3"
+    local_models_only: bool = False
     embedding_cache_path: Path = BACKEND_ROOT / "data/embedding-cache.sqlite3"
     dense_recall_limit: int = Field(default=30, ge=1, le=1000)
     sparse_recall_limit: int = Field(default=30, ge=1, le=1000)

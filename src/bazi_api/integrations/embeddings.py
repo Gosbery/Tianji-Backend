@@ -51,8 +51,9 @@ class HashEmbeddingProvider:
 
 
 class SentenceTransformerEmbeddingProvider:
-    def __init__(self, model_name: str) -> None:
+    def __init__(self, model_name: str, local_files_only: bool = False) -> None:
         self.model_name = model_name
+        self.local_files_only = local_files_only
         self.model_version = f"sentence-transformers:{model_name}"
         self.model = None
         self.dimension = 0
@@ -75,7 +76,9 @@ class SentenceTransformerEmbeddingProvider:
                     "embedding_model_loading",
                     extra={"provider": self.model_version},
                 )
-                self.model = SentenceTransformer(self.model_name)
+                self.model = SentenceTransformer(
+                    self.model_name, local_files_only=self.local_files_only
+                )
                 get_dimension = getattr(self.model, "get_embedding_dimension", None)
                 if get_dimension is None:
                     get_dimension = self.model.get_sentence_embedding_dimension
@@ -122,10 +125,7 @@ class RemoteEmbeddingProvider:
         try:
             payload = response.json()
             data = payload["data"]
-            vectors = [
-                [float(value) for value in item["embedding"]]
-                for item in data
-            ]
+            vectors = [[float(value) for value in item["embedding"]] for item in data]
         except (KeyError, TypeError, ValueError) as exc:
             raise InvalidUpstreamResponseError("远程向量服务返回了无法识别的响应") from exc
         if len(vectors) != len(texts):
@@ -140,7 +140,9 @@ def create_embedding_provider(
     http_client: httpx.AsyncClient | None = None,
 ) -> EmbeddingProvider:
     if settings.embedding_provider == "sentence_transformer":
-        return SentenceTransformerEmbeddingProvider(settings.embedding_model)
+        return SentenceTransformerEmbeddingProvider(
+            settings.embedding_model, settings.local_models_only
+        )
     if settings.embedding_provider == "remote":
         if http_client is None:
             raise RuntimeError("远程 embedding 需要由应用容器提供共享 HTTP client")

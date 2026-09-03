@@ -23,6 +23,36 @@ def test_chart_is_deterministic() -> None:
     assert "大模型" in chart.calculation_basis
 
 
+def test_chart_includes_structural_facts_without_claiming_transformation() -> None:
+    chart = ChartCalculator().calculate(
+        BirthInput(date=date(1990, 1, 1), time=time(12, 0), name="测试")
+    )
+
+    assert chart.month_command.model_dump() == {
+        "branch": "子",
+        "main_hidden_stem": "癸",
+        "ten_god": "正官",
+    }
+    assert chart.pattern_candidates[0].name == "正官格候选"
+    assert chart.pattern_candidates[0].basis == "month_main_qi"
+    assert chart.pattern_candidates[0].exposed_positions == []
+    assert "仅为候选" in chart.pattern_candidates[0].note
+    assert any(
+        item.stem_position == "day" and item.branch in {"巳", "寅"} and item.relation == "same_stem"
+        for item in chart.roots
+    )
+    assert any(
+        item.stem_position == "day" and item.branch == "午" and item.relation == "same_element"
+        for item in chart.roots
+    )
+    assert {item.label for item in chart.structural_relations} >= {
+        "子午冲",
+        "寅午半三合候选",
+        "寅巳刑候选",
+    }
+    assert any(item.hidden_stem == "丙" and item.outside_day_master for item in chart.exposed_stems)
+
+
 def test_chart_marks_time_boundary_uncertainty() -> None:
     chart = ChartCalculator().calculate(
         BirthInput(date=date(1990, 1, 1), time=time(23, 30), name="测试")

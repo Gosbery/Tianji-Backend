@@ -8,6 +8,7 @@ from bazi_api.core.config import Settings
 from bazi_api.core.errors import InvalidUpstreamResponseError, UpstreamServiceError
 from bazi_api.integrations.llm import (
     AnswerGenerator,
+    GenerationResult,
     classify_question_policy,
     requires_refusal,
 )
@@ -85,9 +86,7 @@ async def test_llm_retries_then_falls_back_without_response_format() -> None:
             },
         )
 
-    settings = Settings(
-        llm_provider="openai", openai_api_key="test-key", http_request_retries=2
-    )
+    settings = Settings(llm_provider="openai", openai_api_key="test-key", http_request_retries=2)
     async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
         result = await AnswerGenerator(settings, client).generate(
             "如何理解正官？", chart(), [hit()]
@@ -150,6 +149,7 @@ async def test_anthropic_provider_uses_messages_protocol() -> None:
     assert isinstance(headers, dict) and headers["x-api-key"] == "test-anthropic-key"
     assert headers["anthropic-version"] == "2023-06-01"
     assert isinstance(payload, dict) and payload["model"] == "claude-test"
+    assert payload["thinking"] == {"type": "disabled"}
     assert "system" in payload and "response_format" not in payload
     assert result.answer == "有依据的回答 [1]"
     assert result.token_usage == 42
@@ -172,9 +172,7 @@ async def test_openai_streams_answer_field_and_returns_terminal_metadata() -> No
             + "\n\n"
             for chunk in model_chunks
         ]
-        events.append(
-            f"data: {json.dumps({'choices': [], 'usage': {'total_tokens': 42}})}\n\n"
-        )
+        events.append(f"data: {json.dumps({'choices': [], 'usage': {'total_tokens': 42}})}\n\n")
         events.append("data: [DONE]\n\n")
         return httpx.Response(
             200,
@@ -266,14 +264,10 @@ async def test_llm_retry_count_is_bounded() -> None:
         requests += 1
         return httpx.Response(503, headers={"Retry-After": "0"})
 
-    settings = Settings(
-        llm_provider="openai", openai_api_key="test-key", http_request_retries=2
-    )
+    settings = Settings(llm_provider="openai", openai_api_key="test-key", http_request_retries=2)
     async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
         with pytest.raises(UpstreamServiceError):
-            await AnswerGenerator(settings, client).generate(
-                "如何理解正官？", chart(), [hit()]
-            )
+            await AnswerGenerator(settings, client).generate("如何理解正官？", chart(), [hit()])
 
     assert requests == 3
 
@@ -283,14 +277,10 @@ async def test_llm_rejects_malformed_success_envelope() -> None:
     def handler(_: httpx.Request) -> httpx.Response:
         return httpx.Response(200, json={"choices": []})
 
-    settings = Settings(
-        llm_provider="openai", openai_api_key="test-key", http_request_retries=0
-    )
+    settings = Settings(llm_provider="openai", openai_api_key="test-key", http_request_retries=0)
     async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
         with pytest.raises(InvalidUpstreamResponseError):
-            await AnswerGenerator(settings, client).generate(
-                "如何理解正官？", chart(), [hit()]
-            )
+            await AnswerGenerator(settings, client).generate("如何理解正官？", chart(), [hit()])
 
 
 @pytest.mark.asyncio
@@ -333,7 +323,7 @@ async def test_llm_calls_model_without_evidence() -> None:
     assert no_evidence.answer == "明年可能发财 [1]"
     assert high_risk.policy_decision == "allow"
     assert high_risk.answer == "明年可能发财 [1]"
-    assert no_evidence.citations_validated
+    assert not no_evidence.citations_validated
     assert high_risk.citations_validated
 
 
@@ -370,6 +360,20 @@ async def test_llm_output_without_valid_citations_is_returned() -> None:
     assert result.policy_decision == "allow"
     assert result.answer == "没有引用的确定结论"
     assert not result.citations_validated
+
+
+def test_citation_validation_normalizes_named_bracket_labels() -> None:
+    result = AnswerGenerator._validate_model_generation(
+        GenerationResult(
+            answer="命盘事实 [pattern_candidates]，资料依据 [1]。",
+            uncertainties=["仍需核对"],
+            followups=[],
+        ),
+        evidence_count=1,
+    )
+
+    assert result.answer == "命盘事实 （pattern_candidates），资料依据 [1]。"
+    assert result.citations_validated
 
 
 @pytest.mark.asyncio

@@ -41,6 +41,54 @@ class PillarFacts(BaseModel):
     nayin: str
 
 
+class MonthCommandFacts(BaseModel):
+    branch: str
+    main_hidden_stem: str
+    ten_god: str
+
+
+class ExposedStemFact(BaseModel):
+    hidden_stem: str
+    hidden_positions: list[str]
+    visible_positions: list[str]
+    outside_day_master: bool
+
+
+class RootFact(BaseModel):
+    stem: str
+    stem_position: str
+    branch: str
+    branch_position: str
+    hidden_stem: str
+    relation: Literal["same_stem", "same_element"]
+
+
+class StructuralRelationFact(BaseModel):
+    kind: Literal[
+        "stem_combination",
+        "branch_combination",
+        "branch_clash",
+        "branch_harm",
+        "branch_punishment",
+        "three_harmony",
+        "seasonal_meeting",
+    ]
+    label: str
+    members: list[str]
+    positions: list[str]
+    completeness: Literal["pair", "partial", "full"] = "pair"
+    note: str = ""
+
+
+class PatternCandidateFact(BaseModel):
+    name: str
+    ten_god: str
+    source_stem: str
+    basis: Literal["month_main_qi", "month_hidden_stem_exposed"]
+    exposed_positions: list[str] = Field(default_factory=list)
+    note: str
+
+
 class ChartFacts(BaseModel):
     calculated_at: datetime
     birth: BirthInput
@@ -48,5 +96,10 @@ class ChartFacts(BaseModel):
     day_master: str
     day_master_element: str
     day_master_yin_yang: str
+    month_command: MonthCommandFacts
+    exposed_stems: list[ExposedStemFact] = Field(default_factory=list)
+    roots: list[RootFact] = Field(default_factory=list)
+    structural_relations: list[StructuralRelationFact] = Field(default_factory=list)
+    pattern_candidates: list[PatternCandidateFact] = Field(default_factory=list)
     calculation_basis: str
     uncertainties: list[str] = Field(default_factory=list)
