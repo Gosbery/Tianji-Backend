@@ -1,14 +1,55 @@
 {
+  "cases": 61,
+  "chart_profiles": 4,
+  "recall_at_k": 1.0,
+  "recall_at_5": 1.0,
+  "mrr_at_10": 0.9508,
+  "evidence_text_consistency": 1.0,
+  "evidence_id_resolution": 1.0,
+  "citation_chain_rate": 1.0,
+  "retrieval_match_policy": "document_id_or_resolvable_trace_ref",
+  "by_category": {
+    "direct": 1.0,
+    "concept": 1.0,
+    "conflict": 1.0,
+    "boundary": 1.0,
+    "cross_concept": 1.0
+  },
+  "misses": [],
+  "answer_quality": {
+    "citation_validity_rate": 1.0,
+    "policy_cases": 61,
+    "policy_accuracy_rate": 1.0,
+    "answer_allowed_rate": 1.0,
+    "uncertainty_cases": 1,
+    "uncertainty_trigger_rate": 1.0,
+    "failures": []
+  },
+  "acceptance": {
+    "recall_at_5": true,
+    "mrr_at_10": true,
+    "evidence_text_consistency": true,
+    "evidence_id_resolution": true,
+    "answer_citation_validity": true,
+    "answer_policy_accuracy": true,
+    "answer_all_topics_allowed": true,
+    "answer_uncertainty_trigger": true
+  },
+  "passed": true,
   "mode": "hybrid",
   "dataset": "questions.json",
-  "dataset_sha256": "ebaad74d015f4400191e91fffab6cc339ae0fc548b94a27ef58434e3395a657b",
+  "dataset_sha256": "4abc4c1ca341313ebdc869c856e9eab126e295b79553f71d6b0efdcef2dc7ce7",
   "limit": 10,
   "evidence_scope": "reviewed_only",
   "answer_mode": "offline",
   "embedding_provider": "hash",
   "reranker_provider": "lexical",
   "model_version": "hash-blake2b-char-ngram-v1-d384",
-  "index_version": "3a1c8b8e2c67727a",
+  "index_version": "76a1a330ce14d5e7",
+  "cache": {
+    "hits": 625,
+    "misses": 2
+  },
   "tuning": {
     "dense_recall_limit": 30,
     "sparse_recall_limit": 30,
@@ -29,21 +70,5 @@
     "chapter_heading_boost": 0.4,
     "chapter_topic_boost": 0.12
   },
-  "max_regression": 0.02,
-  "cases": 60,
-  "chart_profiles": 3,
-  "recall_at_5": 1.0,
-  "mrr_at_10": 0.9575,
-  "evidence_text_consistency": 1.0,
-  "evidence_id_resolution": 1.0,
-  "citation_chain_rate": 1.0,
-  "answer_quality": {
-    "citation_validity_rate": 1.0,
-    "policy_accuracy_rate": 1.0,
-    "boundary_compliance_rate": 1.0,
-    "boundary_explanation_accuracy": 1.0,
-    "hard_refusal_recall": 1.0,
-    "safe_answer_rate": 1.0,
-    "uncertainty_trigger_rate": 1.0
-  }
+  "max_regression": 0.02
 }

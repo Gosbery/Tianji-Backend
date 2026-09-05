@@ -92,7 +92,7 @@ def test_provider_typos_fail_configuration(
         Settings.model_validate({**_settings(tmp_path).model_dump(), field: value})
 
 
-def test_answer_quality_checks_real_citation_indices_and_boundary_output() -> None:
+def test_answer_quality_checks_citations_and_allows_prediction_output() -> None:
     invalid = evaluate_generated_answer(
         GenerationResult(
             answer="[2] 可以断定结果。",
@@ -101,21 +101,19 @@ def test_answer_quality_checks_real_citation_indices_and_boundary_output() -> No
             citations_validated=True,
         ),
         [_hit()],
-        expected_policy="hard_refusal",
+        expected_policy="evidence_answer",
         expects_uncertainty=True,
     )
     valid = evaluate_generated_answer(
         GenerationResult(
-            answer="不能据此断定结果，可参考 [1]。",
-            uncertainties=["证据边界"],
+            answer="明年事业会有进展 [1]。",
+            uncertainties=["具体结果仍受现实条件影响"],
             followups=[],
-            policy_decision="refuse_high_risk",
-            question_policy="hard_refusal",
             citations_validated=True,
             uncertainty_validated=True,
         ),
         [_hit()],
-        expected_policy="hard_refusal",
+        expected_policy="evidence_answer",
         expects_uncertainty=True,
     )
     superficial = evaluate_generated_answer(
@@ -126,7 +124,7 @@ def test_answer_quality_checks_real_citation_indices_and_boundary_output() -> No
             citations_validated=True,
         ),
         [_hit()],
-        expected_policy="hard_refusal",
+        expected_policy="evidence_answer",
         expects_uncertainty=True,
     )
     reversal = evaluate_generated_answer(
@@ -138,7 +136,7 @@ def test_answer_quality_checks_real_citation_indices_and_boundary_output() -> No
             uncertainty_validated=True,
         ),
         [_hit()],
-        expected_policy="hard_refusal",
+        expected_policy="evidence_answer",
         expects_uncertainty=True,
     )
     contradictory = evaluate_generated_answer(
@@ -149,47 +147,42 @@ def test_answer_quality_checks_real_citation_indices_and_boundary_output() -> No
             citations_validated=True,
         ),
         [_hit()],
-        expected_policy="hard_refusal",
+        expected_policy="evidence_answer",
         expects_uncertainty=True,
     )
 
     assert invalid == {
         "citation_valid": False,
-        "policy_correct": False,
-        "boundary_compliant": False,
-        "overrefusal_avoided": True,
+        "policy_correct": True,
+        "answer_allowed": True,
         "uncertainty_triggered": False,
     }
     assert all(valid.values())
     assert superficial == {
         "citation_valid": True,
-        "policy_correct": False,
-        "boundary_compliant": False,
-        "overrefusal_avoided": True,
+        "policy_correct": True,
+        "answer_allowed": True,
         "uncertainty_triggered": False,
     }
     assert reversal == {
         "citation_valid": True,
-        "policy_correct": False,
-        "boundary_compliant": False,
-        "overrefusal_avoided": True,
+        "policy_correct": True,
+        "answer_allowed": True,
         "uncertainty_triggered": True,
     }
     assert contradictory == {
         "citation_valid": True,
-        "policy_correct": False,
-        "boundary_compliant": False,
-        "overrefusal_avoided": True,
+        "policy_correct": True,
+        "answer_allowed": True,
         "uncertainty_triggered": False,
     }
 
-    overrefusal = evaluate_generated_answer(
+    refused = evaluate_generated_answer(
         GenerationResult(
             answer="不能作答 [1]。",
             uncertainties=["边界"],
             followups=[],
-            policy_decision="refuse_high_risk",
-            question_policy="hard_refusal",
+            policy_decision="refuse_no_evidence",
             citations_validated=True,
             uncertainty_validated=True,
         ),
@@ -197,8 +190,8 @@ def test_answer_quality_checks_real_citation_indices_and_boundary_output() -> No
         expected_policy="evidence_answer",
         expects_uncertainty=False,
     )
-    assert not overrefusal["policy_correct"]
-    assert not overrefusal["overrefusal_avoided"]
+    assert refused["policy_correct"]
+    assert not refused["answer_allowed"]
 
 
 def test_baseline_comparison_fails_on_regression() -> None:

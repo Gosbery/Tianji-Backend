@@ -1,0 +1,64 @@
+schema_version: 1
+experts:
+  - id: comprehensive
+    display_name: 综合研究
+    version: "1.0"
+    review_status: reviewed
+    allowed_schools: [基础共识, 子平格局法, 其他用神体系, 文献整理, 版本研究, 盲派象法]
+    preferred_schools: [基础共识]
+    method_cards:
+      - card_id: method-comprehensive-evidence-first
+        purpose: 证据优先与冲突处理
+    methodology:
+      - 先确认程序计算出的命盘事实
+      - 再按问题组织经典原文、注释和规则卡
+      - 对不同流派的冲突分别陈述
+    boundaries:
+      - 证据不足时不作确定性判断
+      - 健康、法律和财务内容不替代专业意见
+    attribution: 项目通用研究方法
+    is_default: false
+
+  - id: liang-xiangrun
+    display_name: 梁湘润方法
+    version: "0.1-preview"
+    review_status: machine_verified
+    allowed_schools: [基础共识, 子平格局法, 其他用神体系, 文献整理, 版本研究]
+    preferred_schools: [子平格局法, 文献整理]
+    method_cards:
+      - card_id: method-liang-month-pattern
+        purpose: 月令、格局、救应与调候分层
+    methodology:
+      - 月令与格局
+      - 成败救应
+      - 调候与用神区分
+      - 原文与评注辨析
+    boundaries:
+      - 仅采用方法框架，不模仿梁湘润口吻或冒充本人
+      - 现代著作只保留书目信息、合法短引和审核摘要
+      - 与命盘事实或高等级证据冲突时，以后者为准
+    attribution: 公开材料方法研究摘要，待人工书目复核
+    is_default: true
+
+  - id: duan-jianye
+    display_name: 段建业方法
+    version: "0.1-preview"
+    review_status: machine_verified
+    allowed_schools: [基础共识, 盲派象法]
+    preferred_schools: [盲派象法]
+    method_cards:
+      - card_id: method-duan-image-work
+        purpose: 取象、主宾体用、做功和反馈验证
+    methodology:
+      - 取象
+      - 主宾与体用
+      - 做功
+      - 虚实
+      - 应期
+      - 事实反馈
+    boundaries:
+      - 仅采用方法框架，不模仿段建业口吻或冒充本人
+      - 象法推论必须与程序命盘事实分开标注
+      - 未经用户事实反馈的判断必须保留不确定性
+    attribution: 公开材料方法研究摘要，待人工书目复核
+    is_default: false

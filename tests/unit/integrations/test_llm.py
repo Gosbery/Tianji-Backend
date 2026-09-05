@@ -1,4 +1,5 @@
 import json
+import re
 from datetime import date, time
 
 import httpx
@@ -10,30 +11,55 @@ from bazi_api.integrations.llm import (
     AnswerGenerator,
     GenerationResult,
     classify_question_policy,
-    requires_refusal,
 )
 from bazi_api.modules.charts.schemas import BirthInput
 from bazi_api.modules.charts.service import ChartCalculator
 from bazi_api.modules.retrieval.schemas import RetrievalDocument, RetrievalHit
 
 
-def test_prediction_policy_is_disabled() -> None:
-    for question in (
-        "我何年暴富？",
-        "我的婚事肯定黄吗？",
-        "我啥时候归西？",
-        "这场诉讼胜券在握不？",
-        "金是否可以直接解释成财富？",
-        "《子平真诠》怎样解释正官？",
-    ):
-        assert classify_question_policy(question) == "evidence_answer"
-        assert not requires_refusal(question)
+@pytest.mark.parametrize(
+    ("question", "expected"),
+    [
+        ("我何年暴富？", "evidence_answer"),
+        ("我的婚事肯定黄吗？", "evidence_answer"),
+        ("我啥时候归西？", "evidence_answer"),
+        ("这场诉讼胜券在握不？", "evidence_answer"),
+        ("金是否可以直接解释成财富？", "evidence_answer"),
+        ("《子平真诠》怎样解释正官？", "evidence_answer"),
+    ],
+)
+def test_question_policy_allows_every_topic(
+    question: str, expected: str
+) -> None:
+    assert classify_question_policy(question) == expected
 
 
 def chart():
     return ChartCalculator().calculate(
         BirthInput(date=date(1990, 1, 1), time=time(12, 0), name="隐私姓名")
     )
+
+
+def test_system_prompt_requires_readable_markdown_layout() -> None:
+    prompt = AnswerGenerator._system_prompt("基础共识", "reviewed_only")
+
+    assert "## 标题" in prompt
+    assert "每段最多三句话" in prompt
+    assert "每项单独成行" in prompt
+    assert "禁止把“一、二、三”多个部分连续写在同一段" in prompt
+    assert "以上分析步骤不得展示给用户" in prompt
+    assert "候选依据与逐项检验" in prompt
+    assert "资料审核层级只在证据面板展示" in prompt
+
+
+def test_chart_context_hides_internal_luck_status_values() -> None:
+    context = AnswerGenerator._chart_context(chart())
+
+    assert '"status"' not in context
+    assert '"current"' not in context
+    assert '"future"' not in context
+    assert '"pattern_candidates"' not in context
+    assert "候选" not in context
 
 
 def hit() -> RetrievalHit:
@@ -156,28 +182,20 @@ async def test_anthropic_provider_uses_messages_protocol() -> None:
 
 
 @pytest.mark.asyncio
-async def test_openai_streams_answer_field_and_returns_terminal_metadata() -> None:
+async def test_streaming_buffers_until_answer_passes_validation() -> None:
     captured: dict[str, object] = {}
-    model_chunks = [
-        '{"answer":"有依据',
-        '的回答 [1]","uncertainties":["仍有边界"],',
-        '"followups":["继续追问"]}',
-    ]
-
     def handler(request: httpx.Request) -> httpx.Response:
         captured["payload"] = json.loads(request.content)
-        events = [
-            "data: "
-            + json.dumps({"choices": [{"delta": {"content": chunk}}]}, ensure_ascii=False)
-            + "\n\n"
-            for chunk in model_chunks
-        ]
-        events.append(f"data: {json.dumps({'choices': [], 'usage': {'total_tokens': 42}})}\n\n")
-        events.append("data: [DONE]\n\n")
         return httpx.Response(
             200,
-            text="".join(events),
-            headers={"Content-Type": "text/event-stream"},
+            json={
+                "choices": [{"message": {"content": json.dumps({
+                    "answer": "有依据的回答 [1]",
+                    "uncertainties": ["仍有边界"],
+                    "followups": ["继续追问"],
+                }, ensure_ascii=False)}}],
+                "usage": {"total_tokens": 42},
+            },
         )
 
     settings = Settings(llm_provider="openai", openai_api_key="test-key")
@@ -197,7 +215,7 @@ async def test_openai_streams_answer_field_and_returns_terminal_metadata() -> No
     assert result.followups == ["继续追问"]
     assert result.token_usage == 42
     assert isinstance(captured["payload"], dict)
-    assert captured["payload"]["stream"] is True  # type: ignore[index]
+    assert "stream" not in captured["payload"]  # type: ignore[operator]
 
 
 @pytest.mark.asyncio
@@ -284,7 +302,7 @@ async def test_llm_rejects_malformed_success_envelope() -> None:
 
 
 @pytest.mark.asyncio
-async def test_llm_calls_model_without_evidence() -> None:
+async def test_no_evidence_skips_model_but_prediction_request_calls_it() -> None:
     requests = 0
 
     def handler(request: httpx.Request) -> httpx.Response:
@@ -299,7 +317,7 @@ async def test_llm_calls_model_without_evidence() -> None:
                             "content": json.dumps(
                                 {
                                     "answer": "明年可能发财 [1]",
-                                    "uncertainties": [],
+                                    "uncertainties": ["具体结果仍受现实选择影响"],
                                     "followups": [],
                                 },
                                 ensure_ascii=False,
@@ -317,19 +335,24 @@ async def test_llm_calls_model_without_evidence() -> None:
         no_evidence = await generator.generate("如何理解正官？", chart(), [])
         high_risk = await generator.generate("我何年暴富？", chart(), [hit()])
 
-    assert requests == 2
-    assert no_evidence.policy_decision == "allow"
+    assert requests == 1
+    assert no_evidence.policy_decision == "refuse_no_evidence"
     assert no_evidence.question_policy == "evidence_answer"
-    assert no_evidence.answer == "明年可能发财 [1]"
+    assert no_evidence.degradation_reason == "no_evidence"
     assert high_risk.policy_decision == "allow"
+    assert high_risk.question_policy == "evidence_answer"
     assert high_risk.answer == "明年可能发财 [1]"
-    assert not no_evidence.citations_validated
+    assert no_evidence.citations_validated
     assert high_risk.citations_validated
 
 
 @pytest.mark.asyncio
-async def test_llm_output_without_valid_citations_is_returned() -> None:
+async def test_llm_output_without_valid_citations_falls_back_after_one_repair() -> None:
+    requests = 0
+
     def handler(request: httpx.Request) -> httpx.Response:
+        nonlocal requests
+        requests += 1
         return httpx.Response(
             200,
             json={
@@ -358,8 +381,40 @@ async def test_llm_output_without_valid_citations_is_returned() -> None:
         )
 
     assert result.policy_decision == "allow"
-    assert result.answer == "没有引用的确定结论"
-    assert not result.citations_validated
+    assert requests == 2
+    assert "[1] **证据**" in result.answer
+    assert result.citations_validated
+    assert result.degradation_reason == "model_output_failed_validation"
+
+
+@pytest.mark.asyncio
+async def test_llm_repairs_out_of_range_citation_once() -> None:
+    requests = 0
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        nonlocal requests
+        requests += 1
+        answer = "越界引用 [99]" if requests == 1 else "已修复引用 [1]"
+        return httpx.Response(
+            200,
+            json={"choices": [{"message": {"content": json.dumps({
+                "answer": answer,
+                "uncertainties": ["仍需结合更多资料"],
+                "followups": [],
+            }, ensure_ascii=False)}}]},
+            request=request,
+        )
+
+    settings = Settings(llm_provider="openai", openai_api_key="test-key")
+    async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+        result = await AnswerGenerator(settings, client).generate(
+            "如何理解正官？", chart(), [hit()]
+        )
+
+    assert requests == 2
+    assert result.answer == "已修复引用 [1]"
+    assert result.citations_validated
+    assert result.degradation_reason == ""
 
 
 def test_citation_validation_normalizes_named_bracket_labels() -> None:
@@ -372,12 +427,48 @@ def test_citation_validation_normalizes_named_bracket_labels() -> None:
         evidence_count=1,
     )
 
-    assert result.answer == "命盘事实 （pattern_candidates），资料依据 [1]。"
+    assert result.answer == "命盘事实 （格局参考），资料依据 [1]。"
     assert result.citations_validated
 
 
+def test_generation_validation_removes_internal_luck_labels_from_user_text() -> None:
+    result = AnswerGenerator._validate_model_generation(
+        GenerationResult(
+            answer=(
+                "当前辛亥（2018—2027，状态current），下一步壬子"
+                "（2028—2037，status=future） [1]。"
+            ),
+            uncertainties=["current_cycle 仍需结合现实"],
+            followups=["继续分析 next_cycle"],
+        ),
+        evidence_count=1,
+    )
+
+    assert result.answer == "当前辛亥（2018—2027），下一步壬子（2028—2037） [1]。"
+    assert result.uncertainties == ["当前大运 仍需结合现实"]
+    assert result.followups == ["继续分析 下一步大运"]
+
+
+def test_generation_validation_removes_review_and_candidate_language() -> None:
+    result = AnswerGenerator._validate_model_generation(
+        GenerationResult(
+            answer=(
+                "月令酉金偏印当令（machine_verified 候选，未定成格），感情推进偏慢 [1]。"
+                "偏印格候选为机器校勘候选，未定成格。整体仍需结合大运。"
+            ),
+            uncertainties=["仍需结合现实"],
+            followups=[],
+        ),
+        evidence_count=1,
+    )
+
+    assert "感情推进偏慢 [1]" in result.answer
+    assert "整体仍需结合大运" in result.answer
+    assert not re.search(r"machine_verified|候选|未定成格|机器校勘", result.answer)
+
+
 @pytest.mark.asyncio
-async def test_llm_deterministic_prediction_is_returned_with_valid_citation() -> None:
+async def test_llm_allows_deterministic_prediction_with_valid_citation() -> None:
     def handler(request: httpx.Request) -> httpx.Response:
         return httpx.Response(
             200,
@@ -388,7 +479,7 @@ async def test_llm_deterministic_prediction_is_returned_with_valid_citation() ->
                             "content": json.dumps(
                                 {
                                     "answer": "明年中大奖，已经可以确定 [1]",
-                                    "uncertainties": ["没有不确定性"],
+                                    "uncertainties": ["实际结果仍可能受到现实条件影响"],
                                     "followups": [],
                                 },
                                 ensure_ascii=False,
@@ -408,10 +499,11 @@ async def test_llm_deterministic_prediction_is_returned_with_valid_citation() ->
 
     assert result.policy_decision == "allow"
     assert result.answer == "明年中大奖，已经可以确定 [1]"
+    assert result.degradation_reason == ""
 
 
 @pytest.mark.asyncio
-async def test_llm_allows_bazi_terms_with_prediction_boundary() -> None:
+async def test_llm_allows_bazi_prediction_answer() -> None:
     def handler(request: httpx.Request) -> httpx.Response:
         return httpx.Response(
             200,
@@ -422,7 +514,7 @@ async def test_llm_allows_bazi_terms_with_prediction_boundary() -> None:
                             "content": json.dumps(
                                 {
                                     "answer": (
-                                        "本盘可讨论正财格 [1]，但不能据此预测现实财富或婚姻结果。"
+                                        "本盘正财格显示财富积累较稳，婚姻中重视现实基础 [1]。"
                                     ),
                                     "uncertainties": ["格局判断仍需更多规则"],
                                     "followups": [],
@@ -448,7 +540,7 @@ async def test_llm_allows_bazi_terms_with_prediction_boundary() -> None:
 
 
 @pytest.mark.asyncio
-async def test_llm_returns_personal_assertion_with_bazi_terms() -> None:
+async def test_llm_allows_personal_assertion_with_bazi_terms() -> None:
     def handler(request: httpx.Request) -> httpx.Response:
         return httpx.Response(
             200,
@@ -459,7 +551,7 @@ async def test_llm_returns_personal_assertion_with_bazi_terms() -> None:
                             "content": json.dumps(
                                 {
                                     "answer": "命主明年一定发财 [1]。",
-                                    "uncertainties": [],
+                                    "uncertainties": ["现实结果仍可能变化"],
                                     "followups": [],
                                 },
                                 ensure_ascii=False,
@@ -479,3 +571,4 @@ async def test_llm_returns_personal_assertion_with_bazi_terms() -> None:
 
     assert result.policy_decision == "allow"
     assert result.answer == "命主明年一定发财 [1]。"
+    assert result.degradation_reason == ""

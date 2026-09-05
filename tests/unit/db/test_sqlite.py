@@ -143,11 +143,11 @@ def test_interrupted_feedback_migration_is_resumed_idempotently(tmp_path: Path) 
     database = SQLiteDatabase(path)
     with database.transaction() as connection:
         connection.execute(
-            "INSERT INTO sessions VALUES ('session', 'now', 'now')"
+            "INSERT INTO sessions(id, created_at, updated_at) VALUES ('session', 'now', 'now')"
         )
         connection.execute(
             """
-            INSERT INTO messages
+            INSERT INTO messages(id, session_id, role, content, payload_json, created_at)
             VALUES ('assistant', 'session', 'assistant', 'answer', '{}', 'now')
             """
         )

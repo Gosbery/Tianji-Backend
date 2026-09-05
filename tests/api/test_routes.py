@@ -81,6 +81,7 @@ def test_health_and_chart_routes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
                 "question": "《子平真诠》如何讨论月令用神？",
                 "mode": "hybrid",
                 "evidence_scope": "personal_preview",
+                "school": "子平格局法",
             },
         )
         unknown_session_chat = client.post(
@@ -101,6 +102,18 @@ def test_health_and_chart_routes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
                 "mode": "hybrid",
             },
         )
+        mismatched_session_chat = client.post(
+            "/api/v1/chat/stream",
+            json={
+                "chart": chart.json(),
+                "question": "继续解释",
+                "session_id": preview_chat.json()["session_id"],
+                "school": "基础共识",
+                "mode": "hybrid",
+                "evidence_scope": "personal_preview",
+            },
+        )
+        history = client.get(f"/api/v1/conversations/{preview_chat.json()['session_id']}")
         traces_without_key = client.get("/api/v1/observability/recent")
         traces = client.get(
             "/api/v1/observability/recent",
@@ -170,6 +183,7 @@ def test_health_and_chart_routes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
     assert rejected_preflight.status_code == 400
     assert overview.status_code == 200
     assert overview.json()["layers"]["modern_annotations"] >= 10
+    assert overview.json()["schools"]["子平格局法"]["machine_verified"] > 0
     ziping = next(
         work for work in originals.json()["works"] if work["id"] == "work-ziping-zhenquan"
     )
@@ -193,15 +207,23 @@ def test_health_and_chart_routes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
     assert any(
         item["review_status"] == "machine_verified" for item in preview_chat.json()["evidence"]
     )
+    assert history.status_code == 200
+    assert [item["role"] for item in history.json()["messages"]] == ["user", "assistant"]
+    assert history.json()["messages"][-1]["response"]["message_id"] == preview_chat.json()[
+        "message_id"
+    ]
     assert unknown_session_chat.status_code == 404
     assert unknown_session_chat.json()["code"] == "session_not_found"
     assert invalid_session_chat.status_code == 422
+    assert mismatched_session_chat.status_code == 409
+    assert mismatched_session_chat.json()["code"] == "session_context_mismatch"
     assert traces_without_key.status_code == 401
     assert traces.status_code == 200
     assert disabled_traces.status_code == 404
     assert traces.json()[0]["evidence_scope"] == "personal_preview"
     assert traces.json()[0]["model_version"].startswith("hash-")
     assert traces.json()[0]["index_version"]
+    assert traces.json()[0]["question_policy"] == "evidence_answer"
     assert "hits_json" not in traces.json()[0]
     assert feedback.status_code == 204
     assert updated_feedback.status_code == 204

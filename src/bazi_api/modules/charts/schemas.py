@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field, field_validator
 class BirthInput(BaseModel):
     date: date
     time: time
+    gender: Literal["male", "female"] = "male"
     timezone: str = Field(default="Asia/Shanghai", min_length=1, max_length=64)
     name: str = Field(default="访客", max_length=100)
 
@@ -89,6 +90,32 @@ class PatternCandidateFact(BaseModel):
     note: str
 
 
+class LuckCycleFact(BaseModel):
+    index: int = Field(ge=1)
+    ganzhi: str
+    stem: str
+    branch: str
+    start_year: int
+    end_year: int
+    start_age: int
+    end_age: int
+    status: Literal["past", "current", "future"]
+
+
+class LuckFacts(BaseModel):
+    direction: Literal["forward", "reverse"]
+    direction_label: Literal["顺排", "逆排"]
+    start_at: datetime
+    start_offset_years: int = Field(ge=0)
+    start_offset_months: int = Field(ge=0, le=11)
+    start_offset_days: int = Field(ge=0)
+    start_offset_hours: int = Field(ge=0)
+    method: str
+    cycles: list[LuckCycleFact]
+    current_cycle: LuckCycleFact | None = None
+    next_cycle: LuckCycleFact | None = None
+
+
 class ChartFacts(BaseModel):
     calculated_at: datetime
     birth: BirthInput
@@ -101,5 +128,6 @@ class ChartFacts(BaseModel):
     roots: list[RootFact] = Field(default_factory=list)
     structural_relations: list[StructuralRelationFact] = Field(default_factory=list)
     pattern_candidates: list[PatternCandidateFact] = Field(default_factory=list)
+    luck: LuckFacts
     calculation_basis: str
     uncertainties: list[str] = Field(default_factory=list)

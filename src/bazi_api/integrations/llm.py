@@ -21,12 +21,10 @@ logger = logging.getLogger(__name__)
 
 PolicyDecision = Literal[
     "allow",
-    "refuse_high_risk",
     "refuse_no_evidence",
     "refuse_invalid_citations",
-    "refuse_unsafe_output",
 ]
-QuestionPolicy = Literal["evidence_answer", "explain_boundary", "hard_refusal"]
+QuestionPolicy = Literal["evidence_answer"]
 
 
 @dataclass
@@ -39,6 +37,9 @@ class GenerationResult:
     question_policy: QuestionPolicy = "evidence_answer"
     citations_validated: bool = False
     uncertainty_validated: bool = False
+    degradation_reason: str = ""
+    model_version: str = ""
+    prompt_version: str = "open-prediction-v4"
 
 
 class AnswerGenerator:
@@ -59,16 +60,88 @@ class AnswerGenerator:
         self.http_client = http_client
 
     async def generate(
-        self, question: str, chart: ChartFacts, hits: list[RetrievalHit]
+        self,
+        question: str,
+        chart: ChartFacts,
+        hits: list[RetrievalHit],
+        *,
+        school: str = "基础共识",
+        evidence_scope: str = "reviewed_only",
+        history: list[dict[str, str]] | None = None,
+        expert_context: str = "",
     ) -> GenerationResult:
+        question_policy = classify_question_policy(question)
+        if not hits:
+            return self._no_evidence(question_policy)
         if not self.api_key:
             logger.info("llm_extractive_demo", extra={"provider": "extractive-demo"})
-            return self._extractive_demo(question, chart, hits)
+            return self._extractive_demo(question, chart, hits, question_policy)
+
+        generated = await self._generate_once(
+            question,
+            chart,
+            hits,
+            school=school,
+            evidence_scope=evidence_scope,
+            history=history or [],
+            expert_context=expert_context,
+        )
+        generated.question_policy = question_policy
+        generated.model_version = self.model
+        self._validate_model_generation(generated, len(hits))
+        if self._generation_is_trusted(generated):
+            return generated
+
+        logger.warning(
+            "llm_generation_repair",
+            extra={"provider": self.model, "error_code": self._validation_reason(generated)},
+        )
+        repaired = await self._generate_once(
+            question,
+            chart,
+            hits,
+            school=school,
+            evidence_scope=evidence_scope,
+            history=history or [],
+            expert_context=expert_context,
+            repair_reason=self._validation_reason(generated),
+        )
+        repaired.question_policy = question_policy
+        repaired.model_version = self.model
+        self._validate_model_generation(repaired, len(hits))
+        if self._generation_is_trusted(repaired):
+            return repaired
+        fallback = self._extractive_demo(question, chart, hits, question_policy)
+        fallback.degradation_reason = "model_output_failed_validation"
+        fallback.model_version = self.model
+        return fallback
+
+    async def _generate_once(
+        self,
+        question: str,
+        chart: ChartFacts,
+        hits: list[RetrievalHit],
+        *,
+        school: str,
+        evidence_scope: str,
+        history: list[dict[str, str]],
+        expert_context: str = "",
+        repair_reason: str = "",
+    ) -> GenerationResult:
 
         context = self._evidence_context(hits)
-        chart_json = chart.model_dump_json(exclude={"birth": {"name"}})
-        system = self._system_prompt(streaming=False)
-        user = f"命盘：\n{chart_json}\n\n用户问题：{question}\n\n资料：\n{context}"
+        chart_json = self._chart_context(chart)
+        system = self._system_prompt(school, evidence_scope, expert_context)
+        history_context = self._history_context(history)
+        repair = (
+            f"\n\n上一次输出未通过可信校验（{repair_reason}）。请重新完整回答，不能复述上次草稿。"
+            if repair_reason
+            else ""
+        )
+        user = (
+            f"命盘：\n{chart_json}\n\n近期对话：\n{history_context or '无'}\n\n"
+            f"用户问题：{question}\n\n资料：\n{context}{repair}"
+        )
         request_payload, headers, endpoint = self._model_request(system, user)
         logger.info("llm_request_started", extra={"provider": self.model})
         try:
@@ -150,7 +223,7 @@ class AnswerGenerator:
             followups=self._string_list(parsed.get("followups")),
             token_usage=token_usage,
         )
-        return self._validate_model_generation(generated, len(hits))
+        return generated
 
     async def generate_stream(
         self,
@@ -158,46 +231,23 @@ class AnswerGenerator:
         chart: ChartFacts,
         hits: list[RetrievalHit],
         on_answer_chunk: Callable[[str], Awaitable[None]],
+        *,
+        school: str = "基础共识",
+        evidence_scope: str = "reviewed_only",
+        history: list[dict[str, str]] | None = None,
+        expert_context: str = "",
     ) -> GenerationResult:
-        if not self.api_key:
-            generated = self._extractive_demo(question, chart, hits)
-            await on_answer_chunk(generated.answer)
-            return generated
-
-        context = self._evidence_context(hits)
-        chart_json = chart.model_dump_json(exclude={"birth": {"name"}})
-        system = self._system_prompt(streaming=True)
-        user = f"命盘：\n{chart_json}\n\n用户问题：{question}\n\n资料：\n{context}"
-        request_payload, headers, endpoint = self._model_request(system, user)
-        request_payload["stream"] = True
-        if self.provider == "openai":
-            request_payload["stream_options"] = {"include_usage": True}
-
-        try:
-            content, usage_payload = await self._consume_model_stream(
-                endpoint, headers, request_payload, on_answer_chunk
-            )
-        except httpx.HTTPStatusError as exc:
-            if self.provider != "openai" or exc.response.status_code not in {400, 422}:
-                raise UpstreamServiceError() from exc
-            request_payload.pop("response_format", None)
-            content, usage_payload = await self._consume_model_stream(
-                endpoint,
-                {**headers, "Idempotency-Key": str(uuid.uuid4())},
-                request_payload,
-                on_answer_chunk,
-            )
-        except httpx.HTTPError as exc:
-            raise UpstreamServiceError() from exc
-
-        parsed = self._parse_model_json(content)
-        generated = GenerationResult(
-            answer=str(parsed.get("answer") or "证据不足，暂时无法回答。"),
-            uncertainties=self._string_list(parsed.get("uncertainties")),
-            followups=self._string_list(parsed.get("followups")),
-            token_usage=self._token_usage(usage_payload),
+        generated = await self.generate(
+            question,
+            chart,
+            hits,
+            school=school,
+            evidence_scope=evidence_scope,
+            history=history,
+            expert_context=expert_context,
         )
-        return self._validate_model_generation(generated, len(hits))
+        await on_answer_chunk(generated.answer)
+        return generated
 
     @staticmethod
     def _evidence_context(hits: list[RetrievalHit]) -> str:
@@ -205,9 +255,22 @@ class AnswerGenerator:
             text = hit.document.text
             return text if len(text) <= 1400 else text[:1397].rstrip() + "……"
 
+        review_labels = {
+            "reviewed": "已复核",
+            "machine_verified": "机器校勘",
+            "draft": "草稿",
+            "retired": "已停用",
+        }
+        verification_labels = {
+            "unverified": "未核验",
+            "single_source_integrity": "单源完整性",
+            "multi_source_alignment": "多源对齐",
+            "human_review": "人工复核",
+        }
         return "\n\n".join(
             f"[{index}] 第{hit.document.layer}层 · {hit.document.title}\n"
-            f"状态：{hit.document.review_status}；校验：{hit.document.verification_level}；"
+            f"状态：{review_labels.get(hit.document.review_status, '未核验')}；"
+            f"校验：{verification_labels.get(hit.document.verification_level, '未核验')}；"
             f"置信度：{hit.document.confidence:.2f}\n"
             f"风险提示：{hit.document.warning or '无'}\n"
             f"来源：{hit.document.source}\n"
@@ -217,23 +280,79 @@ class AnswerGenerator:
         )
 
     @staticmethod
-    def _system_prompt(streaming: bool) -> str:
-        ordering = "，并且 answer 必须是第一个字段" if streaming else ""
-        return (
-            "你是采用《子平真诠》月令格局法的研究助手。命盘 JSON 中的四柱、月令、透干、"
-            "根气、合冲刑害是程序计算的事实；pattern_candidates 只是待验证候选，绝不等于成格。"
-            "回答须按以下顺序推理：一、列出与问题有关的命盘事实；二、提出候选格局及其依据；"
+    def _system_prompt(school: str, evidence_scope: str, expert_context: str = "") -> str:
+        evidence_label = "含机器校勘预览" if evidence_scope == "personal_preview" else "仅人工审核"
+        prompt = (
+            f"你是采用“{school}”范围的研究助手，当前证据范围为“{evidence_label}”。"
+            "命盘数据中的四柱、月令、透干、根气、合冲刑害由程序计算。"
+            "请在内部按以下顺序完成分析：一、核对与问题有关的命盘信息；二、提出可能解释及其依据；"
             "三、逐项套用资料中的前提和条件；四、检查破格、救应、例外、力量与位置先后；"
-            "五、给出分层结论与尚缺信息。知识性结论必须紧跟有效引用 [n]，不得引用不存在的编号。"
-            "方括号只允许写资料编号 [1]、[2]，命盘程序事实直接称为“程序事实”，不得写文字标签引用。"
-            "原典、现代注释、规则卡各司其职；machine_verified 只能称机器校勘候选，"
-            "不得说成人工定论。"
-            "绝对不得从通根数量直接推断身强、身弱、身旺或身轻；当前程序没有计算旺衰。"
-            "绝对不得把格局候选说成成立、成格或定格，也不得把合冲刑害候选说成合化成功。"
-            "资料不足以完成某一步时明确停止，不凭常识补造规则，不把格局术语直接预测为财富、婚姻、"
-            "健康或具体事件。只返回 JSON，字段为 answer、uncertainties、followups"
-            f"{ordering}。"
+            "五、形成结论。以上分析步骤不得展示给用户；最终 answer 只保留用户需要的结论、"
+            "具体表现、时间趋势和建议。知识性结论必须紧跟有效引用 [n]，不得引用不存在的编号。"
+            "answer 必须使用清晰的 Markdown 排版：每个主要部分用“## 标题”单独成行；"
+            "每段最多三句话；并列判断、准备建议和注意事项使用“- ”或“1. ”列表且每项单独成行；"
+            "标题、段落和列表之间留一个空行。禁止把“一、二、三”多个部分连续写在同一段。"
+            "标题使用“结论”“具体表现”“时间趋势”“建议”等自然名称，不得使用“命盘程序事实”"
+            "“候选依据与逐项检验”“条件套用”“检查与推演”或其他分析过程名称。"
+            "回答必须使用自然中文，不得输出 JSON 字段名、审核状态、内部枚举值或“候选、未定成格”"
+            "等系统措辞。资料审核层级只在证据面板展示，正文不要复述。"
+            "方括号只允许写资料编号 [1]、[2]，不得写文字标签引用。"
+            "birth 中的 date、time、timezone、gender 均为用户已经提供的输入，不得再次声称缺少"
+            "出生日期、出生时间或性别，也不得要求用户重复提供。luck 是程序计算的大运事实；用户询问"
+            "当前或下一大运时，须直接使用命盘中已经计算出的当前大运与下一步大运回答，"
+            "不得把第一步大运误称为下一步大运。出生地未采集，但除非用户主动要求真太阳时校正，"
+            "不得将出生地作为回答前提。"
+            "允许在证据范围内讨论财富、婚姻、感情、健康、事业、考试、诉讼和具体事件，不得只因题材"
+            "敏感而拒绝回答，但必须遵守以下边界：过往只作回溯验证，先列命局条件与对应岁运，再说明与"
+            "实际事件是否吻合，不得根据用户经历反向修改规则；未来只给条件式趋势、时间窗口和不确定性，"
+            "不得承诺具体年份必然发财、升职、结婚、离婚或发生灾祸。健康内容只能说明传统文献观点，"
+            "不得诊断疾病、预测寿命或死亡时间、安排手术、建议治疗用药或停药；用户提到现实症状时应"
+            "建议咨询有资质的医生。古籍中的身份、性别、婚姻和疾病断语要标明历史语境，不得直接复述为"
+            "现实结论。命例只用于展示规则应用，不得因一柱、一字或相似十神套用古人结果。"
+            "应结合本轮命盘与资料给出直接、完整的判断；资料未明确覆盖的内容必须列为不确定性，"
+            "不要反复插入“程序事实”“命理推演”等技术免责声明。"
+            "只返回 JSON，字段为 answer、"
+            "uncertainties、followups。"
         )
+        if expert_context:
+            prompt += f"\n\n专家方法约束：\n{expert_context}"
+        return prompt
+
+    @staticmethod
+    def _history_context(history: list[dict[str, str]]) -> str:
+        lines = []
+        for item in history[-8:]:
+            if item.get("role") not in {"user", "assistant"} or not item.get("content"):
+                continue
+            speaker = "用户" if item.get("role") == "user" else "助手"
+            lines.append(f"{speaker}：{item.get('content', '')[:1200]}")
+        return "\n".join(lines)
+
+    @staticmethod
+    def _chart_context(chart: ChartFacts) -> str:
+        payload = chart.model_dump(mode="json", exclude={"birth": {"name"}})
+        payload.pop("pattern_candidates", None)
+        relations = payload.get("structural_relations")
+        if isinstance(relations, list):
+            for relation in relations:
+                if not isinstance(relation, dict):
+                    continue
+                relation.pop("note", None)
+                label = relation.get("label")
+                if isinstance(label, str):
+                    relation["label"] = label.replace("候选", "")
+        luck = payload.get("luck")
+        if isinstance(luck, dict):
+            cycles = luck.get("cycles")
+            if isinstance(cycles, list):
+                for cycle in cycles:
+                    if isinstance(cycle, dict):
+                        cycle.pop("status", None)
+            for key in ("current_cycle", "next_cycle"):
+                cycle = luck.get(key)
+                if isinstance(cycle, dict):
+                    cycle.pop("status", None)
+        return json.dumps(payload, ensure_ascii=False)
 
     async def _consume_model_stream(
         self,
@@ -365,6 +484,7 @@ class AnswerGenerator:
             {
                 "model": self.model,
                 "temperature": self.temperature,
+                "max_tokens": self.max_tokens,
                 "response_format": {"type": "json_object"},
                 "messages": [
                     {"role": "system", "content": system},
@@ -462,7 +582,11 @@ class AnswerGenerator:
         return parsed if isinstance(parsed, dict) else {"answer": str(parsed)}
 
     def _extractive_demo(
-        self, question: str, chart: ChartFacts, hits: list[RetrievalHit]
+        self,
+        question: str,
+        chart: ChartFacts,
+        hits: list[RetrievalHit],
+        question_policy: QuestionPolicy = "evidence_answer",
     ) -> GenerationResult:
         if not hits:
             return GenerationResult(
@@ -491,12 +615,50 @@ class AnswerGenerator:
             ],
             citations_validated=True,
             uncertainty_validated=True,
+            question_policy=question_policy,
+            model_version="extractive-demo",
         )
+
+    @staticmethod
+    def _no_evidence(question_policy: QuestionPolicy) -> GenerationResult:
+        return GenerationResult(
+            answer="当前所选流派和审核范围内没有找到足够证据，暂时不作命理判断。",
+            uncertainties=["没有可用于支持回答的合格证据。"],
+            followups=["可以调整流派或证据范围后重新提问。"],
+            policy_decision="refuse_no_evidence",
+            question_policy=question_policy,
+            citations_validated=True,
+            uncertainty_validated=True,
+            degradation_reason="no_evidence",
+            model_version="policy-engine-v1",
+        )
+
+    @staticmethod
+    def _generation_is_trusted(generated: GenerationResult) -> bool:
+        return (
+            generated.citations_validated
+            and generated.uncertainty_validated
+            and generated.policy_decision == "allow"
+        )
+
+    @staticmethod
+    def _validation_reason(generated: GenerationResult) -> str:
+        reasons = []
+        if not generated.citations_validated:
+            reasons.append("invalid_citations")
+        if not generated.uncertainty_validated:
+            reasons.append("missing_uncertainty")
+        return ",".join(reasons) or "unknown"
 
     @staticmethod
     def _validate_model_generation(
         generated: GenerationResult, evidence_count: int
     ) -> GenerationResult:
+        generated.answer = _humanize_internal_labels(generated.answer)
+        generated.uncertainties = [
+            _humanize_internal_labels(item) for item in generated.uncertainties
+        ]
+        generated.followups = [_humanize_internal_labels(item) for item in generated.followups]
         generated.answer = re.sub(
             r"\[([^\]]+)\]",
             lambda match: match.group(0) if match.group(1).isdigit() else f"（{match.group(1)}）",
@@ -509,341 +671,49 @@ class AnswerGenerator:
             and all(1 <= citation <= evidence_count for citation in citations)
             and all(label.isdigit() for label in bracket_labels)
         )
-        generated.uncertainty_validated = bool(generated.uncertainties)
+        generated.uncertainty_validated = any(
+            item.strip()
+            and not _contains_any(
+                re.sub(r"\s+", "", item),
+                ("没有不确定性", "毫无不确定性", "不存在不确定性", "已经确定"),
+            )
+            for item in generated.uncertainties
+        )
         return generated
 
 
-_HIGH_RISK_TERMS = (
-    "癌",
-    "肿瘤",
-    "病",
-    "健康",
-    "寿命",
-    "死亡",
-    "死",
-    "归西",
-    "离世",
-    "去世",
-    "活多久",
-    "灾祸",
-    "受伤",
-    "手术",
-    "财",
-    "赚钱",
-    "赚多少",
-    "收入",
-    "彩票",
-    "投资",
-    "亏损",
-    "升职",
-    "失业",
-    "职业",
-    "职位",
-    "考试",
-    "录取",
-    "上岸",
-    "婚",
-    "配偶",
-    "夫妻",
-    "感情",
-    "恋爱",
-    "姻缘",
-    "官司",
-    "诉讼",
-    "大牢",
-    "牢狱",
-    "坐牢",
-    "蹲牢",
-    "判刑",
-    "入狱",
-    "拘留",
-    "运势",
-    "好运",
-    "倒霉",
-    "吉凶",
-)
-_PERSONAL_TERMS = (
-    "我",
-    "咱",
-    "你会",
-    "你将",
-    "你在",
-    "你的婚",
-    "你的财",
-    "他会",
-    "他将",
-    "他在",
-    "他的婚",
-    "他的财",
-    "她会",
-    "她将",
-    "她在",
-    "她的婚",
-    "她的财",
-    "本人",
-    "自己",
-    "这个人",
-    "某人",
-    "对象",
-    "我们家",
-    "家人",
-    "家里人",
-    "孩子",
-    "父母",
-    "伴侣",
-    "老公",
-    "老婆",
-    "男友",
-    "女友",
-)
-_SPECIFIC_TERMS = (
-    "这场",
-    "这次",
-    "本次",
-    "眼下",
-)
-_CONCRETE_PREDICTION_TERMS = (
-    "断定",
-    "断言",
-    "预测",
-    "预言",
-    "算出",
-    "一定",
-    "肯定",
-    "必然",
-    "必定",
-    "铁定",
-    "注定",
-    "保证",
-    "稳赢",
-    "胜券在握",
-    "十拿九稳",
-    "板上钉钉",
-    "成定局",
-    "哪年",
-    "何年",
-    "哪一年",
-    "何时",
-    "什么时候",
-    "啥时候",
-    "几时",
-    "哪天",
-    "何日",
-    "几岁",
-    "具体金额",
-    "具体日期",
-    "结果",
-    "结局",
-    "成败",
-    "成功",
-    "失败",
-    "顺利",
-    "不顺",
-    "吉凶",
-    "祸福",
-    "发财",
-    "暴富",
-    "赚多少钱",
-    "升职",
-    "失业",
-    "离婚",
-    "婚变",
-    "破裂",
-    "得病",
-    "患病",
-    "重病",
-    "归西",
-    "离世",
-    "去世",
-    "坐牢",
-    "蹲大牢",
-    "入狱",
-    "判刑",
-)
-_DIRECT_REQUEST_TERMS = (
-    "请断定",
-    "请预测",
-    "请算",
-    "帮我算",
-    "告诉我",
-    "算一算",
-    "算算",
-    "给我断",
-    "替我看",
-)
-_RESEARCH_TERMS = (
-    "原文",
-    "古籍",
-    "文本",
-    "章节",
-    "概念",
-    "定义",
-    "含义",
-    "意思",
-    "解释",
-    "理解",
-    "区别",
-    "关系",
-    "条件",
-    "出处",
-    "注释",
-    "依据",
-    "证据",
-    "语境",
-    "用法",
-    "校勘",
-    "版本",
-    "历史",
-    "是什么",
-    "有哪些",
-    "哪一柱",
-    "哪章",
-    "第几章",
-    "哪一篇",
-    "位于哪篇",
-    "位于哪一篇",
-    "何处",
-    "哪里",
-    "哪一段",
-    "谈到",
-    "记载",
-    "出现",
-    "几个",
-)
-_MAPPING_TERMS = (
-    "一定",
-    "必然",
-    "断定",
-    "断言",
-    "预测",
-    "推断",
-    "直接判断",
-    "导致",
-    "就会",
-    "就必",
-    "解释成",
-    "等于",
-    "代表",
-    "表示",
-    "说明",
-    "翻译成",
-    "保证",
-)
-_SINGLE_BASIS_TERMS = ("只凭", "仅凭", "单凭", "只看", "看到")
-_BAZI_SYMBOL_TERMS = (
-    "八字",
-    "命盘",
-    "命里",
-    "四柱",
-    "五行",
-    "阴阳",
-    "天干",
-    "地支",
-    "支",
-    "日主",
-    "月令",
-    "生克",
-    "生剋",
-    "旺衰",
-    "身强",
-    "身弱",
-    "十神",
-    "比肩",
-    "劫财",
-    "食神",
-    "伤官",
-    "偏财",
-    "正财",
-    "七杀",
-    "正官",
-    "偏印",
-    "正印",
-    "用神",
-    "格局",
-    "行运",
-    "星辰",
-    "神煞",
-    "四吉神",
-    "四凶神",
-    "阳刃",
-    "建禄",
-    "月劫",
-    "六亲",
-    "外格",
-    "喜神",
-    "喜忌",
-    "口诀",
-    "木",
-    "火",
-    "土",
-    "金",
-    "水",
-)
-_META_QUESTION_TERMS = (
-    "是否",
-    "能否",
-    "是不是",
-    "可不可以",
-    "可以不可以",
-    "能不能",
-    "会不会",
-    "等不等于",
-    "为什么不能",
-    "为何不能",
-    "应该避免",
-)
-_PREDICTION_STRUCTURE = re.compile(
-    r"(?:哪|何|啥).{0,3}(?:年|月|日|天|时|时候)|"
-    r"几(?:年|岁|时)|(?:19|20)\d{2}|今年|明年|后年|未来|以后|将来|"
-    r"(?:会不会|能不能|是否|能否)|(?:会|能|要|将).{0,18}(?:吗|么|不|$)|"
-    r"(?:多少|几多).{0,5}(?:钱|元|块|万|百万|千万|亿)?|"
-    r"确定|肯定|必然|注定|保证"
-)
-_ASSERTIVE_PREDICTION = re.compile(
-    r"(?:今年|明年|后年|未来|以后|将来|(?:19|20)\d{2}).{0,24}"
-    r"(?:确定|肯定|一定|必然|注定|保证|将会|会在|能成|必成)"
-)
-_OUTPUT_BOUNDARY_TERMS = (
-    "不能",
-    "不可",
-    "不应",
-    "无法",
-    "不宜",
-    "不等于",
-    "不代表",
-    "不足以",
-    "不支持",
-    "不要",
-    "避免",
-    "禁止",
-    "尚不能",
-    "并非",
-    "未必",
-    "不作",
-    "不做",
-    "不用于",
-    "不意味着",
-    "不得",
-)
-_OUTPUT_PERSONAL_TERMS = _PERSONAL_TERMS + (
-    "你",
-    "您",
-    "命主",
-    "此人",
-    "本命",
-    "本盘",
-    "该命",
-)
-
-
 def classify_question_policy(_question: str) -> QuestionPolicy:
-    """Compatibility hook; prediction policy checks are disabled."""
-
     return "evidence_answer"
 
 
-def requires_refusal(_question: str) -> bool:
-    return False
+def _humanize_internal_labels(text: str) -> str:
+    text = re.sub(r"\bpattern_candidates\b", "格局参考", text, flags=re.IGNORECASE)
+    text = re.sub(
+        r"[（(][^（）()\n]*(?:machine_verified|机器校勘|未定成格)"
+        r"[^（）()\n]*[）)]",
+        "",
+        text,
+        flags=re.IGNORECASE,
+    )
+    text = re.sub(
+        r"(^|[。！？])[^。！？\n]*(?:machine_verified|机器校勘)"
+        r"[^。！？\n]*[。！？]?",
+        r"\1",
+        text,
+        flags=re.IGNORECASE,
+    )
+    text = re.sub(
+        r"(?:[,，;；]\s*)?(?:状态|status)\s*(?:为|是|[:：=])?\s*"
+        r"(?:current|future|past)\b",
+        "",
+        text,
+        flags=re.IGNORECASE,
+    )
+    text = re.sub(r"\bcurrent_cycle\b", "当前大运", text, flags=re.IGNORECASE)
+    text = re.sub(r"\bnext_cycle\b", "下一步大运", text, flags=re.IGNORECASE)
+    text = re.sub(r"未定成格|(?:结构关系)?候选", "", text)
+    text = re.sub(r"[（(]\s*[）)]", "", text)
+    return re.sub(r"([，；])\s*[，；]", r"\1", text)
 
 
 def _contains_any(text: str, terms: tuple[str, ...]) -> bool:

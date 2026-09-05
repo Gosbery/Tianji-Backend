@@ -29,6 +29,7 @@ class RetrievalDocument(BaseModel):
     graph_refs: list[str] = Field(default_factory=list)
     retrieval_terms: list[str] = Field(default_factory=list)
     normalized_text: str = ""
+    rerank_text: str = ""
     review_status: ReviewStatus = "reviewed"
     verification_level: VerificationLevel = "human_review"
     confidence: float = Field(default=0.95, ge=0.0, le=1.0)

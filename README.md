@@ -116,12 +116,17 @@ PYTHONPATH=src uv run python -m bazi_api.cli.evaluate --mode hybrid_rerank --lim
 PYTHONPATH=src uv run python -m bazi_api.cli.evaluate --mode hybrid_rerank --limit 10 \
   --dataset ziping-zhenquan.json --scope personal_preview
 PYTHONPATH=src uv run python -m bazi_api.cli.export_lightrag
+PYTHONPATH=src uv run python -m bazi_api.cli.export_feedback_candidates \
+  --database data/app.db --output evals/candidates/feedback.json
 ```
 
 检索参数可重复使用 `--param name=v1,v2` 做矩阵扫描，并用 `--output` 保存报告。
 CI 使用纯本地 `hash + lexical` 跑完整离线答案评测，再通过
 `--baseline evals/baselines/questions.hash.hybrid.json` 和 `--max-regression` 阻止质量回退；
 `--require-acceptance` 可让未达到题库验收阈值的运行直接返回失败。
+仓库根目录的 `make eval` 固定使用 `hash + lexical`，同时运行 60 条主评测、10 条多轮追问
+和 52 条策略对抗评测。
+负反馈导出只生成 `pending_human_review` 候选，不会自动加入固定题库或在线修改模型。
 
 当前 243 张 v2 卡加入后的真实 BGE 专项评测结果：《子平真诠》150 题
 `Recall@5 = 0.9733`、`MRR@10 = 0.9314`，引用文本一致率和引用 ID 可解析率均为 `1.0`，
@@ -138,6 +143,8 @@ CI 使用纯本地 `hash + lexical` 跑完整离线答案评测，再通过
 - `GET /api/v1/health`
 - `POST /api/v1/chart`
 - `POST /api/v1/chat`
+- `POST /api/v1/chat/stream`
+- `GET /api/v1/conversations/{session_id}`
 - `GET /api/v1/knowledge/cards`
 - `GET /api/v1/knowledge/overview`
 - `GET /api/v1/knowledge/originals`
@@ -151,7 +158,10 @@ CI 使用纯本地 `hash + lexical` 跑完整离线答案评测，再通过
 
 原有 `/api/*` 地址暂时作为隐藏的兼容入口保留，新代码统一使用 `/api/v1/*`。
 
-首版不做大运流年、自动旺衰判定、健康诊断或确定性人生预测。
+当前版本允许回答各类命理预测问题；回答仍区分程序事实、知识依据与命理推演。
+会话绑定命盘指纹、流派和证据范围；上下文不一致时返回
+`409 session_context_mismatch`。模型回答在输出前完成引用与不确定性校验，失败时最多修复一次，
+再次失败则降级为可追溯摘录或证据不足说明。
 当前历法适配只支持 `Asia/Shanghai` 民用时间；扩展其他时区前必须完成节气瞬时转换校验。
 
 ## 下一阶段

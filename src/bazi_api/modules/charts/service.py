@@ -7,6 +7,8 @@ from .schemas import (
     BirthInput,
     ChartFacts,
     ExposedStemFact,
+    LuckCycleFact,
+    LuckFacts,
     MonthCommandFacts,
     PatternCandidateFact,
     PillarFacts,
@@ -111,10 +113,13 @@ class ChartCalculator:
         month_command, exposed_stems, roots, relations, pattern_candidates = self.analyze_structure(
             pillars, day_master
         )
+        luck = self._luck_facts(eight_char, birth)
         uncertainties: list[str] = []
         if birth.time.hour in {22, 23, 0, 1}:
             uncertainties.append("出生时间接近日界或子时边界，不同流派的换日规则可能改变日柱。")
-        uncertainties.append("首版按输入地的民用时间排盘，尚未校正真太阳时。")
+        uncertainties.append(
+            "已使用输入的出生时间完成四柱与大运计算；当前按民用时间计算，未另作真太阳时调整。"
+        )
 
         return ChartFacts(
             calculated_at=datetime.now(),
@@ -128,11 +133,60 @@ class ChartCalculator:
             roots=roots,
             structural_relations=relations,
             pattern_candidates=pattern_candidates,
+            luck=luck,
             calculation_basis=(
                 "lunar-python 节气历法；"
-                f"按 {birth.timezone} 当地民用时间计算，未校正真太阳时；不由大模型推算"
+                f"按 {birth.timezone} 当地民用时间计算，未校正真太阳时；"
+                "大运按年干阴阳与性别定顺逆、按分钟法三天折一年；不由大模型推算"
             ),
             uncertainties=uncertainties,
+        )
+
+    @staticmethod
+    def _luck_facts(eight_char: EightChar, birth: BirthInput) -> LuckFacts:
+        yun = eight_char.getYun(1 if birth.gender == "male" else 0, sect=2)
+        current_year = datetime.now().year
+        cycles = [
+            LuckCycleFact(
+                index=item.getIndex(),
+                ganzhi=item.getGanZhi(),
+                stem=item.getGanZhi()[0],
+                branch=item.getGanZhi()[1],
+                start_year=item.getStartYear(),
+                end_year=item.getEndYear(),
+                start_age=item.getStartAge(),
+                end_age=item.getEndAge(),
+                status=(
+                    "past"
+                    if current_year > item.getEndYear()
+                    else "future"
+                    if current_year < item.getStartYear()
+                    else "current"
+                ),
+            )
+            for item in yun.getDaYun(11)[1:]
+        ]
+        current_cycle = next((item for item in cycles if item.status == "current"), None)
+        next_cycle = next(
+            (
+                item
+                for item in cycles
+                if item.index == (current_cycle.index + 1 if current_cycle else 1)
+            ),
+            None,
+        )
+        return LuckFacts(
+            direction="forward" if yun.isForward() else "reverse",
+            direction_label="顺排" if yun.isForward() else "逆排",
+            start_at=datetime.strptime(yun.getStartSolar().toYmdHms(), "%Y-%m-%d %H:%M:%S"),
+            start_offset_years=yun.getStartYear(),
+            start_offset_months=yun.getStartMonth(),
+            start_offset_days=yun.getStartDay(),
+            start_offset_hours=yun.getStartHour(),
+            method="出生年干阴阳与性别定顺逆；按分钟法三天折一年",
+            cycles=cycles,
+            current_cycle=current_cycle,
+            next_cycle=next_cycle,
         )
 
     def analyze_structure(
@@ -376,3 +430,5 @@ class ChartCalculator:
             ten_god_branches=list(ten_god_branches),
             nayin=str(nayin),
         )
+    LuckCycleFact,
+    LuckFacts,

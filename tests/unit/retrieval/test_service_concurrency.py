@@ -68,7 +68,18 @@ def test_single_han_concepts_require_boundaries() -> None:
     assert query_mentions_term("怎样理解五行", "五行")
 
     graph = KnowledgeGraphIndex(
-        [GraphNode(id="concept:fire", type="concept", name="火", status="reviewed")],
+        [
+            GraphNode(
+                id="concept:fire",
+                type="concept",
+                name="火",
+                status="reviewed",
+                verification_level="human_review",
+                reviewed_by="test-reviewer",
+                reviewed_at="2026-09-03",
+                review_note="测试夹具人工确认",
+            )
+        ],
         [],
     )
     assert graph.expand("火车如何运行", "reviewed_only") == ([], set())
@@ -218,7 +229,7 @@ async def test_lightrag_only_returns_locally_verified_eligible_documents(
             "测试", chart, "基础共识", "lightrag", 3, "reviewed_only"
         )
         personal_preview = await service.search(
-            "测试", chart, "基础共识", "lightrag", 3, "personal_preview"
+            "测试", chart, "实验流派", "lightrag", 3, "personal_preview"
         )
 
     assert [hit.document.id for hit in reviewed] == ["fire"]

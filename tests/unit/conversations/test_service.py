@@ -7,6 +7,7 @@ from types import SimpleNamespace
 
 import pytest
 
+from bazi_api.core.errors import SessionContextMismatchError
 from bazi_api.db.sqlite import SQLiteDatabase
 from bazi_api.integrations.llm import GenerationResult
 from bazi_api.modules.charts.schemas import BirthInput
@@ -27,7 +28,13 @@ class FakeRetrieval:
 
 
 class FakeGenerator:
-    async def generate(self, *_: object) -> GenerationResult:
+    calls: list[dict[str, object]]
+
+    def __init__(self) -> None:
+        self.calls = []
+
+    async def generate(self, *_: object, **kwargs: object) -> GenerationResult:
+        self.calls.append(kwargs)
         return GenerationResult(
             answer="测试回答",
             uncertainties=["测试不确定性"],
@@ -41,10 +48,11 @@ class FakeGenerator:
         _chart: object,
         _hits: object,
         on_chunk: Callable[[str], Awaitable[None]],
+        **kwargs: object,
     ) -> GenerationResult:
-        await on_chunk("测试")
-        await on_chunk("回答")
-        return await self.generate()
+        result = await self.generate(**kwargs)
+        await on_chunk(result.answer)
+        return result
 
 
 def chat_request() -> ChatRequest:
@@ -157,3 +165,117 @@ async def test_trace_failure_rolls_back_session_and_both_messages(
         assert counts == [0, 0, 0]
     finally:
         database.close()
+
+
+def test_repository_binds_context_and_restores_ordered_history(tmp_path: Path) -> None:
+    database = SQLiteDatabase(tmp_path / "app.db")
+    conversations = ConversationRepository(database)
+    try:
+        session_id, is_new = conversations.resolve_session(
+            chart_fingerprint="chart-a",
+            school="子平格局法",
+            evidence_scope="personal_preview",
+        )
+        with database.transaction() as connection:
+            conversations.save_exchange(
+                connection,
+                session_id=session_id,
+                is_new_session=is_new,
+                question="正官格有哪些条件？",
+                answer="第一轮 [1]",
+                chart_fingerprint="chart-a",
+                school="子平格局法",
+                evidence_scope="personal_preview",
+                assistant_payload={
+                    "evidence": [],
+                    "uncertainties": ["仍需核对"],
+                    "followups": [],
+                    "mode": "hybrid",
+                    "latency_ms": 1,
+                    "policy_decision": "allow",
+                    "citations_validated": True,
+                    "degradation_reason": "",
+                },
+            )
+        with database.transaction() as connection:
+            conversations.save_exchange(
+                connection,
+                session_id=session_id,
+                is_new_session=False,
+                question="它有哪些例外？",
+                answer="第二轮 [1]",
+                chart_fingerprint="chart-a",
+                school="子平格局法",
+                evidence_scope="personal_preview",
+                assistant_payload={
+                    "evidence": [],
+                    "uncertainties": ["仍需核对"],
+                    "followups": [],
+                    "mode": "hybrid",
+                    "latency_ms": 1,
+                    "policy_decision": "allow",
+                    "citations_validated": True,
+                    "degradation_reason": "",
+                },
+            )
+
+        recent = conversations.recent_context(session_id)
+        restored = conversations.history(session_id)
+
+        assert [item["content"] for item in recent] == [
+            "正官格有哪些条件？",
+            "第一轮 [1]",
+            "它有哪些例外？",
+            "第二轮 [1]",
+        ]
+        assert [item["turn_index"] for item in restored["messages"]] == [1, 1, 2, 2]
+        assert restored["messages"][-1]["response"]["answer"] == "第二轮 [1]"
+        with pytest.raises(SessionContextMismatchError):
+            conversations.resolve_session(
+                session_id,
+                chart_fingerprint="chart-a",
+                school="基础共识",
+                evidence_scope="personal_preview",
+            )
+    finally:
+        database.close()
+
+
+def test_followup_retrieval_uses_prior_question_and_evidence_not_assistant_claims() -> None:
+    history = [
+        {"role": "user", "content": "正官格有哪些条件？", "payload": {}},
+        {
+            "role": "assistant",
+            "content": "未经证据约束的自由发挥不应进入检索",
+            "payload": {
+                "evidence": [
+                    {"title": "正官格的成格条件", "concepts": ["正官", "月令"]}
+                ]
+            },
+        },
+    ]
+
+    query = ChatService._retrieval_query("它有哪些例外？", history)
+
+    assert "正官格有哪些条件" in query
+    assert "正官格的成格条件" in query
+    assert "正官" in query and "月令" in query
+    assert "自由发挥" not in query
+
+
+@pytest.mark.parametrize(
+    ("question", "expected_terms"),
+    [
+        ("父母对我的助益如何？", ["六亲", "正印", "偏财"]),
+        ("兄弟姐妹和朋友人脉怎么样？", ["比肩", "劫财", "贵人"]),
+        ("分析桃花、事业和财运", ["夫妻宫", "正官", "正财", "大运"]),
+        ("看看子女和异地发展", ["时柱", "食神", "冲"]),
+    ],
+)
+def test_retrieval_query_expands_common_fortune_topics(
+    question: str, expected_terms: list[str]
+) -> None:
+    query = ChatService._retrieval_query(question, [])
+
+    assert question in query
+    assert all(term in query for term in expected_terms)

@@ -1,0 +1,1313 @@
+work:
+  id: work-mingli-yueyan
+  title: 命理约言
+  attributed_author: 陈素庵
+  dynasty: 清
+  edition: luckclub.cn 公开网页录入本（选章）
+  edition_notes: 按固定主题白名单选章；未作跨版本人工校勘。
+  source_url: https://luckclub.cn/bazi/018/
+  rights: public_domain
+  school: 子平综合法
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: &id001
+  - 仅获得单一公开网页录入本，OCR 错字、脱字及版本异文尚未经人工逐字校勘。
+  content_sha256: 60edf0894310f13e32989cd21059165d5fe5f8f7d817c105ed549d40eeb309ce
+  source_pages:
+  - https://luckclub.cn/bazi/018/
+passages:
+- id: mingli-yueyan-ch005-p001
+  volume: 选章正文
+  chapter_path:
+  - 第5章 看命总法一
+  sequence: 1
+  text: 看命大法，不过生克扶抑而已。列下四柱，先看日干是何五行；随看月支，或是生我克我，或是我生我克。如月支本气透于天干，寅透甲，午透丁，即取为格，系正官、食神、偏财、偏印，则宜生之助之；系偏官、伤官，则宜制之化之。若本气未透遭克，则寅不用甲，而用所藏之丙戊；午不用丁而用所藏之己。若所藏之神，又不通遭克则不用月支，而用别干之势盛力旺者为格。其禄刃比劫，无论在干在支，均不以取格，但用为日干之助耳。总之以日干与财官等较其强弱，强者抑之，弱者扶之，不能扶抑者，以运扶抑之，其必不可扶者则弃之，必不可抑者则顺之。惟合化格、一气两神格、暗冲暗合格，不在此例。总之钱而易见者小，清而难测者大，清而有神者贵，浊而无气者贱，纯粹中和者贵而安，奇怪偏驳者贵而危。或谓太平之世取正，有事之秋取奇，余尝阅古今之命数万，承平安乐，尽多七煞伤官，开创经纶，不少正官正印，特奇正之命，世多世少，气运偶然。非奇者生太平之世必无用，正者生有事之世必不贵也。
+  normalized_text: 看命大法，不过生克扶抑而已。列下四柱，先看日干是何五行；随看月支，或是生我克我，或是我生我克。如月支本气透于天干，寅透甲，午透丁，即取为格，系正官、食神、偏财、偏印，则宜生之助之；系偏官、伤官，则宜制之化之。若本气未透遭克，则寅不用甲，而用所藏之丙戊；午不用丁而用所藏之己。若所藏之神，又不通遭克则不用月支，而用别干之势盛力旺者为格。其禄刃比劫，无论在干在支，均不以取格，但用为日干之助耳。总之以日干与财官等较其强弱，强者抑之，弱者扶之，不能扶抑者，以运扶抑之，其必不可扶者则弃之，必不可抑者则顺之。惟合化格、一气两神格、暗冲暗合格，不在此例。总之钱而易见者小，清而难测者大，清而有神者贵，浊而无气者贱，纯粹中和者贵而安，奇怪偏驳者贵而危。或谓太平之世取正，有事之秋取奇，余尝阅古今之命数万，承平安乐，尽多七煞伤官，开创经纶，不少正官正印，特奇正之命，世多世少，气运偶然。非奇者生太平之世必无用，正者生有事之世必不贵也。
+  locator: 第5章·看命总法一·第1条
+  concepts:
+  - 十神
+  - 旺衰
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 7546c97bc670373aa83041cde4a74a959d5a3957963a248e75a9011185013cb2
+  source_pages:
+  - https://luckclub.cn/bazi/018/005/
+- id: mingli-yueyan-ch006-p001
+  volume: 选章正文
+  chapter_path:
+  - 第6章 看命总法二
+  sequence: 2
+  text: 推命先看日干，或得时，或失时，或得势，或失势。下坐某支，紧贴某干，于日干生克扶抑何如。随看余三干及四支，于日干生克扶抑何如，此恒法也。然不特日干而已，凡主中干支皆当如此研究，如看年干，先看得时得势否？下坐扶抑何如？月干时干亦然。又看年支，先看得时得势否？上载何干紧贴何支？于年支生克扶抑何如？随看余三支四干，于年支生克扶抑何如？月支时支亦然。如此一一研究的确，然后用之为官煞，为财印，为食伤，其是强是弱，当用当舍，自然精当无差，洞彻不惑矣。此看命第一要诀也。
+  normalized_text: 推命先看日干，或得时，或失时，或得势，或失势。下坐某支，紧贴某干，于日干生克扶抑何如。随看余三干及四支，于日干生克扶抑何如，此恒法也。然不特日干而已，凡主中干支皆当如此研究，如看年干，先看得时得势否？下坐扶抑何如？月干时干亦然。又看年支，先看得时得势否？上载何干紧贴何支？于年支生克扶抑何如？随看余三支四干，于年支生克扶抑何如？月支时支亦然。如此一一研究的确，然后用之为官煞，为财印，为食伤，其是强是弱，当用当舍，自然精当无差，洞彻不惑矣。此看命第一要诀也。
+  locator: 第6章·看命总法二·第1条
+  concepts: []
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 988b5c44f082be3ec310dab980fc6ee48015a3dd8b4f4a380b0cde17850a70d1
+  source_pages:
+  - https://luckclub.cn/bazi/018/006/
+- id: mingli-yueyan-ch007-p001
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 3
+  text: 格局有正有变，正者五行之常理也。曰正官，曰偏官，曰印，曰财，曰食神，曰伤官。变者五行之常理，而取用则异矣，曰从，曰化，曰一行得气，曰两神成象，曰暗冲，曰暗合。凡正格未有不相兼者，官煞必兼财印，印财必兼官煞，食伤必兼印财，推之须详，取之须确，变格更宜精审。从化须极真，一行两神须无杂，暗冲暗合须至当，俱勿依稀妄取，开列于左。正官格——兼印曰官印格、兼财曰财官格。
+  normalized_text: 格局有正有变，正者五行之常理也。曰正官，曰偏官，曰印，曰财，曰食神，曰伤官。变者五行之常理，而取用则异矣，曰从，曰化，曰一行得气，曰两神成象，曰暗冲，曰暗合。凡正格未有不相兼者，官煞必兼财印，印财必兼官煞，食伤必兼印财，推之须详，取之须确，变格更宜精审。从化须极真，一行两神须无杂，暗冲暗合须至当，俱勿依稀妄取，开列于左。正官格——兼印曰官印格、兼财曰财官格。
+  locator: 第7章·看格局法·第1条
+  concepts:
+  - 十神
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 016f161903e2f0bafb5dad57b6c05a8a7f13fea7b63da17d617ce78b4502a5f1
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p002
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 4
+  text: 偏官格——兼印曰煞印格、兼财曰财煞格。
+  normalized_text: 偏官格——兼印曰煞印格、兼财曰财煞格。
+  locator: 第7章·看格局法·第2条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: b693cdbf2de82af10eade6509a10632b3092ced4b7feb79a2277b51e4d552577
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p003
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 5
+  text: 印格——兼官曰官印格、兼煞曰煞印格。
+  normalized_text: 印格——兼官曰官印格、兼煞曰煞印格。
+  locator: 第7章·看格局法·第3条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: c3c6fb31a44d861626111fd4d176b3fdd8ebd09ed1718bc2746b72f77d46020b
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p004
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 6
+  text: 财格——兼官曰财官格、兼煞曰财煞格。
+  normalized_text: 财格——兼官曰财官格、兼煞曰财煞格。
+  locator: 第7章·看格局法·第4条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: ffa8216ff72fb9e75b9362d3954c4f532cf7a7d6a39434114bc518c580f90d94
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p005
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 7
+  text: 食神格——用煞曰食神制煞格、用财曰食神生财格。
+  normalized_text: 食神格——用煞曰食神制煞格、用财曰食神生财格。
+  locator: 第7章·看格局法·第5条
+  concepts:
+  - 十神
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 464aa65e66e3b2984bf63e0febec325f12db652f63bb423fecc53c23275cf2f6
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p006
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 8
+  text: 伤官格——取印曰伤官用印格、取财曰伤官生财格。
+  normalized_text: 伤官格——取印曰伤官用印格、取财曰伤官生财格。
+  locator: 第7章·看格局法·第6条
+  concepts:
+  - 十神
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 16f1a14ba1bee5ba28afe73ea990baf37c68276dd74c48937a684b710b378784
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p007
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 9
+  text: 从格——日主无根满局皆官曰从官格
+  normalized_text: 从格——日主无根满局皆官曰从官格
+  locator: 第7章·看格局法·第7条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 4408013d87608c5058e693c1332c7e3ec4e76dd8e2b1b8d36e4b091e49e9d8b4
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p008
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 10
+  text: 日主无根满局皆财曰从财格
+  normalized_text: 日主无根满局皆财曰从财格
+  locator: 第7章·看格局法·第8条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 18ab4c8d24a5d4a5de1c2a5f5b9d27ed3528089f316cba5d80d30ea219fe421a
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p009
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 11
+  text: 日主无根满局皆伤曰从伤格
+  normalized_text: 日主无根满局皆伤曰从伤格
+  locator: 第7章·看格局法·第9条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: d91429b388625f27e4bdf303d97e1c5b2258cf111fba938cf63d8185c9e862c4
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p010
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 12
+  text: 日主无根满局皆煞曰从煞格
+  normalized_text: 日主无根满局皆煞曰从煞格
+  locator: 第7章·看格局法·第10条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 1b6e5c5a3778782c8bea01514c70095e5bcdb8484630c31a8bb2c1f9081ab14e
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p011
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 13
+  text: 日主无根满局皆食曰从食格
+  normalized_text: 日主无根满局皆食曰从食格
+  locator: 第7章·看格局法·第11条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: f144bb98763fb4b4b401b7379d0d71bca295b78040f3e89e651aa9222956f79d
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p012
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 14
+  text: 化格——甲日合己曰或己时、己日合甲曰或甲日曰化土格
+  normalized_text: 化格——甲日合己曰或己时、己日合甲曰或甲日曰化土格
+  locator: 第7章·看格局法·第12条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 0c01bfc453066fbd55b6dda584f7a53843e1d0a44297f7728949fe34372eff35
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p013
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 15
+  text: 乙日合庚月或庚时、庚日合乙月或乙日曰化金格
+  normalized_text: 乙日合庚月或庚时、庚日合乙月或乙日曰化金格
+  locator: 第7章·看格局法·第13条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 26ff4d3258d46a024cd1eb073ba6952a322db8dabf7f35d13608222596b32047
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p014
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 16
+  text: 丙日合辛月或辛时、辛日合丙月或丙日曰化水格
+  normalized_text: 丙日合辛月或辛时、辛日合丙月或丙日曰化水格
+  locator: 第7章·看格局法·第14条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 68d0225e620ead2991994b35d5986f00613db6149c3684b9e9e0fb6ba0875b8a
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p015
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 17
+  text: 丁日合壬月或壬时、壬日合丁月或丁日曰化木格
+  normalized_text: 丁日合壬月或壬时、壬日合丁月或丁日曰化木格
+  locator: 第7章·看格局法·第15条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: f93a033f16d2a4d15cfcda99bf7aaa86aef581e41d97ec5b2cd5822bf6757f64
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p016
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 18
+  text: 戊日合癸曰或癸时、癸日合戊月或戊日曰化火格
+  normalized_text: 戊日合癸曰或癸时、癸日合戊月或戊日曰化火格
+  locator: 第7章·看格局法·第16条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 1b8e50b309b5373d560b6cf02df926016732a1ef00d1a1ab5b8707e18636bec3
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p017
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 19
+  text: 一行得气格——木日全寅卯辰木方、或亥卯未木局曰曲直格
+  normalized_text: 一行得气格——木日全寅卯辰木方、或亥卯未木局曰曲直格
+  locator: 第7章·看格局法·第17条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 44122a2e2f337c234c90197ab22c75d0636fc1a3eb9fa944275fb139b6c5481c
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p018
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 20
+  text: 火日全巳午未火方、或寅午戌火局曰炎上格
+  normalized_text: 火日全巳午未火方、或寅午戌火局曰炎上格
+  locator: 第7章·看格局法·第18条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: bfdab60aca1364dbafc9903ed77a500e828225fee3dd690cfc33c83b37c7706f
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p019
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 21
+  text: 金日全申酉戌金方、或巳酉丑金局曰从革格
+  normalized_text: 金日全申酉戌金方、或巳酉丑金局曰从革格
+  locator: 第7章·看格局法·第19条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: be86da9b1b29c2ad0a552c6459b6264b8222dc59d7ccb32ebb6c7a7ae0bfb222
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p020
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 22
+  text: 水日全亥子丑水方、或申子辰水局曰润下格
+  normalized_text: 水日全亥子丑水方、或申子辰水局曰润下格
+  locator: 第7章·看格局法·第20条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: e3516a10f961718b85cf35f140e4fb81f8028515e25e75b4d8d9e218114cfaf0
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p021
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 23
+  text: 土日全辰戌丑未局曰稼穑格、两神成象格——水木各占两干两支曰水木相生格
+  normalized_text: 土日全辰戌丑未局曰稼穑格、两神成象格——水木各占两干两支曰水木相生格
+  locator: 第7章·看格局法·第21条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 2062bf1cc8a3ad3227e00307f775543cb1036d99ca9f3fb4d67a13acf5cac83d
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p022
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 24
+  text: 木火各占两干两支曰木火相生格
+  normalized_text: 木火各占两干两支曰木火相生格
+  locator: 第7章·看格局法·第22条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: c8f3a3cb4ac6c593ecbe6c7fabfd564510bac83aa0ab75e79730ed43e74e8534
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p023
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 25
+  text: 火土各占两干两支曰火土相生格
+  normalized_text: 火土各占两干两支曰火土相生格
+  locator: 第7章·看格局法·第23条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 154e6a91e6fb094b2cbad6cdae978793bcb428163d63155bdd59f86b98fe69e9
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p024
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 26
+  text: 土金各占两干两支曰土金相生格
+  normalized_text: 土金各占两干两支曰土金相生格
+  locator: 第7章·看格局法·第24条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: f20f5f983b5e13a8fb69534194b775151232184477a95dde4fbe0866cd8dae9d
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p025
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 27
+  text: 金水各占两干两支曰金水相生格
+  normalized_text: 金水各占两干两支曰金水相生格
+  locator: 第7章·看格局法·第25条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 2f50cb9f3a6811b1c007de4d56f177a005d4806449fbd1e5d98d92b0bc8e2aef
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p026
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 28
+  text: 木土各占两干两支曰木土相成格
+  normalized_text: 木土各占两干两支曰木土相成格
+  locator: 第7章·看格局法·第26条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 711630832bcdeb113bee1d9f6a7874828b65a7ef2792306e3fe1951002b45a5d
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p027
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 29
+  text: 水火各占两干两支曰水火相成格
+  normalized_text: 水火各占两干两支曰水火相成格
+  locator: 第7章·看格局法·第27条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 2420e2c4cb2c3fc07092f315d2eae9a9c3110c23fb2cef57f4f1e68a7463f31e
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p028
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 30
+  text: 火金各占两干两支曰火金相成格
+  normalized_text: 火金各占两干两支曰火金相成格
+  locator: 第7章·看格局法·第28条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 48a9d007f83da871c595872e73540e449554949d8ecda143e4046755a05f5b90
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p029
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 31
+  text: 金木各占两干两支曰金木相成格
+  normalized_text: 金木各占两干两支曰金木相成格
+  locator: 第7章·看格局法·第29条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 958a17ee859433655e922085ba36cc3c6a74cb6abd48af7a29704549ae858940
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p030
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 32
+  text: 暗冲格——丙午日午多冲子、丁巳日巳多冲亥曰冲官格
+  normalized_text: 暗冲格——丙午日午多冲子、丁巳日巳多冲亥曰冲官格
+  locator: 第7章·看格局法·第30条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 5d7bdef874c6d147ad17eaf23838603652d7463486ce95d939e8be89aab26df6
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p031
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 33
+  text: 庚子壬子两日子多冲午、辛亥癸亥两日亥多冲巳曰冲官格
+  normalized_text: 庚子壬子两日子多冲午、辛亥癸亥两日亥多冲巳曰冲官格
+  locator: 第7章·看格局法·第31条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 5640c1a919ae7dadb5fb1ee381a4ecafd377e651420f6093644b15b537073112
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p032
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 34
+  text: 庚日申子辰全冲寅午戌曰曰暗冲格
+  normalized_text: 庚日申子辰全冲寅午戌曰曰暗冲格
+  locator: 第7章·看格局法·第32条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 1e005ffd17976a499fc2e28a6a502978ea4b429fa3a38a85f43f58f73270fabf
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch007-p033
+  volume: 选章正文
+  chapter_path:
+  - 第7章 看格局法
+  sequence: 35
+  text: 暗合格——甲辰日辰多合酉、戊戌日戌多合卯、癸卯日卯多合戌、癸酉日酉多合辰皆曰合官格以上正变诸格作用，或载于赋，或著于法，宜通阅之。
+  normalized_text: 暗合格——甲辰日辰多合酉、戊戌日戌多合卯、癸卯日卯多合戌、癸酉日酉多合辰皆曰合官格以上正变诸格作用，或载于赋，或著于法，宜通阅之。
+  locator: 第7章·看格局法·第33条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: baf344ceab8300b81b0788268aa1b847bf82f825cad6f089abefe33ed744afb3
+  source_pages:
+  - https://luckclub.cn/bazi/018/007/
+- id: mingli-yueyan-ch008-p001
+  volume: 选章正文
+  chapter_path:
+  - 第8章 看格局法二
+  sequence: 36
+  text: 五行之理，只是生我克我，我生我克，但不设名目，不便推详，故古人立官煞、印财、食伤之名，而六格出焉。然所谓官者非诚官爵；所谓印者，非诚印章；所谓财者，非诚财宝；所谓伤者，非诚损伤。故得时得局，煞伤可以富贵；失时失局，官印可以贫贱。大抵成格则为上命，破格则为下命。然有初看甚吉，而竞不吉，或吉凶相参者，初看甚凶，而竞不凶或吉凶相参者此乃主中有暗神助格破格，而不易见也。又有细看仍吉而终不吉，或吉凶相参者，细看仍凶而终不凶，或吉凶相参者，此乃运中有暗神助格破格，而未及察也。且或即此一字，而助格破格亦在此，是以吉处藏凶，凶中隐昔贤谆谆言之，岂不精审乎。若人命更有令神无力，六神皆轻，不敢取某神为格者，故多下命，亦有上命，此亦随柱斟酌，逐运消详，不必胶执取格也。至于诸变格，亦不外生克之理。从局化局，则欲生扶其所从所化。一行得气，则欲生扶此一行，不欲损克此一行。两神成象，则或相生、或相克、欲轻不欲混。暗冲暗合，暗取克我之神，欲虚不欲实。此其大略也。然变局有时似成矣，而竞不成，有时似不成矣，而竞有成，此亦吉藏凶，凶隐吉耳。宁求全毋姑取也。
+  normalized_text: 五行之理，只是生我克我，我生我克，但不设名目，不便推详，故古人立官煞、印财、食伤之名，而六格出焉。然所谓官者非诚官爵；所谓印者，非诚印章；所谓财者，非诚财宝；所谓伤者，非诚损伤。故得时得局，煞伤可以富贵；失时失局，官印可以贫贱。大抵成格则为上命，破格则为下命。然有初看甚吉，而竞不吉，或吉凶相参者，初看甚凶，而竞不凶或吉凶相参者此乃主中有暗神助格破格，而不易见也。又有细看仍吉而终不吉，或吉凶相参者，细看仍凶而终不凶，或吉凶相参者，此乃运中有暗神助格破格，而未及察也。且或即此一字，而助格破格亦在此，是以吉处藏凶，凶中隐昔贤谆谆言之，岂不精审乎。若人命更有令神无力，六神皆轻，不敢取某神为格者，故多下命，亦有上命，此亦随柱斟酌，逐运消详，不必胶执取格也。至于诸变格，亦不外生克之理。从局化局，则欲生扶其所从所化。一行得气，则欲生扶此一行，不欲损克此一行。两神成象，则或相生、或相克、欲轻不欲混。暗冲暗合，暗取克我之神，欲虚不欲实。此其大略也。然变局有时似成矣，而竞不成，有时似不成矣，而竞有成，此亦吉藏凶，凶隐吉耳。宁求全毋姑取也。
+  locator: 第8章·看格局法二·第1条
+  concepts:
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 0be1150d4f52a6dae980e0614a1a638b81a56a013410f1082ff8620333636fe6
+  source_pages:
+  - https://luckclub.cn/bazi/018/008/
+- id: mingli-yueyan-ch009-p001
+  volume: 选章正文
+  chapter_path:
+  - 第9章 看用神法
+  sequence: 37
+  text: 命以用神为紧要。看用神之法，不过扶抑而已。凡若者宜扶，扶之者即用神也。扶之太过，抑其扶者为用神。扶之不及，扶其扶者为用神。凡强者亦抑，抑之者即用神也。抑之太过，抑其抑者为用神，抑之不及，扶其抑者为用神。如弱扶之以水，水扶太过，制水以土，水扶不及，生水以金。木强抑之以金，金抑太过，制金以火，金抑不及，生金以土。至通类之相助，财气之相姿，亦扶也。生物泄其气，克物煞其势，亦抑也。是故有日主之用神也。有六神之用神焉。六神之互相扶抑者是也。六神之用神即为日主用也，有原局之用神焉。局中本俱之扶抑是也。更有行运之用神焉，运中补足之扶抑是也，行运之用神，即为原用局也。用神无破为吉，有助则更吉，用神有损为凶，无救则更凶。命譬之身，用神譬之身之精神，精神厚则身旺，精神薄则身衰，精神长存则身生，精神坏尽则身死，看命者，看用身而已矣。然取用神之法，虽当专一而不玄眩，宜变通而不拘。如正偏官格，有时制化互用，甚或生制参用，况行运数十年，无俱木俱金之理。尝见大富贵之命不特一神为用，其专恃一神者，乃补偏救弊之命耳。抑更有说焉，有体而后有用，日主六神体也，扶抑日主六神者，用也。苟日主六神或强不可制，或衰不堪扶，或散漫无伦，或战争不定，是则体先不成，用于或有？其为下命决矣。
+  normalized_text: 命以用神为紧要。看用神之法，不过扶抑而已。凡若者宜扶，扶之者即用神也。扶之太过，抑其扶者为用神。扶之不及，扶其扶者为用神。凡强者亦抑，抑之者即用神也。抑之太过，抑其抑者为用神，抑之不及，扶其抑者为用神。如弱扶之以水，水扶太过，制水以土，水扶不及，生水以金。木强抑之以金，金抑太过，制金以火，金抑不及，生金以土。至通类之相助，财气之相姿，亦扶也。生物泄其气，克物煞其势，亦抑也。是故有日主之用神也。有六神之用神焉。六神之互相扶抑者是也。六神之用神即为日主用也，有原局之用神焉。局中本俱之扶抑是也。更有行运之用神焉，运中补足之扶抑是也，行运之用神，即为原用局也。用神无破为吉，有助则更吉，用神有损为凶，无救则更凶。命譬之身，用神譬之身之精神，精神厚则身旺，精神薄则身衰，精神长存则身生，精神坏尽则身死，看命者，看用身而已矣。然取用神之法，虽当专一而不玄眩，宜变通而不拘。如正偏官格，有时制化互用，甚或生制参用，况行运数十年，无俱木俱金之理。尝见大富贵之命不特一神为用，其专恃一神者，乃补偏救弊之命耳。抑更有说焉，有体而后有用，日主六神体也，扶抑日主六神者，用也。苟日主六神或强不可制，或衰不堪扶，或散漫无伦，或战争不定，是则体先不成，用于或有？其为下命决矣。
+  locator: 第9章·看用神法·第1条
+  concepts:
+  - 旺衰
+  - 用神
+  - 行运
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 64986171db2746af14545b1a01dd566f8d228f53a46cb73483c4fbf04f5528b4
+  source_pages:
+  - https://luckclub.cn/bazi/018/009/
+- id: mingli-yueyan-ch017-p001
+  volume: 选章正文
+  chapter_path:
+  - 第17章 看运法一
+  sequence: 38
+  text: 旧书谓一运上干下支，分管年数，率谓上下各五年，又有因运重地支之说，或谓上四下六，或谓上三下七，其实皆不然也，盖行运从月见而起，顺行者，行未来之月建，逆行者，行已往之月建，凡月建干支，共管一月之事，无干管上半月，支管下半月之理，乃因以行运，反分裂干支，各管几年，有是理乎？故上干下支共管十年为是。上下比和，上下相生，则其力相同，上克下者，上之力胜于下，下克上者，下之力胜于上，合之命主，上下俱喜，则十年全吉，上下俱忌，则十年全凶，上下一喜一忌，则十年之间，吉凶参半，此理之最确当者。但看上干较易，看下支较难，盖干神甲只是甲，乙只是乙，惟支则各有所藏，须一一研析。如行运寅字，原柱有或甲或丙或戊，当察此运，某干得气，再看上干是甲，则此运纯然是木，上干是丙，则此运大半是火，上干是戊，则此运一般是土，余支仿此。又上下与原柱干支，止论生克，理亦易见，下支则与原柱干支，生克之外，更有相冲、相合、相刑、相害种种道理，未易草率论断也。
+  normalized_text: 旧书谓一运上干下支，分管年数，率谓上下各五年，又有因运重地支之说，或谓上四下六，或谓上三下七，其实皆不然也，盖行运从月见而起，顺行者，行未来之月建，逆行者，行已往之月建，凡月建干支，共管一月之事，无干管上半月，支管下半月之理，乃因以行运，反分裂干支，各管几年，有是理乎？故上干下支共管十年为是。上下比和，上下相生，则其力相同，上克下者，上之力胜于下，下克上者，下之力胜于上，合之命主，上下俱喜，则十年全吉，上下俱忌，则十年全凶，上下一喜一忌，则十年之间，吉凶参半，此理之最确当者。但看上干较易，看下支较难，盖干神甲只是甲，乙只是乙，惟支则各有所藏，须一一研析。如行运寅字，原柱有或甲或丙或戊，当察此运，某干得气，再看上干是甲，则此运纯然是木，上干是丙，则此运大半是火，上干是戊，则此运一般是土，余支仿此。又上下与原柱干支，止论生克，理亦易见，下支则与原柱干支，生克之外，更有相冲、相合、相刑、相害种种道理，未易草率论断也。
+  locator: 第17章·看运法一·第1条
+  concepts:
+  - 行运
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 4f876dfa4b77b99aba4f9bfdee5e5d08bdd4f885d69abc839a90ec28c2db4d39
+  source_pages:
+  - https://luckclub.cn/bazi/018/017/
+- id: mingli-yueyan-ch018-p001
+  volume: 选章正文
+  chapter_path:
+  - 第18章 看运法二
+  sequence: 39
+  text: 初运管少年，中运管中年，未运管晚年，此看运法也。更有旧法可参用者，即以四柱推论，年管少年，月日管中年，时管晚年。若年为喜神，则少年发达，为忌神，则少年处困而不得志，月日为喜神，则中年亨通，为忌神则中年蹇滞，时为喜神，则晚年安荣，为忌神，则晚年零落，此法屡试有然，故附之。然但可约略少旺老之大概而已，若确分年限，详断吉凶，仍当看运为主耳。
+  normalized_text: 初运管少年，中运管中年，未运管晚年，此看运法也。更有旧法可参用者，即以四柱推论，年管少年，月日管中年，时管晚年。若年为喜神，则少年发达，为忌神，则少年处困而不得志，月日为喜神，则中年亨通，为忌神则中年蹇滞，时为喜神，则晚年安荣，为忌神，则晚年零落，此法屡试有然，故附之。然但可约略少旺老之大概而已，若确分年限，详断吉凶，仍当看运为主耳。
+  locator: 第18章·看运法二·第1条
+  concepts: []
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: dd316e74fbfaafb7ebf7ff9ad3187bb2bad94c32206bac8852b79fd3052bfb99
+  source_pages:
+  - https://luckclub.cn/bazi/018/018/
+- id: mingli-yueyan-ch019-p001
+  volume: 选章正文
+  chapter_path:
+  - 第19章 看流年法
+  sequence: 40
+  text: 自少至老之岁，谓之流年。虽不若大运之重，然于原柱及大运，亦能抑扶，其法合上干下支，先看于原柱干支生克何如，此看与大运干支生克何如，参伍穷究之，柱运喜神相聚，能助吉乎，能损吉乎，柱运忌神交会，能增凶乎，能减凶乎，柱运或有不合和，为解斗乎，为佐斗乎，柱运或有偏胜，为左袒，为右袒乎，虽柱与运之所喜憎，大略相同，然柱运流年三项，干支辗转生克，情理多端，亦有柱喜而运憎者，且一年之中，当令不齐，一支之中，藏神非一，其理甚纷甚细，既须穷精极微，又须从详反约，推断休咎之难，全在此处。果能了于心，则命理思过半矣。
+  normalized_text: 自少至老之岁，谓之流年。虽不若大运之重，然于原柱及大运，亦能抑扶，其法合上干下支，先看于原柱干支生克何如，此看与大运干支生克何如，参伍穷究之，柱运喜神相聚，能助吉乎，能损吉乎，柱运忌神交会，能增凶乎，能减凶乎，柱运或有不合和，为解斗乎，为佐斗乎，柱运或有偏胜，为左袒，为右袒乎，虽柱与运之所喜憎，大略相同，然柱运流年三项，干支辗转生克，情理多端，亦有柱喜而运憎者，且一年之中，当令不齐，一支之中，藏神非一，其理甚纷甚细，既须穷精极微，又须从详反约，推断休咎之难，全在此处。果能了于心，则命理思过半矣。
+  locator: 第19章·看流年法·第1条
+  concepts:
+  - 行运
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: eee949feca4da63fd2ec29245f918be814d0b9c94c6c787111845a2a7be28ac8
+  source_pages:
+  - https://luckclub.cn/bazi/018/019/
+- id: mingli-yueyan-ch020-p001
+  volume: 选章正文
+  chapter_path:
+  - 第20章 看正官法
+  sequence: 41
+  text: 看官之法，先论日干强弱。日干强则当扶官，日干若，则当扶日，再看官星得时得势与否，适当月令，又透天干为上。如甲生酉月，天干透辛，乙生申月，天干透庚是也。次则或当月令而不透干，或不当月令而干官通支，支官通干，又次。则干有支无，支有干无，皆需财以生之，则官之根茂。印以卫之，则伤官之害远，必须正财配偏印，偏财配正印，则财印不相战，或财在干，印在支，或印在干，财在支，虽皆正皆偏，各有理会，亦不相战也。若官星太多，亦需食伤制之，然不作煞论。切忌有二：一曰冲破，一曰伤官。须忌有三：一曰食众暗损，一曰印众泄气，一曰时归死绝。大抵官之强旺者，遇次五忌，但减贵气；官之衰弱者，遇次五忌，则坏矣。至于逢官看财，虽一定之理，然官衰依财，以多为贵，官旺亦不甚依财，略见已足。行运之法，俱与看官法相同。总之日干能任财官为要，苟日干太衰太旺，运局中又无生克扶抑，即财官俱有，亦不免贫贱。古云小人命内，亦有正气官星，盖坐是耳。至于日主无气，满局皆官，当弃命从之，与从煞同法，然自是从官，非官多作煞也。若神峰张楠年时虚官可用，月令官星必无可用之理，此偏激之见，不足深信。又旧书有官不见官之说，谓甲日见丙辛，则甲得辛为官，辛又得丙为官此乃节外生枝，不足信也。
+  normalized_text: 看官之法，先论日干强弱。日干强则当扶官，日干若，则当扶日，再看官星得时得势与否，适当月令，又透天干为上。如甲生酉月，天干透辛，乙生申月，天干透庚是也。次则或当月令而不透干，或不当月令而干官通支，支官通干，又次。则干有支无，支有干无，皆需财以生之，则官之根茂。印以卫之，则伤官之害远，必须正财配偏印，偏财配正印，则财印不相战，或财在干，印在支，或印在干，财在支，虽皆正皆偏，各有理会，亦不相战也。若官星太多，亦需食伤制之，然不作煞论。切忌有二：一曰冲破，一曰伤官。须忌有三：一曰食众暗损，一曰印众泄气，一曰时归死绝。大抵官之强旺者，遇次五忌，但减贵气；官之衰弱者，遇次五忌，则坏矣。至于逢官看财，虽一定之理，然官衰依财，以多为贵，官旺亦不甚依财，略见已足。行运之法，俱与看官法相同。总之日干能任财官为要，苟日干太衰太旺，运局中又无生克扶抑，即财官俱有，亦不免贫贱。古云小人命内，亦有正气官星，盖坐是耳。至于日主无气，满局皆官，当弃命从之，与从煞同法，然自是从官，非官多作煞也。若神峰张楠年时虚官可用，月令官星必无可用之理，此偏激之见，不足深信。又旧书有官不见官之说，谓甲日见丙辛，则甲得辛为官，辛又得丙为官此乃节外生枝，不足信也。
+  locator: 第20章·看正官法·第1条
+  concepts:
+  - 十神
+  - 旺衰
+  - 行运
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 6f7df131cd05713f350d710101d7564cc97bd024098854fac504419593bfa55a
+  source_pages:
+  - https://luckclub.cn/bazi/018/020/
+- id: mingli-yueyan-ch021-p001
+  volume: 选章正文
+  chapter_path:
+  - 第21章 看偏官法
+  sequence: 42
+  text: 看煞之法，先论日干强弱，日干强，则一点煞星亦可不制，日干弱，则不问煞之多寡，必须制之。再看煞星得时得势否，当令而又透干，为煞旺，次则或当令而不透干，或不当令而干煞通支，支煞通干，又次则干有支无，支有干无。制之用食伤，食较有力，合之用刃劫，刃较有势，化之用印，偏正同功。煞太旺则制化两用，但须食神配正印，则不相战也。或食伤配正印，干支俱异，各有理会，不相战也。若刃劫合煞，引日不如阳日，盖甲用卯中之乙合庚，乃卯之本气，乙用寅中之丙合辛，视本气有间矣；甲用乙合庚，庚贪合则忘煞，乙用甲只能帮身，视合煞又有间矣，故阴日以制化为急。若煞星太弱，宜财神姿之，制神太过，宜印破之。至煞星太强而无制，日主太弱而无根，宜弃命从之，总之日干能任财煞为要。苟日干衰绝，又不能从煞，即有制有化，岁运财煞旺地，必成灾祸。徜更有制无化，岁运财煞旺地，无不危亡。若身煞两停，行运宁可扶身。古云：煞不离印，印不离煞。又云：印无煞不显，煞无刃不威。盖印所以生日主，刃所以护日主，虽不言扶身，而扶身在其中矣。又有煞强于主，行煞云反利者，此必日主本非衰绝，而原局印绶成像有力，煞生印，印生身也，惟忌行财运，坏印助煞，则必为祸矣。
+  normalized_text: 看煞之法，先论日干强弱，日干强，则一点煞星亦可不制，日干弱，则不问煞之多寡，必须制之。再看煞星得时得势否，当令而又透干，为煞旺，次则或当令而不透干，或不当令而干煞通支，支煞通干，又次则干有支无，支有干无。制之用食伤，食较有力，合之用刃劫，刃较有势，化之用印，偏正同功。煞太旺则制化两用，但须食神配正印，则不相战也。或食伤配正印，干支俱异，各有理会，不相战也。若刃劫合煞，引日不如阳日，盖甲用卯中之乙合庚，乃卯之本气，乙用寅中之丙合辛，视本气有间矣；甲用乙合庚，庚贪合则忘煞，乙用甲只能帮身，视合煞又有间矣，故阴日以制化为急。若煞星太弱，宜财神姿之，制神太过，宜印破之。至煞星太强而无制，日主太弱而无根，宜弃命从之，总之日干能任财煞为要。苟日干衰绝，又不能从煞，即有制有化，岁运财煞旺地，必成灾祸。徜更有制无化，岁运财煞旺地，无不危亡。若身煞两停，行运宁可扶身。古云：煞不离印，印不离煞。又云：印无煞不显，煞无刃不威。盖印所以生日主，刃所以护日主，虽不言扶身，而扶身在其中矣。又有煞强于主，行煞云反利者，此必日主本非衰绝，而原局印绶成像有力，煞生印，印生身也，惟忌行财运，坏印助煞，则必为祸矣。
+  locator: 第21章·看偏官法·第1条
+  concepts:
+  - 十神
+  - 旺衰
+  - 行运
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 50ed5c06b2fcdd6f725ae3c5bbab630fd79312b6c1b680f4eaafb5e8cd7281c6
+  source_pages:
+  - https://luckclub.cn/bazi/018/021/
+- id: mingli-yueyan-ch025-p001
+  volume: 选章正文
+  chapter_path:
+  - 第25章 看正偏印法
+  sequence: 43
+  text: 旧书取印。喜正忌偏，此只论天干耳，若地支仿此推之，五阳干遇寅申巳亥为枭，遇子午卯酉为败，五阴干遇子午卯酉为枭，遇寅申巳亥为死，则地支竞无印可取矣，不之五阳干遇寅申巳亥是生印，非枭也，遇子午卯酉是正印，非败也，五阴干遇寅申巳亥，亦正印，非死也，惟遇子午卯酉为偏印，然子为乙贵，午为己禄，何可以枭论乎？大抵印不论正偏，但当月令而取之为格，必不可伤，即不当月令而倚之为用，尤不可伤，在局在运皆然。术家往往重财官而轻印，不知印被伤，与官被克，财被劫相同。其有时而轻者，局偶不用印也，若局用印，而无显印，则暗印宜可取。或木日取申中之壬，辰丑中之癸；或火日取亥中之甲，辰未中之乙，此需二三处有之，仿可取用。行运透出为吉，克坏为凶。仅止一点，亦不济事。总之局印太轻，须以官煞运生之，局印太多须以财运制之。若太多而强不可制，竞为下命。盖印乃生我之神，忌无弃命从印之法，又无比劫泄印之法。至于枭印克食，惟枭食两透于干，祸并见于支，而无制无化则忌。苟制化得宜，或干支异处，则亦不忌。又旧忌印行死地，亦不尽然，盖所贵乎印者，以扶其身耳，印之病死，即身之禄旺，何害之有？若但取印旺，则印之禄旺，即官之死绝，何利之有乎。
+  normalized_text: 旧书取印。喜正忌偏，此只论天干耳，若地支仿此推之，五阳干遇寅申巳亥为枭，遇子午卯酉为败，五阴干遇子午卯酉为枭，遇寅申巳亥为死，则地支竞无印可取矣，不之五阳干遇寅申巳亥是生印，非枭也，遇子午卯酉是正印，非败也，五阴干遇寅申巳亥，亦正印，非死也，惟遇子午卯酉为偏印，然子为乙贵，午为己禄，何可以枭论乎？大抵印不论正偏，但当月令而取之为格，必不可伤，即不当月令而倚之为用，尤不可伤，在局在运皆然。术家往往重财官而轻印，不知印被伤，与官被克，财被劫相同。其有时而轻者，局偶不用印也，若局用印，而无显印，则暗印宜可取。或木日取申中之壬，辰丑中之癸；或火日取亥中之甲，辰未中之乙，此需二三处有之，仿可取用。行运透出为吉，克坏为凶。仅止一点，亦不济事。总之局印太轻，须以官煞运生之，局印太多须以财运制之。若太多而强不可制，竞为下命。盖印乃生我之神，忌无弃命从印之法，又无比劫泄印之法。至于枭印克食，惟枭食两透于干，祸并见于支，而无制无化则忌。苟制化得宜，或干支异处，则亦不忌。又旧忌印行死地，亦不尽然，盖所贵乎印者，以扶其身耳，印之病死，即身之禄旺，何害之有？若但取印旺，则印之禄旺，即官之死绝，何利之有乎。
+  locator: 第25章·看正偏印法·第1条
+  concepts:
+  - 行运
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: bd1f7c935f2b7254718e7647a027098549fa0100b459d3f50fa8e644595b86a7
+  source_pages:
+  - https://luckclub.cn/bazi/018/025/
+- id: mingli-yueyan-ch025-p002
+  volume: 选章正文
+  chapter_path:
+  - 第25章 看正偏印法
+  sequence: 44
+  text: 千里按：以理衡之，局中印绶太多，亦可从印，盖七煞为克我之神，倘可从，则印为生我之神，如子投母，岂不可从。任铁樵所注之《滴天髓阐微》一书载有从强之说，即此意也。印之病死，即身之禄旺，此指阴阳同生同死而言，若以阳生阴死，阴死阳生，则又穿凿不附矣。
+  normalized_text: 千里按：以理衡之，局中印绶太多，亦可从印，盖七煞为克我之神，倘可从，则印为生我之神，如子投母，岂不可从。任铁樵所注之《滴天髓阐微》一书载有从强之说，即此意也。印之病死，即身之禄旺，此指阴阳同生同死而言，若以阳生阴死，阴死阳生，则又穿凿不附矣。
+  locator: 第25章·看正偏印法·第2条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 16ab704a543627952519d4baacd62ba0f7e1ad2273eb6972a76db540fc78e50a
+  source_pages:
+  - https://luckclub.cn/bazi/018/025/
+- id: mingli-yueyan-ch026-p001
+  volume: 选章正文
+  chapter_path:
+  - 第26章 看偏正财法
+  sequence: 45
+  text: 看财之法，不论正偏，只取得时得势，适当月令而有气为得时，不当月令而成象为得势。然看日干强弱为要，日干强，则当扶财，日干弱，则当扶日。旧云逢财看官者，不尽然，凡我克我生，一件入格得气，皆可取贵，但恐只此一件，便是滞物，故财与食伤，又欲其辗转生化，非必以生出克我为贵也。每见用财之命，或财轻而行生财之运，或财重而行制财之运，一生不行官煞，往往富贵，但局中运中见官煞，亦其所宜耳。苟财多身弱，又加以官煞，取祸必矣。旧谓正财乃分内之财，遇之非奇，偏财乃众人之财，得之为美，夫不安己之分，而喜取人之物，此贪夫之见耳。特正财能伤正印，偏财能制枭神，然不可因此而贵偏贱正也。旧又有恶露喜藏之说，此亦谬认财为钱币耳。即以钱币论之，源远流长，挥霍岂忧睥睨。力微势弱，扃钥何难劫夺乎？至于财神太旺，而用比劫，盖爱其助主，非取其分财，财神太衰而用食伤，虽籍其生财，亦防其泄主。若财多而强不可制，当弃命从之，行助财运则吉，行夺财助助运则凶。他如时上偏财，时上财库，日时专财，夹财拱财等格，皆多立名目，不若四柱通融取用，较为简当也。
+  normalized_text: 看财之法，不论正偏，只取得时得势，适当月令而有气为得时，不当月令而成象为得势。然看日干强弱为要，日干强，则当扶财，日干弱，则当扶日。旧云逢财看官者，不尽然，凡我克我生，一件入格得气，皆可取贵，但恐只此一件，便是滞物，故财与食伤，又欲其辗转生化，非必以生出克我为贵也。每见用财之命，或财轻而行生财之运，或财重而行制财之运，一生不行官煞，往往富贵，但局中运中见官煞，亦其所宜耳。苟财多身弱，又加以官煞，取祸必矣。旧谓正财乃分内之财，遇之非奇，偏财乃众人之财，得之为美，夫不安己之分，而喜取人之物，此贪夫之见耳。特正财能伤正印，偏财能制枭神，然不可因此而贵偏贱正也。旧又有恶露喜藏之说，此亦谬认财为钱币耳。即以钱币论之，源远流长，挥霍岂忧睥睨。力微势弱，扃钥何难劫夺乎？至于财神太旺，而用比劫，盖爱其助主，非取其分财，财神太衰而用食伤，虽籍其生财，亦防其泄主。若财多而强不可制，当弃命从之，行助财运则吉，行夺财助助运则凶。他如时上偏财，时上财库，日时专财，夹财拱财等格，皆多立名目，不若四柱通融取用，较为简当也。
+  locator: 第26章·看偏正财法·第1条
+  concepts:
+  - 旺衰
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 4805638fb1e5caf09bbab0450c9fe8031a12346822b3324a8b80dce71fb30c68
+  source_pages:
+  - https://luckclub.cn/bazi/018/026/
+- id: mingli-yueyan-ch027-p001
+  volume: 选章正文
+  chapter_path:
+  - 第27章 看食神法
+  sequence: 46
+  text: 看食神之法，如用于制煞，则以食煞相较，煞重食轻，当扶食抑煞，食重煞轻，当扶煞抑食。如无煞可制，只以食神取用，或当令有援，或成局有势，皆妙。然须生出财神，或局中有财，或运行财地，方为有用。此神与正官相似，性情和顺，多吉少凶。旧云只要一位，此系不然。假令甲日得丙，而又见巳，乙日得丁，而又见午，斯为更美。即甲日或遇两丙两巳，乙日或遇两丁或遇两午，亦有何碍。所虑者，日主衰弱，不能任之耳。故先看日主强弱为要。身食两旺，可为贵格。然谓食神有气胜于财官，亦一偏之论也。此神最忌枭印可之，得偏财亦不畏。若满局食神日主无气，亦可从之，此乃我生之神，较之从煞则更纯，较从财则更美，勿泥旧勿从例也。或日主太旺，局中无一可倚，只有一二点食神，略成气象，则需顺行食神生旺之运为妙。如食伤相混，用食则宜去伤，用伤不比去食，盖食纯伤驳，犹之官不容煞混，煞不容官混也。至于用食见煞，虽与伤官见官不同，然克伤日主，则任食无力，抗敌食神，则养主少气。惟主多比劫，最喜煞制，主用印绶，反喜煞生耳。否则官宜不宜多见，况煞乎？
+  normalized_text: 看食神之法，如用于制煞，则以食煞相较，煞重食轻，当扶食抑煞，食重煞轻，当扶煞抑食。如无煞可制，只以食神取用，或当令有援，或成局有势，皆妙。然须生出财神，或局中有财，或运行财地，方为有用。此神与正官相似，性情和顺，多吉少凶。旧云只要一位，此系不然。假令甲日得丙，而又见巳，乙日得丁，而又见午，斯为更美。即甲日或遇两丙两巳，乙日或遇两丁或遇两午，亦有何碍。所虑者，日主衰弱，不能任之耳。故先看日主强弱为要。身食两旺，可为贵格。然谓食神有气胜于财官，亦一偏之论也。此神最忌枭印可之，得偏财亦不畏。若满局食神日主无气，亦可从之，此乃我生之神，较之从煞则更纯，较从财则更美，勿泥旧勿从例也。或日主太旺，局中无一可倚，只有一二点食神，略成气象，则需顺行食神生旺之运为妙。如食伤相混，用食则宜去伤，用伤不比去食，盖食纯伤驳，犹之官不容煞混，煞不容官混也。至于用食见煞，虽与伤官见官不同，然克伤日主，则任食无力，抗敌食神，则养主少气。惟主多比劫，最喜煞制，主用印绶，反喜煞生耳。否则官宜不宜多见，况煞乎？
+  locator: 第27章·看食神法·第1条
+  concepts:
+  - 十神
+  - 旺衰
+  - 性情
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 875ae6c7c4342551b3f2661ae5ea31abc9ad54a91b570b4f4359a51b6a815576
+  source_pages:
+  - https://luckclub.cn/bazi/018/027/
+- id: mingli-yueyan-ch028-p001
+  volume: 选章正文
+  chapter_path:
+  - 第28章 看伤官法
+  sequence: 47
+  text: 看伤官之法，不当月令，而局成他格，些小伤官为害，则去之，不为害则置之。虽当月令，而用以敌煞，当从煞格推究。惟局中无足取用，而伤官或当令有援，或党众有势，则用之。虽不得令得势，而日主旺甚无倚，止一二点伤官略成气象，则亦用之。用之者何？以其亦我所生，虽不如食神之纯粹，亦我之精气流通，英华发外，亦可取也。然比生出财神方为有用，否则顽而不灵，徒泄我气耳。用伤官大法，日主强健则喜财，日主衰弱则喜印，财印俱正俱偏，则恐其相争，财印一正一偏，则不嫌并露，然亦看全局理气及财印情势。有俱正俱偏而相安者，有一正一偏而相戾者，此在舒配之妙。若必如旧书所云，用财去印，用印去财，则太拘矣。旧又有以当令为真伤官，不当令为假伤官，夫以不当令而为之假，则不当令之官煞，为假官煞乎？不当令之财印食神为假财印食神乎？不知伤官无论真假，当论强弱，强则制之，伤官强而复行伤运，则日愈泄气矣。弱则复之。伤官弱而复行破伤，则日主愈无倚矣。制伤之法，印运为上，帮身次之。扶上之法，伤食运为上，比劫次之。若伤官不喜见官，正如先有比劫而见财，先有枭神而见食，必为患害。旧书譬之殴伤官长而又见官，官必不恕，则鉴矣。又为伤官伤尽，反喜见官，将劫财劫尽，反喜见财，夺食夺尽，反喜见食矣。然官亦有可见者，身弱伤强而有印绶，可以见官，官生印绶，则身能任伤也。身强财弱而有比劫，可以见官，官制比劫，则财不受夺也。否则皆不可见官，见之非惟取伤之害，而日主受克，亦不能任伤为用。次必仍行伤运克之为妙，次则食运亦可。若伤官伤尽不见官，似乎如格，而乃贫贱者，必无财之故耳。旧分五行孰可见官，孰不可见官，支离无理，关于伤官赋中，至于见煞虽非见官之比，然无印无比而见煞，则亦克主而不能任伤，不可不去。若阳刃甚有益于伤官，以其助主生伤，又能合煞也。至于日主无气，满局皆伤，当弃命从之，反倚凶神为用，行运忌坏伤相主，又未可以伤多不宜为论矣。
+  normalized_text: 看伤官之法，不当月令，而局成他格，些小伤官为害，则去之，不为害则置之。虽当月令，而用以敌煞，当从煞格推究。惟局中无足取用，而伤官或当令有援，或党众有势，则用之。虽不得令得势，而日主旺甚无倚，止一二点伤官略成气象，则亦用之。用之者何？以其亦我所生，虽不如食神之纯粹，亦我之精气流通，英华发外，亦可取也。然比生出财神方为有用，否则顽而不灵，徒泄我气耳。用伤官大法，日主强健则喜财，日主衰弱则喜印，财印俱正俱偏，则恐其相争，财印一正一偏，则不嫌并露，然亦看全局理气及财印情势。有俱正俱偏而相安者，有一正一偏而相戾者，此在舒配之妙。若必如旧书所云，用财去印，用印去财，则太拘矣。旧又有以当令为真伤官，不当令为假伤官，夫以不当令而为之假，则不当令之官煞，为假官煞乎？不当令之财印食神为假财印食神乎？不知伤官无论真假，当论强弱，强则制之，伤官强而复行伤运，则日愈泄气矣。弱则复之。伤官弱而复行破伤，则日主愈无倚矣。制伤之法，印运为上，帮身次之。扶上之法，伤食运为上，比劫次之。若伤官不喜见官，正如先有比劫而见财，先有枭神而见食，必为患害。旧书譬之殴伤官长而又见官，官必不恕，则鉴矣。又为伤官伤尽，反喜见官，将劫财劫尽，反喜见财，夺食夺尽，反喜见食矣。然官亦有可见者，身弱伤强而有印绶，可以见官，官生印绶，则身能任伤也。身强财弱而有比劫，可以见官，官制比劫，则财不受夺也。否则皆不可见官，见之非惟取伤之害，而日主受克，亦不能任伤为用。次必仍行伤运克之为妙，次则食运亦可。若伤官伤尽不见官，似乎如格，而乃贫贱者，必无财之故耳。旧分五行孰可见官，孰不可见官，支离无理，关于伤官赋中，至于见煞虽非见官之比，然无印无比而见煞，则亦克主而不能任伤，不可不去。若阳刃甚有益于伤官，以其助主生伤，又能合煞也。至于日主无气，满局皆伤，当弃命从之，反倚凶神为用，行运忌坏伤相主，又未可以伤多不宜为论矣。
+  locator: 第28章·看伤官法·第1条
+  concepts:
+  - 十神
+  - 旺衰
+  - 行运
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 0a371257a280354f23c5b22f966c55bf0bdc93c37ede29dae019b31ccf7971c5
+  source_pages:
+  - https://luckclub.cn/bazi/018/028/
+- id: mingli-yueyan-ch029-p001
+  volume: 选章正文
+  chapter_path:
+  - 第29章 看食神法
+  sequence: 48
+  text: 食神格中有优秀者，曰木火通明，曰金白水清，曰土金育秀，今略举取用之法。木火通明格，以以春三月木日遇火为妙，妙在木旺能任火相，方进也，四月亦取，盖火当令而未燥，但木需得势通根耳。金白水清格，以七八月金日遇水为合，亦妙在金旺水相。水木清奇格，以二月癸日遇乙，及卯木为上。土金育秀格，以八月己日遇辛，及酉金为上，盖卯酉气专而清，但癸与己需得气通根耳。凡合此四格者，皆清贵上命。其喜忌之理，随格详审之。然不特此也，凡日主强旺，喜泄甚于喜克，局中官煞与食伤并见，势均力敌，照常取断。若官煞轻浅，其情恒向食伤，不必当时得令，但透干成象，即可取用，反以官煞为病神矣。术家如此等局面，只泥官煞为用，所以往往不验。是亦所谓六神通变之端，不可不知也。
+  normalized_text: 食神格中有优秀者，曰木火通明，曰金白水清，曰土金育秀，今略举取用之法。木火通明格，以以春三月木日遇火为妙，妙在木旺能任火相，方进也，四月亦取，盖火当令而未燥，但木需得势通根耳。金白水清格，以七八月金日遇水为合，亦妙在金旺水相。水木清奇格，以二月癸日遇乙，及卯木为上。土金育秀格，以八月己日遇辛，及酉金为上，盖卯酉气专而清，但癸与己需得气通根耳。凡合此四格者，皆清贵上命。其喜忌之理，随格详审之。然不特此也，凡日主强旺，喜泄甚于喜克，局中官煞与食伤并见，势均力敌，照常取断。若官煞轻浅，其情恒向食伤，不必当时得令，但透干成象，即可取用，反以官煞为病神矣。术家如此等局面，只泥官煞为用，所以往往不验。是亦所谓六神通变之端，不可不知也。
+  locator: 第29章·看食神法·第1条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 7e2dab2b649f234f63c6d8236df621bd6b4434187fca57ada1a3ef36405013f3
+  source_pages:
+  - https://luckclub.cn/bazi/018/029/
+- id: mingli-yueyan-ch040-p001
+  volume: 选章正文
+  chapter_path:
+  - 第40章 看六亲法一
+  sequence: 49
+  text: 旧取正印生我为母，偏财克正印为父，我所克之财为妻，财所生之官煞为子。命家封为定法，实则悖戾多端，请一一论之。人由父母共生，止以正印属母，岂母能独生耳？其悖戾一也。偏财故正印之配，然财乃我之所克，安能生我？其悖戾二也。夫有制妻之道，子无制父之理，偏财系我所克，是为子制父，其悖戾三也。财为妻财，又可为父，是翁与妇共矣，其悖戾四也。子与夫妻共有，至取财生官煞，将妻能独生焉，其悖戾五也。官煞克我之神，岂肯为我之子，其悖戾六也。为人子则制父为人父又受制于子，可谓聚逆矣，其悖逆七也。父之与母，既以克取，儿之于妇，亦应以克推，官煞克者即日主，是又妇与翁共矣，其悖逆八矣。为日之父者，则为日生者之祖，为日之子者，则为日生之孙，偏财实生官煞，是孙从祖生？其悖戾九也。考其凭据，不过日有夫妇然后有父子，若依夫妇父子之例，辗转推之，三党男女，错综无极，其悖戾十也。今定男以印为父母，食神伤官为子，我克之财为妻，女以印为父母翁姑，食神伤官为子，克我之官煞为夫。印不论偏正，但不遭冲克，则父母俱全，扶抑合宜，则父母双寿，更带贵气，则父母荣显。食神伤官不遭冲克，则有子，扶抑合宜，则多子，更带贵气，则有贵子。财不遭劫夺，官煞不遭冲克，则夫妻皆老，扶抑合宜，则夫妻贤淑，更带贵气，则夫显妻荣。反是则父母或不全或不贵，子或无或少或有而不肖，夫妻或克或不贤不显，此宜得其大略耳。人命常有无印而父母贵寿者矣，无食神伤官而子息繁昌者矣，无财官煞而夫妻安荣者矣。但就日主及全局观之，知其有无根气，则知其父母，知其有无生气则知其子息，知其有无和气则知其夫妻。即显露财印官煞食伤亦须以此意消息之。总之中和完好者，家门必多福庆，偏枯缺陷者，骨肉不免刑伤，此自然之理也，若兄弟但看同类干支气势如何，纯美者多或贵，亏损者或寡或贱，和洽者得力，偏驳者相乖，如无同类干支，即看日主气势如何，或生扶有情，或孤干无辅，可以知其兄弟矣。
+  normalized_text: 旧取正印生我为母，偏财克正印为父，我所克之财为妻，财所生之官煞为子。命家封为定法，实则悖戾多端，请一一论之。人由父母共生，止以正印属母，岂母能独生耳？其悖戾一也。偏财故正印之配，然财乃我之所克，安能生我？其悖戾二也。夫有制妻之道，子无制父之理，偏财系我所克，是为子制父，其悖戾三也。财为妻财，又可为父，是翁与妇共矣，其悖戾四也。子与夫妻共有，至取财生官煞，将妻能独生焉，其悖戾五也。官煞克我之神，岂肯为我之子，其悖戾六也。为人子则制父为人父又受制于子，可谓聚逆矣，其悖逆七也。父之与母，既以克取，儿之于妇，亦应以克推，官煞克者即日主，是又妇与翁共矣，其悖逆八矣。为日之父者，则为日生者之祖，为日之子者，则为日生之孙，偏财实生官煞，是孙从祖生？其悖戾九也。考其凭据，不过日有夫妇然后有父子，若依夫妇父子之例，辗转推之，三党男女，错综无极，其悖戾十也。今定男以印为父母，食神伤官为子，我克之财为妻，女以印为父母翁姑，食神伤官为子，克我之官煞为夫。印不论偏正，但不遭冲克，则父母俱全，扶抑合宜，则父母双寿，更带贵气，则父母荣显。食神伤官不遭冲克，则有子，扶抑合宜，则多子，更带贵气，则有贵子。财不遭劫夺，官煞不遭冲克，则夫妻皆老，扶抑合宜，则夫妻贤淑，更带贵气，则夫显妻荣。反是则父母或不全或不贵，子或无或少或有而不肖，夫妻或克或不贤不显，此宜得其大略耳。人命常有无印而父母贵寿者矣，无食神伤官而子息繁昌者矣，无财官煞而夫妻安荣者矣。但就日主及全局观之，知其有无根气，则知其父母，知其有无生气则知其子息，知其有无和气则知其夫妻。即显露财印官煞食伤亦须以此意消息之。总之中和完好者，家门必多福庆，偏枯缺陷者，骨肉不免刑伤，此自然之理也，若兄弟但看同类干支气势如何，纯美者多或贵，亏损者或寡或贱，和洽者得力，偏驳者相乖，如无同类干支，即看日主气势如何，或生扶有情，或孤干无辅，可以知其兄弟矣。
+  locator: 第40章·看六亲法一·第1条
+  concepts:
+  - 十神
+  - 六亲
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 0d2e57cb22f83b2bf6f39d8ba74f8cd1f05dc4bc6397ddad48520f36898d5d6f
+  source_pages:
+  - https://luckclub.cn/bazi/018/040/
+- id: mingli-yueyan-ch041-p001
+  volume: 选章正文
+  chapter_path:
+  - 第41章 看六亲法二
+  sequence: 50
+  text: 看六亲之法，旧以年为祖上，月为父母，日支为妻，时为子息，同类为兄弟，此立法之有理者。如吉神居年则祖上荣显，亦主受祖上之阴；凶神居年，则祖上寒薄，亦主不受祖上之阴。如吉神居月，则父母贵盛，主受父母之阴；凶神居月，则父母衰残，亦主不受父母之阴。如吉神居日支，则妻室皆老，主受妻室之力，；凶神居日支，则妻室丧亡，主不得妻室之力。如吉神居时，则子息繁衍，主得子息之力；凶神居时，则子息凋零，主不得子息之力。若兄弟则无定位，但看同类为吉神，则兄弟繁昌，主得兄弟之力；同类为凶神，则兄弟衰寡，亦主不得兄弟之力。此法虽难尽拘，然大概不远，与前法参看可也。若旧书更有以月为兄弟者，夫月尊于日，兄弟安能当之？柱无兄弟，犹之干无妻位，岂可强乎？
+  normalized_text: 看六亲之法，旧以年为祖上，月为父母，日支为妻，时为子息，同类为兄弟，此立法之有理者。如吉神居年则祖上荣显，亦主受祖上之阴；凶神居年，则祖上寒薄，亦主不受祖上之阴。如吉神居月，则父母贵盛，主受父母之阴；凶神居月，则父母衰残，亦主不受父母之阴。如吉神居日支，则妻室皆老，主受妻室之力，；凶神居日支，则妻室丧亡，主不得妻室之力。如吉神居时，则子息繁衍，主得子息之力；凶神居时，则子息凋零，主不得子息之力。若兄弟则无定位，但看同类为吉神，则兄弟繁昌，主得兄弟之力；同类为凶神，则兄弟衰寡，亦主不得兄弟之力。此法虽难尽拘，然大概不远，与前法参看可也。若旧书更有以月为兄弟者，夫月尊于日，兄弟安能当之？柱无兄弟，犹之干无妻位，岂可强乎？
+  locator: 第41章·看六亲法二·第1条
+  concepts:
+  - 六亲
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 1093bb6ebaee19cc14a1bff82bb969e8bd65adce2ba53f275a67a474d48d5f6b
+  source_pages:
+  - https://luckclub.cn/bazi/018/041/
+- id: mingli-yueyan-ch046-p001
+  volume: 选章正文
+  chapter_path:
+  - 第46章 看富贵吉寿贫贱凶夭总法
+  sequence: 51
+  text: 术家看命，必取何局为贵，何局为富，何局为吉，何局为寿，以及何局为贫贱凶夭，此未尝悖理也。然往往有验，有不验，是有故也，局当贵而得富，局当富而得贵，富贵之美一也，足以相准矣。局当贱而得贫，局当贫而得贱，贫贱之不美一也，足以相准矣。不宁惟是，吉寿富贵，可相准也。凶夭贫贱，可相准也。富贵而凶夭，贫贱而吉寿，可相准也。故今统富贵吉寿，列上局六十，统贫贱列下局六十，人命合上局多者备美，少者次之。合下局多者穷凶，少者次之。虽然泛而无定如此，何取惟命乎？法当取上下诸局，融会贯通于胸中，而证以古人之命，学以今人之命，则相准之故彻，而有定之理出矣。即分孰富贵，孰吉寿，孰贫贱，孰凶夭，亦无不可耳。
+  normalized_text: 术家看命，必取何局为贵，何局为富，何局为吉，何局为寿，以及何局为贫贱凶夭，此未尝悖理也。然往往有验，有不验，是有故也，局当贵而得富，局当富而得贵，富贵之美一也，足以相准矣。局当贱而得贫，局当贫而得贱，贫贱之不美一也，足以相准矣。不宁惟是，吉寿富贵，可相准也。凶夭贫贱，可相准也。富贵而凶夭，贫贱而吉寿，可相准也。故今统富贵吉寿，列上局六十，统贫贱列下局六十，人命合上局多者备美，少者次之。合下局多者穷凶，少者次之。虽然泛而无定如此，何取惟命乎？法当取上下诸局，融会贯通于胸中，而证以古人之命，学以今人之命，则相准之故彻，而有定之理出矣。即分孰富贵，孰吉寿，孰贫贱，孰凶夭，亦无不可耳。
+  locator: 第46章·看富贵吉寿贫贱凶夭总法·第1条
+  concepts: []
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 9325509fdb9a4fc9295c5faf3f9e02176c57c3d1bc0ec15c8ff4d2579dd449f6
+  source_pages:
+  - https://luckclub.cn/bazi/018/046/
+- id: mingli-yueyan-ch049-p001
+  volume: 选章正文
+  chapter_path:
+  - 第49章 看富贵吉寿贫贱凶夭要法
+  sequence: 52
+  text: 看富贵吉寿贫贱凶夭诸局，相准之故即彻，有定之理既得矣。然以人命不尽然，是有己身之善恶焉，有家世之善恶焉，福善祸淫，必然之理。如为恶之人，命应一品之贵，而减至四五品。命应百万之富，而减至六七十万。命应百岁之寿，而减至六七十岁。命应五福全备，而减至一二。又如为善之人，命应极贱，而得一命之荣。命应极贫，而得中人之产。命应早世，而得数十岁之寿。命应诸凶必集，而免其二三。世俗之见，将为恶者，何尝不福，为善者，何尝不祸，岂知福之易损，祸之己减乎？知祸福者，非知命者也。知善恶之为祸福者，则诚知命耳。虽然，徒知之何益，是有转移之道焉？昔袁了凡先生，，遇术士推命，止于贡士而无子，因详列将来履历，始则一一神验。后遇高僧，导以造命之学，积以若干善求科第，积若干善求子息，善数既积，果登两榜而举子。术士所推，毫不验矣。故凡欲求富贵吉寿，而免贫贱凶夭者，当以积善为要。每日自记功过，必期念念皆仁，事事皆善，久必如其所愿。若恃命之善，而敢于为恶，咎命之薄，而不思挽回，此为天下至愚之人，无志之士矣。诸命法皆末耳，是乃要法也。
+  normalized_text: 看富贵吉寿贫贱凶夭诸局，相准之故即彻，有定之理既得矣。然以人命不尽然，是有己身之善恶焉，有家世之善恶焉，福善祸淫，必然之理。如为恶之人，命应一品之贵，而减至四五品。命应百万之富，而减至六七十万。命应百岁之寿，而减至六七十岁。命应五福全备，而减至一二。又如为善之人，命应极贱，而得一命之荣。命应极贫，而得中人之产。命应早世，而得数十岁之寿。命应诸凶必集，而免其二三。世俗之见，将为恶者，何尝不福，为善者，何尝不祸，岂知福之易损，祸之己减乎？知祸福者，非知命者也。知善恶之为祸福者，则诚知命耳。虽然，徒知之何益，是有转移之道焉？昔袁了凡先生，，遇术士推命，止于贡士而无子，因详列将来履历，始则一一神验。后遇高僧，导以造命之学，积以若干善求科第，积若干善求子息，善数既积，果登两榜而举子。术士所推，毫不验矣。故凡欲求富贵吉寿，而免贫贱凶夭者，当以积善为要。每日自记功过，必期念念皆仁，事事皆善，久必如其所愿。若恃命之善，而敢于为恶，咎命之薄，而不思挽回，此为天下至愚之人，无志之士矣。诸命法皆末耳，是乃要法也。
+  locator: 第49章·看富贵吉寿贫贱凶夭要法·第1条
+  concepts: []
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 14595da22579bc274a6f9d05aa6369b3ec4035b2285430401f44b914cdf01e18
+  source_pages:
+  - https://luckclub.cn/bazi/018/049/
+- id: mingli-yueyan-ch051-p001
+  volume: 选章正文
+  chapter_path:
+  - 第51章 看性情法
+  sequence: 53
+  text: 旧分五行抡人性情。此不可拘。如木主仁寿慈，然有成局入格之木而不仁者矣。金主肃杀，然又有得时乘势之金而不杀者矣。须先看柱中神情气势，或正大，或光显，或纯厚，或英发，皆贤人也。或偏驳，或晦昧，或刚戾，或卑琐，皆不贤人也。又看取格取用，或中正显白，无所贪恋包藏，或奇巧隐曲，多所牵合攘取，则性情大端可睹矣。然后以五行推之，深见其肺腑，浅则得其梗概。其又始正而终邪者，始驳而终粹者，则行运使然耳。至于二德多善，贵人多贤，空亡多虚，劫煞多暴，理之所有。然执一端取断，断不验也。
+  normalized_text: 旧分五行抡人性情。此不可拘。如木主仁寿慈，然有成局入格之木而不仁者矣。金主肃杀，然又有得时乘势之金而不杀者矣。须先看柱中神情气势，或正大，或光显，或纯厚，或英发，皆贤人也。或偏驳，或晦昧，或刚戾，或卑琐，皆不贤人也。又看取格取用，或中正显白，无所贪恋包藏，或奇巧隐曲，多所牵合攘取，则性情大端可睹矣。然后以五行推之，深见其肺腑，浅则得其梗概。其又始正而终邪者，始驳而终粹者，则行运使然耳。至于二德多善，贵人多贤，空亡多虚，劫煞多暴，理之所有。然执一端取断，断不验也。
+  locator: 第51章·看性情法·第1条
+  concepts:
+  - 行运
+  - 性情
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 083972149e6b6c4dc0bdfe2ab0a344942b205236807aa8d0f685c2696a3bd186
+  source_pages:
+  - https://luckclub.cn/bazi/018/051/
+- id: mingli-yueyan-ch052-p001
+  volume: 选章正文
+  chapter_path:
+  - 第52章 看疾病法
+  sequence: 54
+  text: 旧分五行，论人疾病，未尝不合于理。但人身脏腑经络，五行具全，人命柱中运中，五行未必全备，必以某行断其病，亦不尽然。须看日主及所用格局，或朗健，或中和，或平顺，皆无疾病之命。或晦弱，或驳杂，或乖戾，皆有疾病之命也。又看其神理气势，或太过或不及，兼取柱中运中五行参合论之。即无木而就生木，克木，木生，木克之神，亦可推木之受病否。至于干支配头目手足等项，皆当以意消息之，弱必取诸病而拟议之，则名医所论。孰非五行，空须摘取医书数十百种，列于命书矣。
+  normalized_text: 旧分五行，论人疾病，未尝不合于理。但人身脏腑经络，五行具全，人命柱中运中，五行未必全备，必以某行断其病，亦不尽然。须看日主及所用格局，或朗健，或中和，或平顺，皆无疾病之命。或晦弱，或驳杂，或乖戾，皆有疾病之命也。又看其神理气势，或太过或不及，兼取柱中运中五行参合论之。即无木而就生木，克木，木生，木克之神，亦可推木之受病否。至于干支配头目手足等项，皆当以意消息之，弱必取诸病而拟议之，则名医所论。孰非五行，空须摘取医书数十百种，列于命书矣。
+  locator: 第52章·看疾病法·第1条
+  concepts:
+  - 格局
+  - 健康
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 4b7df0356a05612eb4fe81ea7bcf5614d199450f95cbcf9b1029a1213e01efc8
+  source_pages:
+  - https://luckclub.cn/bazi/018/052/
+- id: mingli-yueyan-ch057-p001
+  volume: 选章正文
+  chapter_path:
+  - 第57章 格局赋
+  sequence: 55
+  text: 总纲既定，格局宜详，月令所得何支，依之取断，柱神所有何类，参以酌量。偏正不必甚分者，曰财星，曰印绶。阴阳必应各取者，曰官煞，曰食神。月遇禄神，未可推为领袖，月逢刃曜，又何取此凶狂。格从司令而来（司令即月令），此实以经顺理。格由他神而取，盖为舍弱用强，（详参卷一，看命总法。）。逢官看煞，逢煞看印为要（用官最忌煞混，故必需看七煞何如。用煞最忌身衰，故必须看印煞何如。）。用财畏劫，用食畏枭是其常（劫能夺财，枭能夺食，故畏。）。若全局无官星可言，则暗格亦取，或日主配他干而变，则化局可商。其余外格多端，半皆诞妄，更有纳音诸法，益以咣洋。总之先定何格以推，则喜忌自见，随取何神为用，则休咎弥章。或止恃一神，始终相托，或兼求他用，变化无方。至于气象茫茫，论格既无可取，神情泛泛，言用亦无足当，此则深求反凿，浅论为长。
+  normalized_text: 总纲既定，格局宜详，月令所得何支，依之取断，柱神所有何类，参以酌量。偏正不必甚分者，曰财星，曰印绶。阴阳必应各取者，曰官煞，曰食神。月遇禄神，未可推为领袖，月逢刃曜，又何取此凶狂。格从司令而来（司令即月令），此实以经顺理。格由他神而取，盖为舍弱用强，（详参卷一，看命总法。）。逢官看煞，逢煞看印为要（用官最忌煞混，故必需看七煞何如。用煞最忌身衰，故必须看印煞何如。）。用财畏劫，用食畏枭是其常（劫能夺财，枭能夺食，故畏。）。若全局无官星可言，则暗格亦取，或日主配他干而变，则化局可商。其余外格多端，半皆诞妄，更有纳音诸法，益以咣洋。总之先定何格以推，则喜忌自见，随取何神为用，则休咎弥章。或止恃一神，始终相托，或兼求他用，变化无方。至于气象茫茫，论格既无可取，神情泛泛，言用亦无足当，此则深求反凿，浅论为长。
+  locator: 第57章·格局赋·第1条
+  concepts:
+  - 十神
+  - 格局
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: f14a849dac5e1cdd40401a2bfbac8168625b084c0e1c7de7dc4c1d7f8633e30c
+  source_pages:
+  - https://luckclub.cn/bazi/018/057/
+- id: mingli-yueyan-ch058-p001
+  volume: 选章正文
+  chapter_path:
+  - 第58章 行运赋
+  sequence: 56
+  text: 格局既分，荣枯之分已具，运途参考，否泰之理斯完，从生月而推，递行前月后月之建，以男女为别，乃分顺行逆行之端，男生阳年，女生阴年，则以未来取用。男生阴年女生阳岁，则从已往详观。计生辰之离节，凡有几日，知人命之交运，应在何年。一日则为四月，虽片时而必扣，三日为一岁。苟缺月而勿宽。一运管十年，荣枯有准，五行配四柱，休戚相连，宜与不宜，全凭格局，利与不利，但问日干，破格者，值之为戚，助格者，遇之为欢。日弱扶之而气盛，日强抑之而美全。旺日复到旺乡，必罹悔吝。衰日再行衰地，定主摧残。吉若财官印食，喜于相见（行运中固喜见财官印食，然亦需看日主之气势何如，能否应付。）。凶若刑冲枭劫，多主不安（行运中固忌刑冲枭劫，然果日主气势有余，应分四项而论，非枭与劫，逢刑冲也。）。但吉而无情，亦难吉论，苟凶而有余，不作吉论。运重支，然须合干神兼论。运虽忌岁，亦难上下截看。火若在天，下有水流而减曜。金于处地，上逢火灼而失坚。木火同来，十年并暖。水金相济，一运皆寒。（所谓一运者，一干一支是也，虽不能截断分论，然果干害支，支害干，其吉凶之力，未尝不减轻，干助支，亦未尝不加重耳。）取神煞以评，实在干支而较缓。谓交接必咎，岂行运福利而亦然（俗谓交运脱运之际）。然凶运既去为殃，是离任之官，犹能行令。言吉运未来作福，将候选之职，遂可操权。（凶运既去，自无祸害，吉运未来，安有瑞祥）。命吉运凶，若良马坚车，阻险道而难进。命凶运吉，若破帆敝楫，乘顺风而亦前。行运此大略，通变难以言宣。
+  normalized_text: 格局既分，荣枯之分已具，运途参考，否泰之理斯完，从生月而推，递行前月后月之建，以男女为别，乃分顺行逆行之端，男生阳年，女生阴年，则以未来取用。男生阴年女生阳岁，则从已往详观。计生辰之离节，凡有几日，知人命之交运，应在何年。一日则为四月，虽片时而必扣，三日为一岁。苟缺月而勿宽。一运管十年，荣枯有准，五行配四柱，休戚相连，宜与不宜，全凭格局，利与不利，但问日干，破格者，值之为戚，助格者，遇之为欢。日弱扶之而气盛，日强抑之而美全。旺日复到旺乡，必罹悔吝。衰日再行衰地，定主摧残。吉若财官印食，喜于相见（行运中固喜见财官印食，然亦需看日主之气势何如，能否应付。）。凶若刑冲枭劫，多主不安（行运中固忌刑冲枭劫，然果日主气势有余，应分四项而论，非枭与劫，逢刑冲也。）。但吉而无情，亦难吉论，苟凶而有余，不作吉论。运重支，然须合干神兼论。运虽忌岁，亦难上下截看。火若在天，下有水流而减曜。金于处地，上逢火灼而失坚。木火同来，十年并暖。水金相济，一运皆寒。（所谓一运者，一干一支是也，虽不能截断分论，然果干害支，支害干，其吉凶之力，未尝不减轻，干助支，亦未尝不加重耳。）取神煞以评，实在干支而较缓。谓交接必咎，岂行运福利而亦然（俗谓交运脱运之际）。然凶运既去为殃，是离任之官，犹能行令。言吉运未来作福，将候选之职，遂可操权。（凶运既去，自无祸害，吉运未来，安有瑞祥）。命吉运凶，若良马坚车，阻险道而难进。命凶运吉，若破帆敝楫，乘顺风而亦前。行运此大略，通变难以言宣。
+  locator: 第58章·行运赋·第1条
+  concepts:
+  - 格局
+  - 行运
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: e4efef81572937aee7e195138c138b56a27f35ce91132b7cda1be60f34d52bfe
+  source_pages:
+  - https://luckclub.cn/bazi/018/058/
+- id: mingli-yueyan-ch059-p001
+  volume: 选章正文
+  chapter_path:
+  - 第59章 流年赋
+  sequence: 57
+  text: 大运司十载之休咎，流年管一岁之穷通。岁干如君，固应从重，岁支为辅，实则同功。先观岁与日干，或为利，或为害，此详岁与大运，或为顺，或相攻，或问其有无会合，考其宜否刑冲。大抵命之所喜者，自非运所忌见，命之所恶者，亦非运所乐逢。岁与运战争，须凭原局之中，有神救解，岁与运和睦，若系主干之吉，加倍兴隆。或谓犯岁而致灾必重，或谓合岁而引悔成凶，夫犯必日之财官，非正即偏，有何不利？合必日助之正配，非官即财，正喜相逢，惟衰官不任财官，反罹其祸，非太岁每逢克合，必害厥躬（凡日干犯太岁者，如甲见戊，乙见己之类，皆为偏财。太岁合日干者，如甲见己，乙见庚之类，非正财即正官，倘日主气势有余，得此反主奋发）。先遇是物而安，后遇是物而危，由运途亨蹇之异。初见斯神而喜，复见斯神而畏，因岁建上下不同。上来降祥，而为支所生，则弥增福力，下欲逞虐，而受干之制，则半减凶锋（流年干支，固不能截断分论，然以上半年属干，下半年属支。然果岁干为喜神，而又得岁支生之，未倘不可弥增福力。岁支为忌神，得岁干制之，未尝不可半减凶锋）。木若司年，至金月而阴浅。水如禀岁，涉冬令而波洪。岁运并临，灾祥庚大。干支同类，势力尤雄。煞年而局食先强，岂能相难。（日主虽衰，而原柱食神得势，即岁逢七煞，亦不为害，盖食先煞后，食可制煞也。）。劫岁而运财方盛，亦止得中（运行财地，其财方盛，虽遇劫财流年，亦不至损失。）。举此为例，其类可充。至本年每月之吉凶，仿此推究，若逐岁小运之谬妄，不必研穷。
+  normalized_text: 大运司十载之休咎，流年管一岁之穷通。岁干如君，固应从重，岁支为辅，实则同功。先观岁与日干，或为利，或为害，此详岁与大运，或为顺，或相攻，或问其有无会合，考其宜否刑冲。大抵命之所喜者，自非运所忌见，命之所恶者，亦非运所乐逢。岁与运战争，须凭原局之中，有神救解，岁与运和睦，若系主干之吉，加倍兴隆。或谓犯岁而致灾必重，或谓合岁而引悔成凶，夫犯必日之财官，非正即偏，有何不利？合必日助之正配，非官即财，正喜相逢，惟衰官不任财官，反罹其祸，非太岁每逢克合，必害厥躬（凡日干犯太岁者，如甲见戊，乙见己之类，皆为偏财。太岁合日干者，如甲见己，乙见庚之类，非正财即正官，倘日主气势有余，得此反主奋发）。先遇是物而安，后遇是物而危，由运途亨蹇之异。初见斯神而喜，复见斯神而畏，因岁建上下不同。上来降祥，而为支所生，则弥增福力，下欲逞虐，而受干之制，则半减凶锋（流年干支，固不能截断分论，然以上半年属干，下半年属支。然果岁干为喜神，而又得岁支生之，未倘不可弥增福力。岁支为忌神，得岁干制之，未尝不可半减凶锋）。木若司年，至金月而阴浅。水如禀岁，涉冬令而波洪。岁运并临，灾祥庚大。干支同类，势力尤雄。煞年而局食先强，岂能相难。（日主虽衰，而原柱食神得势，即岁逢七煞，亦不为害，盖食先煞后，食可制煞也。）。劫岁而运财方盛，亦止得中（运行财地，其财方盛，虽遇劫财流年，亦不至损失。）。举此为例，其类可充。至本年每月之吉凶，仿此推究，若逐岁小运之谬妄，不必研穷。
+  locator: 第59章·流年赋·第1条
+  concepts:
+  - 十神
+  - 行运
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 4546cde8bdc2edb42449519c4922e109b3cbce489969fe0f40605919b0e227e8
+  source_pages:
+  - https://luckclub.cn/bazi/018/059/
+- id: mingli-yueyan-ch091-p001
+  volume: 选章正文
+  chapter_path:
+  - 第91章 太岁论
+  sequence: 58
+  text: 旧称太岁为诸煞之首，夫太岁至尊，非煞也。特诸煞皆从太岁干支而起耳，凡流年太岁，原柱干支，以之扶抑，大运干支以之参赞。或干支具为柱运之福，或干支具为柱运之害，或干为福，支为害，或干为害，支为福，此项须合看而深察之。旧书往往独取天干，尝考历载每年太岁，甲子年则曰太岁在甲子，未尝之言太岁在甲也。及列年神方位之图，子下有太岁字，甲下无太岁字，奈何详干略支耶。旧书又以日干可克岁为犯，日干合岁为晦，并主凶咎，此一偏之见，流年赋中，已辩之矣。若征太岁之说，尤为不经，夫征者，上伐下也，太岁命中之君，可言征也。惟阳岁干克阴日干，而岁支又冲日支，是为天克地冲，间有不利耳。
+  normalized_text: 旧称太岁为诸煞之首，夫太岁至尊，非煞也。特诸煞皆从太岁干支而起耳，凡流年太岁，原柱干支，以之扶抑，大运干支以之参赞。或干支具为柱运之福，或干支具为柱运之害，或干为福，支为害，或干为害，支为福，此项须合看而深察之。旧书往往独取天干，尝考历载每年太岁，甲子年则曰太岁在甲子，未尝之言太岁在甲也。及列年神方位之图，子下有太岁字，甲下无太岁字，奈何详干略支耶。旧书又以日干可克岁为犯，日干合岁为晦，并主凶咎，此一偏之见，流年赋中，已辩之矣。若征太岁之说，尤为不经，夫征者，上伐下也，太岁命中之君，可言征也。惟阳岁干克阴日干，而岁支又冲日支，是为天克地冲，间有不利耳。
+  locator: 第91章·太岁论·第1条
+  concepts:
+  - 行运
+  graph_refs:
+  - work:mingli-yueyan
+  - school:mingli-yueyan
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 798b227ca222cd2310a30f1b24b08fecb0da3ca7c049d23d352e39fbc00af017
+  source_pages:
+  - https://luckclub.cn/bazi/018/091/

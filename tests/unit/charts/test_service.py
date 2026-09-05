@@ -1,4 +1,4 @@
-from datetime import date, time
+from datetime import date, datetime, time
 
 import pytest
 from pydantic import ValidationError
@@ -58,6 +58,35 @@ def test_chart_marks_time_boundary_uncertainty() -> None:
         BirthInput(date=date(1990, 1, 1), time=time(23, 30), name="测试")
     )
     assert any("换日" in item for item in chart.uncertainties)
+
+
+def test_chart_calculates_current_and_next_luck_cycles_for_gender() -> None:
+    male = ChartCalculator().calculate(
+        BirthInput(date=date(2002, 9, 22), time=time(16, 0), gender="male")
+    )
+    female = ChartCalculator().calculate(
+        BirthInput(date=date(2002, 9, 22), time=time(16, 0), gender="female")
+    )
+
+    assert male.luck.direction_label == "顺排"
+    assert male.luck.start_at.isoformat() == "2008-02-07T10:00:00"
+    assert [item.ganzhi for item in male.luck.cycles[:3]] == ["庚戌", "辛亥", "壬子"]
+    assert female.luck.direction_label == "逆排"
+    assert female.luck.start_at.isoformat() == "2007-07-25T02:00:00"
+    assert [item.ganzhi for item in female.luck.cycles[:3]] == ["戊申", "丁未", "丙午"]
+    for chart in (male, female):
+        expected_current = next(
+            (
+                item
+                for item in chart.luck.cycles
+                if item.start_year <= datetime.now().year <= item.end_year
+            ),
+            None,
+        )
+        assert chart.luck.current_cycle == expected_current
+        if expected_current:
+            assert chart.luck.next_cycle
+            assert chart.luck.next_cycle.index == expected_current.index + 1
 
 
 def test_only_algorithm_supported_timezone_is_accepted() -> None:

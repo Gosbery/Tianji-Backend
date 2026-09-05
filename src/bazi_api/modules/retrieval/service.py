@@ -150,6 +150,19 @@ def query_mentions_term(query: str, term: str) -> bool:
     return normalized_term in normalized_query
 
 
+def chapter_heading_terms(heading: str) -> list[str]:
+    topic = heading.removeprefix("论").strip()
+    simplified = re.sub(r"[一二三四五六七八九十类]$", "", topic).strip()
+    base = re.sub(r"(?:说|法|论|歌|诀|类)$", "", simplified).strip()
+    return list(
+        dict.fromkeys(item for item in (heading, topic, simplified, base) if len(item) >= 2)
+    )
+
+
+def primary_query_text(query: str) -> str:
+    return query.split("\n检索扩展：", 1)[0]
+
+
 def retrieval_tuning(settings: Settings) -> dict[str, int | float]:
     return {name: getattr(settings, name) for name in RETRIEVAL_TUNING_FIELDS}
 
@@ -204,7 +217,10 @@ class BM25Index:
             query_tokens = self.tokenizer.tokenize(
                 [" ".join(tokenize_zh(query))], show_progress=False
             )
-            count = min(len(self.documents), max(limit * 4, limit))
+            # bm25s cannot filter during retrieval. Fetch the full ranking before
+            # applying school/status eligibility so a large multi-school corpus
+            # cannot discard an exact-title match prematurely.
+            count = len(self.documents)
             indices, scores = self.index.retrieve(query_tokens, k=count, show_progress=False)
             hits: list[tuple[str, float]] = []
             for index, score in zip(indices[0].tolist(), scores[0].tolist(), strict=True):
@@ -223,12 +239,11 @@ class BM25Index:
         match = re.search(r"第\d+章\s+([^/]+)$", document.title)
         if match is None:
             return 0.0
-        normalized_query = normalize_retrieval_text(query)
+        normalized_query = normalize_retrieval_text(primary_query_text(query))
         heading = normalize_retrieval_text(match.group(1)).strip()
-        topic = heading.removeprefix("论").strip()
         if heading and heading in normalized_query:
             return self.heading_boost
-        if len(topic) >= 2 and topic in normalized_query:
+        if any(term in normalized_query for term in chapter_heading_terms(heading)[1:]):
             return self.topic_boost
         return 0.0
 
@@ -412,7 +427,10 @@ class CrossEncoderReranker:
                 pairs = [
                     (
                         query,
-                        f"{doc.title}\n{' '.join(doc.concepts)}\n{doc.text[:256]}",
+                        (
+                            f"{doc.title}\n{' '.join(doc.concepts)}\n"
+                            f"{(doc.rerank_text or doc.text)[:900]}"
+                        ),
                     )
                     for doc in documents
                 ]
@@ -459,6 +477,7 @@ class KnowledgeGraphIndex:
             {
                 label
                 for node_id in related
+                if self.nodes[node_id].type != "knowledge_card"
                 for label in [self.nodes[node_id].name, *self.nodes[node_id].aliases]
                 if label and not query_mentions_term(query, label)
             }
@@ -593,14 +612,19 @@ class RetrievalService:
         mode: str,
         limit: int = 6,
         evidence_scope: EvidenceScope = "reviewed_only",
+        allowed_schools: list[str] | None = None,
+        preferred_schools: list[str] | None = None,
     ) -> list[RetrievalHit]:
+        schools = set(allowed_schools or [school])
         allowed = {
             document.id
             for document in self.documents.values()
-            if self._eligible(document, chart, school, evidence_scope)
+            if self._eligible(document, chart, schools, evidence_scope)
         }
         if mode == "lightrag":
-            return await self._search_lightrag(query, allowed, limit)
+            hits = await self._search_lightrag(query, allowed, limit)
+            self._apply_school_priority(preferred_schools or [], hits)
+            return hits
         chart_terms = self._chart_query_terms(query, chart)
         graph_query = " ".join([query, *chart_terms])
         expanded_terms, related_nodes = self.graph.expand(graph_query, evidence_scope)
@@ -614,6 +638,8 @@ class RetrievalService:
                     self.bm25.search, retrieval_query, allowed, self.settings.sparse_recall_limit
                 )
                 hits = self._hits_from_single(sparse_fallback, "bm25-fallback", limit)
+            hits = self._diversify_hits(hits, limit)
+            self._apply_school_priority(preferred_schools or [], hits)
             return self._expand_evidence_chain(hits, allowed, limit)
         dense, sparse = await asyncio.gather(
             self._dense_search(retrieval_query, allowed),
@@ -636,6 +662,7 @@ class RetrievalService:
         ]
         self._apply_title_boost(query, hits)
         self._apply_concept_boost(query, hits)
+        self._apply_school_priority(preferred_schools or [], hits)
         self._apply_graph_boost(related_nodes, hits)
         self._apply_chart_context_boost(chart_terms, chart, hits)
         if mode == "hybrid_rerank" and hits:
@@ -653,7 +680,25 @@ class RetrievalService:
                 hit.matched_by.append("reranker")
             candidates.sort(key=lambda hit: hit.score, reverse=True)
             hits = [*candidates, *remainder]
+        hits = self._diversify_hits(hits, limit)
         return self._expand_evidence_chain(hits, allowed, limit)
+
+    @staticmethod
+    def _apply_school_priority(
+        preferred_schools: list[str], hits: list[RetrievalHit]
+    ) -> None:
+        if not preferred_schools:
+            return
+        count = len(preferred_schools)
+        for hit in hits:
+            if hit.document.school not in preferred_schools:
+                continue
+            rank = preferred_schools.index(hit.document.school)
+            bonus = 0.01 * (count - rank)
+            hit.score += bonus
+            hit.component_scores["expert_school_priority"] = bonus
+            hit.matched_by.append("expert_school_priority")
+        hits.sort(key=lambda hit: hit.score, reverse=True)
 
     @staticmethod
     def _chart_query_terms(query: str, chart: ChartFacts) -> list[str]:
@@ -870,14 +915,17 @@ class RetrievalService:
         self, hits: list[RetrievalHit], allowed: set[str], limit: int
     ) -> list[RetrievalHit]:
         base = hits[:limit]
-        parent = next(
-            (hit for hit in base if hit.document.kind in {"knowledge_card", "modern_annotation"}),
-            None,
-        )
-        if parent is None:
-            return base
-        canonical = self._find_canonical_reference(parent.document, allowed)
-        if canonical is None:
+        parent: RetrievalHit | None = None
+        canonical: RetrievalDocument | None = None
+        for candidate in base:
+            if candidate.document.kind not in {"knowledge_card", "modern_annotation"}:
+                continue
+            resolved = self._find_canonical_reference(candidate.document, allowed)
+            if resolved is not None:
+                parent = candidate
+                canonical = resolved
+                break
+        if parent is None or canonical is None:
             return base
         linked = next(
             (hit for hit in base if hit.document.id == canonical.id),
@@ -916,9 +964,15 @@ class RetrievalService:
         return None
 
     def _apply_title_boost(self, query: str, hits: list[RetrievalHit]) -> None:
-        normalized_query = normalize_retrieval_text(query)
+        normalized_query = normalize_retrieval_text(primary_query_text(query))
         for hit in hits:
             document_title = normalize_retrieval_text(hit.document.title).strip()
+            work_title, separator, _ = document_title.partition(" · ")
+            if separator and len(work_title) >= 2 and work_title in normalized_query:
+                bonus = self.settings.exact_title_boost
+                hit.score += bonus
+                hit.component_scores["work_title"] = bonus
+                hit.matched_by.append("work_title")
             if len(document_title) >= 2 and document_title in normalized_query:
                 bonus = self.settings.exact_title_boost
                 hit.score += bonus
@@ -928,10 +982,9 @@ class RetrievalService:
             if match is None:
                 continue
             heading = normalize_retrieval_text(match.group(1)).strip()
-            topic = heading.removeprefix("论").strip()
             if heading and heading in normalized_query:
                 bonus = self.settings.chapter_heading_boost
-            elif len(topic) >= 2 and topic in normalized_query:
+            elif any(term in normalized_query for term in chapter_heading_terms(heading)[1:]):
                 bonus = self.settings.chapter_topic_boost
             else:
                 continue
@@ -990,7 +1043,7 @@ class RetrievalService:
     def _eligible(
         document: RetrievalDocument,
         chart: ChartFacts,
-        school: str,
+        schools: set[str],
         evidence_scope: EvidenceScope,
     ) -> bool:
         allowed_statuses = (
@@ -998,9 +1051,7 @@ class RetrievalService:
         )
         if document.review_status not in allowed_statuses:
             return False
-        if document.school not in {school, "基础共识"} and not (
-            evidence_scope == "personal_preview" and document.review_status == "machine_verified"
-        ):
+        if document.school not in {*schools, "基础共识"}:
             return False
         facts = {
             "day_master": chart.day_master,
@@ -1020,3 +1071,25 @@ class RetrievalService:
             if key in facts and facts[key] == expected:
                 return False
         return True
+
+    @staticmethod
+    def _diversify_hits(hits: list[RetrievalHit], limit: int) -> list[RetrievalHit]:
+        selected: list[RetrievalHit] = []
+        seen_families: set[str] = set()
+        chapter_counts: Counter[str] = Counter()
+        for hit in hits:
+            canonical_refs = [
+                ref for ref in hit.document.trace_refs if ref != hit.document.id and "-ch" in ref
+            ]
+            family = canonical_refs[0] if canonical_refs else hit.document.id
+            chapter_match = re.search(r"-ch(\d+)-", family)
+            chapter = chapter_match.group(1) if chapter_match else ""
+            if family in seen_families or (chapter and chapter_counts[chapter] >= 2):
+                continue
+            selected.append(hit)
+            seen_families.add(family)
+            if chapter:
+                chapter_counts[chapter] += 1
+            if len(selected) >= limit:
+                break
+        return selected

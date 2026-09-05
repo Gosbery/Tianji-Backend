@@ -7,7 +7,7 @@ import yaml
 from pydantic import ValidationError
 
 from bazi_api.modules.knowledge.repository import KnowledgeRepository
-from bazi_api.modules.knowledge.schemas import GraphEdge, KnowledgeCard, SourceRef
+from bazi_api.modules.knowledge.schemas import GraphEdge, GraphNode, KnowledgeCard, SourceRef
 
 BACKEND_ROOT = Path(__file__).resolve().parents[3]
 
@@ -20,6 +20,12 @@ def _minimal_knowledge_root(tmp_path: Path) -> Path:
     (root / "cards" / "test.yml").write_text(
         yaml.safe_dump(
             {
+                "review_defaults": {
+                    "verification_level": "human_review",
+                    "reviewed_by": "test-reviewer",
+                    "reviewed_at": "2026-09-03",
+                    "review_note": "测试夹具人工确认",
+                },
                 "cards": [
                     {
                         "id": "test-yinyang",
@@ -28,7 +34,7 @@ def _minimal_knowledge_root(tmp_path: Path) -> Path:
                         "concepts": ["阴阳"],
                         "status": "reviewed",
                     }
-                ]
+                ],
             },
             allow_unicode=True,
         ),
@@ -37,6 +43,12 @@ def _minimal_knowledge_root(tmp_path: Path) -> Path:
     (root / "graph" / "core.yml").write_text(
         yaml.safe_dump(
             {
+                "review_defaults": {
+                    "verification_level": "human_review",
+                    "reviewed_by": "test-reviewer",
+                    "reviewed_at": "2026-09-03",
+                    "review_note": "测试夹具人工确认",
+                },
                 "nodes": [
                     {
                         "id": "concept:yinyang",
@@ -53,6 +65,11 @@ def _minimal_knowledge_root(tmp_path: Path) -> Path:
         encoding="utf-8",
     )
     (root / "sources" / "notes.md").write_text(
+        "---\n"
+        "reviewed_by: test-reviewer\n"
+        "reviewed_at: 2026-09-03\n"
+        "review_note: 测试夹具人工确认\n"
+        "---\n\n"
         "# 研究笔记\n\n## 阴阳关系\n\n这里讨论阴阳关系。\n",
         encoding="utf-8",
     )
@@ -102,6 +119,32 @@ def test_only_reviewed_evidence_enters_retrieval() -> None:
     assert all(
         document.warning for document in preview if document.review_status == "machine_verified"
     )
+    generated = next(document for document in preview if document.id.startswith("ziping-rule"))
+    card = next(item for item in repository.cards if item.id == generated.id)
+    assert card.conclusion in generated.rerank_text
+    assert card.conditions[0] in generated.rerank_text
+    assert card.exceptions[0] in generated.rerank_text
+    assert card.break_conditions[0] in generated.rerank_text
+    assert card.prohibited_uses[0] in generated.rerank_text
+
+
+def test_reviewed_status_requires_complete_human_audit_metadata() -> None:
+    with pytest.raises(ValidationError, match="missing audit fields"):
+        GraphNode(id="concept:test", type="concept", name="测试", status="reviewed")
+
+    reviewed = GraphNode(
+        id="concept:test",
+        type="concept",
+        name="测试",
+        status="reviewed",
+        verification_level="human_review",
+        reviewed_by="reviewer",
+        reviewed_at="2026-09-03",
+        review_note="已核对来源和内容",
+    )
+
+    assert reviewed.verification_level == "human_review"
+    assert reviewed.reviewed_by == "reviewer"
 
 
 def test_ziping_source_archive_is_complete_and_hash_verified() -> None:
@@ -175,6 +218,9 @@ def test_ziping_v2_cards_cover_all_chapters_with_explicit_reasoning_fields() -> 
         sum(f"-ch{chapter:02d}-" in card.id for chapter in range(31, 48) for card in rules) >= 143
     )
     assert all(card.status == "machine_verified" for card in cards)
+    assert len({re.sub(r"\s+", "", card.rule) for card in rules}) == len(rules)
+    assert all(not card.conclusion.rstrip().endswith(("？", "?")) for card in rules)
+    assert all(card.conclusion in card.rule for card in rules)
     assert all(
         card.premises
         and card.conclusion
@@ -234,7 +280,9 @@ def test_reviewed_and_machine_status_dependencies_are_enforced() -> None:
         repository._validate()
 
     candidate.status = "machine_verified"
-    candidate.source_refs.append(SourceRef(passage_id="ditiansui-tongshen-001"))
+    draft_target = repository.original_passages[0]
+    draft_target.status = "draft"
+    candidate.source_refs.append(SourceRef(passage_id=draft_target.id))
     with pytest.raises(ValueError, match="machine_verified.*draft"):
         repository._validate()
 
@@ -262,3 +310,63 @@ def test_legacy_concepts_are_derived_from_graph_nodes(tmp_path: Path) -> None:
     assert set(note.concepts) <= {
         node.name for node in repository.graph_nodes if node.type == "concept"
     }
+
+
+def test_topic_and_bibliography_catalogs_are_loaded_and_validated() -> None:
+    repository = KnowledgeRepository(BACKEND_ROOT / "knowledge")
+    repository.load()
+
+    assert len(repository.topics) == 12
+    assert {item.priority for item in repository.topics} == {
+        "core",
+        "high_frequency",
+        "extended",
+    }
+    health = next(item for item in repository.topics if item.id == "topic:health")
+    assert health.risk == "health"
+    assert {"疾病", "非诊断"}.issubset(health.retrieval_terms)
+    assert len(repository.bibliography) >= 7
+    qianli = next(
+        item
+        for item in repository.bibliography
+        if item.id == "bibliography:wei-qianli-qianli-minggao"
+    )
+    assert qianli.rights_status == "copyrighted"
+    assert not qianli.fulltext_eligible
+    assert all(
+        item.rights_status == "public_domain"
+        for item in repository.bibliography
+        if item.fulltext_eligible
+    )
+
+
+def test_classic_preview_evidence_never_enters_reviewed_only_scope() -> None:
+    repository = KnowledgeRepository(BACKEND_ROOT / "knowledge")
+    repository.load()
+
+    reviewed_ids = {item.id for item in repository.documents("reviewed_only")}
+    preview = repository.documents("personal_preview")
+
+    assert not any(item.startswith("classic-rule-") for item in reviewed_ids)
+    assert any(item.id.startswith("classic-rule-") for item in preview)
+    assert all(
+        item.warning for item in preview if item.id.startswith(("classic-rule-", "classic-case-"))
+    )
+
+
+def test_classic_health_and_prediction_cards_preserve_safety_boundaries() -> None:
+    repository = KnowledgeRepository(BACKEND_ROOT / "knowledge")
+    repository.load()
+    classics = [item for item in repository.cards if item.id.startswith("classic-")]
+    health = [item for item in classics if "健康" in item.concepts]
+    cases = [item for item in classics if item.card_type == "case"]
+
+    assert health
+    assert all(any("疾病诊断" in value for value in item.prohibited_uses) for item in health)
+    assert all(any("寿命" in value for value in item.prohibited_uses) for item in health)
+    assert all(
+        any("必然" in value for value in item.prohibited_uses)
+        for item in classics
+        if item.card_type == "rule"
+    )
+    assert all(any("直接套用" in value for value in item.prohibited_uses) for item in cases)

@@ -1,0 +1,106 @@
+metadata:
+  as_of: 2026-09-04
+  methodology: >-
+    根据公开网页检索可见问法、产品现有问句与离线评测集做定性归类；优先级表示产品内容建设顺序，
+    不代表任何平台的精确搜索量或互动量。
+  ranking_scope: qualitative
+  source_notes:
+  - 公开搜索只用于识别常见表达，不保存未经核验的流量数字。
+  - 核心、高频应用、延伸三档是产品定性标签，可随评测反馈修订。
+topics:
+- id: topic:ten-gods-self
+  label: 十神与自我理解
+  priority: core
+  description: 以十神关系讨论性情、能力倾向与行为模式，不作人格定论。
+  query_terms: [十神, 正官, 七杀, 正印, 偏印, 正财, 偏财, 食神, 伤官, 比肩, 劫财, 性格, 自我]
+  retrieval_terms: [十神, 日主, 官杀, 印绶, 财星, 食伤, 比劫, 性情, 旺衰, 配合]
+  risk: interpretive
+  related_work_ids: [work-ziping-zhenquan, work-ditiansui, work-yuanhai-ziping, work-sanming-tonghui, work-shenfeng-tongkao, work-mingli-yueyan]
+- id: topic:luck-timing
+  label: 大运流年与趋势
+  priority: core
+  description: 讨论大运、流年与原局条件的作用关系，只给条件式趋势和时间窗口。
+  query_terms: [大运, 流年, 岁运, 太岁, 起运, 未来, 今年, 明年, 什么时候]
+  retrieval_terms: [大运, 行运, 流年, 岁运, 太岁, 起运, 顺排, 逆排, 节气, 原局, 旺衰, 格局, 成败, 救应]
+  risk: interpretive
+  related_work_ids: [work-ziping-zhenquan, work-ditiansui, work-yuanhai-ziping, work-sanming-tonghui, work-shenfeng-tongkao, work-mingli-yueyan]
+- id: topic:retrospective
+  label: 过往事件回溯
+  priority: core
+  description: 用既定规则比较命局、岁运和已发生事件，不按用户经历反向改写规则。
+  query_terms: [过去, 过往, 验证, 回溯, 曾经, 哪年发生]
+  retrieval_terms: [命例, 原局, 行运, 岁运, 应期, 条件, 反例]
+  risk: interpretive
+  related_work_ids: [work-ditiansui, work-sanming-tonghui, work-shenfeng-tongkao, work-mingli-yueyan]
+- id: topic:career
+  label: 事业与职业
+  priority: high_frequency
+  description: 讨论职业环境、职责方式和阶段变化，不保证升职或成功。
+  query_terms: [事业, 职业, 职场, 工作, 创业, 跳槽, 升职, 职位]
+  retrieval_terms: [正官, 七杀, 官杀, 食神, 伤官, 印绶, 格局, 大运, 行运]
+  risk: interpretive
+  related_work_ids: [work-ziping-zhenquan, work-ditiansui, work-sanming-tonghui, work-mingli-yueyan]
+- id: topic:wealth
+  label: 财富与财运
+  priority: high_frequency
+  description: 讨论财星、承载条件和风险窗口，不承诺暴富或具体收益。
+  query_terms: [财运, 财富, 收入, 求财, 破财, 投资, 置业, 暴富]
+  retrieval_terms: [正财, 偏财, 财星, 比肩, 劫财, 比劫, 食神, 伤官, 食伤, 旺衰, 大运, 行运]
+  risk: interpretive
+  related_work_ids: [work-ziping-zhenquan, work-ditiansui, work-yuanhai-ziping, work-sanming-tonghui, work-shenfeng-tongkao]
+- id: topic:relationships
+  label: 感情与婚恋
+  priority: high_frequency
+  description: 讨论关系模式和条件变化，不断言必然结婚、出轨或离婚。
+  query_terms: [桃花, 恋爱, 感情, 婚姻, 伴侣, 对象, 夫妻, 离婚]
+  retrieval_terms: [夫妻, 婚姻, 日支, 夫妻宫, 正财, 偏财, 财星, 正官, 七杀, 官杀, 合, 冲, 六亲, 大运, 行运]
+  risk: interpretive
+  related_work_ids: [work-ziping-zhenquan, work-ditiansui, work-yuanhai-ziping, work-sanming-tonghui, work-shenfeng-tongkao, work-mingli-yueyan]
+- id: topic:study
+  label: 学业与考试
+  priority: high_frequency
+  description: 讨论学习方式、考试阶段和环境条件，不保证录取结果。
+  query_terms: [学业, 考试, 学习, 深造, 考研, 高考, 留学]
+  retrieval_terms: [印绶, 正印, 偏印, 食神, 伤官, 官印, 行运]
+  risk: interpretive
+  related_work_ids: [work-yuanhai-ziping, work-sanming-tonghui, work-mingli-yueyan]
+- id: topic:social
+  label: 人际与合作
+  priority: high_frequency
+  description: 讨论同辈、合作与资源互动方式，不给他人贴固定标签。
+  query_terms: [朋友, 人脉, 合作伙伴, 社交, 贵人, 小人, 同事]
+  retrieval_terms: [比肩, 劫财, 比劫, 合, 冲, 官杀, 印绶, 六亲, 贵人]
+  risk: interpretive
+  related_work_ids: [work-ditiansui, work-yuanhai-ziping, work-sanming-tonghui, work-shenfeng-tongkao]
+- id: topic:migration
+  label: 迁移与变化
+  priority: high_frequency
+  description: 讨论异地、出行、搬迁及环境变化的传统判断条件。
+  query_terms: [迁移, 异地, 出行, 搬家, 移民, 换城市, 变动]
+  retrieval_terms: [冲, 合, 驿马, 年柱, 时柱, 岁运, 行运]
+  risk: interpretive
+  related_work_ids: [work-yuanhai-ziping, work-sanming-tonghui, work-shenfeng-tongkao]
+- id: topic:family
+  label: 六亲与家庭
+  priority: extended
+  description: 讨论父母、兄弟姐妹和子女等传统六亲映射，并提示历史性别语境。
+  query_terms: [父母, 父亲, 母亲, 原生家庭, 兄弟, 姐妹, 手足, 同辈, 子女, 晚辈, 养育]
+  retrieval_terms: [六亲, 父母, 兄弟, 子女, 年柱, 月柱, 时柱, 正印, 偏印, 印绶, 正财, 偏财, 财星, 比肩, 劫财, 比劫, 食神, 伤官, 食伤]
+  risk: interpretive
+  related_work_ids: [work-ziping-zhenquan, work-ditiansui, work-yuanhai-ziping, work-sanming-tonghui, work-shenfeng-tongkao, work-mingli-yueyan]
+- id: topic:health
+  label: 健康文献观点
+  priority: extended
+  description: 仅检索古籍关于五行、旺衰与疾病的历史观点，禁止诊断、寿命预测和治疗建议。
+  query_terms: [健康, 身体, 身心, 疾病, 生病, 症状, 寿命, 活几年, 吃药, 停药]
+  retrieval_terms: [疾病, 五行, 旺衰, 调候, 病药, 岁运, 传统文献, 非诊断]
+  risk: health
+  related_work_ids: [work-ditiansui, work-sanming-tonghui, work-shenfeng-tongkao, work-mingli-yueyan]
+- id: topic:strength-climate
+  label: 调候与旺衰
+  priority: extended
+  description: 讨论日主强弱、气候寒暖燥湿及体用、病药等不同分析路径。
+  query_terms: [旺衰, 身强, 身弱, 调候, 寒暖, 燥湿, 体用, 病药, 用神]
+  retrieval_terms: [旺衰, 强弱, 调候, 体用, 病药, 用神, 月令, 格局, 救应]
+  risk: standard
+  related_work_ids: [work-ziping-zhenquan, work-ditiansui, work-sanming-tonghui, work-shenfeng-tongkao, work-mingli-yueyan]

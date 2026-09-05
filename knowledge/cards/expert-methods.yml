@@ -1,0 +1,43 @@
+cards:
+  - id: method-comprehensive-evidence-first
+    title: 综合研究的证据优先流程
+    content: 先核对程序命盘事实，再按问题检索经典原文、注释与知识卡；结论冲突时以可核查证据为准，并明确分歧与不确定性。
+    card_type: method
+    school: 基础共识
+    concepts: [证据链, 命盘事实, 不确定性]
+    status: reviewed
+    verification_level: human_review
+    reviewed_by: Gosbery
+    reviewed_at: 2026-09-04
+    review_note: 项目维护者审核的通用研究流程，不归属于任何现代人物。
+    source_refs: [{source_id: project-foundation, section: 证据优先原则}]
+
+  - id: method-liang-month-pattern
+    title: 梁湘润方法研究卡：月令、格局与救应
+    content: 研究时依次核对月令取用、格局成立条件、成败与救应，并把调候需要和格局用神分开陈述；原文、后人评注和研究摘要不得混写。
+    card_type: method
+    school: 子平格局法
+    concepts: [月令, 格局, 成败救应, 调候, 用神]
+    status: machine_verified
+    verification_level: multi_source_alignment
+    confidence: 0.65
+    source_count: 3
+    collation_method: 依据产品规划建立的方法框架，经典引文已解析，人物归属仍待人工书目复核。
+    source_refs:
+      - {passage_id: ziping-zhenquan-ch08-p001, locator: 论用神}
+      - {passage_id: ziping-zhenquan-ch09-p005, locator: 论用神成败救应}
+      - {passage_id: ziping-zhenquan-ch12-p001, locator: 论用神格局高低}
+
+  - id: method-duan-image-work
+    title: 段建业方法研究卡：取象、主宾与做功
+    content: 研究时从命盘关系取象，区分主宾与体用，检查组合如何做功，再讨论虚实和应期；所有现实判断必须标注为待事实反馈验证，不能以象代替命盘事实。
+    card_type: method
+    school: 盲派象法
+    concepts: [取象, 主宾, 体用, 做功, 虚实, 应期, 事实反馈]
+    status: machine_verified
+    verification_level: single_source_integrity
+    confidence: 0.55
+    source_count: 1
+    collation_method: 依据产品规划建立的研究提纲，人物归属及术语出处待人工复核；经典引用仅支撑关系取象边界。
+    source_refs:
+      - {passage_id: ditiansui-ch008-p001, locator: 知命}

@@ -1,0 +1,787 @@
+annotations:
+- id: annotation-yuanhai-ziping-ch055-original_note001
+  title: 《渊海子平》论起大运法·眉批
+  kind: commentary
+  content: 眉批：如初一日午时生，若卯时立春，便作正月；若寅时生，未还交节，作上提十二月节推命。如正月初一子时生，上四刻仍作上年十二月，夜子时生下四刻方作正月初一子时推正，谓神仙难断夜子时。
+  passage_refs:
+  - yuanhai-ziping-ch055-p002
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: &id001
+  - 仅获得单一公开网页录入本，OCR 错字、脱字及版本异文尚未经人工逐字校勘。
+  content_sha256: 656c5b85abe047e1e1658eeffb8efab527ad1d7c43caef47df055658b33d9edb
+  source_pages:
+  - https://luckclub.cn/bazi/001/055/
+- id: annotation-yuanhai-ziping-ch065-original_note001
+  title: 《渊海子平》论日为主·眉批
+  kind: commentary
+  content: 眉批：见杀宜身旺，用在杀主亨强，日主绰美。财者养命之源，印为生我之母。伤官食神我生之子，盗母气。甲见己为财，乙见甲为劫财，以强淩弱之故。以日为主，如人之己身。年干为祖、支为祖母，月干为父、支为母及兄弟也，日干为己、身支为妻身，时干为子、支为女。论命论人则贵贱有克制论之。
+  passage_refs:
+  - yuanhai-ziping-ch065-p007
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 十神
+  - 旺衰
+  - 六亲
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: b0a2b22ebb7cde50669ed035d243676968c5465ec66a3615baf7634be83b4587
+  source_pages:
+  - https://luckclub.cn/bazi/001/065/
+- id: annotation-yuanhai-ziping-ch066-original_note001
+  title: 《渊海子平》论月令·眉批
+  kind: commentary
+  content: 眉批：出自祖宗，主庇荫之宫。
+  passage_refs:
+  - yuanhai-ziping-ch066-p001
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts: []
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: cdfc17198d7bbdd93f019996c478a426c9d80cb541254a61b0bf71affe9121bb
+  source_pages:
+  - https://luckclub.cn/bazi/001/066/
+- id: annotation-yuanhai-ziping-ch070-original_note001
+  title: 《渊海子平》论官杀混杂要制伏·眉批
+  kind: commentary
+  content: 眉批：假如金旺无制，则不能为吉。
+  passage_refs:
+  - yuanhai-ziping-ch070-p001
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts: []
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: cd40ad172320bfcdcd6d790533ec119937d7ec217c9c851ce1658f1807e1e73b
+  source_pages:
+  - https://luckclub.cn/bazi/001/070/
+- id: annotation-yuanhai-ziping-ch077-original_note001
+  title: 《渊海子平》正官论·眉批
+  kind: commentary
+  content: 眉批：甲见辛为正官，乙见庚为正官，丙见癸为正官，丁见壬为正官，戊见乙为正官，己见甲为正官，以下仿此。年为君，月为五行君之令，谓之月令。正官无印乃非真官，故喜身旺财旺。“巳酉丑金局”，《四言独步》云，八月官星、大忌卯丁、卯丁克破、有情无情。诀曰，正气官星只用支，更详财气到年时，若还四支无冲破，富贵双全折桂枝。
+  passage_refs:
+  - yuanhai-ziping-ch077-p007
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 十神
+  - 旺衰
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: b838103aa0b8b32f45705aceea0a06fc7a750397c0acf6298f9b21c82e14f4f8
+  source_pages:
+  - https://luckclub.cn/bazi/001/077/
+- id: annotation-yuanhai-ziping-ch079-original_note001
+  title: 《渊海子平》论偏官即七杀·眉批
+  kind: commentary
+  content: 眉批：甲见庚为偏官，乙见辛为偏官，丙见壬为偏官，丁见癸为偏官，戊见甲为偏官，己见乙为偏官，庚见丙为偏官，辛见丁为偏官，壬见戊为偏官，癸见己为偏官。七杀者，甲至庚为七数，庚克甲为杀，故曰七杀，五行同此。诀曰，若有制伏化其杀，身旺文章有必发，君若同来合有情，功名成就百千强。诀曰，偏官偏印最难明，上下相生有利名，四库坐财直向贵，等闲平步出公卿。此论偏印相生，功名显达，如有刃身旺主权贵。
+  passage_refs:
+  - yuanhai-ziping-ch079-p006
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 十神
+  - 旺衰
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: c20617b7a7f6b87aba64ef5fde5f6e82739a3aa5c68f5f673e6c6c42d3883031
+  source_pages:
+  - https://luckclub.cn/bazi/001/079/
+- id: annotation-yuanhai-ziping-ch080-original_note001
+  title: 《渊海子平》论七杀即偏官·眉批
+  kind: commentary
+  content: 眉批：此言合杀为贵。
+  passage_refs:
+  - yuanhai-ziping-ch080-p006
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 十神
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: dc47112f76fc5ce3b3da1679acbd7751f600aafc6bdab2f92d8214e9d095dc7a
+  source_pages:
+  - https://luckclub.cn/bazi/001/080/
+- id: annotation-yuanhai-ziping-ch080-original_note002
+  title: 《渊海子平》论七杀即偏官·眉批
+  kind: commentary
+  content: 眉批：此言杀重身弱。
+  passage_refs:
+  - yuanhai-ziping-ch080-p008
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 十神
+  - 旺衰
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: e151d0a28d2a28eaa5651af4f6df45c4cef05fb0b2a89556e0df5e9056ae649d
+  source_pages:
+  - https://luckclub.cn/bazi/001/080/
+- id: annotation-yuanhai-ziping-ch081-original_note001
+  title: 《渊海子平》论印绶·眉批
+  kind: commentary
+  content: 眉批：此月中气乃处者，庚金正旺。
+  passage_refs:
+  - yuanhai-ziping-ch081-p009
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 十神
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 1e611605f816b8e98ce6948587843772d32087c4e1539f51197559ca564b8ccb
+  source_pages:
+  - https://luckclub.cn/bazi/001/081/
+- id: annotation-yuanhai-ziping-ch081-original_note002
+  title: 《渊海子平》论印绶·眉批
+  kind: commentary
+  content: 眉批：甲见癸为正印，乙见壬为正印，丙见乙为正印，丁见甲为正印，戊见丁为正印，己见丙为正印，庚见己为正印，辛见戊为正印，壬见辛为正印，癸见庚为正印。偏印又谓之枭神。印者，生我之父母，故以祖宗、父母论之，如父母有福德及子孙。以时上见，必见生子孙有福而养父母，此理甚明。
+  passage_refs:
+  - yuanhai-ziping-ch081-p015
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 十神
+  - 六亲
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: ac8b46783887f623fd8baee940a4cc6d1118340b00acfa78756beb4951f6e1d3
+  source_pages:
+  - https://luckclub.cn/bazi/001/081/
+- id: annotation-yuanhai-ziping-ch082-original_note001
+  title: 《渊海子平》论正财·眉批
+  kind: commentary
+  content: 眉批：倒食者，甲见壬之类，以壬水克甲木之食神丙火，谓之倒食。螟蛉，小虫也，赢珠负之为子，此言自身无子，抱人之子以为子也。
+  passage_refs:
+  - yuanhai-ziping-ch082-p006
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 十神
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 4101719111e79d7061f0dd427e53c4c002ff5c440c016f3afd26bef1806e786b
+  source_pages:
+  - https://luckclub.cn/bazi/001/082/
+- id: annotation-yuanhai-ziping-ch082-original_note002
+  title: 《渊海子平》论正财·眉批
+  kind: commentary
+  content: 眉批：七月庚金正旺，以丙日生乃偏财旺极。
+  passage_refs:
+  - yuanhai-ziping-ch082-p010
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts: []
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 0885f6c0994cf3a138699aecfc09dc8d8c7569919c5ca82274fbdd3d88e43ce7
+  source_pages:
+  - https://luckclub.cn/bazi/001/082/
+- id: annotation-yuanhai-ziping-ch082-original_note003
+  title: 《渊海子平》论正财·眉批
+  kind: commentary
+  content: 眉批：此言年上偏财自身坐禄，时上印生旺，所以为福。
+  passage_refs:
+  - yuanhai-ziping-ch082-p012
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts: []
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 5d07b11fba187931b43f18b1b22aa7a2fa0d4f6f431b424c5c469b2fda2e797f
+  source_pages:
+  - https://luckclub.cn/bazi/001/082/
+- id: annotation-yuanhai-ziping-ch082-original_note004
+  title: 《渊海子平》论正财·眉批
+  kind: commentary
+  content: 眉批：论财喜见伤官，伤官又能生财，有化化之妙矣。
+  passage_refs:
+  - yuanhai-ziping-ch082-p014
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 十神
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: bb84118f79af08b2b8f69945b1945094254a129e06b6386d28a73073fb7cd851
+  source_pages:
+  - https://luckclub.cn/bazi/001/082/
+- id: annotation-yuanhai-ziping-ch082-original_note005
+  title: 《渊海子平》论正财·眉批
+  kind: commentary
+  content: 眉批：甲见己为正财，乙见戊为正财，丙见辛为正财，丁见庚为正财，戊见癸为正财，己见壬为正财，庚见乙为正财，辛见甲为正财，壬见丁为正财，癸见丙为正财。
+  passage_refs:
+  - yuanhai-ziping-ch082-p014
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts: []
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: bcaa4d020c37fcc74e5d611ba94b198ea43ed6718806d1b016f73d7c718e41f4
+  source_pages:
+  - https://luckclub.cn/bazi/001/082/
+- id: annotation-yuanhai-ziping-ch083-original_note001
+  title: 《渊海子平》论偏财·眉批
+  kind: commentary
+  content: 眉批：甲见戊为偏财，乙见己为偏财，丙见庚为偏财，丁见辛为偏财，戊见壬为偏财，己见癸为偏财，庚见甲为偏财，辛见乙为偏财，壬见丁为偏财，癸见丁为偏财。
+  passage_refs:
+  - yuanhai-ziping-ch083-p004
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts: []
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 1cd760df92b6a4e1266f6025a2c1104d88711830b127126b1fe86e0976a567f2
+  source_pages:
+  - https://luckclub.cn/bazi/001/083/
+- id: annotation-yuanhai-ziping-ch084-original_note001
+  title: 《渊海子平》论食神·眉批
+  kind: commentary
+  content: 眉批：甲见丙为食神，乙见丁为食神，丙见戊为食神，丁见己为食神，戊见庚为食神，己见辛为食神，庚见壬为食神，辛见癸为食神，壬见甲为食神，癸见乙为食神。食神诗诀，食神有气胜财官，先要他强旺本干，若是反伤来夺食，忙忙辛苦祸千般。
+  passage_refs:
+  - yuanhai-ziping-ch084-p007
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 十神
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 114f2b8734a359dee836d554bf938626d7a3db021dd66df34af420e8cc83ba79
+  source_pages:
+  - https://luckclub.cn/bazi/001/084/
+- id: annotation-yuanhai-ziping-ch086-original_note001
+  title: 《渊海子平》论伤官·眉批
+  kind: commentary
+  content: 眉批：甲见丁为伤官，乙见丙为伤官，丙见己为伤官，丁见戊为伤官，戊见辛为伤官，己见庚为伤官，庚见癸为伤官，辛见壬为伤官，壬见乙为伤官，癸见甲为伤官。伤官诗诀，火土伤官宜伤尽，金水伤官要见官，木火伤官官有旺，土金官去反成官，惟有水木伤官格，财官两见始为欢。此星遇官，如贫人见财，多贪而致祸。见杀印，必有成。惟带刃，必有凶盗，须中和为贵，无制则祸。有吉神助之则吉，恶煞助之则凶。
+  passage_refs:
+  - yuanhai-ziping-ch086-p007
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 十神
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 752012d87a753e2f568b0505bf43abdf795f5fe460f69dce0ee2a60881a0faa2
+  source_pages:
+  - https://luckclub.cn/bazi/001/086/
+- id: annotation-yuanhai-ziping-ch087-original_note001
+  title: 《渊海子平》论劫财·眉批
+  kind: commentary
+  content: 眉批：甲见乙为败财，乙见甲为劫财；丙见丁为败财，丁见丙为劫财；戊见己为败财，己见戊为劫财；庚见辛为败财，辛见庚为劫财；壬见癸为败财，癸见壬为劫财。
+  passage_refs:
+  - yuanhai-ziping-ch087-p001
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 十神
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 3431f3c7dce004ff3f75d7f9d26f5f1681b82e85ced009d98e04573c5977a5db
+  source_pages:
+  - https://luckclub.cn/bazi/001/087/
+- id: annotation-yuanhai-ziping-ch142-original_note001
+  title: 《渊海子平》六亲总论·眉批
+  kind: commentary
+  content: 眉批：生我身者为母，克我母者为父，克我之干者为我子也，我同类比肩者为我兄弟姐妹，生我妻者为我外母，克我外母者为我外父。若女命，则以我生之干为子息，以来克日干为夫，以生夫者为姑，以克姑者为公，其余兄弟父母皆与男命同之。
+  passage_refs:
+  - yuanhai-ziping-ch142-p003
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 十神
+  - 六亲
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 58c51887e9f59d11c219cf970b092cfde93f0af27a8b3eb81d775e7e6997ec1b
+  source_pages:
+  - https://luckclub.cn/bazi/001/142/
+- id: annotation-yuanhai-ziping-ch143-original_note001
+  title: 《渊海子平》六亲捷要歌·眉批
+  kind: commentary
+  content: 眉批：以上八句皆主男命刑害之言。有比有刃者过旺无制，主克父母刑妻。月令印绶格者，八字中财多克母，印多克子，大运遇财亦然。
+  passage_refs:
+  - yuanhai-ziping-ch143-p002
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 十神
+  - 行运
+  - 六亲
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 2420ac34867d95a897569f7e5f9a0edd2cd4d67a67bd7e7a36943ff0fdf8f1c7
+  source_pages:
+  - https://luckclub.cn/bazi/001/143/
+- id: annotation-yuanhai-ziping-ch144-original_note001
+  title: 《渊海子平》论父·眉批
+  kind: commentary
+  content: 眉批：以甲木为主，故以戊为父也，癸乃甲之母，戊乃癸之夫，甲以戌丑偏财，财旺则父旺，财败财衰则父衰，所以论命之荣枯，则以父之兴散察其理，余皆仿此。
+  passage_refs:
+  - yuanhai-ziping-ch144-p001
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts: []
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 519a152a26dc0220b69d260796909ac68243c45a709a43ac2e4aefaf0db7e61b
+  source_pages:
+  - https://luckclub.cn/bazi/001/144/
+- id: annotation-yuanhai-ziping-ch145-original_note001
+  title: 《渊海子平》论母·眉批
+  kind: commentary
+  content: 眉批：癸水生甲木，甲以癸为母。桃花即咸池煞，主淫。
+  passage_refs:
+  - yuanhai-ziping-ch145-p001
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts: []
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 64c0a1f8b73220b9cf09d6ddd4508ec1dc659c5efad0697711861155e3fe742a
+  source_pages:
+  - https://luckclub.cn/bazi/001/145/
+- id: annotation-yuanhai-ziping-ch146-original_note001
+  title: 《渊海子平》论妻妾·眉批
+  kind: commentary
+  content: 眉批：甲与己合，己为正财，正财即正妻。沐浴为遇水，更带桃花见漂流，故谓主妻妾私通。干蛊，谓妻有能，特有侠义可畏。甲戌、己亥日为日坐空亡。
+  passage_refs:
+  - yuanhai-ziping-ch146-p002
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts: []
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 9f20e3f01e98ac6fa0932e11d6b3c1a7cbb9ccda0ead9760304dc81febbdb74f
+  source_pages:
+  - https://luckclub.cn/bazi/001/146/
+- id: annotation-yuanhai-ziping-ch147-original_note001
+  title: 《渊海子平》论兄弟姐妹·眉批
+  kind: commentary
+  content: 眉批：阳见阳为兄弟，阴见阴为姐妹。阴见阳为兄，阳见阴为妹。
+  passage_refs:
+  - yuanhai-ziping-ch147-p001
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 六亲
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: e04484c6933ca0e97d6a17758bd47b39b696e0b90786217f4437374501e1fdf6
+  source_pages:
+  - https://luckclub.cn/bazi/001/147/
+- id: annotation-yuanhai-ziping-ch148-original_note001
+  title: 《渊海子平》论子息·眉批
+  kind: commentary
+  content: 眉批：男取克干为子，以甲木为主，庚为七杀，从甲至庚第七，故谓之七杀，阳见阳之类。甲丙戊庚壬为阳日阳时，乙丁己辛癸为阴日阴时。吉曜者，天月德、天福、天官贵人之类。空亡对下为孤虚之地。甲以土为财，若土不旺则妻不旺。
+  passage_refs:
+  - yuanhai-ziping-ch148-p003
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 十神
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 414f8e0d9617356c80534a7994b21dafd64569f64fd0d35092b3b799218c3663
+  source_pages:
+  - https://luckclub.cn/bazi/001/148/
+- id: annotation-yuanhai-ziping-ch158-original_note001
+  title: 《渊海子平》论性情·眉批
+  kind: commentary
+  content: 眉批：大凡观人之性情，皆以五行金木水火土。取象如取本性，则要四柱不要相犯，若多则杂，人物不清高。受克多则疾病。若只以日主所属为主，以分形体，则其主有是也，若得当令，果然有验。若是秋木凋零，主其人有不足。其余火土金水，仿此断之。
+  passage_refs:
+  - yuanhai-ziping-ch158-p007
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 健康
+  - 性情
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 8f6c79633b22475d17b2b3de2a96045027392ef0c10690d028117f65972a7846
+  source_pages:
+  - https://luckclub.cn/bazi/001/158/
+- id: annotation-yuanhai-ziping-ch159-original_note001
+  title: 《渊海子平》论疾病·眉批
+  kind: commentary
+  content: 眉批：此以木命见金克之全，有此病，克之多者则重，少者则轻。若木生旺而逢金，亦无此病。日乃金木水火土五行之精聚会合而得，故明正行直。
+  passage_refs:
+  - yuanhai-ziping-ch159-p003
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 健康
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 63f89aa02d5f601dc957e4b7e614dbbd2b7db2b146c99415360f554e1972c93a
+  source_pages:
+  - https://luckclub.cn/bazi/001/159/
+- id: annotation-yuanhai-ziping-ch159-original_note002
+  title: 《渊海子平》论疾病·眉批
+  kind: commentary
+  content: 眉批：土命人见木多主有是病，见金则能克之可恕矣。
+  passage_refs:
+  - yuanhai-ziping-ch159-p005
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 健康
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: c55dd054b81a780943b4395ced68ab8f36a0d13b18a78400e3403727ca0b697d
+  source_pages:
+  - https://luckclub.cn/bazi/001/159/
+- id: annotation-yuanhai-ziping-ch159-original_note003
+  title: 《渊海子平》论疾病·眉批
+  kind: commentary
+  content: 眉批：金主肺及大肠，若见火则有是病，见水亦能制之。水火相济得中和，自无此病。
+  passage_refs:
+  - yuanhai-ziping-ch159-p006
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 健康
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: b4614a4c8e5089a3d1bc1e73261d0b20880785be1c8e9156e44a9e622aa2f76d
+  source_pages:
+  - https://luckclub.cn/bazi/001/159/
+- id: annotation-yuanhai-ziping-ch159-original_note004
+  title: 《渊海子平》论疾病·眉批
+  kind: commentary
+  content: 眉批：水主肾经，见土多克之则有是病，木多制之则免，不然天下人尽死矣。
+  passage_refs:
+  - yuanhai-ziping-ch159-p009
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 健康
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 2012ce6adc8857b11d1950b9c79e8065a666410643927f95322525e3e825a7de
+  source_pages:
+  - https://luckclub.cn/bazi/001/159/
+- id: annotation-yuanhai-ziping-ch160-original_note001
+  title: 《渊海子平》论大运·眉批
+  kind: commentary
+  content: 眉批：看命宜精详强弱观之，所谓以年为根，以月为苗，以日为花，以时为实，实能结果者之谓也，亦能一生喻之。用神者，月中所藏之字，如子宫取癸水之类。转角交运如同接木，倘接木者犹忌大风摇动，则损其根枝必断折，宜护持之可也。行运比之，若遇恶杀或流年相克亦主凶。假如寅交卯、卯交辰，此乃东方一气，谓之移花，虽遇风雨亦不折之，以命比之，虽以恶星相克亦不伤命。若遇运气好，东松柏茂西倾秀，南园花盛北园成。若运气不好，则曰接木不移花，主凶。
+  passage_refs:
+  - yuanhai-ziping-ch160-p014
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 旺衰
+  - 用神
+  - 行运
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 9d54fc14dc6534ff32af5682fa10dde6696aca22748f89b076548dbe49909971
+  source_pages:
+  - https://luckclub.cn/bazi/001/160/
+- id: annotation-yuanhai-ziping-ch161-original_note001
+  title: 《渊海子平》论太岁吉凶·眉批
+  kind: commentary
+  content: 眉批：假如甲日生於戊年，是日年本克也，故谓之曰犯岁君主凶祸，柱中原有庚金制其日，甲受制则不能克戊土，谓五行有救，戊乃甲之偏财，则反招财。故言五行仿此。凡日犯岁君，即君臣相战，必有一死，臣犯刑君之罪必重，故云刑於本命。
+  passage_refs:
+  - yuanhai-ziping-ch161-p001
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: df618f69d77c4cc7e854ae5c2e31bf8e1baa539cb66e5d38355861a222812360
+  source_pages:
+  - https://luckclub.cn/bazi/001/161/
+- id: annotation-yuanhai-ziping-ch174-original_note001
+  title: 《渊海子平》论征太岁·眉批
+  kind: commentary
+  content: 眉批：征者如两君相持不能比和，谓之年征。得胜者吉，不得胜者凶，此只以一年之事断之。
+  passage_refs:
+  - yuanhai-ziping-ch174-p004
+  author: 原网页所录眉批（作者未详）
+  publication: 渊海子平
+  school: 子平法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:yuanhai-ziping
+  - school:yuanhai-ziping
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 57a51ced836ecd3adee93d91cc966e0496344ef69c7e99802134da86631c9c7b
+  source_pages:
+  - https://luckclub.cn/bazi/001/174/

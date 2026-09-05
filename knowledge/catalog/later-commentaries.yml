@@ -1,0 +1,62 @@
+entries:
+- id: bibliography:ren-tieqiao-ditiansui-chanwei
+  title: 滴天髓阐微
+  author: 任铁樵
+  relationship: 对《滴天髓》原文及原注作系统阐释，并收入大量命例。
+  source_work_id: work-ditiansui
+  topic_focus: [旺衰体用, 十神, 六亲, 性情疾病, 岁运, 命例]
+  rights_status: public_domain
+  fulltext_eligible: true
+  edition_notes: 首批采用可复现公开网页录入本选章；仅单一底本，保持个人预览。
+  source_urls: [https://luckclub.cn/bazi/007/]
+- id: bibliography:xu-lewu-ditiansui-buzhu
+  title: 滴天髓补注
+  author: 徐乐吾
+  relationship: 对《滴天髓》及既有注本作补充说明。
+  source_work_id: work-ditiansui
+  topic_focus: [旺衰, 体用, 格局, 岁运]
+  rights_status: public_domain
+  fulltext_eligible: false
+  edition_notes: 本期只建书目；全文须另行确认合法且可复现底本。
+- id: bibliography:xu-lewu-dingzheng-ditiansui-zhengyi
+  title: 订正滴天髓征义
+  author: 徐乐吾
+  relationship: 对《滴天髓征义》作订正和评释。
+  source_work_id: work-ditiansui
+  topic_focus: [原文校订, 旺衰, 用神, 命例]
+  rights_status: public_domain
+  fulltext_eligible: false
+  edition_notes: 本期只建书目；版本关系待依据影印本复核。
+- id: bibliography:xu-lewu-ziping-zhenquan-pingzhu
+  title: 子平真诠评注
+  author: 徐乐吾
+  relationship: 对《子平真诠》逐章评注。
+  source_work_id: work-ziping-zhenquan
+  topic_focus: [月令格局, 用神, 成败救应, 行运]
+  rights_status: public_domain
+  fulltext_eligible: false
+  edition_notes: 本期复用原书正文，不导入该评注全文。
+- id: bibliography:xu-lewu-qiongtong-baojian-pingzhu
+  title: 穷通宝鉴评注
+  author: 徐乐吾
+  relationship: 对《穷通宝鉴》的调候体系作评注。
+  topic_focus: [调候, 月令, 五行气候, 用神]
+  rights_status: public_domain
+  fulltext_eligible: false
+  edition_notes: 按计划仅存书目；后续强化调候体系时再独立选底本导入。
+- id: bibliography:yuan-shushan-mingli-tanyuan
+  title: 命理探原
+  author: 袁树珊
+  relationship: 近代对子平命理源流和方法的综合整理。
+  topic_focus: [命理源流, 基础机制, 格局, 六亲, 岁运]
+  rights_status: unclear
+  fulltext_eligible: false
+  edition_notes: 版权及底本授权需进一步确认，仅保存书目和主题标签。
+- id: bibliography:wei-qianli-qianli-minggao
+  title: 千里命稿
+  author: 韦千里
+  relationship: 近现代命理讲义与实例汇编。
+  topic_focus: [十神, 格局, 六亲, 行运, 命例]
+  rights_status: copyrighted
+  fulltext_eligible: false
+  edition_notes: 仍可能处于版权期，禁止导入全文；仅存书目信息、观点标签及合法短引。

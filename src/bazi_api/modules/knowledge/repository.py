@@ -11,6 +11,8 @@ import yaml
 from bazi_api.modules.retrieval.schemas import RetrievalDocument
 
 from .schemas import (
+    BibliographyCatalog,
+    BibliographyEntry,
     CanonicalPassage,
     CanonicalWork,
     EvidenceScope,
@@ -18,8 +20,10 @@ from .schemas import (
     GraphNode,
     KnowledgeCard,
     KnowledgeOverview,
+    KnowledgeTopic,
     ModernAnnotation,
     SourceRef,
+    TopicCatalog,
 )
 
 
@@ -32,6 +36,8 @@ class KnowledgeRepository:
         self.cards: list[KnowledgeCard] = []
         self.graph_nodes: list[GraphNode] = []
         self.graph_edges: list[GraphEdge] = []
+        self.topics: list[KnowledgeTopic] = []
+        self.bibliography: list[BibliographyEntry] = []
         self._overview: KnowledgeOverview | None = None
 
     def load(self) -> None:
@@ -40,10 +46,26 @@ class KnowledgeRepository:
         self.cards = self._load_cards()
         self.graph_nodes, self.graph_edges = self._load_graph()
         self.annotations = [*self._load_annotations(), *self._load_legacy_sources()]
+        self.topics = self._load_topics()
+        self.bibliography = self._load_bibliography()
         if not self.cards:
             raise RuntimeError(f"No knowledge cards found under {self.root / 'cards'}")
         self._validate()
         self._overview = self._calculate_overview()
+
+    def _load_topics(self) -> list[KnowledgeTopic]:
+        path = self.root / "catalog" / "young-user-topics.yml"
+        if not path.exists():
+            return []
+        payload = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        return TopicCatalog.model_validate(payload).topics
+
+    def _load_bibliography(self) -> list[BibliographyEntry]:
+        path = self.root / "catalog" / "later-commentaries.yml"
+        if not path.exists():
+            return []
+        payload = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        return BibliographyCatalog.model_validate(payload).entries
 
     def _load_originals(self) -> tuple[list[CanonicalWork], list[CanonicalPassage]]:
         works: list[CanonicalWork] = []
@@ -69,7 +91,8 @@ class KnowledgeRepository:
         for path in sorted((self.root / "cards").glob("*.y*ml")):
             payload = yaml.safe_load(path.read_text(encoding="utf-8")) or []
             items = payload.get("cards", []) if isinstance(payload, dict) else payload
-            cards.extend(KnowledgeCard.model_validate(item) for item in items)
+            defaults = payload.get("review_defaults", {}) if isinstance(payload, dict) else {}
+            cards.extend(KnowledgeCard.model_validate({**defaults, **item}) for item in items)
         return cards
 
     def _load_graph(self) -> tuple[list[GraphNode], list[GraphEdge]]:
@@ -77,8 +100,19 @@ class KnowledgeRepository:
         edges: list[GraphEdge] = []
         for path in sorted((self.root / "graph").glob("*.y*ml")):
             payload = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-            nodes.extend(GraphNode.model_validate(item) for item in payload.get("nodes", []))
-            edges.extend(GraphEdge.model_validate(item) for item in payload.get("edges", []))
+            defaults = payload.get("review_defaults", {})
+            nodes.extend(
+                GraphNode.model_validate(
+                    {**defaults, **item} if item.get("status") == "reviewed" else item
+                )
+                for item in payload.get("nodes", [])
+            )
+            edges.extend(
+                GraphEdge.model_validate(
+                    {**defaults, **item} if item.get("status") == "reviewed" else item
+                )
+                for item in payload.get("edges", [])
+            )
         return nodes, edges
 
     def _load_legacy_sources(self) -> list[ModernAnnotation]:
@@ -87,6 +121,18 @@ class KnowledgeRepository:
         annotations: list[ModernAnnotation] = []
         for path in sorted((self.root / "sources").glob("*.md")):
             text = path.read_text(encoding="utf-8")
+            review_metadata: dict[str, object] = {}
+            if text.startswith("---\n"):
+                _, frontmatter, text = text.split("---\n", 2)
+                raw_metadata = yaml.safe_load(frontmatter) or {}
+                review_metadata = {
+                    key: raw_metadata[key]
+                    for key in ("reviewed_by", "reviewed_at", "review_note")
+                    if key in raw_metadata
+                }
+            is_reviewed = all(
+                review_metadata.get(key) for key in ("reviewed_by", "reviewed_at", "review_note")
+            )
             source_id = path.stem
             document_title = source_id
             headings: list[str] = []
@@ -116,7 +162,9 @@ class KnowledgeRepository:
                                 locator=f"段落 {index}",
                             )
                         ],
-                        status="reviewed",
+                        status="reviewed" if is_reviewed else "draft",
+                        verification_level="human_review" if is_reviewed else "unverified",
+                        **review_metadata,
                     )
                 )
                 buffer = []
@@ -145,6 +193,8 @@ class KnowledgeRepository:
         self._require_unique("knowledge card", (item.id for item in self.cards))
         self._require_unique("graph node", (item.id for item in self.graph_nodes))
         self._require_unique("graph edge", (item.id for item in self.graph_edges))
+        self._require_unique("topic", (item.id for item in self.topics))
+        self._require_unique("bibliography entry", (item.id for item in self.bibliography))
 
         work_ids = {item.id for item in self.works}
         work_status = {item.id: item.status for item in self.works}
@@ -161,6 +211,14 @@ class KnowledgeRepository:
             for ref in annotation.source_refs
             if ref.source_id
         }
+        for topic in self.topics:
+            if not topic.query_terms or not topic.retrieval_terms:
+                raise ValueError(f"{topic.id} requires query_terms and retrieval_terms")
+            for work_id in topic.related_work_ids:
+                self._require_reference("work", work_id, work_ids, topic.id)
+        for entry in self.bibliography:
+            if entry.source_work_id:
+                self._require_reference("work", entry.source_work_id, work_ids, entry.id)
 
         for passage in self.original_passages:
             self._require_reference("work", passage.work_id, work_ids, passage.id)
@@ -204,6 +262,15 @@ class KnowledgeRepository:
             )
             self._require_graph_refs(card.graph_refs, node_ids, card.id)
             self._validate_card_refs(card, card_by_id)
+        generated_rules: dict[str, str] = {}
+        for card in self.cards:
+            if "explicit_reasoning_fields" not in card.collation_method or card.card_type == "case":
+                continue
+            normalized_rule = re.sub(r"\s+", "", card.rule)
+            duplicate = generated_rules.get(normalized_rule)
+            if duplicate is not None:
+                raise ValueError(f"{card.id} duplicates generated rule from {duplicate}")
+            generated_rules[normalized_rule] = card.id
         for node in self.graph_nodes:
             self._validate_source_refs(
                 node.source_refs, source_ids, passage_ids, annotation_ids, node.id
@@ -283,9 +350,7 @@ class KnowledgeRepository:
             "machine_verified": {"machine_verified", "reviewed"},
         }
         if owner_status in allowed and target_status not in allowed[owner_status]:
-            raise ValueError(
-                f"{owner} ({owner_status}) cannot cite {target} ({target_status})"
-            )
+            raise ValueError(f"{owner} ({owner_status}) cannot cite {target} ({target_status})")
 
     @classmethod
     def _validate_ref_statuses(
@@ -315,9 +380,7 @@ class KnowledgeRepository:
             raise ValueError(f"{owner} content_sha256 mismatch: {expected} != {actual}")
 
     @classmethod
-    def _validate_card_refs(
-        cls, card: KnowledgeCard, cards: dict[str, KnowledgeCard]
-    ) -> None:
+    def _validate_card_refs(cls, card: KnowledgeCard, cards: dict[str, KnowledgeCard]) -> None:
         for ref_id in card.rule_refs:
             cls._require_reference("knowledge card", ref_id, set(cards), card.id)
             target = cards[ref_id]
@@ -362,12 +425,19 @@ class KnowledgeRepository:
             "graph_nodes": sum(item.status == "machine_verified" for item in self.graph_nodes),
             "graph_edges": sum(item.status == "machine_verified" for item in self.graph_edges),
         }
+        schools: defaultdict[str, dict[str, int]] = defaultdict(
+            lambda: {"reviewed": 0, "machine_verified": 0}
+        )
+        for document in self.documents("personal_preview"):
+            if document.review_status in {"reviewed", "machine_verified"}:
+                schools[document.school][document.review_status] += 1
         return KnowledgeOverview(
             layers=layers,
             reviewed=reviewed,
             machine_verified=machine_verified,
             retrieval_documents=len(self.documents()),
             preview_documents=len(self.documents("personal_preview")),
+            schools=dict(sorted(schools.items())),
         )
 
     def _extract_graph_concepts(self, text: str) -> list[str]:
@@ -400,7 +470,7 @@ class KnowledgeRepository:
                     title=f"{work.title} · {' / '.join(passage.chapter_path)}",
                     text=passage.text,
                     source=f"{work.title}（{work.edition}）· {passage.locator}",
-                    school="基础共识",
+                    school=work.school,
                     concepts=passage.concepts,
                     trace_refs=[passage.id, passage.work_id],
                     graph_refs=graph_refs,
@@ -411,8 +481,7 @@ class KnowledgeRepository:
                     confidence=passage.confidence,
                     warning=self._warning(passage.status, passage.unresolved_variants),
                     unresolved_variants=passage.unresolved_variants,
-                    content_sha256=passage.content_sha256
-                    or self._content_sha256(passage.text),
+                    content_sha256=passage.content_sha256 or self._content_sha256(passage.text),
                 )
             )
 
@@ -485,6 +554,11 @@ class KnowledgeRepository:
                 text_parts.append(f"流派分歧：{positions}")
             if card.prohibited_uses:
                 text_parts.append(f"禁用范围：{'；'.join(card.prohibited_uses)}")
+            rerank_parts = [card.title, card.rule, card.conclusion]
+            rerank_parts.extend(card.conditions)
+            rerank_parts.extend(card.exceptions)
+            rerank_parts.extend(card.break_conditions)
+            rerank_parts.extend(card.prohibited_uses)
             docs.append(
                 RetrievalDocument(
                     id=card.id,
@@ -511,6 +585,7 @@ class KnowledgeRepository:
                     unresolved_variants=card.unresolved_variants,
                     content_sha256=card.content_sha256 or self._content_sha256(card.content),
                     version=card.version,
+                    rerank_text="\n".join(part for part in rerank_parts if part),
                 )
             )
         return docs

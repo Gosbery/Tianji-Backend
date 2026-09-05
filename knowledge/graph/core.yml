@@ -1,3 +1,8 @@
+review_defaults:
+  verification_level: human_review
+  reviewed_by: Gosbery
+  reviewed_at: 2026-09-02
+  review_note: 项目维护者在基础知识图谱提交时完成仓库级关系复核。
 nodes:
 - id: person:project-editors
   type: person
@@ -68,10 +73,6 @@ nodes:
   source_count: 1
   unresolved_variants: []
   source_pages: []
-- id: work:ditiansui
-  type: work
-  name: 滴天髓
-  status: draft
 - id: person:shen-xiaozhan
   type: person
   name: 沈孝瞻

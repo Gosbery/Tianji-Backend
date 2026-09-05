@@ -17,10 +17,12 @@ from bazi_api.core.errors import BaziApiError, UpstreamServiceError
 from bazi_api.core.logging import configure_logging, request_id_context
 from bazi_api.modules.charts.router import router as charts_router
 from bazi_api.modules.conversations.router import router as conversations_router
+from bazi_api.modules.experts.router import router as experts_router
 from bazi_api.modules.feedback.router import router as feedback_router
 from bazi_api.modules.knowledge.router import router as knowledge_router
 from bazi_api.modules.observability.router import router as observability_router
 from bazi_api.modules.system.router import router as system_router
+from bazi_api.modules.tasks.router import router as tasks_router
 
 API_PREFIX = "/api/v1"
 LEGACY_API_PREFIX = "/api"
@@ -177,7 +179,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         CORSMiddleware,
         allow_origins=app_settings.cors_origins,
         allow_credentials=app_settings.cors_allow_credentials,
-        allow_methods=["GET", "POST"],
+        allow_methods=["GET", "POST", "PATCH"],
         allow_headers=["Authorization", "Content-Type", "X-Request-ID"],
         expose_headers=["Deprecation", "Link", "Sunset", "X-Request-ID"],
     )
@@ -185,7 +187,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         system_router,
         charts_router,
         knowledge_router,
+        experts_router,
         conversations_router,
+        tasks_router,
         feedback_router,
         observability_router,
     ):

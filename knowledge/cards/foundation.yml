@@ -1,3 +1,8 @@
+review_defaults:
+  verification_level: human_review
+  reviewed_by: Gosbery
+  reviewed_at: 2026-09-02
+  review_note: 项目维护者在基础资料提交时完成仓库级内容复核。
 cards:
   - id: element-wood
     title: 木的基础象义
@@ -19,7 +24,7 @@ cards:
     source_refs: [{source_id: project-foundation, section: 五行是关系模型}]
   - id: element-metal
     title: 金的基础象义
-    content: 金常被用来描述收敛、界定与取舍的倾向。它不能脱离生克关系被直接解释为强硬或财富。
+    content: 金常被用来描述收敛、界定与取舍的倾向；结合生克、位置和全局关系，可继续推演性格、财富等现实主题。
     concepts: [五行, 金]
     status: reviewed
     source_refs: [{source_id: project-foundation, section: 五行是关系模型}]
@@ -190,7 +195,7 @@ cards:
     source_refs: [{source_id: project-foundation, section: 十神是相对关系}]
   - id: god-piancai
     title: 偏财
-    content: 偏财表示日主所克、同阴阳的关系。它是关系标签，不等同于意外之财，也不能独立预测财富水平。
+    content: 偏财表示日主所克、同阴阳的关系，可结合强弱、位置和全局配合推演财富来源、机会与水平。
     concepts: [十神, 偏财, 日主]
     status: reviewed
     source_refs: [{source_id: project-foundation, section: 十神是相对关系}]
@@ -208,7 +213,7 @@ cards:
     source_refs: [{source_id: project-foundation, section: 十神是相对关系}]
   - id: god-zhengguan
     title: 正官
-    content: 正官表示克日主、异阴阳的关系。常用于讨论规范与责任主题，但不能单独推断职位或婚姻。
+    content: 正官表示克日主、异阴阳的关系，可结合强弱、位置和全局配合推演职位、事业与婚姻主题。
     concepts: [十神, 正官, 日主]
     status: reviewed
     source_refs: [{source_id: project-foundation, section: 十神是相对关系}]
@@ -274,6 +279,12 @@ cards:
     concepts: [四柱, 时柱, 出生时间]
     status: reviewed
     source_refs: [{source_id: project-foundation, section: 时间边界}]
+  - id: concept-luck-cycle
+    title: 大运顺逆、起运与当前区间
+    content: 大运从月柱按顺逆逐步排列，每步十年。阳年男、阴年女顺排，阴年男、阳年女逆排；起运以出生时刻到相邻节气的时间差按三天折一年换算。当前大运应按查询年份所在区间确定，下一大运是当前区间之后的一步，不是出生后的第一步。
+    concepts: [大运, 起运, 顺排, 逆排, 节气, 性别]
+    status: reviewed
+    source_refs: [{source_id: project-foundation, section: 大运顺逆与起运}]
   - id: concept-hidden-stems
     title: 藏干提供地支内部层次
     content: 地支并非只有表面的五行标签，藏干用于描述其内部包含的天干层次。藏干不等同于天干透出，解读时应区分显隐位置。
@@ -305,8 +316,8 @@ cards:
     status: reviewed
     source_refs: [{source_id: project-foundation, section: 流派与分歧}]
   - id: concept-evidence-boundary
-    title: 命理解释必须保留证据边界
-    content: 命盘事实、命理规则与现实建议是三个层次。回答应分别展示依据和不确定性，不能只看一个五行就预测健康、财富或婚姻结果。
-    concepts: [证据, 不确定性, 解读边界]
+    title: 命理预测应区分证据与推演
+    content: 命盘事实、命理规则与现实预测是三个层次。财富、婚姻、健康、事业及其他题材均可回答；回答应说明所用依据，并将延伸判断明确标注为命理推演。
+    concepts: [证据, 不确定性, 命理推演]
     status: reviewed
     source_refs: [{source_id: project-foundation, section: 三层证据}]

@@ -7,6 +7,7 @@ work:
   edition_notes: 仅纳入乾隆四十一年序及正文第一至四十七篇；已自动核对结构、归档哈希、隐藏水印、夹带材料边界和引用定位。未找到可合法公开下载的赵展如原刊影印本，故仍是单一来源机器校勘本。
   source_url: https://www.diancangwang.cn/xuanxuewushu/03cf53eede8a/
   rights: public_domain
+  school: 子平格局法
   status: machine_verified
   content_sha256: 6f3049e4164ad6ec836e4abc1a07902710bb1392ddb5349d847951bf160f936a
   source_pages:

@@ -13,6 +13,9 @@ VerificationLevel = Literal[
     "multi_source_alignment",
     "human_review",
 ]
+TopicPriority = Literal["core", "high_frequency", "extended"]
+TopicRisk = Literal["standard", "interpretive", "health"]
+RightsStatus = Literal["public_domain", "copyrighted", "unclear"]
 
 
 class VerificationMetadata(BaseModel):
@@ -26,11 +29,26 @@ class VerificationMetadata(BaseModel):
     verification_level: VerificationLevel = "unverified"
     confidence: float = Field(default=0.5, ge=0.0, le=1.0)
     unresolved_variants: list[str] = Field(default_factory=list)
+    reviewed_by: str = ""
+    reviewed_at: date | None = None
+    review_note: str = ""
 
     @model_validator(mode="after")
-    def infer_legacy_verification_metadata(self) -> VerificationMetadata:
-        if self.status == "reviewed" and self.verification_level == "unverified":
-            self.verification_level = "human_review"
+    def validate_verification_metadata(self) -> VerificationMetadata:
+        if self.status == "reviewed":
+            missing = [
+                name
+                for name, value in {
+                    "reviewed_by": self.reviewed_by,
+                    "reviewed_at": self.reviewed_at,
+                    "review_note": self.review_note,
+                }.items()
+                if not value
+            ]
+            if missing:
+                raise ValueError(f"reviewed evidence missing audit fields: {', '.join(missing)}")
+            if self.verification_level != "human_review":
+                raise ValueError("reviewed evidence must use verification_level=human_review")
             self.confidence = max(self.confidence, 0.95)
         elif self.status == "machine_verified" and self.verification_level == "unverified":
             self.verification_level = "single_source_integrity"
@@ -63,6 +81,7 @@ class CanonicalWork(VerificationMetadata):
     edition_notes: str = ""
     source_url: str = ""
     rights: str = "public_domain"
+    school: str = "基础共识"
 
 
 class CanonicalPassage(VerificationMetadata):
@@ -83,6 +102,52 @@ class CanonicalPassage(VerificationMetadata):
 class CanonicalCorpus(BaseModel):
     works: list[CanonicalWork]
     passages: list[CanonicalPassage]
+
+
+class TopicCatalogMetadata(BaseModel):
+    as_of: date
+    methodology: str
+    ranking_scope: Literal["qualitative"] = "qualitative"
+    source_notes: list[str] = Field(default_factory=list)
+
+
+class KnowledgeTopic(BaseModel):
+    id: str
+    label: str
+    priority: TopicPriority
+    description: str
+    query_terms: list[str]
+    retrieval_terms: list[str]
+    risk: TopicRisk = "standard"
+    related_work_ids: list[str]
+
+
+class TopicCatalog(BaseModel):
+    metadata: TopicCatalogMetadata
+    topics: list[KnowledgeTopic]
+
+
+class BibliographyEntry(BaseModel):
+    id: str
+    title: str
+    author: str
+    relationship: str
+    source_work_id: str = ""
+    topic_focus: list[str]
+    rights_status: RightsStatus
+    fulltext_eligible: bool = False
+    edition_notes: str = ""
+    source_urls: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def validate_rights(self) -> BibliographyEntry:
+        if self.fulltext_eligible and self.rights_status != "public_domain":
+            raise ValueError("only public-domain bibliography may be fulltext_eligible")
+        return self
+
+
+class BibliographyCatalog(BaseModel):
+    entries: list[BibliographyEntry]
 
 
 class ModernAnnotation(VerificationMetadata):
@@ -117,9 +182,7 @@ class KnowledgeCard(VerificationMetadata):
     title: str
     content: str
     schema_version: int = Field(default=1, ge=1)
-    card_type: Literal["concept", "rule", "method", "boundary", "dispute", "case"] = (
-        "concept"
-    )
+    card_type: Literal["concept", "rule", "method", "boundary", "dispute", "case"] = "concept"
     rule: str = ""
     school: str = "基础共识"
     concepts: list[str]
@@ -143,8 +206,6 @@ class KnowledgeCard(VerificationMetadata):
     application_steps: list[str] = Field(default_factory=list)
     graph_refs: list[str] = Field(default_factory=list)
     version: int = Field(default=1, ge=1)
-    reviewed_by: str = ""
-    reviewed_at: date | None = None
 
     @model_validator(mode="after")
     def validate_versioned_card_shape(self) -> KnowledgeCard:
@@ -184,6 +245,11 @@ class KnowledgeCard(VerificationMetadata):
                 missing.append("source_refs.passage_id")
             if missing:
                 raise ValueError(f"v2 case card missing: {', '.join(missing)}")
+        if "explicit_reasoning_fields" in self.collation_method:
+            if self.conclusion.rstrip().endswith(("？", "?")):
+                raise ValueError("generated v2 card conclusion must be declarative")
+            if self.card_type != "case" and self.conclusion not in self.rule:
+                raise ValueError("generated v2 card rule must include its source conclusion")
         return self
 
 
@@ -200,6 +266,7 @@ class GraphNode(VerificationMetadata):
         "source",
         "annotation",
         "knowledge_card",
+        "topic",
     ]
     name: str
     aliases: list[str] = Field(default_factory=list)
@@ -229,3 +296,4 @@ class KnowledgeOverview(BaseModel):
     machine_verified: dict[str, int]
     retrieval_documents: int
     preview_documents: int
+    schools: dict[str, dict[str, int]] = Field(default_factory=dict)

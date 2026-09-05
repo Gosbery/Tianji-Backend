@@ -1,0 +1,64 @@
+source:
+  host: https://luckclub.cn
+  retrieved_at: 2026-09-04
+  article_selector: article#article-content
+  excluded_panels: [白话译文, 关键词, 现代启示]
+defaults:
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants:
+  - 仅获得单一公开网页录入本，OCR 错字、脱字及版本异文尚未经人工逐字校勘。
+works:
+- slug: ditiansui
+  catalog_id: "007"
+  work_id: work-ditiansui
+  title: 滴天髓阐微
+  attributed_author: 京图原文、刘基原注、任铁樵增注（传统题署）
+  dynasty: 清
+  edition: luckclub.cn 公开网页录入本（选章）
+  school: 旺衰体用法
+  parser: ditiansui_commentary
+  chapters: ["008", "009", "010", "013", "014", "016", "019", "020", "022", "023", "037", "038", "039", "040", "060", "061", "062", "063", "064"]
+- slug: yuanhai-ziping
+  catalog_id: "001"
+  work_id: work-yuanhai-ziping
+  title: 渊海子平
+  attributed_author: 徐大升编纂（传统题署）
+  dynasty: 宋元间
+  edition: luckclub.cn 公开网页录入本（选章）
+  school: 子平法
+  parser: standard
+  chapters: ["055", "065", "066", "067", "070", "077", "078", "079", "080", "081", "082", "083", "084", "085", "086", "087", "142", "143", "144", "145", "146", "147", "148", "158", "159", "160", "161", "174"]
+- slug: sanming-tonghui
+  catalog_id: "005"
+  work_id: work-sanming-tonghui
+  title: 三命通会
+  attributed_author: 万民英
+  dynasty: 明
+  edition: luckclub.cn 公开网页录入本（选章）
+  school: 子平综合法
+  parser: standard
+  chapters: ["026", "028", "029", "049", "070", "071", "134", "139", "143", "144", "151", "152", "162", "163", "182"]
+- slug: shenfeng-tongkao
+  catalog_id: "008"
+  work_id: work-shenfeng-tongkao
+  title: 神峰通考
+  attributed_author: 张楠
+  dynasty: 明
+  edition: luckclub.cn 公开网页录入本（选章）
+  school: 病药用神法
+  parser: standard
+  chapters: ["003", "007", "008", "011", "012", "015", "016", "017", "018", "020", "054", "055", "056", "067", "076", "081"]
+- slug: mingli-yueyan
+  catalog_id: "018"
+  work_id: work-mingli-yueyan
+  title: 命理约言
+  attributed_author: 陈素庵
+  dynasty: 清
+  edition: luckclub.cn 公开网页录入本（选章）
+  school: 子平综合法
+  parser: standard
+  chapters: ["005", "006", "007", "008", "009", "017", "018", "019", "020", "021", "025", "026", "027", "028", "029", "040", "041", "046", "049", "051", "052", "057", "058", "059", "091"]

@@ -19,6 +19,12 @@ class SessionNotFoundError(BaziApiError):
     default_message = "会话不存在或已失效，请重新开始对话"
 
 
+class SessionContextMismatchError(BaziApiError):
+    status_code = 409
+    code = "session_context_mismatch"
+    default_message = "命盘、流派或证据范围已改变，请开始新的对话"
+
+
 class FeedbackTargetError(BaziApiError):
     status_code = 422
     code = "invalid_feedback_target"
@@ -46,3 +52,27 @@ class UpstreamServiceError(BaziApiError):
 class InvalidUpstreamResponseError(UpstreamServiceError):
     code = "invalid_upstream_response"
     default_message = "上游模型返回了无法识别的响应"
+
+
+class ExpertNotFoundError(BaziApiError):
+    status_code = 404
+    code = "expert_not_found"
+    default_message = "专家方法不存在或不在当前审核范围"
+
+
+class TaskNotFoundError(BaziApiError):
+    status_code = 404
+    code = "task_not_found"
+    default_message = "任务不存在"
+
+
+class TaskBusyError(BaziApiError):
+    status_code = 409
+    code = "task_busy"
+    default_message = "该任务正在排队或生成，请完成后再提问"
+
+
+class InvalidJobStateError(BaziApiError):
+    status_code = 409
+    code = "invalid_job_state"
+    default_message = "当前生成状态不支持此操作"

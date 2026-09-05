@@ -1,0 +1,3410 @@
+annotations:
+- id: annotation-ditiansui-ch008-original_note001
+  title: 《滴天髓阐微》配合·原注
+  kind: commentary
+  content: 【原注】天干地支，相为配合，仔细推详其进退之机，则可以断人之祸福灾祥矣。
+  passage_refs:
+  - ditiansui-ch008-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: &id001
+  - 仅获得单一公开网页录入本，OCR 错字、脱字及版本异文尚未经人工逐字校勘。
+  content_sha256: 09be554d2fb455f04a2652f50484cbc1a60e8447c796f5e1071b3f2a77a62aea
+  source_pages:
+  - https://luckclub.cn/bazi/007/008/
+- id: annotation-ditiansui-ch008-ren_commentary002
+  title: 《滴天髓阐微》配合·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    此章乃辟谬之要领也。配合干支，必须正理搜寻详推，与衰旺喜忌之理，不可将四柱干支弗论，专从奇格、异局、神杀等类妄谈，以致祸福无凭，吉凶不验。命中至理，只存用神，不拘财、官、印绶、比劫、食伤、枭杀，皆可为用，勿以名之美者为佳，恶者为憎。果能审日主之衰旺，用神之喜忌，当抑则抑，当扶则扶，所谓去留舒配，取裁确当，则运途否泰，显然明白，祸福灾祥，无不验矣。'
+  passage_refs:
+  - ditiansui-ch008-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 旺衰
+  - 用神
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: ad2f3e6a8597e433427d9cb321b89f6f468cd857f69014366e32fc22a51985b0
+  source_pages:
+  - https://luckclub.cn/bazi/007/008/
+- id: annotation-ditiansui-ch009-original_note001
+  title: 《滴天髓阐微》天干·原注
+  kind: commentary
+  content: 【原注】甲、丙、戊、庚、壬为阳，独丙火秉阳之精，而为阳中之阳；乙、丁、己、辛、癸为阴，独癸水秉阴之精，而为阴中之阴。
+  passage_refs:
+  - ditiansui-ch009-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: b7bd71a3a24d37eb3f8c18752722ea20c0aea6f5381dc35dd772dce2a570a068
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-ren_commentary002
+  title: 《滴天髓阐微》天干·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    丙乃纯阳之火，万物莫不由此而发，得此而敛；癸乃纯阴之水，万物莫不由此而生，得此而茂。阳极则阴生，故丙辛化水；阴极则阳生，故戊癸化火。阴阳相济，万物有生生之妙。
+
+    夫十干之气，以先天言之，固一原同出，以后天言之，亦一气相包。甲乙一木也，丙丁一火也，戊己一土也，庚辛一金也，壬癸一水也，即分别所用，不过阳刚阴柔，阳健阴顺而已。窃怪命家作歌为赋，比拟失伦，竟以甲木为梁栋，乙木为花果；丙作太阳，丁作灯烛；戊作城墙，己作田园；庚为顽铁，辛作珠玉；壬为江河，癸为雨露。相沿已久，牢不可破，用之论命，诚大谬也。如谓甲为无根死木，乙为有根活木，同是木而分生死，岂阳木独禀死气，阴木独禀生气乎？又谓活木畏水泛，死木不畏水泛，岂活木遇水且漂，而枯槎遇水反定乎？论断诸干，如此之类，不一而足，当尽避之，以绝将来之谬。'
+  passage_refs:
+  - ditiansui-ch009-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 31e75b9b8d5550b48bc5204ce95a6cee99b7fd685834a9eb1992faed20de2a26
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-original_note003
+  title: 《滴天髓阐微》天干·原注
+  kind: commentary
+  content: 【原注】五阳得阳之气，即能成乎阳刚之势，不畏财杀之势；五阴得阴之气，即能成乎阴顺之义，故木盛则从木，火盛则从火，土盛则从土，金盛则从金，水盛则从水。于情义之所在者，见其势衰，则忌之矣，盖妇人之情也。如此，若得气顺理正者，亦未必从势而忘义，虽从亦必正矣。
+  passage_refs:
+  - ditiansui-ch009-p002
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: f74f7be40179bb73cc02901b8231ee1421285b994e4403a767c2fc9d14193f87
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-ren_commentary004
+  title: 《滴天髓阐微》天干·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    五阳气避，光亨之象易观；五阴气翕，包含之蕴难测。五阳之性刚健，故不畏财煞，而有测隐之心，其处世不苟且；五阴之性柔顺，故见势忘义，而有鄙吝之心，其处世多骄谄。是以柔能克制刚，刚不能制克柔也。大抵趋利忘义之徒，皆阴气之为戾也；豪侠慷慨之人，皆阳气之独钟。然尚有阳中之阴、阴中之阳，又有阳外阴内、阴外阳内，亦当辨之。阳中之阴，外仁义而内奸诈；阴中之阳，外凶险而内仁慈；阳外阴内者，包藏祸心；阴外阳内者，秉持直道。此人品之端邪？故不可以不辨。要在气势顺正，四柱五行停匀，庶不偏倚，自无损人利己之心。凡持身涉世之道，趋避必先知人，故云”择其善者而从之”，即此意也。'
+  passage_refs:
+  - ditiansui-ch009-p002
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: d6092e03e85336417cdde9d5cae5bde3aded854bf4499b73c3f974a5e29fa85d
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-original_note005
+  title: 《滴天髓阐微》天干·原注
+  kind: commentary
+  content: 【原注】纯阳之木，参天雄壮。火者木之子也，旺木得火而愈敷荣。生于春则欺金，而不能容金也；生于秋则助金，而不能容土也。寅午戌，丙丁多见而坐辰，则能归；申子辰，壬癸多见而坐寅，则能纳。使土气不干，水气不消，则能长生矣。
+  passage_refs:
+  - ditiansui-ch009-p003
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 963f052f11e6517ac47d4f6dd54551946c17a97dcce5c42073b4bf5dbd78d9e2
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-ren_commentary006
+  title: 《滴天髓阐微》天干·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    甲为纯阳之木，体本坚固，参天之势，又极雄壮。生于春初，木嫩气寒，得火而发荣；生于仲春，旺极之势，宜泄其菁英。所谓强木得火，方化其顽。克之者金，然金属休囚，以衰金而克旺木，木坚金缺，势所必然，故春不容金也。生于秋，失时就衰，但枝叶虽凋落渐稀，根气却收敛下达，受克者土。秋土生金泄气，最为虚薄。以虚气之土，遇下攻之木，不能培木之根，必反遭其倾陷，故秋不容土也。柱中寅午戌全，又透丙丁，不惟泄气太过，而木且被焚，宜坐辰，辰为水库，其土湿，湿土能生木泄火，所谓火炽乘龙也。申子辰全又透壬癸，水泛木浮，宜坐寅，寅乃火土生地，木之禄旺，能纳水气，不致浮泛，所谓水宕骑虎也。如果金不锐，土不燥，火不烈，水不狂，非植立千古而得长生者哉！'
+  passage_refs:
+  - ditiansui-ch009-p003
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: f08c2e205484cddca63ba9380944bec803c0cc9b1b7c2ea3030697a23969f46c
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-original_note007
+  title: 《滴天髓阐微》天干·原注
+  kind: commentary
+  content: 【原注】乙木者，生于春如桃李，夏如禾稼，秋如桐桂，冬如奇葩。坐丑未能制柔土，如割宰羊、解割牛然，只要有一丙丁，则虽生申酉之月，亦不胃之；生于子月，而又壬癸发透者，则虽坐午，亦能发生。故益知坐丑未月之为美。甲与寅字多见，弟从兄义，譬之藤萝附乔木，不畏斫伐也。
+  passage_refs:
+  - ditiansui-ch009-p004
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 5a7581d1605376cd956d265423b19d8ad64cf134b9d467a3956804e0f19fcf43
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-ren_commentary008
+  title: 《滴天髓阐微》天干·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    乙木者，甲之质，而承甲之生气也。春如桃李，金克则凋；夏如禾家，水滋得生；秋如桐桂，金旺火制；冬如奇葩，火湿土培。生于春宜火者，喜其发荣也；生于夏宜水者，润地之燥也；生于秋宜火者，使其克金也；生于冬宜火者，解天之冻也。割羊解牛者，生于丑未月，或乙未乙丑日，未乃木库，得以蟠根，丑乃湿土，可以受气也。怀丁抱丙，跨凤乘猴者，生于申酉月，或乙酉日，得丙丁透出天干，有水不相争克，制化得宜，不畏金强。虚湿之地，骑马亦忧者，生于亥子月，四柱无丙丁，又无戌未燥土，即使年支有午，亦难发生也。天干甲透，地支寅藏，此谓鸢萝系松柏，春固得助，秋亦合扶，故可春可秋，言四季皆可也。'
+  passage_refs:
+  - ditiansui-ch009-p004
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: c0d1892ef42d13f029793f2a3af087dfed0c82745c4182fd6c16312c9626f1e3
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-original_note009
+  title: 《滴天髓阐微》天干·原注
+  kind: commentary
+  content: 【原注】火阳精也，丙火灼阳之至，故猛烈，不畏秋而欺霜，不畏冬而晦雪。庚金虽顽，力能煅之，辛金本柔，合而反弱。土其子也，见戊己多而成慈爱之德；水其君也，遇壬癸旺而显忠节之风。至于未遂炎上之性，而遇寅午戌三位者，露甲木则燥而焚灭也。
+  passage_refs:
+  - ditiansui-ch009-p005
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 79c8afa32b6afbd36c5d240d15257c04d8ac4732d2d921ebd185e49c2e14b1fb
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-ren_commentary010
+  title: 《滴天髓阐微》天干·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    丙乃纯阳之火，其势猛烈，欺霜侮雪，有除寒解冻之功。能煅庚金，遇强暴而施克伐也；逢辛反怯，合柔顺而寓和平也。土众成慈，不凌下也；水猖显节，不援上也。虎马犬乡者，支坐寅午戌，火势已过于猛烈，若再见甲木来生，转致焚灭也。由此论之，泄其威，须用己土；遏其焰，必要壬水；顺其性，还须辛金。己土卑湿之体，能收元阳之气；戊土高燥，见丙火而焦坼矣。壬水刚中之德，能制暴烈之火；癸水阴柔，逢丙火而涸干矣。辛金柔软之物，明作合而相亲，暗化水而相济；庚金刚健，刚又逢刚，势不两立。此虽举五行而论，然世事人情，何莫不然！'
+  passage_refs:
+  - ditiansui-ch009-p005
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: a308ad2b6b9266a24fc8d1210ced08f8696865f9e65468b43f97710b4a6df6c2
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-original_note011
+  title: 《滴天髓阐微》天干·原注
+  kind: commentary
+  content: 【原注】丁干属阴，火性虽阴，柔而得其中矣。外柔顺而内文明，内性岂不昭融乎？乙非丁之嫡母也，乙畏辛而辛抱之，不若丙抱甲而反能焚甲木也，不若乙抱丁而反能晦丁火也，其孝异乎人矣。壬为丁之正君也，壬畏戊而丁合之，外则抚恤戊土，能使戊土不欺壬也，内则暗化木神，而使戊土不敢抗乎壬也，其忠异乎人矣。生于秋冬，得一甲木，则倚之不灭，而焰至无穷也，故曰可秋可冬。皆柔之道也。
+  passage_refs:
+  - ditiansui-ch009-p006
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 2b3062ffaf6a0556bfc05895abe95bb9ddb7bfbe78fcfb64b2407e9da8919c0f
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-ren_commentary012
+  title: 《滴天髓阐微》天干·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    丁非灯烛之谓，较丙火则柔中耳。内性昭融者，文明之象也。抱乙而孝，明使辛金不伤乙木也；合壬而忠，暗使戊土不伤壬水也。惟其柔中，故无太过不及之弊，虽时当乘旺，而不至赫炎；即时值就衰，而不至于熄灭。干透甲乙，秋生不畏金；支藏寅卯，冬产不忌水。'
+  passage_refs:
+  - ditiansui-ch009-p006
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 46f2dbf6ea08533b0890fcee09d05231c3214c01fd785db447055f62aeb3bc17
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-original_note013
+  title: 《滴天髓阐微》天干·原注
+  kind: commentary
+  content: 【原注】戊土非城墙堤岸之谓也，较己特高厚刚燥，乃己土发源之地，得乎中气而且正大矣。春夏则气辟而生万物，秋冬则气翕而成万物，故为万物之司命也。其气属阳，喜润不喜燥，坐寅怕申，坐申怕寅。盖冲则根动，非地道之正也，故宜静。
+  passage_refs:
+  - ditiansui-ch009-p007
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 74d53809a74809c3827438e6c0a3dffd0bb6d44b35815a308b16caa5de74d914
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-ren_commentary014
+  title: 《滴天髓阐微》天干·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    戊为阳土，其气固重，居中得正。春夏气动而避，则发生，秋冬气静而翕，则收藏，故为万物之司命也。其气高厚，生于春夏，火旺宜水润之，则万物发生，燥则物枯；生于秋冬，水多宜火暖之，则万物化成，湿则物病。艮坤者，寅申之月也。春则受克，气虚宜静；秋则多泄，体薄怕冲。或坐寅申日，亦喜静忌冲。又生四季月者，最喜庚申辛酉之金，秀气流行，定为贵格，己土亦然。如柱见木火，或行运遇之，则破矣。
+
+    己土卑湿，中正蓄藏。不愁木盛，不畏水狂。火少火晦，金多金光。若要物旺，宜助宜帮。
+
+    己土卑薄软湿，乃戊土枝叶之地，亦主中正而能蓄藏万物。柔土能生木，非木所能克，故不愁木盛；土深而能纳水，非水所能荡，故不畏水狂。无根之火，不能生湿土，故火少而火反晦；湿土能润金气，故金多而金光彩，反清莹可观。此其无为而有为之妙用。若要万物充盛长旺，惟土势深固，又得火气暖和方可。'
+  passage_refs:
+  - ditiansui-ch009-p007
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 729b58638ae89e48ddcabdb820cb2bc27deb0b2ae2876d89c76145ca3f9f5607
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-ren_commentary015
+  title: 《滴天髓阐微》天干·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    己土为阴湿之地，中正蓄藏，贯八方而旺四季，有滋生不息之妙用焉。不愁木盛者，其性柔和，木藉以培养，木不克也。不畏水狂者，其体端凝，水得以纳藏，水不冲也。水少火晦者，丁火也，阴土能敛火，晦火也。金多金光者，辛金也，湿土能生金，润金也。柱中土气深固，又得丙火去其阴湿之气，更足以滋生万物，所谓宜助宜帮者也。'
+  passage_refs:
+  - ditiansui-ch009-p007
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 9d2d216ed1071505d14387e316f454839d38b9961eb0c3f4067c56c734c7db39
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-original_note016
+  title: 《滴天髓阐微》天干·原注
+  kind: commentary
+  content: 【原注】庚金乃天上之太白，带杀而刚健。健而得水，则气流而清；刚而得火，则气纯而锐。有水之土，能全其生；有火之土，能使其脆。甲木虽强，力足伐之；乙木虽柔，合而反弱。
+  passage_refs:
+  - ditiansui-ch009-p008
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 90b6c4107b9073ad8b86921670fde456ab0c1e599d29b2405d8ce0904f83257c
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-ren_commentary017
+  title: 《滴天髓阐微》天干·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    庚乃秋天肃杀之气，刚健为最。得水而清者，壬水也，壬水发生，引通刚杀之性，便觉淬厉晶莹。得火而锐者，丁火也，丁火阴柔，不与庚金为敌，良冶销熔，遂成剑戟，洪炉煅炼，时露锋砧。生于春夏，其气稍弱，遇丑辰之湿土则生，逢未戌之燥土则脆。甲木正敌，力能伐之；与乙相合，转觉有情。乙非尽合庚而助暴，庚亦非尽合乙而反弱也，宜详辨之。'
+  passage_refs:
+  - ditiansui-ch009-p008
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: febfa940489b3e2f710fefe60f691875968ddf04f1c2a8005f3a3edd5f16273e
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-original_note018
+  title: 《滴天髓阐微》天干·原注
+  kind: commentary
+  content: 【原注】辛乃阴金，非珠玉之谓也。凡温软清润者，皆辛金也。戊己土多而能埋，故畏之；壬癸水多而必秀，故乐之。辛为丙之臣也，合丙化水，使丙火臣服壬水，而安扶社稷；辛为甲之君也，合丙化水，使丙火不焚甲木，而救援生灵。生于九夏而得己土，则能晦火而存之；生于隆冬而得丁火，则能敌寒而养之。故辛金生于冬月，见丙火则男命不贵，虽贵亦不忠；女命克夫，不克亦不和。见丁男女皆贵且顺。
+  passage_refs:
+  - ditiansui-ch009-p009
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 5b07c684ec0829db5ef101e5ea96496969fb31a460dff85ea4f60106c49f7cbe
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-ren_commentary019
+  title: 《滴天髓阐微》天干·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    辛金乃人间五金之质，故清润可观。畏土之叠者，戊土太重，而涸水埋金；乐水之盈者，壬水有余，而润土养金也。辛为甲之君也，丙火能焚甲木，合而化水，使丙火不焚甲木，反有相生之象；辛为丙之臣也，丙火能生戊土，合丙化水，使丙火不生戊土，反有相助之美。岂非扶社稷救生灵乎？生于夏而火多，有己土则晦火而生金；生于冬而水旺，有丁火则温水而养金。所谓热则喜母，寒则喜丁也。'
+  passage_refs:
+  - ditiansui-ch009-p009
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: a060c1c097dcba7b5c30572b8fbd09e84c1ec87b400b22776d28d968c720b28b
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-original_note020
+  title: 《滴天髓阐微》天干·原注
+  kind: commentary
+  content: 【原注】壬水即癸水之发源，昆仑之水也；癸水即壬水之归宿，扶桑之水也。有分有合，运行不息，所以为百川者此也，亦为雨露者此也，是不可歧而二之。申为天关，乃天河之口，壬水长生于此，能泄西方金气。周流之性，冲进不滞，刚中之德犹然也。若申子辰全而又透癸，则其势冲奔，不可遏也。如东海本发端于天河，复成水患，命中遇之，若无财官者，其祸当何如哉！合丁化木，又生丁火，则可谓有情；能制丙火，不使其夺丁之爱，故为夫义而为君仁。生于九夏，则巳、午、未、申火土之气，得壬水熏蒸而成雨露，故虽从火土，未尝不相济也。
+  passage_refs:
+  - ditiansui-ch009-p010
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 8efa1f64f2fe20576b431a5578ac66a08ea3ca0bea86502e65ecbe0b1831396a
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-ren_commentary021
+  title: 《滴天髓阐微》天干·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    壬为阳水。通河者，即天河也，长生在申，申在天河之口，又在坤方，壬水生此，能泄西方肃杀气，所以为刚中之德也。百川之源，周流不滞，易进而难退也。如申子辰全，又透癸水，其势泛滥，纵有戊己之土，亦不能止其流，若强制之，反冲激而成水患，必须用木泄之，顺其气势，不至于冲奔也。合丁化木，又能生火，不息之妙，化则有情也。生于四、五、六月，柱中火土并旺，别无金水相助。火旺透干则从火，土旺透干则从土，调和润泽，仍有相济之功也。'
+  passage_refs:
+  - ditiansui-ch009-p010
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: ae536efbe640b502da6430a108962f9c04928b8a31b1dfe09553e718e287b367
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-original_note022
+  title: 《滴天髓阐微》天干·原注
+  kind: commentary
+  content: 【原注】癸水乃阴之纯而至弱，故扶桑有弱水也。达于天津，随天而运，得龙以成云雨，乃能润泽万物，功化斯神。凡柱中有甲乙寅卯，皆能运水气，生木制火，润土养金，定为贵格，火土虽多不畏。至于庚金，则不赖其生，亦不忌其多。惟合戊土化火也，戊生寅，癸生卯，皆属东方，故能生火。此固一说也，不知地不满东南，戊土之极处，即癸水之尽处，乃太阳起方也，故化火。凡戊癸得丙丁透者，不论衰旺，秋冬皆能化火，最为真也。
+  passage_refs:
+  - ditiansui-ch009-p011
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 旺衰
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 63a01b1800973ddb2f1d1d20477c203a3172db5964fe1d95d8da5cea1913b54e
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch009-ren_commentary023
+  title: 《滴天髓阐微》天干·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    癸水非雨露之谓，乃纯阴之水。发源虽长，其性极弱，其势最静，能润土养金，发育万物，得龙而运，变化不测。所谓逢龙即化，龙即辰也，非真龙而能变化也。得辰而化者，化辰之原神发露也，凡十干逢辰位，必干透化神，此一定不易之理也。不愁火土者，至弱之性，见火土多即从化矣；不论庚辛者，弱水不能泄金气，所谓金多反浊，癸水是也。合戊见火者，阴极则阳生，戊土燥厚，柱中得丙火透露，引出化神，乃为真也。若秋冬金水旺地，纵使支遇辰龙，干透丙丁，亦难从化，宜细详之。'
+  passage_refs:
+  - ditiansui-ch009-p011
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 6e2ffe4d59196cce3e1ca0ccaa68e829125597d99f6464313b9722d0d2688fc4
+  source_pages:
+  - https://luckclub.cn/bazi/007/009/
+- id: annotation-ditiansui-ch010-original_note001
+  title: 《滴天髓阐微》地支·原注
+  kind: commentary
+  content: 【原注】子、寅、辰、午、申、戌，阳也，其性动，其势强，其发至速，其灾祥至显；丑、卯、巳、未、酉、亥，阴也，其性静，其气专，发之不速，而否泰之验，每至经年而后见。
+  passage_refs:
+  - ditiansui-ch010-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: acc2d14c6cde402c892bdf4332d1653d9454534e555ac3e6ba7489e64e5499bb
+  source_pages:
+  - https://luckclub.cn/bazi/007/010/
+- id: annotation-ditiansui-ch010-ren_commentary002
+  title: 《滴天髓阐微》地支·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    地支有以子至巳为阳，午至亥为阴者，此从冬至阳生、夏至阴生论；有以寅至未为阳，申至丑为阴者，此分木火为阳，金水为阴也。命家以子、寅、辰、午、申、戌为阳，丑、卯、巳、未、酉、亥为阴。若子从癸、午从丁，是体阳而用阴也；巳从丙，亥从壬，是体阴而用阳也。分别取用，亦惟刚柔健顺之理，与天干无异，但生克制化，其理多端，盖一支所藏或二干，或三干故耳。然以本气为主，寅必先甲而后及丙，申必先庚而后及壬，余支皆然。阳支性动而强，吉凶之验恒速；阴支性静而弱，祸福之应较迟。在局在运，均以此意消息之。'
+  passage_refs:
+  - ditiansui-ch010-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: c473c6c8164a83775f2c12df5bb4a0011daa7256448b3ec55974f0e26363bb42
+  source_pages:
+  - https://luckclub.cn/bazi/007/010/
+- id: annotation-ditiansui-ch010-original_note003
+  title: 《滴天髓阐微》地支·原注
+  kind: commentary
+  content: 【原注】寅、申、巳、亥生方也，忌冲动；辰、戌、丑、未四库也，宜冲开。子、午、卯、酉四败也，有逢合而喜冲者，不若生地之必不可冲也；有逢冲而喜合者，不若库地之必不可闲也。须仔细详之。
+  passage_refs:
+  - ditiansui-ch010-p002
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 607dc3097fb72afc89779dc984756e7b374bcfc2536b7f70bf6036e724e0accc
+  source_pages:
+  - https://luckclub.cn/bazi/007/010/
+- id: annotation-ditiansui-ch010-ren_commentary004
+  title: 《滴天髓阐微》地支·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    旧说云，金水能冲木火，木火不能冲金水，此论天干则可，论地支则不可。盖地支之气多不专，有他气藏在内也。须看他气乘权得势，即木火亦岂不能冲金水乎？生方怕动者，两败俱伤也。假如寅申逢冲，申中庚金，克寅中甲木，寅中丙火，未尝不克申中庚金；申中壬水，克寅中丙火，寅中戊土，未尝不克申中壬水。战克不静故也。库宜开者，然亦有宜不宜，详在杂气章中。败地逢冲仔细推者，子、午、卯、酉之专气也，用金水则可冲，用木火则不可冲。然亦须活看，不可执一。倘用春夏之金水，则金水之气休囚，木火之势旺相，金水岂不反伤乎？宜参究之。'
+  passage_refs:
+  - ditiansui-ch010-p002
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 54a9db15abe19b6244ba9828d32688328d2ddd0a3a2070edf09dde0a0621b941
+  source_pages:
+  - https://luckclub.cn/bazi/007/010/
+- id: annotation-ditiansui-ch010-original_note005
+  title: 《滴天髓阐微》地支·原注
+  kind: commentary
+  content: 【原注】冲者必是相克，及四库兄弟之冲，所以必动；至于刑穿之间，又有相生相合者存，所以有动不动之异
+  passage_refs:
+  - ditiansui-ch010-p008
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 六亲
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: b0c0cf0ad157fc3ccd7c43d757c5061f0f2d31853554bbfaa435ae933bbb6893
+  source_pages:
+  - https://luckclub.cn/bazi/007/010/
+- id: annotation-ditiansui-ch010-ren_commentary006
+  title: 《滴天髓阐微》地支·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    地支逢冲，犹天干之相克也，须视其强弱喜忌而论之。至于四库之冲，亦有宜不宜，如三月之辰，乙木司令，逢戌冲，则戌中辛金，亦能伤乙木；六月之未，丁火司令，逢丑冲，则丑中癸水，亦能伤丁火。按三月之乙、六月之丁，虽属退气，若得司令，竟可为用，冲则受伤，不足用矣。所谓暮库逢冲则发者，后人之谬也。暮者，坟暮之意；库者，木火金水收藏埋根之地，譬如得气之坟，未开动而发福者也
+
+    如木火金水之天干，地支无寅、卯、巳、午、申、酉、亥、子之禄旺，全赖辰戌丑未之身库通根，逢冲则微根拨尽，未有冲动而强旺者也。如不用司令，以土为喜神，冲之有益无损，盖土动则发生矣。刑之义无所取，如亥刑亥、辰刑辰、酉刑酉、午刑午，谓之自刑，本支见本支，自谓同气，何以相刑？子刑卯，卯刑子，是谓相生，何以相刑？戌刑未，未刑丑，皆为土气，更不当刑。寅刑巳，亦是相生，寅申相刑，即冲何必再刑？又曰子卯一刑也，寅巳申二刑也，丑戌未三刑也，故称三刑，又有自刑，此皆俗谬，姑置之。穿，即害也，六害由六合而来，冲我合神，故为之害，如子合丑而未冲，丑合子而午冲之类。子未之害，无非相克，丑午寅亥之害，乃是相生，何以为害？且刑既不足为凭，而害之义，尤为穿凿。总以论其生克为是，至于破之义，非害即刑也，尤属不经，削之可也'
+  passage_refs:
+  - ditiansui-ch010-p008
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 旺衰
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: dbdf6945a5711c8e5792451648b8490c4ed946bd9ee3894b1b1e8257cbc5ead6
+  source_pages:
+  - https://luckclub.cn/bazi/007/010/
+- id: annotation-ditiansui-ch010-original_note007
+  title: 《滴天髓阐微》地支·原注
+  kind: commentary
+  content: 【原注】如柱中无所缺之局，取多者暗冲暗会，冲起暗神，而来会合暗神，比明冲明会尤佳，子来冲午，寅与戌会午是也。是日为我，提纲为彼；提纲为我，年时为彼；四柱为我，运途为彼；运途为我，岁月为彼。如我寅彼申，申能克寅，是彼冲我；我子彼午，子能克午，是我冲彼。皆为冲起
+  passage_refs:
+  - ditiansui-ch010-p012
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 043a449ddf2d08d33e7d1211089c25874ba9095f508c2e38e9da3419c403ef3c
+  source_pages:
+  - https://luckclub.cn/bazi/007/010/
+- id: annotation-ditiansui-ch010-ren_commentary008
+  title: 《滴天髓阐微》地支·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    支中逢冲，固非美事，然八字缺陷者多，停匀者少。木火旺，金水必乏矣；金水旺，木火必乏矣。若旺而有余者冲去之，衰而不足者会助之为美。如四柱无冲会之神，得岁运暗来冲会尤为喜也。盖有病得良剂以生也。然冲有彼我之分，会有去来之理。彼我者，不必分年时为彼，日月为我，亦不必分四柱为我，岁运为彼也，总之喜神是我，忌神为彼可也。如喜神是午，逢子冲，是彼冲我，喜与寅戌会为吉；喜神是子逢午冲，是我冲彼，忌寅与戌会为凶。如喜神是子，有申得辰会而来之为吉；喜神是亥，有未得卯会而去之则凶。宁可我去冲彼，不可彼来冲我。我去冲彼，谓之冲起；彼来冲我，谓之不起。水火之冲会如此，余可类推'
+  passage_refs:
+  - ditiansui-ch010-p012
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 1e96fbf6883eabe25f1724eec8a4d890f8be1fd4bc35a1e40553ffdfdda79a57
+  source_pages:
+  - https://luckclub.cn/bazi/007/010/
+- id: annotation-ditiansui-ch010-original_note009
+  title: 《滴天髓阐微》地支·原注
+  kind: commentary
+  content: 【原注】子旺午衰，冲则午拔不能立；子衰午旺，冲则午发而为福。余仿此
+  passage_refs:
+  - ditiansui-ch010-p016
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: cf4dc03f3f483eac22951806f6f471271bd0bd2ad3612f8139345289c9b0b4e4
+  source_pages:
+  - https://luckclub.cn/bazi/007/010/
+- id: annotation-ditiansui-ch010-ren_commentary010
+  title: 《滴天髓阐微》地支·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    十二支相冲，各支中所藏互相冲克，在原局为明冲，在岁运为暗冲。得令者冲衰则拔，失时者冲旺无伤。冲之者有力，则能去之，去凶神则利，去吉神则不利；冲之者无力，则反激之，激凶神则为祸，激吉神虽不为祸，亦不能获福也。如日主是午，或喜神是午，支中有寅卯巳未戌之类，遇子冲谓衰神冲旺，无伤；日主午，或喜神是午，支中有申酉亥子丑辰之类，遇子冲，谓旺者冲衰则拔。余支皆然。然以子、卯、午、酉、寅、申、巳、亥八支为重，辰、戌、丑、未较轻。如子午冲，子中癸水冲午中丁火，如午旺提纲，四柱无金而有木，则午能冲子；卯酉冲，酉中辛金，冲卯中乙木，如卯旺提纲，四柱有火而无土，则卯亦能冲酉；寅申冲，寅中甲木丙火，被申中庚金壬水所克，然寅旺提纲，四柱有火，则寅亦能冲申矣；巳亥冲，巳中丙火戊土，被亥中甲木壬水所克，然巳旺提纲，四柱有木，则巳亦能冲亥矣。必先察其衰旺，四柱有无解救，或抑冲，或助泄，观其大势，究其喜忌，则吉凶自验矣。至于四库兄弟之冲，其蓄藏之物，看其四柱干支，有无引出。如四柱之干支，无所引出，及司令之神，又不关切，虽冲无害，合而得用亦为喜。原局与岁运皆同此论'
+  passage_refs:
+  - ditiansui-ch010-p016
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 旺衰
+  - 行运
+  - 六亲
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: ca8ef0cbddeb13835a726f63d156bb57cccece813f1c22e6b0c7474f88b257b4
+  source_pages:
+  - https://luckclub.cn/bazi/007/010/
+- id: annotation-ditiansui-ch013-original_note001
+  title: 《滴天髓阐微》方局·原注
+  kind: commentary
+  content: 【原注】寅卯辰，东方也，搭一亥或卯或未，则太过，岂不为混局哉！
+  passage_refs:
+  - ditiansui-ch013-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: d80c277773238f5ae75b6174e8d5931665c723fd28e678042aa0c0896f031a8d
+  source_pages:
+  - https://luckclub.cn/bazi/007/013/
+- id: annotation-ditiansui-ch013-ren_commentary002
+  title: 《滴天髓阐微》方局·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    十二支，寅卯辰东方，巳午未南方，申酉戌西方，亥子丑北方。凡三字全为成方，如寅卯辰全，其力量较胜于亥卯未木局。戊日遇寅月，见三字，俱以杀论；遇卯月，见三字，俱以官论，己日反是。遇辰月，视寅卯之势，较量轻重，以发杀，其余仿此。若只二字，则竟不取，所言方局莫混之量，愚意以为不然，且如木而见亥字，为生旺之神；见未字，为我克之财，又是木盘根之地，亦何不可？即用三合木局，则有所损累耶？至于作用，则局之用多，而方之用狭，弗以论方而别生穿凿也。'
+  passage_refs:
+  - ditiansui-ch013-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 1d8ec4a4c8f38256f6a34068ff3889faac382f352ac56441059e8a5ce1a2bb23
+  source_pages:
+  - https://luckclub.cn/bazi/007/013/
+- id: annotation-ditiansui-ch013-original_note003
+  title: 《滴天髓阐微》方局·原注
+  kind: commentary
+  content: 【原注】亥卯未木局，混一寅辰，则太强，行运南北，则有纯疵，不能俱利。
+  passage_refs:
+  - ditiansui-ch013-p004
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 90da521014b57a2e4dee131ed35d41f5cc91ea759143320945994c759dbffc1c
+  source_pages:
+  - https://luckclub.cn/bazi/007/013/
+- id: annotation-ditiansui-ch013-ren_commentary004
+  title: 《滴天髓阐微》方局·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    地支有三位相合而成局者，亥卯未木局，寅午戌火局，巳酉丑金局，申子辰水局，皆取生旺墓，一气始终也。柱中遇三支合势，吉凶之力较大。亦有取二支者，然以旺支为主，或亥卯，或卯未，皆可取，亥未次之。凡会忌冲，如亥卯未木局，杂一酉丑字于其中，而以与所冲之神紧贴，是为破局。虽冲字杂地其中，而不紧贴，或冲字处于其外而紧贴，则会局与损局瘐论，其二支会局者，以相贴为妙，逢冲即破，他字间之，亦遥隔无力，须天干领出可用。至于“局混方兮有纯疵”之说，与“方要得方莫混局”，之理相似，究其理亦无所害。见寅字是谓同气，见辰字是谓余气，又是东方湿土，能生助木神，又何损累耶？”行运南北之分须看局中意向为是。如木局，日主是甲乙，四柱纯木，不杂别字，运行南方，谓秀气流行，则纯；运行北方，谓之生助强神，无疪。或干支有火吐秀，运行南方，名利裕如；运行北方，凶灾立见。木论如此，余者可知。'
+  passage_refs:
+  - ditiansui-ch013-p004
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 8307c1f4b000a8b6c968f51aed56453bee2356a45998a0cc168ca0d1a609a382
+  source_pages:
+  - https://luckclub.cn/bazi/007/013/
+- id: annotation-ditiansui-ch013-original_note005
+  title: 《滴天髓阐微》方局·原注
+  kind: commentary
+  content: 【原注】木局木方全者，须要天干全顺得序，行运不背乃好。
+  passage_refs:
+  - ditiansui-ch013-p007
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 23aaa9aa60fdb5a71ae027d55eaca87c7dc2003c651ad6011ff5836241c83321
+  source_pages:
+  - https://luckclub.cn/bazi/007/013/
+- id: annotation-ditiansui-ch013-ren_commentary006
+  title: 《滴天髓阐微》方局·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    方局齐来者，承上文方混局局混方之谓也。如寅卯辰兼未，亥卯未兼寅辰，巳午未兼戌，寅午戌兼巳未，申酉戌兼巳丑，巳酉丑兼申戌，亥子丑兼申辰，申子辰兼丑亥子类是也。干头无反复者，方局齐来，其气旺盛，要天干顺其气势为妙。若地支寅卯辰，日主是木，或再见亥之生，未之库，如地支亥卯未，日主是木，或再逢寅之禄、辰之余，旺之极矣，非金所能克也，须要天干有火，泄其精英，不见金水，则干头无反复，然后行土运，乃为全顺得序而不悖矣。如天干无火而仍生木，逢凶有解。苟有火而见水，或无火而见金，此谓干头反复，如得运程安顿，遇土则可止其逆水，遇火则可去其微金，亦不失为吉耳。如日干是土，别干得火，相生之谊，亦不反复；见金以寡敌众，见水生助强神则反复矣。所以制之以盛，不若化之以德，则其流行全顺矣。余仿此。'
+  passage_refs:
+  - ditiansui-ch013-p007
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: e1ba63622f7a357d0f63904adf1088554598f00c24a2101d8997ae37f55b1f0d
+  source_pages:
+  - https://luckclub.cn/bazi/007/013/
+- id: annotation-ditiansui-ch013-original_note007
+  title: 《滴天髓阐微》方局·原注
+  kind: commentary
+  content: 【原注】寅卯辰全者，日主甲乙木，则透元神，而又遇亥之生，未之库，决不发福，惟纯一火运略好。
+  passage_refs:
+  - ditiansui-ch013-p010
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: e333bb6e53d5b5e6081c818c33d34edcb04b76f31e50297c3c7230c9cc70f56f
+  source_pages:
+  - https://luckclub.cn/bazi/007/013/
+- id: annotation-ditiansui-ch013-ren_commentary008
+  title: 《滴天髓阐微》方局·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    成方干透元神者，日主即方之气也。如木方日主是木，火方日主是火，即为元神透出也。生地库地皆非福者，身旺不宜再助也，然亦要看其气势，不可一例而推。成方透元神，旺可知矣，固不宜再行生地库地，以帮方也。倘年月时干不杂财官，又有劫印，谓之从强，则生地库地，亦能发福。如逢纯一火运，真谓秀气流行，名利皆遂。如年月时干，财官无气，再行生地库地之运，不但不能发福，而且刑耗多端。此屡试屡验，故志之。'
+  passage_refs:
+  - ditiansui-ch013-p010
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 旺衰
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 652798c734f5f422195f79f620b3201f258a6b486392c6e29616e6705ce231e0
+  source_pages:
+  - https://luckclub.cn/bazi/007/013/
+- id: annotation-ditiansui-ch013-original_note009
+  title: 《滴天髓阐微》方局·原注
+  kind: commentary
+  content: 【原注】甲乙日遇亥卯未全者，庚辛乃木之官也，又见左辰右寅，则名利无成。甲乙日单遇庚辛，则亦无成。
+  passage_refs:
+  - ditiansui-ch013-p013
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: e00332e44231ac3ad21687e09fb2787240adb4dcf4156f186026a7ae8752a396
+  source_pages:
+  - https://luckclub.cn/bazi/007/013/
+- id: annotation-ditiansui-ch013-ren_commentary010
+  title: 《滴天髓阐微》方局·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    如地支会木局，日主元神透出，别干见辛之官、庚之杀，虚脱无气，即余干有土，土亦休囚，难以生金，须地支有一申酉丑字为美。若无申酉丑，反加之寅辰字，则木势愈盛，金势愈衰矣，故碌碌终身，名利无成也。若得岁运去其官星，亦可发达，必要柱中先见食伤，然后岁运去净官煞之根，名利遂矣。本局如此，余局仿此论之可也。'
+  passage_refs:
+  - ditiansui-ch013-p013
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: e60063ec38ae2b1eb279b110fe27b87339f8eeefc8c4171499e70dc193bd0cf4
+  source_pages:
+  - https://luckclub.cn/bazi/007/013/
+- id: annotation-ditiansui-ch014-original_note001
+  title: 《滴天髓阐微》八格·原注
+  kind: commentary
+  content: 【原注】自形象气局之外，而格为最。格之真者，月支之神，透于天干也。以散乱之天干，而寻其得所附于提纲，非格也。自八格之外，若曲直五格皆为格，而方已局气象定之者，不可言格也。五格之外，飞天合禄虽为格，而可以破害刑冲论之者，亦不可言格了也。
+  passage_refs:
+  - ditiansui-ch014-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 8343bec3857b86e83e0aba668f0e92921629c2288816778caa974d719566b9c4
+  source_pages:
+  - https://luckclub.cn/bazi/007/014/
+- id: annotation-ditiansui-ch014-ren_commentary002
+  title: 《滴天髓阐微》八格·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    八格者，命中之正理也。先观月令所得何支，次看天干透出何神，再究司令以定真假，然后取用，以分清浊，此实依经顺理，若月逢禄刃，无格可取，须审日主之喜忌另寻别支透出天干者，借以为用。然格局有正有变，正者必兼五行之常礼也，曰官印，曰煞印，曰财煞，曰食神制杀，曰食神生财，曰伤官佩印，曰伤官生财；变者，必从五行之气势也，曰从财，曰从官杀，曰从食伤，曰从强，曰从弱，曰从势，曰一行得气，曰两气成形。其余外格我端，余务考群书，俱不从五行正理，尽属谬谈；至于《兰台妙选》，所定一切奇格异局，纳音诸法，尤属不经，不待辩而知其荒唐也.自唐宋以来，作者甚多，皆虚邙之论;更有吉凶神煞，不知起自何人，作此险语，往往全无应验，诚意伯〈千金赋〉云：“吉凶神煞之多端，何如生克制化之一理”。一言以蔽之矣，即如壬辰日为“壬骑龙背”，壬寅日为“王骑虎背”，何不再取壬午、壬申、壬戌、壬子，谓骑猴马犬鼠之背乎？又如六辛日逢子时，谓“六阴朝阳”，夫五阴皆阴，何独辛金可朝阳，余干不可朝阳乎？且子乃体阳用阴，子中癸水，六阴之至，何谓阳也？又如六乙日逢子时，谓“鼠贵格”，夫鼠者，耗也，何以为贵？且十干之贵，时支皆有之者，岂余干不可贵乎？不待辩而知其谬也。其余谬格甚多，支离无当，学者宜细详正理五行之格，弗以谬书为惑也。'
+  passage_refs:
+  - ditiansui-ch014-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 格局
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 01f1b9885904e4a9c4c58cd428196884b32a7c4bfd54e7dd0bfccae0409da9a6
+  source_pages:
+  - https://luckclub.cn/bazi/007/014/
+- id: annotation-ditiansui-ch014-original_note003
+  title: 《滴天髓阐微》八格·原注
+  kind: commentary
+  content: 【原注】飞天合禄之类，固为影响遥系而非格矣。如四季月生人，只当取土为格，不可言杂气财官；戊己日生于四季月者，当看人元透出天干者取格，不可概以杂气财官论之；至于建禄月劫羊无能为刃，亦当看月令中人元透于天干者取格，若不合气象形局，则又无格矣。只取用神，用神又无所取，只得看其大势，以皮面上断其穷通。不可执格论也。
+  passage_refs:
+  - ditiansui-ch014-p008
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 用神
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: c3e065a780f970c9ff05177c7a1c4c15f656ada366c7f018035fa86da3b57526
+  source_pages:
+  - https://luckclub.cn/bazi/007/014/
+- id: annotation-ditiansui-ch014-ren_commentary004
+  title: 《滴天髓阐微》八格·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    影响遥系者，即暗冲暗合之格也。俗书所谓飞天禄马是也。如丙午日支全三午，癸酉日支三酉，逢三则冲，午去暗冲子水为官，酉去暗合辰土为官。尚有冲财合财，如壬子日支全三子，暗冲午火为财，乙卯日支三卯，暗合戌土为财。又云，先要四柱不要财官，为真方可冲合。夫冲者，散也，合者，化也，何能为我用乎？四柱原有财官，不宜冲合，尚有喜与不喜，何况四柱无财官乎？至于杂气财官，亦是画蛇添足。辰戌丑未，无非支藏三干，各为杂气；寅申巳亥，亦有三干，何故不论？夫库中余气，可以言格，生地之神，莫非反弃？又云杂气财官喜冲，尤为穿凿。若甲木生丑月，为杂气财官，喜未冲之，未中丁火，紧伤丑中辛金之官，格乃破矣，余支皆然，不若透出天干取格为是。
+
+    诸书所载，禄分四种，年为背禄，月为建禄，日为专禄，时为归禄。又云建禄喜官，归禄忌官，则又遗背禄专禄矣，又云日禄归时没官星，号为青去得路，诚如所论，则丙辛两日生人，逢癸巳丁酉时者，世无读书出仕者乎？无非日干旺地之比肩也，不可认作食禄为王家之格言，则四柱神，竟同亲刻，既柱中之禄为美，何得运逢禄支反为禄堂而家破人亡乎？命彻底根源，则穷通寿夭，自不爽矣。大凡格局真实而纯粹者，百无一二，破坏而杂气者，十有八九，无格可取者甚多，无用可寻者不少。格正用真，行运不悖，名利自如；格破用损，谓这有病，忧多乐少。倘行运得所，去其破损之物，扶其喜用之神，譬如人染沉疴，得良剂以生也，不贵亦富。无格可取，无用可寻，只可看其大势，与日主之所向，运途能补其所喜，去其所忌，虽碌碌营生，可免饥寒之患。若行运又无可取，则不贫亦贱；若格正用真，五行反悖，一生有志难伸矣。'
+  passage_refs:
+  - ditiansui-ch014-p008
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 格局
+  - 行运
+  - 健康
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 6e8097ab9863087269ab48028ce3c19bc8526d003fc200000e6dee1726326f4b
+  source_pages:
+  - https://luckclub.cn/bazi/007/014/
+- id: annotation-ditiansui-ch016-original_note001
+  title: 《滴天髓阐微》精神·原注
+  kind: commentary
+  content: 【原注】精气神气皆无气也，五行大率以金水为精气，木火为神气，而土所以实之者也。有神人不见其精，而精自足者，有精足不见其神，而神自足者；有精缺神索，而日主虚旺者；有精缺神索，而日主孤弱者，有神不足而精有余者，有精不足而神有余者，有精神俱缺而气旺；有精神俱旺而气衰，有精缺得神以助之者，有神缺得精以生之者，有精助精而精反泄无气者，有神助神而神反毙无气者，二者皆由气以主之也。凡此皆不可以一偏求也，俱要损益其进退，不可使有过不及也。
+  passage_refs:
+  - ditiansui-ch016-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 6bf3dd233feb40821d8afb26e1e1d17ddd3ad14b9c39d426dd7dbb84a7b3e5e8
+  source_pages:
+  - https://luckclub.cn/bazi/007/016/
+- id: annotation-ditiansui-ch016-ren_commentary002
+  title: 《滴天髓阐微》精神·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    精者，生我之神也；神者，克我之物也；气者，本气贯足也。二者以精为主，精足则气旺，气旺则神旺，非专以金水为精气，木火为神气也。本文末句云：“要在损之益之得其中”，显非金水为精，木火为神，必得流通生化，损益适中，则精气神三者备矣。细究之，不特日主用神体象有精神，即五行皆有也。有余者则损之，不足则益之，虽一定理，然亦有一定中之不定也，惟在审察“得其中”三字而已。损者，克制也；益者，生扶也。有余损之，也有余者宜泄之；不足益之，过不足者宜去之。此损益之妙用也。
+
+    盖过于有余，损之反触其怒，则宜顺其有余而泄之；过于不足，益不受补，则宜从其不足而去之，是不可以一偏求也。总之精太足宜益其气，气太旺宜助其神，神太泄宜滋其精，则生化流通，神清气壮矣。如精太足，反损其气，气太旺，反伤其神，神太泄，反抑其精，则偏枯杂乱，精索神枯矣。所以水泛木浮，木无精神；木多火炽，火无精神；火炎金无精神；金多水弱，水无精神。原注以金水为精气，木火为神气者，此由脏而论也。以肺属金，以肾属水，金水相生，藏于里，故为精气，以肝属木，以心属火，木火相生，发于表，故为神气，以脾属土，贯于周身，上所以实之也。若论命中之表里精神，则不以金木水火为精神也，譬如旺者宜泄，泄神得为精足，此从里发于表，而神自足矣；旺者宜克，克神有力为神足，此由表达于里，而精自足矣，如土生于四季月，四柱土多无木，或干透庚辛，或支藏申酉，此谓里发于表，精足神定；如土多无金，或干透甲乙，或支藏寅卯，此谓表达于里，神足精安；土论如此，五行皆同，宜细究之。'
+  passage_refs:
+  - ditiansui-ch016-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 用神
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 933662eec589168474e7559f944892a5b14b8fd6b9a2af26971ede9cce8af005
+  source_pages:
+  - https://luckclub.cn/bazi/007/016/
+- id: annotation-ditiansui-ch019-original_note001
+  title: 《滴天髓阐微》衰旺·原注
+  kind: commentary
+  content: 【原注】旺则宜泄宜伤，衰则喜帮喜助，子平之理也。然旺中有衰者存，不可损也；衰中有旺者存，不可益也。旺之可损，以损在其中矣；衰之极者不可所当损者而损之，反凶；实所当益者而益之，反害，此真机，皆能知之，又何难于详察三微奥乎？
+  passage_refs:
+  - ditiansui-ch019-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 旺衰
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 9f75f1347d6ae5bf8a4bef1b7507a3be66c93cd8f72aa4dd08667cd6aa046397
+  source_pages:
+  - https://luckclub.cn/bazi/007/019/
+- id: annotation-ditiansui-ch019-ren_commentary002
+  title: 《滴天髓阐微》衰旺·任铁樵注
+  kind: commentary
+  content: '任氏曰：得时俱为旺论，失令便作衰看，虽是至理，亦死法也。夫五行之气，流行于四时，虽日干各有专令，而其实专令之中，亦有并存者在，如春木司令，甲乙虽旺，而此时休囚之戊己，亦未尝绝于天地也；冬水司令，壬水虽旺，而此时休囚之丙丁，未尝绝于天地也。物时当退避，不敢争先，而其实春土何尝不生万物，冬日何尝不照万国乎？况八字虽以月令为重，而旺相休囚，年日时中，亦有损益之权，故生月即不值令，亦能值年值日值时，岂可执一而论？有如春木虽强，金太重而木亦危；干庚辛而支申酉，无火制而不富，逢土生而必夭，是得时不旺也。秋木虽弱，木根深而木亦强，干甲乙而支寅卯，遇官透而能受，逢水生而太过，是失时不弱也。是故日干不论月令休囚，只要四柱有根，便能受财官食神而当伤官七杀。长生禄旺，根之重者也；墓库余气，根之轻者也。天干得一比肩，不如地支得一余气墓库。墓者，如甲乙逢未，丙丁逢戌，庚辛逢丑，壬癸辰之类是也。余气者，如丙丁逢未，丙丁逢戌，庚辛逢丑，壬癸逢辰之类是也。余气者，如丙丁逢未，甲乙逢辰，庚辛逢戌，壬癸逢丑之类是也，得二比肩，不如支中得一长生禄旺，如甲乙逢亥寅卯之类是也。盖比肩如朋友之相扶，通根如家室之可托，干多不如根重，理固然也。今人不知此理，见是春土夏水秋木冬火，不问有根无根，便谓之弱：见是春木夏火秋金冬水，不究克重克轻，便谓之旺，更有壬癸逢辰，丙丁逢戌，甲乙逢未，庚辛逢丑之类，不以为通根逢库，甚至求刑冲以开之，竟不思刑冲伤吾本根之气。此种谬论，必宜一切扫除也。
+
+    然此皆论衰旺之正面，易者也，更有颠倒之理存焉，其理有十：木太旺者而似金，喜火之炼也；木旺极者而似火，喜水之克也。火太旺者而似水，喜土之止也；火旺极者而似土，喜木之克也。土太旺者而似木，喜金之克也；土旺极者而似水，喜火之练也。金太旺者而似火，喜水之济也；金旺极者而似水，喜土之止也。水太旺者而似土，喜木之制也；水旺极者而似木，喜金之克也。木太衰者而似水也，宜金以生之；木衰极者而似土也，宜火以生之。火太衰者而似木也，宜水以生之；火衰极者而似金也，宜土以生之。土太衰者而似火也，宜木以生之；土衰极者而似水也，宜金以生之。金太衰者而似土，宜火以生之。金衰极者而似木也，宜水以生之。水太衰者而似金也，宜土以生之；水衰极者而似火也，宜木以生之。此五行颠倒之真机，学者宜细详，玄玄之妙。'
+  passage_refs:
+  - ditiansui-ch019-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 旺衰
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 95a2dc606e7e22c061a88cfbe6909b1a2aa134e2fa5a97ab0579580296af0d5a
+  source_pages:
+  - https://luckclub.cn/bazi/007/019/
+- id: annotation-ditiansui-ch020-original_note001
+  title: 《滴天髓阐微》中和·原注
+  kind: commentary
+  content: 【原注】中而且和，子平之要法也：“有病方为贵，无伤不是奇”，举偏而言之也。至于格中如去病，财禄两相宜，则又中和矣，到底中和，乃为至贵。若当令之气数，或身弱而财官旺地，取富贵不必于中也；用神强，取富贵而不必于和也；偏其古怪，取富贵而不必于中且和也。何也？以天下之财官，止有此数，而天下之人材，惟此时为最多，皆尚于奇巧也。
+  passage_refs:
+  - ditiansui-ch020-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 旺衰
+  - 用神
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 6af8f9570ed7065f5dbd6ca28cd6da799bfa50131d46d70ff49889b938421dc2
+  source_pages:
+  - https://luckclub.cn/bazi/007/020/
+- id: annotation-ditiansui-ch020-ren_commentary002
+  title: 《滴天髓阐微》中和·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    中和者，命中之正理也。即得中和之正气，又何患名利之不遂耶？夫一世优游，无抑郁而畅遂者，少险阻而迪吉者，为人孝友而无骄谄者，居心耿介而不苟且者，得中和之正气也。至若身弱而旺地取富贵，身旺而弱地取富贵者，必四柱有所缺陷，或财轻劫重，或官衰伤旺，或杀强制弱，或制强杀弱，此等虽不得中和之理，其气却亦纯正，为人恩怨分明，惟柱中所有缺陷，或运又违，因而妻子财禄，各有不足，如财轻劫重妻不足，制强杀弱子不足，官衰伤旺名不足，杀强制弱财不足，其人或志高傲物，虽贫无谄，后至岁运，补其不足，去其有余，乃得中和之理，定然起发于后，有第见富贵而生谄容，遇贫穷面作骄态者，必四柱偏气古怪，五行不得其正，故心事奸贪，作事侥幸也。若所谓“有病有药，吉凶易验，无病无药，祸福难推”，此论仍乃失之偏。大凡有病者显而易取，无病者隐而难推。然总以中和为主，犹如人之无病，由四肢健旺，营卫调和，行止自如，诸多安适：设使有病，则忧多乐少，举动艰难，如无良药医之，岂不为终身之患乎？'
+  passage_refs:
+  - ditiansui-ch020-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 旺衰
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: a427cdc74b2b549c14d19655eb99ba7335545e9ce2496a78da8bf6dea2cd6a40
+  source_pages:
+  - https://luckclub.cn/bazi/007/020/
+- id: annotation-ditiansui-ch022-original_note001
+  title: 《滴天髓阐微》通关·原注
+  kind: commentary
+  content: 【原注】天气欲不降，地气欲上升，欲相合相和相生也。木土而要火，火金而要土，土水而要金，金木而要水，皆是牛郎织女之有情也。中间上下远隔，为物所间；前后远绝，或被刑冲，或被劫占，或隔一物，皆谓之关也。必得引用无合之神及刑冲所间之物，前后上下，授引得来，能胜劫占之神，能补所缺之物，明见暗会，岁运相逢，乃为通关也。必得引用无合之神，及刑冲所间之物，前后上下，援引得来，能胜劫占之神，能补所缺之物，明见暗会，岁运相逢，乃为通关也。关通而其愿遂矣，不犹牛郎织女之入洞房也哉？
+  passage_refs:
+  - ditiansui-ch022-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 5b15419e80a3948f27f077e3b33d2351d33de118670562d00b072a2a5fb9d037
+  source_pages:
+  - https://luckclub.cn/bazi/007/022/
+- id: annotation-ditiansui-ch022-ren_commentary002
+  title: 《滴天髓阐微》通关·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    通关者，引通克制之神也。所谓阴阳二用，妙在气交，天降而下，地升而上。天干之气动而专，地支之气静而杂，是故地运有推移，而天气从之；天气有转徒，而地运应之；天气动于上，而人元应之；人元动于下，而天气从之，所以阴胜逢阳则止，阳胜逢阴则往，是谓天地交泰，干支有情，左右不背，阴阳生育而相通也，若杀重喜印，杀露印亦露，煞藏印亦藏，此显然通达，不必节外生枝。倘原局无印，必须岁运逢印，向而通之，或暗会明合而通之，局内有印，被财星损坏，或官星化之，或比劫解之，或被合住，则冲开之，或被冲坏，则合化之，或隔一物，则克去之，前后上下，不能授引，得岁运相逢尤佳。如年印时杀，干杀支印，前后远立，上下悬隔，或为间神忌物所间，此原局无可通之理，必须岁运暗冲暗会，克制间神忌物，该冲则冲，该合则合，引通相克之势，此关一通，所谓琴遇子期，马逢伯乐，求名者青钱万选，问利者意则屡中，如牛郎织女之入洞房，无不其所愿。杀印之论如此，食伤财官之论亦如此。'
+  passage_refs:
+  - ditiansui-ch022-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 25dc052652f5398005c13069a4c33105e2d820747da3650264afa56add9d2424
+  source_pages:
+  - https://luckclub.cn/bazi/007/022/
+- id: annotation-ditiansui-ch023-original_note001
+  title: 《滴天髓阐微》官杀·原注
+  kind: commentary
+  content: 【原注】杀即官也，同流共派者可混也；官非杀也，各立门墙者，不可混也。杀重矣，官从之，非混也；官轻矣，杀助之，非混也。败财与比肩双至者，杀可使官混也；比肩与劫财两遇者，官可使杀混也。一官而不有生印者，杀助之，非混也；一杀而遇食伤者，官助之，非混也。势在于官，官有根，杀之情依乎官；依官之杀，岁助之而混官，不可也。势在于杀，杀有权，官之势依乎杀；依杀之官，岁扶之而混杀，不可也。藏官露杀，干神助杀，合官留杀，皆成杀气，勿使官混也；藏杀露官，干神助官，合杀留官，皆从官象，不可使杀混也。
+  passage_refs:
+  - ditiansui-ch023-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 9c935fb22272103e056463a9e37060bcd3933735408d0289f8e0aeaead98c161
+  source_pages:
+  - https://luckclub.cn/bazi/007/023/
+- id: annotation-ditiansui-ch023-ren_commentary002
+  title: 《滴天髓阐微》官杀·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    杀即官也，身旺者以杀为官；官即杀也，身弱者以官为杀，日主甚强，虽无制不为杀困；正官相杂，但无根亦随杀行。去官不过两端，用食用伤皆可；合杀总为美事，合来合去宜清。独杀乘权，无制伏，职居清要；众杀有制，主通根，身掌权衡。杀生印生身，龙墀高步；身任财而财滋杀，雁塔题名。若杀重而身轻，非贫即夭；苟杀微而制过，虽学无成，在四柱总宜降伏，休云年逢勿制；以一位取为权贵，何必时上尊称。制杀为吉，全凭调剂之工借杀为权，妙有中和之理，但见杀凌衰主，究必倾家，弗谓局得杀神，遂许显豁。书支，“格格推详，以杀为重”，是以究之宜切，用之宜精。杀有可混不可混之理，如天干甲、丙、戊、庚、壬为杀，地支卯、午、丑、未、酉子，乃杀之旺地，非混也；天干乙、丁、己、辛、癸为官，地支寅、巳、辰、戌、申、亥，乃官之旺地，非混也。如干甲乙支寅，干丙丁支巳，干戊己支辰戌，干庚辛支申，干壬癸支亥，以官混杀，宜乎去官；如干甲乙支卯，干丙丁支午，干戊己支丑未，干庚辛支酉，干壬癸支子，以杀混官，宜乎去杀，年月两干透一杀，年月支中有财，时遇官星无根，此官从杀势，非混也；年月两干透一官，年月支中有财，时遇杀星无根，此杀从官势，非混也，势在于官，官得禄，依官之杀，年干助杀，为混也；势在于杀，杀得禄，依杀之官，年干助官为混也。败财合杀，比肩敌杀，官可混也；比肩合官，劫财挡官，杀可混也，一官而印绶重逢，官星泄气，杀助之，非混也，一杀而食伤并见，制杀太过，官助之，非混也。若官杀并透无根，四柱劫印重逢，不但喜混，尚宜财星助杀官也。总之日主旺相可混也，日主休囚不可混也。今将杀分六等，此余所试验者，分列详细于后，以备参考。
+
+    一曰财滋弱杀格'
+  passage_refs:
+  - ditiansui-ch023-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 旺衰
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 791fd639a2bcb86aca673f92d2a943c01d12aad5d46f0553d16933920ac59afb
+  source_pages:
+  - https://luckclub.cn/bazi/007/023/
+- id: annotation-ditiansui-ch023-ren_commentary003
+  title: 《滴天髓阐微》官杀·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    官杀混杂者，富贵甚多。总之杀官当令者，必要坐下印绶，则其杀官之气流通，生化有情：或气贯生时，亦足以扶身敌杀。若不气贯生时，又不坐下印绶，不贫亦贱。如杀官不当令者，不作此论也。
+
+    六曰制杀太过格'
+  passage_refs:
+  - ditiansui-ch023-case024
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 626f14bb6dd3e12878c6bd8d5afbfb13d0f18612fbe292d28d7d3fbe3ef80d7c
+  source_pages:
+  - https://luckclub.cn/bazi/007/023/
+- id: annotation-ditiansui-ch023-ren_commentary004
+  title: 《滴天髓阐微》官杀·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    与其制杀太过，不若官杀混杂之美也。何也？盖制杀太过，杀既伤残，再行制煞之运，九死一生。官杀混杂，只要日主坐旺，印绶不伤，运程安顿，未有不富贵者也。如日主休囚，财星坏印，即使独杀纯清，一官不混，往往忧多乐少，屈志难伸。学者宜审焉。'
+  passage_refs:
+  - ditiansui-ch023-case029
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 3a922b5d70864592b5b03dbec01b6df164b5d04f09d41eaf4f5e8ac0dfdf3dbd
+  source_pages:
+  - https://luckclub.cn/bazi/007/023/
+- id: annotation-ditiansui-ch037-original_note001
+  title: 《滴天髓阐微》夫妻·原注
+  kind: commentary
+  content: 【原注】妻与子一也，局中有喜神，一生富贵在于是，妻子在于是。大率依财看妻，如喜神即是财神，其妻美而且富贵；喜神与财神不相妒忌亦好，否则克妻，亦或不美，或欠和。然看财神，又须活法，如财神薄，须用助财；财旺身弱，又喜比劫；财神伤印者，要官星；财薄官多者，要伤官。财气未行，要冲者冲，泄者泄；财气流通，要合者合，库者库。或财神泄气太重，比劫透露，及身旺无财者，必非夫妇全美者也。至于财旺身强者，必富贵而多妻妾，看着当审辨轻重何如。
+  passage_refs:
+  - ditiansui-ch037-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 旺衰
+  - 六亲
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: d7fc25c75cd71407001f62cda4075361f23142b2c18087826cf90fda6fe54cde
+  source_pages:
+  - https://luckclub.cn/bazi/007/037/
+- id: annotation-ditiansui-ch037-ren_commentary002
+  title: 《滴天髓阐微》夫妻·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    子平之法，以财为妻，财是我克。人以财来侍我，此理出于正论，又以财为父者，乃后人谬也。若据此为确论，则翁女同宗，岂不失伦常乎？虽分偏正之说，究竟勉强。财之偏正，无非阴阳之别，并不换他气，且世无犯上之理，宜辨而辟之。如果财为父，官为子，则人伦灭矣，不特翁妇同宗，则显然祖去生子孙，有是理乎？是以六亲之法，今当更定。
+
+    生我者为父母，偏正印绶是也；我生者为子女，食神伤官是也。我克者为妇妾，偏正财星是也，克我者为官鬼，祖父是也；同我者为兄弟，比肩劫财是也。此理正名顺，乃不易之法。
+
+    夫财以妻论，财星清，则中馈贤能；财神浊，则河东狮吼。清者，喜神即是财星，不争不妒是也。浊者，生煞坏印，争妒无情是也。
+
+    旧书不管日主之衰旺，总以阳刃劫财主克妻，究其理则实非，须分日主衰旺喜忌之别，四柱配合活看为是。
+
+    如财神轻而无官，比劫多，主克妻。
+
+    财神重而身弱，无比劫，主克妻。
+
+    官杀旺而用印，见财星，主妻陋而克。
+
+    官杀轻而身旺，见财星，遇比劫，主妻美而克。
+
+    劫刃重，财星轻，有食伤，逢枭印，主妻遭凶死。
+
+    财星微，官杀旺，无食伤，有印绶，主妻有弱病。
+
+    劫刃旺，而财轻，有食伤，妻贤不克，妻陋必亡。
+
+    官星弱，遇财星，妻陋不克。
+
+    身强煞浅，财星滋杀，官轻伤重，财星化伤，印绶重叠，财星得气者，主妻贤而美，或得妻财臻富。
+
+    杀重身轻，财星党杀，官多用印，财星坏印，伤官佩印，财星得局者，主妻不贤而陋，或因妻招祸伤身。
+
+    日主坐财，财为喜用者，必得妻财。
+
+    日主喜财，财合闲神而化财者，必得妻力。
+
+    日主喜财，财合闲神而化忌神者，主妻有外情。
+
+    日主忌财，财合闲神而化财者，主琴瑟不和。
+
+    皆以四柱情势、日主喜忌而论。若财星浮泛，宜财库以收藏；财星深伏，宜冲动而引助。须细究之。'
+  passage_refs:
+  - ditiansui-ch037-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 旺衰
+  - 六亲
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: e0545a0f5c378d5f4b51905d531dab79789186565308e216b053c2d0edc1cb01
+  source_pages:
+  - https://luckclub.cn/bazi/007/037/
+- id: annotation-ditiansui-ch038-original_note001
+  title: 《滴天髓阐微》子女·原注
+  kind: commentary
+  content: 【原注】大率依官看子，如喜神即是官星，其子贤俊，喜神与官星不相妒亦好，否则无子，或不肖，或有克。然看官星，又要活法，如官轻须要助官；杀重身轻，只要印比；无官星，只论财；若官星阻滞，要生扶冲发；官星泄气太重，须合助遥会；若杀得身轻而无制者，多女。
+  passage_refs:
+  - ditiansui-ch038-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 六亲
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 28ef851843c5ef686b93253219f88640409c07dfafc745c349ef1bae2252a431
+  source_pages:
+  - https://luckclub.cn/bazi/007/038/
+- id: annotation-ditiansui-ch038-ren_commentary002
+  title: 《滴天髓阐微》子女·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    以官为子之说，细究之，终有犯上之嫌。夫官者，管也。朝廷设官，官治万民，则不敢妄为，循守规矩。家庭必酋长为管，出入动作，皆遵祖父训是也。不服官府之治者，则为逆子；夫命者理也，岂可以民为子而犯上乎？莫非论命竟可无君无父乎？谚云，“父在子不得自专”，若以官为子，父反以子管治，显见父不得自专矣，故俗以克父克母为是，有是理乎？今更定以食伤为子女。
+
+    书云，“食神有寿妻多子，时逢七煞本无儿”，“食神有制定多儿”，此两说，可谓确据矣。然此亦死法，倘局中无食伤无官杀者，又作何论？故命理不可执一，总要变通为是，先将食伤认定，然后再看日主之衰旺，四柱之喜忌则用之。故“喜神看与杀相连”者，乃通变之至论也。
+
+    日主旺，无印绶，有食伤，子必多。
+
+    日主旺，印绶重，食伤轻，子必少。
+
+    日主旺，印绶重，食伤轻，有财星，子多而贤。
+
+    日主旺，印绶多，无食伤，有财星，子多而能。
+
+    日主弱，印绶轻，有财星，子必无。
+
+    日主弱，食伤重，印绶无，亦无子。
+
+    日主弱，食伤轻，无比劫，有官星，子必无。
+
+    日主弱，官杀重，印绶轻，微伏财，必多女。
+
+    日主弱，七杀重，食伤轻，有比劫，女多子少。
+
+    日主弱，官杀重，无印比，子必无。
+
+    日主旺，食伤轻，逢印绶，遇财星，子少孙多。
+
+    日主旺，印绶重，官杀轻，有财星，子虽克则有孙。
+
+    日主旺，食伤旺，有印绶，遇财星，虽有若无。
+
+    日主弱，官杀旺，有印绶，遇财星，有子必逆。
+
+    又有日主旺，无印绶，食伤伏，有官杀，子必多者。
+
+    又有日主旺，比劫多，无印绶，食伤伏，子必多者。盖母多灭子之意也。故木多火熄，金克木则生火；火多土焦，水克火则生土；土重金埋，木克土则生金；金多水渗，火克金刚水克火则生水；水多木浮，土克水则生木。以官杀为子也，此之谓也。明虽以官杀为子也，暗仍以食伤为子，此逆局反克相生之法，非竟以官杀为子也。大率身旺财为子，身衰印作儿，此皆余之试验者，故敢更定，仔细推之，无不应也。(用神为子，忌神为女)'
+  passage_refs:
+  - ditiansui-ch038-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 旺衰
+  - 用神
+  - 六亲
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: cce22d7683c9c62674ff3de5b3ec3e551a56f7af1bba5029e0ef6e32690924dd
+  source_pages:
+  - https://luckclub.cn/bazi/007/038/
+- id: annotation-ditiansui-ch039-original_note001
+  title: 《滴天髓阐微》父母·原注
+  kind: commentary
+  content: 【原注】子平之法，以财为父，以印为母，以断其吉凶，十有九验，然看岁月为紧。岁气有益于月令者，及岁月不伤夫喜神者，父母必昌。岁月财气斩丧于时干者，先克父；岁月印气斩丧于时支者，先克母。又须活看其局中之大势，不可专论财印，中间有隐露其兴亡之机，而不必在于财印者。与财生印生之神，而损益舒得所，及阴阳多寡之论，无有不验。
+  passage_refs:
+  - ditiansui-ch039-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 六亲
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 968608f89fd86e036853ec6986fe4a9b25c0e948e3c3940a1a5268c37212f8b4
+  source_pages:
+  - https://luckclub.cn/bazi/007/039/
+- id: annotation-ditiansui-ch039-ren_commentary002
+  title: 《滴天髓阐微》父母·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    父母者，生身之根本，是以岁月所关，知其与替之不一，可谓正理不易之法也。原注竟以财印分属父母，又论克父母之说，无把握，仍惑于谷书之谬也。夫父母届可以克字加之？当更定丧亲、刑妻、克子为至理。如年月官印相生，日时财伤不犯，则上叨荫庇，下受儿荣；年月官印相生，日时刑伤冲犯，则破荡祖业，败坏门风。年官月印，月官年印，祖上清高；日主喜官，时日逢伤，日主喜印，时日逢财，必败祖辱宗，年财月印，日主喜印，时日逢官印者，知其帮父兴家；年伤月印，日主喜印，时日逢官者，知其父母创业之命。年印月财，日主喜印，时上遇官者，知其父母破败；时日逢印者，知其自创成家。年官月印，日主喜官，时日逢财，出身富贵，守成之造；年伤月劫，日主喜财，时日逢财或伤者，出身寒窘，创业之命。年劫月财，日主喜财，遗绪丰勇，日主喜劫，清高贫寒。年官月伤，日主喜官，时日适官必跨灶，时日遇劫，必破败。总之财官印绶，在于年月，为日主之喜，父母不贵亦富；为日主之忌，不贫亦贱，宜详说察之。'
+  passage_refs:
+  - ditiansui-ch039-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 六亲
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: f6a323dd58889aadd50c4d0a0e61aed38ded4cc8da882106377e1cafbb119edd
+  source_pages:
+  - https://luckclub.cn/bazi/007/039/
+- id: annotation-ditiansui-ch040-original_note001
+  title: 《滴天髓阐微》兄弟·原注
+  kind: commentary
+  content: 【原注】败财比肩羊刃，皆兄弟也。要在提纲之神，与财神喜神较其重轻，财官弱，三者显其攘夺之迹，兄弟必强；财官旺，三者出其助主之功，兄弟必美；身与财官平，而三者伏而不出，兄弟必贵；比肩重而伤民财杀亦旺者，兄弟必富。身弱而帮者不显，有印而兄弟必多；身旺而三者又显，无官而兄弟必衰。
+  passage_refs:
+  - ditiansui-ch040-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 旺衰
+  - 六亲
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: a4d3352d2c75fd49e903458712c2875f563a47349b2ef2fcb2ce7a17eac4ec1b
+  source_pages:
+  - https://luckclub.cn/bazi/007/040/
+- id: annotation-ditiansui-ch040-ren_commentary002
+  title: 《滴天髓阐微》兄弟·任铁樵注
+  kind: commentary
+  content: 【任氏曰】；比肩为兄，败财为弟，禄刃亦同此论。如杀旺无食，杀重无印，得败财合杀，必得弟力；杀旺食轻，印弱逢财，得比肩敌杀，必得兄力；杀旺食轻，印弱逢财，得比肩敌杀，必得兄财轻劫重，印绶制伤，不免司马之忧；财官失势，劫刃肆逞，周公之虑。财生杀党，比劫帮峰，大被可以同眠；杀重无印，主衰伤伏，鸽原料能无兴叹。杀旺印伏，比肩无气，弟虽敬而史必衰；官旺印轻，财星得气，兄虽爱而弟无成。日主虽衰，印旺月提，兄弟成群；身旺逢枭，劫重无官，独自主持，财轻劫重，食伤化劫，可无斗粟尺布之谣；财轻遇劫。官得明显，不作煮豆燃萁之咏。枭比重逢，财轻杀伏，未免折翎之悲啼；主衰有印，财星逢劫，反许棠棣之竞秀。不论提纲之喜忌，全赁日主之爱憎，审察宜精，断。
+  passage_refs:
+  - ditiansui-ch040-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 旺衰
+  - 六亲
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 13dd729656fb690da254e4a6676366224c695c129dc79d51547202d2e68752b5
+  source_pages:
+  - https://luckclub.cn/bazi/007/040/
+- id: annotation-ditiansui-ch060-original_note001
+  title: 《滴天髓阐微》性情·原注
+  kind: commentary
+  content: 【原注】五气在天，则为元亨利贞；赋在人，则仁、义、礼、智、信之性，恻隐，羞恶，辞让，是非诚实之情，五所不戾者，则其存之而为性，发之而为情，莫不中和矣，反此者乖戾。
+  passage_refs:
+  - ditiansui-ch060-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: db739c34e17456125528676c5489152acb08a6f6f9d6d3113cce4b24a5ec7ac0
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-ren_commentary002
+  title: 《滴天髓阐微》性情·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    五气者，先天《洛书》之气也。阳居四正，阴居四隅，土寄居于艮坤，此后天定位之应。东方属木，于时为春，于人为仁南方属火，于时为夏，于人为礼；西方属金，于时为秋，于人为义；北方属水，于时为冬，于人为智。坤艮为主，坤居西南者，以火生土，以土生金也；艮居东北者，万物皆主于土，冬尽春来，非土不能止水，非土不能栽木，犹仁、义、礼、智之性，非信不能成。故圣人易艮于东北者，即信以成之之旨也。赋于人者，须要五行不戾，中和纯粹，则有恻隐、辞让、诚实之情；若偏枯混浊，太过不及，则有是非、乖逆、骄傲之性矣。'
+  passage_refs:
+  - ditiansui-ch060-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 5c4d23403b0b64b5ffedc35abbcaca9264c67b70f2055a89e0307824e27dadd8
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-original_note003
+  title: 《滴天髓阐微》性情·原注
+  kind: commentary
+  content: 【原注】火烈而能顺其性，必明顺，惟金水激之，其燥争不可御矣。
+  passage_refs:
+  - ditiansui-ch060-p005
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 1248270f232ae0ec1290732ac5c19ce2aadb5b5feed1ada4a4b0320d5c5928a2
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-ren_commentary004
+  title: 《滴天髓阐微》性情·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    火燥而烈，其炎上之性，只可纯用湿土润之，则知礼而成慈爱之德；若遇金水激之，则火势愈烈而不知礼，灾祸必生也。湿土者，丑辰也，晦其光，敛其烈，则明矣。'
+  passage_refs:
+  - ditiansui-ch060-p005
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 2a94c3ecb94e8c27c77ed95a281e953fca43f4de6d9b951818f25556485f386f
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-original_note005
+  title: 《滴天髓阐微》性情·原注
+  kind: commentary
+  content: 【原注】水盛而奔，其性至刚至急，惟有金以行之，木以泄之，则柔矣。
+  passage_refs:
+  - ditiansui-ch060-p008
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: e70c33b00cd6f40353bcd447caac888692d7057b2c84d52b9bead83ebba18705
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-ren_commentary006
+  title: 《滴天髓阐微》性情·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    水性本柔，其冲奔之势，刚急为最，若逢火冲之，土激之，逆其性而更刚矣。奔者，旺极之势也，用金以顺其势，用木以疏其淤塞，所谓从其旺势，纳其狂神，其性反柔。刚中之德，易进难退之意也，虽智巧多能，而不失仁义之情矣。'
+  passage_refs:
+  - ditiansui-ch060-p008
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 0e5e4d770807fe4c9c978e2c4031bfc432e13367c144ddb16542e6286a255d6d
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-original_note007
+  title: 《滴天髓阐微》性情·原注
+  kind: commentary
+  content: 【原注】木之性见火为慈，奔南则仁之性行于礼，其性软怯。得其中者，为恻隐辞让，偏者为姑息，为繁缛矣。
+  passage_refs:
+  - ditiansui-ch060-p012
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 56140d99e0dbd76cec00af9525f8ae09be0276dc82ca594bf1bd65c1cc06d1ed
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-ren_commentary008
+  title: 《滴天髓阐微》性情·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    木奔南，泄气太过，柱中有金，必得水以通之，则火不烈；如无金，必得辰土以收火气，得其中矣，为人恭而有礼，和而中节。如无水以济土，土以晦火，发泄太过，则聪明自恃，又多迁变不常，而成妇人之仁矣。'
+  passage_refs:
+  - ditiansui-ch060-p012
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 7e52e6cfdf962d3667da35b8d988abe5e9250caa2b0a8058a2441e76e463ea4a
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-original_note009
+  title: 《滴天髓阐微》性情·原注
+  kind: commentary
+  content: 【原注】金之性，最方正，有断制执毅，见水则义之性行而为智，智则元神不滞，故流通。得气之正者，是非不苟，有斟酌，有变化；得气之偏者，必泛滥流荡。
+  passage_refs:
+  - ditiansui-ch060-p015
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 1ecb63c7e78580086a43ac14cdc24fa099106eca5d4ff0f7c57e1b8f26ad872e
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-ren_commentary010
+  title: 《滴天髓阐微》性情·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    金者，刚健中正之体也，能任大事，能决大谋，见水则流通刚前面之性，能用智矣。得气之正者，金旺遇水也，其人内方外圆，能知权变，处世不伤廉惠，行藏自合中庸；得气之偏者，金衰水旺也，其人作事荒唐，口是心非，有挟术待人之意也。'
+  passage_refs:
+  - ditiansui-ch060-p015
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: cd8b05b14451747a781c6b97ea1a2f93ebe710caeb95cc45c2860c82329a659a
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-original_note011
+  title: 《滴天髓阐微》性情·原注
+  kind: commentary
+  content: 【原注】西方之水，发源最长，其势最旺，无土以制之，木以纳之，如浩荡之势。不顺行，反行南方，则逆其性，非强拗而难制乎？
+  passage_refs:
+  - ditiansui-ch060-p018
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: c4078faf976ae87b3d91db37e8509f3abffd3c91304ed1b0a51a179a30cbbbde
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-ren_commentary012
+  title: 《滴天髓阐微》性情·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    西方之水，发源昆仑，其势浩荡，不可遏也。亦可顺其性，用木以纳之，则智之性行于仁矣。如用土制之，若不得其情，有反冲奔之患，其性仍逆而强拗。'
+  passage_refs:
+  - ditiansui-ch060-p018
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: c3d2765ae4250ec9da804d5bc3f4f33367676990f345527cb3a6f901c671fb43
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-original_note013
+  title: 《滴天髓阐微》性情·原注
+  kind: commentary
+  content: 【原注】东方之火，其气焰欲炎上，局中无土以收之，水以制之，焉能安焚烈之势？若不顺行而反行北方，则逆其性矣，能不刚暴耶？
+  passage_refs:
+  - ditiansui-ch060-p021
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 733d436d16ee539455f59f3ea55faa6012c8305fec5fdf623c9f9abfca54ef11
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-ren_commentary014
+  title: 《滴天髓阐微》性情·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    东方之火，火逞木势，其炎上之性，不可御也，只可顺其刚烈之性，用湿土以收之，则刚烈之性，化为慈爱之德矣。一转北方，焉制焚烈之势？必刚暴无礼。若无土以收这，仍行火木之运，顺其气势，亦不失慈让恻隐之心矣。'
+  passage_refs:
+  - ditiansui-ch060-p021
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 1e1c8181bc8655ef5abca5c94e1ec09739bd6737bdb21527d218a2e69be7b89d
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-original_note015
+  title: 《滴天髓阐微》性情·原注
+  kind: commentary
+  content: 【原注】如木生火，火生土，一路顺其性情次序，自相和平：中遇击神，而不得遂其顺生之性，则抗而勇猛。
+  passage_refs:
+  - ditiansui-ch060-p024
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 70d22a39a9b129d92f1279b7238b2b933d701ac3d275a8fd0b55d8427b5c5251
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-ren_commentary016
+  title: 《滴天髓阐微》性情·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    顺则宜顺，逆则宜逆，则和平而性顺矣。如木旺得火以通之，顺也；土以行之，生也，不宜见金水之击也。木衰，得水以生之，反顺也；金以助水，逆中之生也，不宜见火土之击也。我生者为顺，生我者为逆；旺者宜顺，衰者宜逆，则性正情和。如遇击神，旺者勇急，衰者懦弱。如格局得顺逆这序，其性情本和平，至岁运遇击神，亦能变为强弱。宜细究之。'
+  passage_refs:
+  - ditiansui-ch060-p024
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 旺衰
+  - 格局
+  - 行运
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 30ff5e2cb3c2b37fbaa40b72239af3cf0f536df516eb20caf94e21871fc64f6b
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-original_note017
+  title: 《滴天髓阐微》性情·原注
+  kind: commentary
+  content: 【原注】如木生亥，见戌酉申则气逆，非性之所安，一遇闲神若巳酉丑逆之，则必发而为狂猛。
+  passage_refs:
+  - ditiansui-ch060-p027
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 36f415aba9a3a307e64cd052ebd034e9285eceef018b0bc61b9bc4be1b10a8d9
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-ren_commentary018
+  title: 《滴天髓阐微》性情·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    逆则宜逆，顺则宜顺，则性正情和矣，如木旺极得水以生之，逆也；金以成之，助逆之生也，不宜见己丑之闲神也。如木衰极，得火以行之，反逆也；土以化之，逆中之顺也，不宜见辰未闲神也。此旺极衰极，乃从旺从弱之理，非前辈旺衰得中之意。如旺极见闲神，必为狂猛；衰极见闲神，必为姑息。岁运见之亦然，火土金水如之。'
+  passage_refs:
+  - ditiansui-ch060-p027
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 旺衰
+  - 行运
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 8d8c3a69ae69e6a3e40b5e7c900d9936996e6a1aa358e87bf25c5de9c6bb883b
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-original_note019
+  title: 《滴天髓阐微》性情·原注
+  kind: commentary
+  content: 【原注】寅午戌为阳明，有金气伏于内，则成其郁郁而多烦闷。
+  passage_refs:
+  - ditiansui-ch060-p031
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 10585374a86a95869ae1c4fb909c028c8e7d87cfc820c596f2087d2f5b6a9ce5
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-ren_commentary020
+  title: 《滴天髓阐微》性情·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    阳明之气，本多畅遂，如遇湿土藏金，则火不能克金，金又不能生水，而成忧郁。一生得意者少，而失意者多，则心郁志灰，而多烦闷矣。必要纯行阴浊之运，引通金水之性，方遂其所愿也。'
+  passage_refs:
+  - ditiansui-ch060-p031
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 92407f21bf0e548694f7f03f9d291f6435b2c683213cc821c6fb944254fe132c
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-original_note021
+  title: 《滴天髓阐微》性情·原注
+  kind: commentary
+  content: 【原注】酉、丑、亥为阴浊，有火气藏于内，则不发辉而多滞。
+  passage_refs:
+  - ditiansui-ch060-p034
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 99353f34da20d467de8cd16bbd671a3eff9efa5aec0d4a534946a32786e9a939
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-ren_commentary022
+  title: 《滴天髓阐微》性情·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    阴晦之气，本难奋发，如遇湿木藏火，阴气太盛，不能生陷之火，而成湿滞之患。故心欲速而志未逮，临事而模棱少决，所以心性多疑。必须纯行阳明之运，引通木火之气，则豁然而通达矣。'
+  passage_refs:
+  - ditiansui-ch060-p034
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: adf4eb9c9898e45ba7943214c015a30765b31acc5e962ada985c7bf276597408
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-original_note023
+  title: 《滴天髓阐微》性情·原注
+  kind: commentary
+  content: 【原注】羊刃局，凡羊录，如是午火，干头透丙，支又会戌会寅，或得卯以生之，皆旺。透丁为露刃，子冲为战，未合为藏，再逢亥水之克，壬癸水之制，丑辰土之泄，则弱矣。伤官格，如支会伤局，干化伤角，不重出，无食混，身旺有财，身弱有印，谓之清，反是则浊，夏木之见水，冬金之得火，清而且秀，富贵非常。
+  passage_refs:
+  - ditiansui-ch060-p038
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 旺衰
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: e5a8507ed2b1430cbc031f89fc86840cca9fdc836e96c6cdd7f03f5f96a81576
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch060-ren_commentary024
+  title: 《滴天髓阐微》性情·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    羊刃局，旺则心高志傲，战则恃势逞威，弱则多疑怕事，合则矫情立异。如丙日主，以午为羊刃，干透丁火为露刃。支会寅戌，或逢卯生，干透甲乙，或逢丙助，皆谓之旺。支逢子为冲，遇亥申为制，得丑辰为泄，干透壬癸为克，逢己土为泄，皆谓之弱。支得未为合，遇巳为帮，则中和矣。伤官须人真假，真者身弱有印，不见财为清；假者身旺有财，不见印为贵。真者，月令伤官，或支会伤局，又透出天干者是也；假者，满局比劫，无官星以制之，虽有官星，气力不能敌。柱中不论食神伤官，皆可作用，纵无亦美，只不宜见印，见印破伤为凶。凡伤官格，清而得用，为人恭而有礼，和而中节，人才卓越，学问渊深，反此者傲而多骄，刚而无礼以强欺弱，奉势趋利。用神多者，少恒之志，多迁变之心；时支柘者，狐疑少决，始勤终怠，夏木之见水，必先有金，则水有源；冬金之遇火，须身旺有木，则火有焰，富贵无疑若夏水无金，冬火无木，清柘之象，名利皆虚也。'
+  passage_refs:
+  - ditiansui-ch060-p038
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 旺衰
+  - 用神
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 05ad3d37ab8ff480bba58f740e6430398872416317b0259b7da44c073b518b30
+  source_pages:
+  - https://luckclub.cn/bazi/007/060/
+- id: annotation-ditiansui-ch061-original_note001
+  title: 《滴天髓阐微》疾病·原注
+  kind: commentary
+  content: 【原注】五行和者，不特全而不缺，生而不克，只是全者宜全。缺者宜缺，生者宜生，克者宜克，则和矣。主一世无灾。
+  passage_refs:
+  - ditiansui-ch061-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 健康
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: cbcea9ebf8e6623a3be8b037343e5e2fdf4c73d7e6465ff09e6ada49e971d3f5
+  source_pages:
+  - https://luckclub.cn/bazi/007/061/
+- id: annotation-ditiansui-ch061-ren_commentary002
+  title: 《滴天髓阐微》疾病·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    五行在天为五气青、赤、黄、白、黑也；在地为五行，木、火、土、金、水也；在人为五脏，肚、心、脾、肺、肾也。人为万物之灵，得、五行之全，表于头面，象天之五敢，裹于脏腑，象地之五行，故为一小天地也，是以脏腑各酏五地之服阳而属焉，凡一脏配一腑，腑皆属阳，故为甲、丙、戊、庚、壬；脏皆属阴，故为乙、丁、己、辛、癸。或不和，或太过不及，则病有风、热、湿、燥、寒之症矣。必得五味调和，亦有可解者。五味者，酸、苦、甘、辛、咸也。酸者属木，多食伤筋；苦者属火，多食伤骨；甘者属土，多食伤肉；辛者属金，多食伤气：咸者属水，多食伤血，比五味之相克也。故曰“五行和者，一世无灾”。不特八字五行宜和，即脏腑五行，亦宜和也。八字五行之和，以岁运和之；脏腑五行之和，以五味和之。和者，解之意也。若五地和，五味调，而灾病无矣。故五行之和，非生而不克，全而不缺为和也，其要贵在泄其旺神，泻其有余，有余之旺神泻，不足之弱神受益矣，此之谓和也。若强制旺神，寡不敌众，触怒其性，旺神不能损，弱神反家伤矣。是以旺神太过者宜泄，不太过宜克；弱神有根者宜扶，无根者反宜伤之。凡八字须得一神有力，制化合宜，主一世无灾。非全而不缺为美，生而不克为和也。'
+  passage_refs:
+  - ditiansui-ch061-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  - 健康
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 12eb8f26c1420a58b52436c546f7253ca000f221469323310499e855746ab96f
+  source_pages:
+  - https://luckclub.cn/bazi/007/061/
+- id: annotation-ditiansui-ch061-original_note003
+  title: 《滴天髓阐微》疾病·原注
+  kind: commentary
+  content: 【原注】血气乱者，不特火胜水，水克火之类；五气反逆，上下不通，往来不顺，谓之乱，主人多病。
+  passage_refs:
+  - ditiansui-ch061-p005
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 健康
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 778568b5b8b038f41e0fdc2a0f8d06b00dcfcb8173994e15ea0c6c41edc8db40
+  source_pages:
+  - https://luckclub.cn/bazi/007/061/
+- id: annotation-ditiansui-ch061-ren_commentary004
+  title: 《滴天髓阐微》疾病·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    血气乱者，五行悖而不顺之谓也。五行论水为血，人身论脉即血也。心胞主血，故通手足厥阴经，心属丁火，心胞主血，膀胱属壬水。丁壬相合，故心能下交于肾，则丁壬化木，而神气自足，得既济相生，血泳流通而无疾病矣。故八字贵乎克处逢生，逆中得顺而为美也。若左右相战，上下相克，喜逆逢顺，则火旺水涸，火能焚木；水旺土荡，水能沉金；土旺木折，土能晦火；金旺火虚，金能伤土；木旺金缺，木能渗水。此五行颠倒相克之理，犯此者，必多灾病。'
+  passage_refs:
+  - ditiansui-ch061-p005
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 健康
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 7b830d211c7fbfbf7fd06799b83ceebe4b9229634c382c25ba4172626e802b23
+  source_pages:
+  - https://luckclub.cn/bazi/007/061/
+- id: annotation-ditiansui-ch061-original_note005
+  title: 《滴天髓阐微》疾病·原注
+  kind: commentary
+  content: 【原注】柱中所忌之神，不制不化，不冲不散，隐伏深固，相克五脏，则其病凶。忌木而入土则脾病，忌火而入金则肺病，忌土而入水则肾病，忌金而入木则肝病，忌水而入火则心病。又看虚实，如木入土，土旺者，则脾自有余之病，发于四季月；土衰者，则脾有不足之病，以于春冬月。余皆仿之。
+  passage_refs:
+  - ditiansui-ch061-p009
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 健康
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 61b6a4963e904da34f947fadb1abf2bfe1278afed5b7885b09f989331963f7fd
+  source_pages:
+  - https://luckclub.cn/bazi/007/061/
+- id: annotation-ditiansui-ch061-ren_commentary006
+  title: 《滴天髓阐微》疾病·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    忌神入五脏者，阴浊之气，埋藏于地支也。阴浊深伏，难制难化，为病最凶。如其为喜，一世无灾；如其为忌，生平多病。土为脾胃，脾喜缓，胃喜和，忌木而入土，则不和缓而病矣。金为大肠肺，肺宜收，大肠宜畅，忌火而入金，则肺气上逆，大肠不畅而病矣。水为膀胱肾，膀胱宜润，肾宜坚，忌土而入水，则贤枯膀胱燥而病矣。木为肝胆，肝宜条达胆宜平，忌金而入木，则肝急而生火，胆寒而病矣。火为不肠心，心宜宽，小肠宜收，忌水而入火，则心不宽，小肠缓而病矣。又要看有余不足，如土太旺，木不能入土，是脾胃自有余之病。脾本忌湿，胃本忌寒，若土湿而有余，其病发于春冬，反忌火以燥之；土燥而有余，其病发于夏秋，反忌水以润之。如土虚，弱木足以疏土，若土湿而不足，其病发于夏秋；土燥而不足，其病发于冬春。盖虚湿之土，遇夏秋之燥，虚湿之土，逢春冬之湿，使木托根而愈茂，土受其克而愈虚。若虚湿之土，再逢虚湿这时，虚燥之土，再逢虚燥之时，木必虚浮，不能盘根，土反不畏其克也。余仿此。'
+  passage_refs:
+  - ditiansui-ch061-p009
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 健康
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 9a08ae97d7d980ff0f7e2e7c3e0f5246b621c4760d89612b9a6314ef8d6579bc
+  source_pages:
+  - https://luckclub.cn/bazi/007/061/
+- id: annotation-ditiansui-ch061-original_note007
+  title: 《滴天髓阐微》疾病·原注
+  kind: commentary
+  content: 【原注】客神比忌神为轻，不能理没，游行六道，则必有灾。如木游于土之地而胃灾。火游于金之地而大肠灾，土行水地膀胱灾，金行木地胆灾。水行火地上肠灾。
+  passage_refs:
+  - ditiansui-ch061-p014
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 健康
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: f647e985fc8f57545fe787f9fcd730bb412e520427aa8ba6b7c3878857bfe984
+  source_pages:
+  - https://luckclub.cn/bazi/007/061/
+- id: annotation-ditiansui-ch061-ren_commentary008
+  title: 《滴天髓阐微》疾病·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    客神游六经者，阳虚之所，浮于天干也。阳而虚露，易制易化，为灾必小，犹病之在表，外感易于发散，不至大患，故为小也。究其病源，仍从五行阴阳，以分脏腑，而五脏论法，亦勿以天干为客神论虚，地支为忌神论实。必须究其虚中有关，实处反虚之理，其灾祥了然有验矣。'
+  passage_refs:
+  - ditiansui-ch061-p014
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 健康
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 2ea770eeed9d44373696a0d53cba5b066aa062209da0c4bdb46bb363c4dcc1cc
+  source_pages:
+  - https://luckclub.cn/bazi/007/061/
+- id: annotation-ditiansui-ch061-original_note009
+  title: 《滴天髓阐微》疾病·原注
+  kind: commentary
+  content: 【原注】水东流而木逢冲，或虚脱，皆不受水也，必主血病。盖肝属木，缄而不纳则病。
+  passage_refs:
+  - ditiansui-ch061-p018
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 健康
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: de929f1b6046048c57fbefdf9a05699a8a35509464e0b043929db9cb9066e591
+  source_pages:
+  - https://luckclub.cn/bazi/007/061/
+- id: annotation-ditiansui-ch061-ren_commentary010
+  title: 《滴天髓阐微》疾病·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    春木不受水者，喜火之温暖也；冬木不受水者，喜火之解冻也。夏木之有根而受水者，去火之烈，润地之燥也；秋木得地而受水者，泄金之锐，化杀之顽也。春冬生旺之木，要其衰而受水；夏秋休囚之木，要其旺而受水。反此则不受，不受则血不流行，故致血病矣。'
+  passage_refs:
+  - ditiansui-ch061-p018
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 健康
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 2b63a01cf0450590bf9233c573f31e907861bb20d7c3db43bb4a44f1b04e2110
+  source_pages:
+  - https://luckclub.cn/bazi/007/061/
+- id: annotation-ditiansui-ch061-original_note011
+  title: 《滴天髓阐微》疾病·原注
+  kind: commentary
+  content: 【原注】土逢冲而虚脱，则不受火，必主气病，盖脾属土而容火，不容则病矣。
+  passage_refs:
+  - ditiansui-ch061-p021
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 健康
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: c7ce203de47ce834b73e8c5c494cfa62ddac49b1f633f40a33b2d87be5223abc
+  source_pages:
+  - https://luckclub.cn/bazi/007/061/
+- id: annotation-ditiansui-ch061-ren_commentary012
+  title: 《滴天髓阐微》疾病·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    燥实之土不受火者，喜水之润也；虚湿之土不受火者，忌水之克也；春土有根而受火者，解天之冻，去地之湿也；秋土得地而受火者，制金之有余，补土之泄气也。过燥则地不润，过湿则天不和，是以火不受，木不容。过燥必气亏，过湿必脾虚，不受则病矣。'
+  passage_refs:
+  - ditiansui-ch061-p021
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 健康
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: e8944824d22cc4b669d8635db5889510cc60e2c886ecc12061ba4bf937d7cc46
+  source_pages:
+  - https://luckclub.cn/bazi/007/061/
+- id: annotation-ditiansui-ch061-original_note013
+  title: 《滴天髓阐微》疾病·原注
+  kind: commentary
+  content: 【原注】凡此皆五行不和之病，而知其病，知其人，则可以断其吉凶。如木之病何如，又看木是日主之何神，若木是财而能发土病，则断其财之衰旺，妻之美恶，父之兴衰。亦不必显验，然有可应则六亲与事体又不相符者，殆以病而免其咎者也。
+  passage_refs:
+  - ditiansui-ch061-p024
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 旺衰
+  - 六亲
+  - 健康
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 1061148a34da9fe0c7357705aff615ed1e33bff19a734e5675bc8440ba19b52b
+  source_pages:
+  - https://luckclub.cn/bazi/007/061/
+- id: annotation-ditiansui-ch061-ren_commentary014
+  title: 《滴天髓阐微》疾病·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    金水伤官，过于寒者，其气辛凉，真气有亏，必主冷嗽；过于热者，水不胜火，火必克金。水不胜火者，心肾不交也；火能克金者，肺家受伤也。冬令虚火上炎，故主痰火。
+
+    火土印绶，过于热者，木从火旺也。火旺焚木，木属风，故主风痰；过于燥者，火炎土焦也。土润则血脉流行，而营卫调和。皮属土，土喜暖，暖即润也，所以过燥则皮痒，过湿则生疮。夏土宜湿，冬土宜燥，在人则无病，在物则发生。总之火多主痰，水多主嗽。
+
+    木火多痰者，火旺逢木，木从火势，则金不能克木，水不能胜火，火必克金而伤肺，不能下生肾水，木又泄水气，肾水必燥，阴虚火炎，痰则生矣。
+
+    生毒郁火金者，火烈水涸，火必焚木；木被火焚，土必焦燥；燥土能脆金，金郁于内，脆金逢火，肺气上逆；肺气逆财肝肾两亏，肝肾亏财血脉不行，加以七情忧郁而生毒矣。
+
+    土燥不能生金，火烈自能枯水，肾经必虚；土虚不能制水，木旺自能克土，脾胃必伤。凡此五行不和之病，细究之必验也。然与人事可相通也，不可专执而论，如病不相符，可究其六亲之吉凶，事体之否泰，必有应验者。如日主是金，木是财星，局中火旺，日主不能任其财，必生火而助杀，反为日主之忌神，既或有水，水仍生木，则金气愈虚；金为大肠肺，肺伤大肠不畅，不能下生肾水，木泄水而生火，必主肾肺两伤之病。然亦有无此者，必财多破耗，衣食不敷，是其咎也。然亦有无病而财源旺者，其妻必陋恶，子必不肖也。断断必有一验，其中亦有妻肾子肖而无病，且财源旺者，岁运一路土金之妙也。然亦有局中金水，与木火停匀，而得肺肾之病者，或财多破耗，或妻陋子劣者，亦因岁运一路木火，而金水受伤之故也。宜仔细推详，不可执一而论也。'
+  passage_refs:
+  - ditiansui-ch061-p024
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 行运
+  - 六亲
+  - 健康
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 4c53adc38b9db15f7795560fd0cea4b7173b08c8c01e3affa0378c64c22923e1
+  source_pages:
+  - https://luckclub.cn/bazi/007/061/
+- id: annotation-ditiansui-ch062-original_note001
+  title: 《滴天髓阐微》出身·原注
+  kind: commentary
+  content: 【原注】凡看命看人之出身最难，如状元出身，格局清奇迥异，若隐若露，奇而难决者，必有元机，须搜寻之。
+  passage_refs:
+  - ditiansui-ch062-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 格局
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: aa2a934b41d8edf7ed3a63a4bda5e70f33383a5b7b4ac5e83da0ea5a95c11473
+  source_pages:
+  - https://luckclub.cn/bazi/007/062/
+- id: annotation-ditiansui-ch062-ren_commentary002
+  title: 《滴天髓阐微》出身·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    命论我人出身最难，故有玄机存焉。玄机者，不特格局清奇迥异，用神真假之分，须究支中藏神司命，包罗用神喜神，使闲神忌神不能争战，反有生拱之情。又有格局本无出色处，而名冠群英者，必先究其世德之美恶，次论山川之灵秀，所以锺灵毓秀。从世德而来者，不论命也。故世德心田居一，山川居二，命格居三。然看命这要，非杀印财官
+
+    官印双清为美也。如显然杀印财官，动人心目者，必非佳造；若用神轻微，喜神暗伏，秀也深藏者，初看并无好处，越看越有精神，其中必有玄机，宜仔细搜寻。'
+  passage_refs:
+  - ditiansui-ch062-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 用神
+  - 格局
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 9e1a1e3acb61cf6cdd1bfca0e4b2df8044dcee62c08a2f548878cf06282e1686
+  source_pages:
+  - https://luckclub.cn/bazi/007/062/
+- id: annotation-ditiansui-ch062-original_note003
+  title: 《滴天髓阐微》出身·原注
+  kind: commentary
+  content: 【原注】天下之命，未有不清而发科甲者，清得尽者，非必一一成象，虽五行尽出，而能安放得所，生化有情，不混亲神忌客，决发科甲。即有一二浊气，而清气或成一个体段，亦可发达。
+  passage_refs:
+  - ditiansui-ch062-p006
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: f8df111d3f7f4d64621c00d3acbc1194e4b78d64d9707f1237f7e8035a4dcf24
+  source_pages:
+  - https://luckclub.cn/bazi/007/062/
+- id: annotation-ditiansui-ch062-ren_commentary004
+  title: 《滴天髓阐微》出身·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    清得尽者，非一行成，两气双肖也。虽五尽出。而清气独逢生旺，或真神得用，或清所陆海空椹者，横榜标名也。若清当权，闲神忌客不司令，不深藏，和岁运制化者，亦发科甲也。清所当权，虽有浊气，安放得所，不銸喜用乾，虽不能发甲，亦发科也。清敢虽不当，得亲神忌客不党浊气，匡扶清气，或岁运安顿者，亦可中式也。'
+  passage_refs:
+  - ditiansui-ch062-p006
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 9ed279cfa274cecb39214b6b746194da54acc327f54e7d2be83e073c4fbcd52c
+  source_pages:
+  - https://luckclub.cn/bazi/007/062/
+- id: annotation-ditiansui-ch062-original_note005
+  title: 《滴天髓阐微》出身·原注
+  kind: commentary
+  content: 【原注】秀才之命，与异路人、贫人、富人之命，无什大别，然终有一种清气处，但官星不起，故无爵禄。
+  passage_refs:
+  - ditiansui-ch062-p020
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: b39588a23267ca72e572714c65c63b8c7d2da72a28a1d3eee4b646edeff269b6
+  source_pages:
+  - https://luckclub.cn/bazi/007/062/
+- id: annotation-ditiansui-ch062-ren_commentary006
+  title: 《滴天髓阐微》出身·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    秀才之命，与异路贫富人无会什分别，细究之，必有清气存焉。官星不起者，非官星不透之谓也，如官星太旺，日主不能用其官；如官星太弱，官昨不能克日主。如官旺用印见财者，如官衰用财遇劫者，如印多泄官星之气者，如官多无印者，如官透无根，地支不载，如官坐伤位，伤坐官位，如忌官逢财，喜官遇伤者，皆谓之官星不起也。纵有清气，不过一衿终身，有富而秀者，身旺财旺，与官星不通也，或伤官顾财不顾官也；有贫而秀者，身旺官轻，财星受劫也。或财官太旺，印星不现，或伤官用印，见财不见官也；有学问过人，竟不能得一衿，老于儒童者。此亦有清气存焉，格局原可发秀，只因运途不济，破其清气，以致终身不能稍舒眉曲也。亦有格局本可登科发甲者，亦因运途不济，屡困场屋，终身一衿，不能得路于青云也。有格局本无出色，竟能科甲连登，此因一路运途合宜，助其清气官星，去其浊气忌客之故也。'
+  passage_refs:
+  - ditiansui-ch062-p020
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 旺衰
+  - 格局
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 5026564d85e0cda6eb001f7301edda1623095f5c3ee4847d528154a14fc3af81
+  source_pages:
+  - https://luckclub.cn/bazi/007/062/
+- id: annotation-ditiansui-ch062-original_note007
+  title: 《滴天髓阐微》出身·原注
+  kind: commentary
+  content: 【原注】刀笔得成名者，与不成名者之异，必是财星得个门户，通得官星，中有一种清气，所以得出身，其老于九笔而不能出身者，终是财星与官不相通也。
+  passage_refs:
+  - ditiansui-ch062-p027
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 0852e2ce3667d5f3dcb271e4e0245ff89a6ed8cd0bb8fffc9fadd65c0727db6c
+  source_pages:
+  - https://luckclub.cn/bazi/007/062/
+- id: annotation-ditiansui-ch062-ren_commentary008
+  title: 《滴天髓阐微》出身·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    异路功名，有刀笔成名者，有捐纳出身者，虽有分别，总不外日干有气，财民相通也。或财星得用，暗成官局，或官伏财乡，丙意情通，或官衰逢财，两神和协，或印旺官衰，财星破印，或身旺无官，食伤生财，或身衰官旺，食神制官，必有一种清纯之气，方可出身。其仕路之高卑，须究格局之气势，运途之损益可知矣。不能出身者，日干太旺，财轻无食伤，喜官而官星不通，或无官也。如日干太弱，财星官星并旺者，有财官虽通，伤官劫占者，有财星得用，暗成劫局者，有喜印逢财，忌印逢官者，皆不能出身也。'
+  passage_refs:
+  - ditiansui-ch062-p027
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 旺衰
+  - 格局
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 51f613e4fa642d907f752624aaa383fd622bda0453703cb34f29559f4514766f
+  source_pages:
+  - https://luckclub.cn/bazi/007/062/
+- id: annotation-ditiansui-ch063-original_note001
+  title: 《滴天髓阐微》地位·原注
+  kind: commentary
+  content: 【原注】能如人之出身，至于地位之在小，亦不易推。若夫为独为卿，清中又有一种权势出入矣，不专在一端而论。
+  passage_refs:
+  - ditiansui-ch063-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 341bf035d360244b213eed4de37a0bb0bf72cccab5dfac71c23003fe3f403deb
+  source_pages:
+  - https://luckclub.cn/bazi/007/063/
+- id: annotation-ditiansui-ch063-ren_commentary002
+  title: 《滴天髓阐微》地位·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    台阁宰匍以及封疆之任，清气发乎天然，秀气出纯粹，四柱内，且与喜神有情，格局之中并无可嫌之物。所用者皆真神所喜者皆真气，此谓“清气显机权”也。度量宽宏能容物，施为纯正不贪私，有润泽生包之德，怀任重致远之财也。
+
+    庚申 庚辰 戊辰 戊午
+
+    此董中堂造，天然清气在庚金也。
+
+    甲子 丙寅 己丑 甲子
+
+    此刘中堂造，天然清气在丙火也。
+
+    壬申 壬寅 丙子 乙未
+
+    此钱尚书造，天然清气在乙木也。
+
+    己亥 丁卯 庚申 庚辰
+
+    此秦侍郎造，天然清气在丁火也。'
+  passage_refs:
+  - ditiansui-ch063-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 格局
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 3592be4ce4f8a7f107cf5e85b2f258f8944ec6a94e351d595982febacf63b188
+  source_pages:
+  - https://luckclub.cn/bazi/007/063/
+- id: annotation-ditiansui-ch063-original_note003
+  title: 《滴天髓阐微》地位·原注
+  kind: commentary
+  content: 【原注】掌生杀之权，其风纪气势，必然超特，清中精神自异又或刃杀两显也。
+  passage_refs:
+  - ditiansui-ch063-p002
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 6e9e766b5968ffeccb28e964c2d1a491c1eb5d77d029794fe2ee5f0dda1e4335
+  source_pages:
+  - https://luckclub.cn/bazi/007/063/
+- id: annotation-ditiansui-ch063-ren_commentary004
+  title: 《滴天髓阐微》地位·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    掌生杀大权，兵刑重任者，其精神清气，自然超特，必以刃旺敌杀，气势出人也。局中杀旺无财，印绶用刃者，或无印而有羊刃者，此谓杀刃神清也。气势特者，刃旺当权也，必文官而掌生杀之任。刃旺者，如春之甲用卯刃，乙用寅刃；夏之丙用午刃丁用巳刃，秋之庚用酉刃，辛用申刃，冬之用子刃，癸用亥刃是也。若刃旺敌杀，局中无食神印绶，而有财官者，气势虽特，神气不清，乃武将之命也。如刃不当权，虽能敌杀，不但不能掌兵权，亦不能贵显也。其人疾恶太严，如刃旺杀弱亦然，必傲物而骄慢也。'
+  passage_refs:
+  - ditiansui-ch063-p002
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: c086ae8c3b8aca5bd5d2e9612bbc74a1e1d61d224455d5367db7af8529fcdd60
+  source_pages:
+  - https://luckclub.cn/bazi/007/063/
+- id: annotation-ditiansui-ch063-original_note005
+  title: 《滴天髓阐微》地位·原注
+  kind: commentary
+  content: 【原注】方面之官，财官为重，必清奇纯粹，格正局全，又有一段精神。
+  passage_refs:
+  - ditiansui-ch063-p007
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts: []
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: c5c1bde6001ee0b9f2a18bc79096ead8811d40c73c33dd7925ef14263c805c89
+  source_pages:
+  - https://luckclub.cn/bazi/007/063/
+- id: annotation-ditiansui-ch063-ren_commentary006
+  title: 《滴天髓阐微》地位·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    方面之任以及州县之官，虽以财官为重，必须格局清纯，更须日元生旺，神贯气足，然后财官情协，则精气神三者足矣。又加官旺有印，官衰有财，印旺有财，左右相通，上下不悖，根通年月，气贯日时，身杀两停，杀重逢印，杀轻遇财者，皆是也，必有利民济物之心；反此者，非所宜也。'
+  passage_refs:
+  - ditiansui-ch063-p007
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 格局
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 929f242f1be18f7353bca77d1767b5107f7f22f54d3c513a46e6af3746cc2e40
+  source_pages:
+  - https://luckclub.cn/bazi/007/063/
+- id: annotation-ditiansui-ch063-original_note007
+  title: 《滴天髓阐微》地位·原注
+  kind: commentary
+  content: 【原注】至贵者莫如天也，得一以清，而位乎上，故膺一命之荣，莫不得清气。所以杂职或佐二首领等官，岂无一段清气？而与浊气者自别。然清浊之形影难解，不专是堸官印绶内有清浊，凡格局、气象、用神、合神，日主化气、从气、神气、精气，以序收藏发生意向，节度性情，理势源流，主从之间皆有之。生于皮面对其形影，得其形而遂可以寻其精髓，乃论大小尊卑。
+  passage_refs:
+  - ditiansui-ch063-p013
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 十神
+  - 用神
+  - 格局
+  - 性情
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 674ca8f637a9f042d82b79c9dd9ec74bc2706c384eb070bc2bef184e029d5c83
+  source_pages:
+  - https://luckclub.cn/bazi/007/063/
+- id: annotation-ditiansui-ch063-ren_commentary008
+  title: 《滴天髓阐微》地位·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    命者，天地阳阳五行之所钟也，清者贵也，浊者贱也。所以杂职佐二等官，亦膺一命之荣，虽非格正局清，真神得用，而气象格局之中，冲合理气之内，必有一点清气，虽清浊气之形影难辨，总不外处天清地浊之理。天干象天，地支象地。地支上升于天干者，轻清之气也；天干下降于地支者，重浊之气也。天干之气本清，不忌浊也；地支之气本浊，必要清也，此命理之贵乎变通也。天干浊，地支清者贵；地支浊，天干清者贱也。地支之气上升者影也，天干之气下降者形也，于升降形影，冲合制化中，分其清浊，究其轻重，论其尊卑可也。'
+  passage_refs:
+  - ditiansui-ch063-p013
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 格局
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: b854b02447db271d296c2af6ae7aefb2fba8b71f56eb0bcfc259254343d6b9ca
+  source_pages:
+  - https://luckclub.cn/bazi/007/063/
+- id: annotation-ditiansui-ch064-original_note001
+  title: 《滴天髓阐微》岁运·原注
+  kind: commentary
+  content: 【原注】日主譬如吾身，局中之神，譬之舟马引从之人，大运譬所到之地，故重地支，未尝无天干。太岁譬所遇之人，故重天干，未偿无地支。必先明一日主，配合七字，权其轻重，看喜行何运，忌行何运。如甲日以气机看春，以人心看仁，以物理看木，大率看气机而余在其中。遇庚辛申酉字面，如春而行之于秋，新伐其生生这机，又看喜与不喜，而行运生甲伐甲之地，何断其休咎也。太岁一至，休咎即显，于是详论战冲和好之势，而得胜负适从之机，则休咎了然在目。
+  passage_refs:
+  - ditiansui-ch064-p001
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 3a5699b14693af209cb97712bbf42b81b8c556fb91bf79ab9a8991d1988438d6
+  source_pages:
+  - https://luckclub.cn/bazi/007/064/
+- id: annotation-ditiansui-ch064-ren_commentary002
+  title: 《滴天髓阐微》岁运·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    富贵虽定乎格局，穷通实系乎运途，所命好不好运也。日主如我之身，局中喜神用神是我所用之人，运途乃我所临之地，故以地支为重。要天干不背，相生相扶为美，故一运看十年切勿上下截看，不可使盖头截脚。如上下截看，不论盖头截脚，则吉凶不验矣。
+
+    如喜行木运，必要甲寅乙卯，次则
+
+    甲辰 乙亥 壬寅 癸卯：喜行火运，必要丙午丁未，次则
+
+    丙寅 丁卯 丙戌 丁巳；喜行土运，必要
+
+    戊午 己未 戊戌 己巳，次则戊辰己丑；喜行金运，必要庚申辛酉，次则
+
+    戌申 己酉 庚辰 辛巳；喜行水运，必要壬子癸亥，次则
+
+    壬申 癸酉 辛亥 庚子。宁使天干生地支，弗使地支生天干；天干生地支而荫厚，地支生天干而气泄。
+
+    何谓盖头？如喜木运而遇庚寅辛卯，喜火运而遇壬午癸巳，喜土运而遇
+
+    甲戌 甲辰 乙丑 乙未，喜金运而遇丙申丁酉，喜水运而遇戊子己亥。何谓截脚？如喜木运而遇
+
+    甲申 乙酉 乙丑 乙巳，喜火运而遇丙子、丁丑、丙申、丁酉、丁亥，喜土运而遇戊寅、乙卯、戊子、己酉、戊申，喜金运而遇庚午、辛亥、庚寅、辛卯、庚子，喜水运而遇壬寅、癸卯、壬午、癸未、壬辰、癸巳是也。
+
+    盖干头喜支，运以重支，财吉凶减半；截脚脚喜干，支不载干，则十年皆否。假如喜行木运，而遇庚寅辛卯，庚辛本为凶运，而金绝寅卯，谓之无根，虽有十分之凶，而减其半。如原局天干有丙丁透露，得回制之能，又减共半，或再遇太岁逢丙丁，制其庚辛，则无凶矣。寅卯本为吉运，因盖头有庚辛之克，虽有十分之吉，亦减其半。如原局地支有申酉之冲，不但无吉，而反凶矣。
+
+    又如喜木运，遇甲申乙酉，木绝于申酉，谓之不载，故甲乙之运不吉。如原局天干又透庚辛，或太岁干头遇庚辛，必凶无疑所以十年皆凶。如原局天干透壬癸，或太岁干头逢壬癸，能泄金生木，则和平无凶矣。故运逢吉不见其吉，运逢凶不见其凶者，缘盖头截脚之故也。
+
+    太岁管一年否泰，如所遇之人，故以天干为重，然地支不可不究，虽有与神之生克，不可与日主运途之冲战。最凶者天克地冲，岁运冲克，日主旺相虽凶无碍，日主凶必罹凶咎。日犯岁君，日主旺相无咎，日主休囚必凶；岁君犯日，亦同此论，故太峧宜和，不可与大运一端论也。如运逢木吉，负逢木反凶者皆战冲不和之故也。依此而推，则吉凶无有不验矣。'
+  passage_refs:
+  - ditiansui-ch064-p001
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 用神
+  - 格局
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: faf2b9dd448823d281add5b6aa3937352f80b327ffbd6436e305e08f48132e60
+  source_pages:
+  - https://luckclub.cn/bazi/007/064/
+- id: annotation-ditiansui-ch064-original_note003
+  title: 《滴天髓阐微》岁运·原注
+  kind: commentary
+  content: 【原注】如丙运庚年，谓之运伐岁。若日主喜庚，要丙降，得丙者吉，日主喜丙，则岁不降运，得戊己以和为妙。如庚坐寅午，丙之力量大，则岁运亦不得不降，降之亦保无祸。庚运丙年，谓之岁伐运，日主喜庚，得戊己以和丙者吉；日主喜丙，则运不降岁，又不可用戊己泄助庚。若庚坐寅午，丙之力量大，则运自降岁，亦保无患。
+  passage_refs:
+  - ditiansui-ch064-p006
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 8e13f767e00c102677518e0a425a0e504651973b606c5e2624dcedf30a6f0539
+  source_pages:
+  - https://luckclub.cn/bazi/007/064/
+- id: annotation-ditiansui-ch064-ren_commentary004
+  title: 《滴天髓阐微》岁运·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    战者克也。如丙运庚年，谓之运克岁，日主喜庚，要丙坐子辰，庚坐申辰，又局中得戊己泄丙，得壬癸克丙则吉；如丙坐午寅，局中又无水土制化，必凶。如庚运丙午，调之岁克运，日主喜庚则凶，喜丙则吉，喜庚者要庚坐申辰，丙坐子辰，又局中逢水土制化者吉，反此必凶，喜丙者依此而推。'
+  passage_refs:
+  - ditiansui-ch064-p006
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 53186f8304208149f3edbe6fb64b04146c9f1dc97236c809a43e5578c1a3e106
+  source_pages:
+  - https://luckclub.cn/bazi/007/064/
+- id: annotation-ditiansui-ch064-original_note005
+  title: 《滴天髓阐微》岁运·原注
+  kind: commentary
+  content: 【原注】如子运午年，谓之运冲岁，日主喜子，则要助子，又得年之干头，遇制午之神，或午之党多，干头遇戊甲字者必凶。如午运子年，谓之岁冲运，日主喜午，而子之党多，干头助子者必凶；日主喜子，而午之党少，干头助子者必吉，若午重子轻，则不降，亦无咎。
+  passage_refs:
+  - ditiansui-ch064-p009
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: ea7d1669b068b0f25e5517f5687deec8637296f03298d1f646a7e7866ea4a52d
+  source_pages:
+  - https://luckclub.cn/bazi/007/064/
+- id: annotation-ditiansui-ch064-ren_commentary006
+  title: 《滴天髓阐微》岁运·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    冲者破也，如子运午年，谓之运冲岁。日主喜子，要干头逢庚壬，午之干头逢甲丙，亦无咎；如子之干头遇丙戊，午之干头遇庚壬，亦有咎。日主喜午，子之干头逢甲戊，午之干头遇甲丙，则吉；如子之干头遇庚壬，午之干头逢丙戊，子之干头遇甲丙，则吉；如午之干头遇丙戊，子之干头遇庚壬，必凶。余可类推。'
+  passage_refs:
+  - ditiansui-ch064-p009
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: edd404208b3a50af6eece978d38dc146c1c1c6fa8297d22b201607b9b1d567ea
+  source_pages:
+  - https://luckclub.cn/bazi/007/064/
+- id: annotation-ditiansui-ch064-original_note007
+  title: 《滴天髓阐微》岁运·原注
+  kind: commentary
+  content: 【原注】如乙运庚年，庚运乙年则和，日主喜金则吉，日主喜木则不吉，子运丑年，丑运子年，日主喜土则吉，喜水则不吉。
+  passage_refs:
+  - ditiansui-ch064-p010
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 41dd16def26fc1255dd92c7664f9af61475a3ef24d2b0b27a8aa5eea343cd0d7
+  source_pages:
+  - https://luckclub.cn/bazi/007/064/
+- id: annotation-ditiansui-ch064-ren_commentary008
+  title: 《滴天髓阐微》岁运·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    和者合也。如乙运庚年，庚运乙年，合而能化，喜金则吉，合而不会，反为羁绊，不顾日主之喜我，则不吉矣。喜庚亦然，所以喜庚者必要木金得地，乙木无根，则合化为美矣，若子丑之合，不化亦是克水，喜水者必不吉也。'
+  passage_refs:
+  - ditiansui-ch064-p010
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 82f7475421de0f2708294cdbc8d75bd2b3a37653a4e144ac1aa1369efa9f535c
+  source_pages:
+  - https://luckclub.cn/bazi/007/064/
+- id: annotation-ditiansui-ch064-original_note009
+  title: 《滴天髓阐微》岁运·原注
+  kind: commentary
+  content: 【原注】如庚运辛年，辛运庚年，申运酉年，酉运申年，则好。日主喜阳，则庚与申为好，喜阴，则辛与酉为好，凡此皆宜类推。
+  passage_refs:
+  - ditiansui-ch064-p011
+  author: 刘基（传统题署）
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: d34514c3162e65d05670eda99f6dd552dcc76e625f4369a7a1b3747a5fb1618a
+  source_pages:
+  - https://luckclub.cn/bazi/007/064/
+- id: annotation-ditiansui-ch064-ren_commentary010
+  title: 《滴天髓阐微》岁运·任铁樵注
+  kind: commentary
+  content: '【任氏曰】：
+
+    好者，类相同也。如庚运申年，辛运酉年，是为真好，乃支之禄旺，自我本气归垣，如家室之可住，如庚运辛年，辛运庚年，乃天干之助，如朋友之帮扶，究竟不甚关切，必先要旺运通根，自然依附为好。如运无根气，其见势衰而无依附之情，非为好也。'
+  passage_refs:
+  - ditiansui-ch064-p011
+  author: 任铁樵
+  publication: 滴天髓阐微
+  school: 旺衰体用法
+  concepts:
+  - 行运
+  graph_refs:
+  - work:ditiansui
+  - school:ditiansui
+  - person:ren-tieqiao
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: a4dca110bdbde45102f07825353735032829ec7492590e71822915693102800a
+  source_pages:
+  - https://luckclub.cn/bazi/007/064/

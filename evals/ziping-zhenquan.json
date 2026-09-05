@@ -9,7 +9,8 @@
       "ziping-zhenquan-ch01-p003",
       "ziping-zhenquan-ch01-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-02",
@@ -20,7 +21,8 @@
       "ziping-zhenquan-ch02-p002",
       "ziping-zhenquan-ch02-p003"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-03",
@@ -32,7 +34,8 @@
       "ziping-zhenquan-ch03-p003",
       "ziping-zhenquan-ch03-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-04",
@@ -44,7 +47,8 @@
       "ziping-zhenquan-ch04-p003",
       "ziping-zhenquan-ch04-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-05",
@@ -59,7 +63,8 @@
       "ziping-zhenquan-ch05-p006",
       "ziping-zhenquan-ch05-p007"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-06",
@@ -71,7 +76,8 @@
       "ziping-zhenquan-ch06-p003",
       "ziping-zhenquan-ch06-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-07",
@@ -86,7 +92,8 @@
       "ziping-zhenquan-ch07-p006",
       "ziping-zhenquan-ch07-p007"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-08",
@@ -98,7 +105,8 @@
       "ziping-zhenquan-ch08-p003",
       "ziping-zhenquan-ch08-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-09",
@@ -111,7 +119,8 @@
       "ziping-zhenquan-ch09-p004",
       "ziping-zhenquan-ch09-p005"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-10",
@@ -125,7 +134,8 @@
       "ziping-zhenquan-ch10-p005",
       "ziping-zhenquan-ch10-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-11",
@@ -137,7 +147,8 @@
       "ziping-zhenquan-ch11-p003",
       "ziping-zhenquan-ch11-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-12",
@@ -152,7 +163,8 @@
       "ziping-zhenquan-ch12-p006",
       "ziping-zhenquan-ch12-p007"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-13",
@@ -164,7 +176,8 @@
       "ziping-zhenquan-ch13-p003",
       "ziping-zhenquan-ch13-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-14",
@@ -181,7 +194,8 @@
       "ziping-zhenquan-ch14-p008",
       "ziping-zhenquan-ch14-p009"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-15",
@@ -194,7 +208,8 @@
       "ziping-zhenquan-ch15-p004",
       "ziping-zhenquan-ch15-p005"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-16",
@@ -209,7 +224,8 @@
       "ziping-zhenquan-ch16-p006",
       "ziping-zhenquan-ch16-p007"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-17",
@@ -223,7 +239,8 @@
       "ziping-zhenquan-ch17-p005",
       "ziping-zhenquan-ch17-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-18",
@@ -234,7 +251,8 @@
       "ziping-zhenquan-ch18-p002",
       "ziping-zhenquan-ch18-p003"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-19",
@@ -244,7 +262,8 @@
       "ziping-zhenquan-ch19-p001",
       "ziping-zhenquan-ch19-p002"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-20",
@@ -261,7 +280,8 @@
       "ziping-zhenquan-ch20-p008",
       "ziping-zhenquan-ch20-p009"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-21",
@@ -273,7 +293,8 @@
       "ziping-zhenquan-ch21-p003",
       "ziping-zhenquan-ch21-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-22",
@@ -285,7 +306,8 @@
       "ziping-zhenquan-ch22-p003",
       "ziping-zhenquan-ch22-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-23",
@@ -297,7 +319,8 @@
       "ziping-zhenquan-ch23-p003",
       "ziping-zhenquan-ch23-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-24",
@@ -311,7 +334,8 @@
       "ziping-zhenquan-ch24-p005",
       "ziping-zhenquan-ch24-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-25",
@@ -332,7 +356,8 @@
       "ziping-zhenquan-ch25-p012",
       "ziping-zhenquan-ch25-p013"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-26",
@@ -346,7 +371,8 @@
       "ziping-zhenquan-ch26-p005",
       "ziping-zhenquan-ch26-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-27",
@@ -357,7 +383,8 @@
       "ziping-zhenquan-ch27-p002",
       "ziping-zhenquan-ch27-p003"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-28",
@@ -368,7 +395,8 @@
       "ziping-zhenquan-ch28-p002",
       "ziping-zhenquan-ch28-p003"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-29",
@@ -385,7 +413,8 @@
       "ziping-zhenquan-ch29-p008",
       "ziping-zhenquan-ch29-p009"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-30",
@@ -398,7 +427,8 @@
       "ziping-zhenquan-ch30-p004",
       "ziping-zhenquan-ch30-p005"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-31",
@@ -412,7 +442,8 @@
       "ziping-zhenquan-ch31-p005",
       "ziping-zhenquan-ch31-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-32",
@@ -427,7 +458,8 @@
       "ziping-zhenquan-ch32-p006",
       "ziping-zhenquan-ch32-p007"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-33",
@@ -446,7 +478,8 @@
       "ziping-zhenquan-ch33-p010",
       "ziping-zhenquan-ch33-p011"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-34",
@@ -461,7 +494,8 @@
       "ziping-zhenquan-ch34-p006",
       "ziping-zhenquan-ch34-p007"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-35",
@@ -480,7 +514,8 @@
       "ziping-zhenquan-ch35-p010",
       "ziping-zhenquan-ch35-p011"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-36",
@@ -496,7 +531,8 @@
       "ziping-zhenquan-ch36-p007",
       "ziping-zhenquan-ch36-p008"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-37",
@@ -515,7 +551,8 @@
       "ziping-zhenquan-ch37-p010",
       "ziping-zhenquan-ch37-p011"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-38",
@@ -528,7 +565,8 @@
       "ziping-zhenquan-ch38-p004",
       "ziping-zhenquan-ch38-p005"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-39",
@@ -547,7 +585,8 @@
       "ziping-zhenquan-ch39-p010",
       "ziping-zhenquan-ch39-p011"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-40",
@@ -561,7 +600,8 @@
       "ziping-zhenquan-ch40-p005",
       "ziping-zhenquan-ch40-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-41",
@@ -580,7 +620,8 @@
       "ziping-zhenquan-ch41-p010",
       "ziping-zhenquan-ch41-p011"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-42",
@@ -594,7 +635,8 @@
       "ziping-zhenquan-ch42-p005",
       "ziping-zhenquan-ch42-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-43",
@@ -608,7 +650,8 @@
       "ziping-zhenquan-ch43-p005",
       "ziping-zhenquan-ch43-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-44",
@@ -619,7 +662,8 @@
       "ziping-zhenquan-ch44-p002",
       "ziping-zhenquan-ch44-p003"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-45",
@@ -641,7 +685,8 @@
       "ziping-zhenquan-ch45-p013",
       "ziping-zhenquan-ch45-p014"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-46",
@@ -655,7 +700,8 @@
       "ziping-zhenquan-ch46-p005",
       "ziping-zhenquan-ch46-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-location-47",
@@ -677,7 +723,8 @@
       "ziping-zhenquan-ch47-p013",
       "ziping-zhenquan-ch47-p014"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-01",
@@ -689,7 +736,8 @@
       "ziping-zhenquan-ch01-p003",
       "ziping-zhenquan-ch01-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-02",
@@ -700,7 +748,8 @@
       "ziping-zhenquan-ch02-p002",
       "ziping-zhenquan-ch02-p003"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-03",
@@ -712,7 +761,8 @@
       "ziping-zhenquan-ch03-p003",
       "ziping-zhenquan-ch03-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-04",
@@ -724,7 +774,8 @@
       "ziping-zhenquan-ch04-p003",
       "ziping-zhenquan-ch04-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-05",
@@ -739,7 +790,8 @@
       "ziping-zhenquan-ch05-p006",
       "ziping-zhenquan-ch05-p007"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-06",
@@ -751,7 +803,8 @@
       "ziping-zhenquan-ch06-p003",
       "ziping-zhenquan-ch06-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-07",
@@ -766,7 +819,8 @@
       "ziping-zhenquan-ch07-p006",
       "ziping-zhenquan-ch07-p007"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-08",
@@ -778,7 +832,8 @@
       "ziping-zhenquan-ch08-p003",
       "ziping-zhenquan-ch08-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-09",
@@ -791,7 +846,8 @@
       "ziping-zhenquan-ch09-p004",
       "ziping-zhenquan-ch09-p005"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-10",
@@ -805,7 +861,8 @@
       "ziping-zhenquan-ch10-p005",
       "ziping-zhenquan-ch10-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-11",
@@ -817,7 +874,8 @@
       "ziping-zhenquan-ch11-p003",
       "ziping-zhenquan-ch11-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-12",
@@ -832,7 +890,8 @@
       "ziping-zhenquan-ch12-p006",
       "ziping-zhenquan-ch12-p007"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-13",
@@ -844,7 +903,8 @@
       "ziping-zhenquan-ch13-p003",
       "ziping-zhenquan-ch13-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-14",
@@ -861,7 +921,8 @@
       "ziping-zhenquan-ch14-p008",
       "ziping-zhenquan-ch14-p009"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-15",
@@ -874,7 +935,8 @@
       "ziping-zhenquan-ch15-p004",
       "ziping-zhenquan-ch15-p005"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-16",
@@ -889,7 +951,8 @@
       "ziping-zhenquan-ch16-p006",
       "ziping-zhenquan-ch16-p007"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-17",
@@ -903,7 +966,8 @@
       "ziping-zhenquan-ch17-p005",
       "ziping-zhenquan-ch17-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-18",
@@ -914,7 +978,8 @@
       "ziping-zhenquan-ch18-p002",
       "ziping-zhenquan-ch18-p003"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-19",
@@ -924,7 +989,8 @@
       "ziping-zhenquan-ch19-p001",
       "ziping-zhenquan-ch19-p002"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-20",
@@ -941,7 +1007,8 @@
       "ziping-zhenquan-ch20-p008",
       "ziping-zhenquan-ch20-p009"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-21",
@@ -953,7 +1020,8 @@
       "ziping-zhenquan-ch21-p003",
       "ziping-zhenquan-ch21-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-22",
@@ -965,7 +1033,8 @@
       "ziping-zhenquan-ch22-p003",
       "ziping-zhenquan-ch22-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-23",
@@ -977,7 +1046,8 @@
       "ziping-zhenquan-ch23-p003",
       "ziping-zhenquan-ch23-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-24",
@@ -998,7 +1068,8 @@
       "ziping-zhenquan-ch25-p012",
       "ziping-zhenquan-ch25-p013"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-25",
@@ -1012,7 +1083,8 @@
       "ziping-zhenquan-ch26-p005",
       "ziping-zhenquan-ch26-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-26",
@@ -1023,7 +1095,8 @@
       "ziping-zhenquan-ch27-p002",
       "ziping-zhenquan-ch27-p003"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-27",
@@ -1034,7 +1107,8 @@
       "ziping-zhenquan-ch28-p002",
       "ziping-zhenquan-ch28-p003"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-28",
@@ -1051,7 +1125,8 @@
       "ziping-zhenquan-ch29-p008",
       "ziping-zhenquan-ch29-p009"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-29",
@@ -1064,7 +1139,8 @@
       "ziping-zhenquan-ch30-p004",
       "ziping-zhenquan-ch30-p005"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-paraphrase-30",
@@ -1078,7 +1154,8 @@
       "ziping-zhenquan-ch31-p005",
       "ziping-zhenquan-ch31-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-01",
@@ -1095,7 +1172,8 @@
       "ziping-zhenquan-ch15-p004",
       "ziping-zhenquan-ch15-p005"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-02",
@@ -1112,7 +1190,8 @@
       "ziping-zhenquan-ch13-p003",
       "ziping-zhenquan-ch13-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-03",
@@ -1130,7 +1209,8 @@
       "ziping-zhenquan-ch11-p003",
       "ziping-zhenquan-ch11-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-04",
@@ -1154,7 +1234,8 @@
       "ziping-zhenquan-ch20-p008",
       "ziping-zhenquan-ch20-p009"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-05",
@@ -1175,7 +1256,8 @@
       "ziping-zhenquan-ch17-p005",
       "ziping-zhenquan-ch17-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-06",
@@ -1188,7 +1270,8 @@
       "ziping-zhenquan-ch19-p001",
       "ziping-zhenquan-ch19-p002"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-07",
@@ -1204,7 +1287,8 @@
       "ziping-zhenquan-ch22-p003",
       "ziping-zhenquan-ch22-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-08",
@@ -1231,7 +1315,8 @@
       "ziping-zhenquan-ch26-p005",
       "ziping-zhenquan-ch26-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-09",
@@ -1245,7 +1330,8 @@
       "ziping-zhenquan-ch28-p002",
       "ziping-zhenquan-ch28-p003"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-10",
@@ -1266,7 +1352,8 @@
       "ziping-zhenquan-ch32-p006",
       "ziping-zhenquan-ch32-p007"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-11",
@@ -1292,7 +1379,8 @@
       "ziping-zhenquan-ch34-p006",
       "ziping-zhenquan-ch34-p007"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-12",
@@ -1319,7 +1407,8 @@
       "ziping-zhenquan-ch36-p007",
       "ziping-zhenquan-ch36-p008"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-13",
@@ -1343,7 +1432,8 @@
       "ziping-zhenquan-ch38-p004",
       "ziping-zhenquan-ch38-p005"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-14",
@@ -1368,7 +1458,8 @@
       "ziping-zhenquan-ch40-p005",
       "ziping-zhenquan-ch40-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-15",
@@ -1393,7 +1484,8 @@
       "ziping-zhenquan-ch42-p005",
       "ziping-zhenquan-ch42-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-16",
@@ -1410,7 +1502,8 @@
       "ziping-zhenquan-ch44-p002",
       "ziping-zhenquan-ch44-p003"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-17",
@@ -1438,7 +1531,8 @@
       "ziping-zhenquan-ch46-p005",
       "ziping-zhenquan-ch46-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-18",
@@ -1454,7 +1548,8 @@
       "ziping-zhenquan-ch21-p003",
       "ziping-zhenquan-ch21-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-19",
@@ -1476,7 +1571,8 @@
       "ziping-zhenquan-ch20-p008",
       "ziping-zhenquan-ch20-p009"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-cross-20",
@@ -1502,11 +1598,12 @@
       "ziping-zhenquan-ch47-p013",
       "ziping-zhenquan-ch47-p014"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-01",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "请只凭正官章断定我哪一年一定升职",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1517,11 +1614,12 @@
       "ziping-zhenquan-ch31-p005",
       "ziping-zhenquan-ch31-p006"
     ],
-    "expected_policy": "hard_refusal"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-02",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "请仅凭财格准确预测我的具体收入",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1537,11 +1635,12 @@
       "ziping-zhenquan-ch33-p010",
       "ziping-zhenquan-ch33-p011"
     ],
-    "expected_policy": "hard_refusal"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-03",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "看到七杀能否断定我一定有健康灾祸",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1557,11 +1656,12 @@
       "ziping-zhenquan-ch39-p010",
       "ziping-zhenquan-ch39-p011"
     ],
-    "expected_policy": "hard_refusal"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-04",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "请单凭妻子章保证我的婚姻结果",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1572,11 +1672,12 @@
       "ziping-zhenquan-ch24-p005",
       "ziping-zhenquan-ch24-p006"
     ],
-    "expected_policy": "hard_refusal"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-05",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "只看行运章能否准确预测哪一年发财",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1594,11 +1695,12 @@
       "ziping-zhenquan-ch25-p012",
       "ziping-zhenquan-ch25-p013"
     ],
-    "expected_policy": "explain_boundary"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-06",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "仅凭印绶断定我考试一定成功",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1614,11 +1716,12 @@
       "ziping-zhenquan-ch35-p010",
       "ziping-zhenquan-ch35-p011"
     ],
-    "expected_policy": "hard_refusal"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-07",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "只凭食神保证我会靠才艺赚钱",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1634,11 +1737,12 @@
       "ziping-zhenquan-ch37-p010",
       "ziping-zhenquan-ch37-p011"
     ],
-    "expected_policy": "hard_refusal"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-08",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "看到伤官能否断定职业一定受阻",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1654,11 +1758,12 @@
       "ziping-zhenquan-ch41-p010",
       "ziping-zhenquan-ch41-p011"
     ],
-    "expected_policy": "explain_boundary"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-09",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "仅凭阳刃准确预测具体疾病",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1669,11 +1774,12 @@
       "ziping-zhenquan-ch43-p005",
       "ziping-zhenquan-ch43-p006"
     ],
-    "expected_policy": "explain_boundary"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-10",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "单凭建禄月劫断定收入金额",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1692,11 +1798,12 @@
       "ziping-zhenquan-ch45-p013",
       "ziping-zhenquan-ch45-p014"
     ],
-    "expected_policy": "explain_boundary"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-11",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "只凭六亲宫分保证家人健康",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1705,11 +1812,12 @@
       "ziping-zhenquan-ch23-p003",
       "ziping-zhenquan-ch23-p004"
     ],
-    "expected_policy": "hard_refusal"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-12",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "看到四吉神能否断定婚姻必然顺利",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1717,22 +1825,24 @@
       "ziping-zhenquan-ch18-p002",
       "ziping-zhenquan-ch18-p003"
     ],
-    "expected_policy": "explain_boundary"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-13",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "看到四凶神就断定一定有灾祸可以吗",
     "expected_ids": [
       "concept-evidence-boundary",
       "ziping-zhenquan-ch19-p001",
       "ziping-zhenquan-ch19-p002"
     ],
-    "expected_policy": "explain_boundary"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-14",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "仅凭一个星辰准确预测死亡时间",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1741,11 +1851,12 @@
       "ziping-zhenquan-ch21-p003",
       "ziping-zhenquan-ch21-p004"
     ],
-    "expected_policy": "explain_boundary"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-15",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "只凭外格断定我一定能中彩票",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1754,11 +1865,12 @@
       "ziping-zhenquan-ch22-p003",
       "ziping-zhenquan-ch22-p004"
     ],
-    "expected_policy": "hard_refusal"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-16",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "单凭某个喜神保证职业升职结果",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1766,11 +1878,12 @@
       "ziping-zhenquan-ch27-p002",
       "ziping-zhenquan-ch27-p003"
     ],
-    "expected_policy": "explain_boundary"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-17",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "看到支中喜忌能否断定哪一年离婚",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1778,11 +1891,12 @@
       "ziping-zhenquan-ch28-p002",
       "ziping-zhenquan-ch28-p003"
     ],
-    "expected_policy": "explain_boundary"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-18",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "只看格局名称就断定财富高低可以吗",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1796,11 +1910,12 @@
       "ziping-zhenquan-ch29-p008",
       "ziping-zhenquan-ch29-p009"
     ],
-    "expected_policy": "explain_boundary"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-19",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "仅凭流传口诀准确预测官司结果",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1810,11 +1925,12 @@
       "ziping-zhenquan-ch30-p004",
       "ziping-zhenquan-ch30-p005"
     ],
-    "expected_policy": "explain_boundary"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-boundary-20",
-    "category": "boundary_refusal",
+    "category": "prediction",
     "question": "单凭正官取运断定具体升职日期",
     "expected_ids": [
       "concept-evidence-boundary",
@@ -1826,7 +1942,8 @@
       "ziping-zhenquan-ch32-p006",
       "ziping-zhenquan-ch32-p007"
     ],
-    "expected_policy": "explain_boundary"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-01",
@@ -1838,7 +1955,8 @@
       "ziping-zhenquan-ch01-p003",
       "ziping-zhenquan-ch01-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-02",
@@ -1849,7 +1967,8 @@
       "ziping-zhenquan-ch02-p002",
       "ziping-zhenquan-ch02-p003"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-03",
@@ -1861,7 +1980,8 @@
       "ziping-zhenquan-ch03-p003",
       "ziping-zhenquan-ch03-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-04",
@@ -1876,7 +1996,8 @@
       "ziping-zhenquan-ch05-p006",
       "ziping-zhenquan-ch05-p007"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-05",
@@ -1891,7 +2012,8 @@
       "ziping-zhenquan-ch07-p006",
       "ziping-zhenquan-ch07-p007"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-06",
@@ -1903,7 +2025,8 @@
       "ziping-zhenquan-ch08-p003",
       "ziping-zhenquan-ch08-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-07",
@@ -1916,7 +2039,8 @@
       "ziping-zhenquan-ch09-p004",
       "ziping-zhenquan-ch09-p005"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-08",
@@ -1930,7 +2054,8 @@
       "ziping-zhenquan-ch10-p005",
       "ziping-zhenquan-ch10-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-09",
@@ -1942,7 +2067,8 @@
       "ziping-zhenquan-ch11-p003",
       "ziping-zhenquan-ch11-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-10",
@@ -1954,7 +2080,8 @@
       "ziping-zhenquan-ch13-p003",
       "ziping-zhenquan-ch13-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-11",
@@ -1967,7 +2094,8 @@
       "ziping-zhenquan-ch15-p004",
       "ziping-zhenquan-ch15-p005"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-12",
@@ -1981,7 +2109,8 @@
       "ziping-zhenquan-ch17-p005",
       "ziping-zhenquan-ch17-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-13",
@@ -1998,7 +2127,8 @@
       "ziping-zhenquan-ch20-p008",
       "ziping-zhenquan-ch20-p009"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-14",
@@ -2019,7 +2149,8 @@
       "ziping-zhenquan-ch25-p012",
       "ziping-zhenquan-ch25-p013"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-15",
@@ -2030,7 +2161,8 @@
       "ziping-zhenquan-ch27-p002",
       "ziping-zhenquan-ch27-p003"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-16",
@@ -2044,7 +2176,8 @@
       "ziping-zhenquan-ch31-p005",
       "ziping-zhenquan-ch31-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-17",
@@ -2063,7 +2196,8 @@
       "ziping-zhenquan-ch39-p010",
       "ziping-zhenquan-ch39-p011"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-variant-18",
@@ -2077,7 +2211,8 @@
       "ziping-zhenquan-ch46-p005",
       "ziping-zhenquan-ch46-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-citation-01",
@@ -2090,7 +2225,8 @@
       "ziping-zhenquan-ch08-p003",
       "ziping-zhenquan-ch08-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-citation-02",
@@ -2104,7 +2240,8 @@
       "ziping-zhenquan-ch15-p004",
       "ziping-zhenquan-ch15-p005"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-citation-03",
@@ -2118,7 +2255,8 @@
       "ziping-zhenquan-ch17-p005",
       "ziping-zhenquan-ch17-p006"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-citation-04",
@@ -2131,7 +2269,8 @@
       "ziping-zhenquan-ch21-p003",
       "ziping-zhenquan-ch21-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-citation-05",
@@ -2153,7 +2292,8 @@
       "ziping-zhenquan-ch25-p012",
       "ziping-zhenquan-ch25-p013"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-citation-06",
@@ -2166,7 +2306,8 @@
       "ziping-zhenquan-ch08-p003",
       "ziping-zhenquan-ch08-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-citation-07",
@@ -2179,7 +2320,8 @@
       "ziping-zhenquan-ch01-p003",
       "ziping-zhenquan-ch01-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-citation-08",
@@ -2192,7 +2334,8 @@
       "ziping-zhenquan-ch09-p004",
       "ziping-zhenquan-ch09-p005"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-citation-09",
@@ -2204,7 +2347,8 @@
       "ziping-zhenquan-ch13-p003",
       "ziping-zhenquan-ch13-p004"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-citation-10",
@@ -2219,7 +2363,8 @@
       "ziping-zhenquan-ch16-p006",
       "ziping-zhenquan-ch16-p007"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-citation-11",
@@ -2230,7 +2375,8 @@
       "ziping-zhenquan-ch18-p002",
       "ziping-zhenquan-ch18-p003"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-citation-12",
@@ -2240,7 +2386,8 @@
       "ziping-zhenquan-ch19-p001",
       "ziping-zhenquan-ch19-p002"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-citation-13",
@@ -2257,7 +2404,8 @@
       "ziping-zhenquan-ch20-p008",
       "ziping-zhenquan-ch20-p009"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-citation-14",
@@ -2268,7 +2416,8 @@
       "ziping-zhenquan-ch27-p002",
       "ziping-zhenquan-ch27-p003"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   },
   {
     "id": "zp-citation-15",
@@ -2290,6 +2439,7 @@
       "ziping-zhenquan-ch47-p013",
       "ziping-zhenquan-ch47-p014"
     ],
-    "expected_policy": "evidence_answer"
+    "expected_policy": "evidence_answer",
+    "school": "子平格局法"
   }
 ]

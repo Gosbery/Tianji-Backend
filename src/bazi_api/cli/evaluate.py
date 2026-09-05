@@ -19,6 +19,7 @@ from bazi_api.integrations.embeddings import create_embedding_provider
 from bazi_api.integrations.llm import AnswerGenerator, GenerationResult, QuestionPolicy
 from bazi_api.modules.charts.schemas import BirthInput, ChartFacts
 from bazi_api.modules.charts.service import ChartCalculator
+from bazi_api.modules.conversations.service import ChatService
 from bazi_api.modules.knowledge.repository import KnowledgeRepository
 from bazi_api.modules.knowledge.schemas import EvidenceScope
 from bazi_api.modules.retrieval.schemas import RetrievalHit
@@ -43,10 +44,7 @@ REPORT_METRICS = (
     "citation_chain_rate",
     "answer_quality.citation_validity_rate",
     "answer_quality.policy_accuracy_rate",
-    "answer_quality.boundary_compliance_rate",
-    "answer_quality.boundary_explanation_accuracy",
-    "answer_quality.hard_refusal_recall",
-    "answer_quality.safe_answer_rate",
+    "answer_quality.answer_allowed_rate",
     "answer_quality.uncertainty_trigger_rate",
 )
 BASELINE_IDENTITY_FIELDS = (
@@ -69,9 +67,7 @@ class EvaluationConfigurationError(ValueError):
     pass
 
 
-def settings_with_tuning(
-    settings: Settings, overrides: dict[str, int | float]
-) -> Settings:
+def settings_with_tuning(settings: Settings, overrides: dict[str, int | float]) -> Settings:
     unknown = set(overrides).difference(RETRIEVAL_TUNING_FIELDS)
     if unknown:
         names = ", ".join(sorted(unknown))
@@ -82,9 +78,7 @@ def settings_with_tuning(
         raise EvaluationConfigurationError(str(exc)) from exc
 
 
-def parse_parameter_grid(
-    values: list[str], settings: Settings
-) -> list[dict[str, int | float]]:
+def parse_parameter_grid(values: list[str], settings: Settings) -> list[dict[str, int | float]]:
     if not values:
         return [{}]
     options: dict[str, list[int | float]] = {}
@@ -121,36 +115,22 @@ def evaluate_generated_answer(
 ) -> dict[str, bool]:
     citations = [int(item) for item in re.findall(r"\[(\d+)\]", generated.answer)]
     citations_in_range = all(1 <= item <= len(hits) for item in citations)
+    citation_exempt = generated.policy_decision == "refuse_no_evidence"
     citation_valid = (
         generated.citations_validated
         and citations_in_range
-        and (bool(citations) if hits else not citations)
+        and (citation_exempt or (bool(citations) if hits else not citations))
     )
     policy_correct = generated.question_policy == expected_policy
-    boundary_compliant = expected_policy == "evidence_answer" or (
-        expected_policy == "explain_boundary"
-        and generated.question_policy == "explain_boundary"
-        and generated.policy_decision == "allow"
-    ) or (
-        expected_policy == "hard_refusal"
-        and generated.question_policy == "hard_refusal"
-        and generated.policy_decision == "refuse_high_risk"
-    )
-    overrefusal_avoided = not (
-        expected_policy != "hard_refusal" and generated.question_policy == "hard_refusal"
-    )
+    answer_allowed = generated.policy_decision == "allow"
     uncertainty_triggered = not expects_uncertainty or (
         generated.uncertainty_validated
-        and any(
-            isinstance(item, str) and bool(item.strip())
-            for item in generated.uncertainties
-        )
+        and any(isinstance(item, str) and bool(item.strip()) for item in generated.uncertainties)
     )
     return {
         "citation_valid": citation_valid,
         "policy_correct": policy_correct,
-        "boundary_compliant": boundary_compliant,
-        "overrefusal_avoided": overrefusal_avoided,
+        "answer_allowed": answer_allowed,
         "uncertainty_triggered": uncertainty_triggered,
     }
 
@@ -185,9 +165,7 @@ def compare_with_baseline(
         current = _nested_number(report, path)
         previous = _nested_number(baseline, path)
         if previous is not None and current is None:
-            raise EvaluationConfigurationError(
-                f"当前报告缺少基线要求的指标: {path}"
-            )
+            raise EvaluationConfigurationError(f"当前报告缺少基线要求的指标: {path}")
         if current is None or previous is None:
             continue
         delta = current - previous
@@ -237,11 +215,7 @@ def _load_cases(settings: Settings, dataset: str) -> list[dict[str, Any]]:
             "expected_policy",
         }.issubset(case):
             raise EvaluationConfigurationError(f"第 {index} 条评测数据缺少必填字段")
-        if case["expected_policy"] not in {
-            "evidence_answer",
-            "explain_boundary",
-            "hard_refusal",
-        }:
+        if case["expected_policy"] != "evidence_answer":
             raise EvaluationConfigurationError(f"第 {index} 条评测数据的 expected_policy 无效")
     return payload
 
@@ -389,8 +363,32 @@ async def _evaluate_cases(
     for case in cases:
         chart = _chart_for_case(case, calculator)
         chart_profiles.add(chart.birth.model_dump_json(exclude={"name"}))
+        query = str(case["question"])
+        if case.get("previous_question"):
+            query = ChatService._retrieval_query(
+                query,
+                [
+                    {"role": "user", "content": str(case["previous_question"]), "payload": {}},
+                    {
+                        "role": "assistant",
+                        "content": "不参与检索的上一轮助手文本",
+                        "payload": {
+                            "evidence": [
+                                {
+                                    "title": title,
+                                    "concepts": case.get("previous_evidence_concepts", []),
+                                }
+                                for title in case.get("previous_evidence_titles", [])
+                            ]
+                        },
+                    },
+                ],
+                repository.topics,
+            )
+        else:
+            query = ChatService._retrieval_query(query, [], repository.topics)
         results = await retrieval.search(
-            case["question"],
+            query,
             chart,
             str(case.get("school", "基础共识")),
             mode,
@@ -399,9 +397,7 @@ async def _evaluate_cases(
         )
         expected = set(case["expected_ids"])
         ranked_ids = [result.document.id for result in results]
-        ranked_targets = [
-            {result.document.id, *result.document.trace_refs} for result in results
-        ]
+        ranked_targets = [{result.document.id, *result.document.trace_refs} for result in results]
         success = any(targets & expected for targets in ranked_targets[:5])
         recall_hits += int(success)
         per_category[str(case["category"])].append(int(success))
@@ -481,53 +477,22 @@ async def _evaluate_cases(
         },
         "misses": misses,
     }
+    if "multi_turn" in per_category:
+        multi_turn_recall = sum(per_category["multi_turn"]) / len(per_category["multi_turn"])
+        result["multi_turn_recall_at_5"] = round(multi_turn_recall, 4)
+        acceptance["multi_turn_recall_at_5"] = multi_turn_recall >= 0.90
     if answer_checks:
         answer_total = len(answer_checks)
         policy_checks = [item for item, _, _ in answer_checks]
-        boundary_checks = [
-            item for item, expected, _ in answer_checks if expected != "evidence_answer"
-        ]
-        hard_refusal_checks = [
-            item for item, expected, _ in answer_checks if expected == "hard_refusal"
-        ]
-        explanation_checks = [
-            item for item, expected, _ in answer_checks if expected == "explain_boundary"
-        ]
-        safe_answer_checks = [
-            item for item, expected, _ in answer_checks if expected != "hard_refusal"
-        ]
         uncertainty_checks = [item for item, _, expected in answer_checks if expected]
-        policy_accuracy = sum(item["policy_correct"] for item in policy_checks) / len(
+        policy_accuracy = sum(item["policy_correct"] for item in policy_checks) / len(policy_checks)
+        answer_allowed_rate = sum(item["answer_allowed"] for item in policy_checks) / len(
             policy_checks
-        )
-        boundary_compliance = (
-            sum(item["boundary_compliant"] for item in boundary_checks)
-            / len(boundary_checks)
-            if boundary_checks
-            else 1.0
         )
         uncertainty_trigger = (
             sum(item["uncertainty_triggered"] for item in uncertainty_checks)
             / len(uncertainty_checks)
             if uncertainty_checks
-            else 1.0
-        )
-        hard_refusal_recall = (
-            sum(item["policy_correct"] for item in hard_refusal_checks)
-            / len(hard_refusal_checks)
-            if hard_refusal_checks
-            else 1.0
-        )
-        explanation_accuracy = (
-            sum(item["policy_correct"] for item in explanation_checks)
-            / len(explanation_checks)
-            if explanation_checks
-            else 1.0
-        )
-        safe_answer_rate = (
-            sum(item["overrefusal_avoided"] for item in safe_answer_checks)
-            / len(safe_answer_checks)
-            if safe_answer_checks
             else 1.0
         )
         answer_quality = {
@@ -537,16 +502,7 @@ async def _evaluate_cases(
             ),
             "policy_cases": len(policy_checks),
             "policy_accuracy_rate": round(policy_accuracy, 4),
-            "boundary_cases": len(boundary_checks),
-            "boundary_compliance_rate": round(boundary_compliance, 4),
-            "boundary_violation_rate": round(1 - boundary_compliance, 4),
-            "hard_refusal_cases": len(hard_refusal_checks),
-            "hard_refusal_recall": round(hard_refusal_recall, 4),
-            "boundary_explanation_cases": len(explanation_checks),
-            "boundary_explanation_accuracy": round(explanation_accuracy, 4),
-            "safe_answer_cases": len(safe_answer_checks),
-            "safe_answer_rate": round(safe_answer_rate, 4),
-            "overrefusal_rate": round(1 - safe_answer_rate, 4),
+            "answer_allowed_rate": round(answer_allowed_rate, 4),
             "uncertainty_cases": len(uncertainty_checks),
             "uncertainty_trigger_rate": round(uncertainty_trigger, 4),
             "failures": invalid_answers,
@@ -556,12 +512,8 @@ async def _evaluate_cases(
             {
                 "answer_citation_validity": answer_quality["citation_validity_rate"] == 1.0,
                 "answer_policy_accuracy": answer_quality["policy_accuracy_rate"] == 1.0,
-                "answer_boundary_compliance": answer_quality["boundary_compliance_rate"]
-                == 1.0,
-                "answer_hard_refusal_recall": answer_quality["hard_refusal_recall"] == 1.0,
-                "answer_safe_answer_rate": answer_quality["safe_answer_rate"] == 1.0,
-                "answer_uncertainty_trigger": answer_quality["uncertainty_trigger_rate"]
-                == 1.0,
+                "answer_all_topics_allowed": answer_quality["answer_allowed_rate"] == 1.0,
+                "answer_uncertainty_trigger": answer_quality["uncertainty_trigger_rate"] == 1.0,
             }
         )
     result["acceptance"] = acceptance
@@ -653,6 +605,7 @@ def main() -> None:
             )
             report["baseline_comparison"] = comparison
             report["passed"] = bool(report.get("passed")) and comparison["passed"]
+        report["max_regression"] = args.max_regression
         rendered = json.dumps(report, ensure_ascii=False, indent=2)
         if args.output:
             args.output.parent.mkdir(parents=True, exist_ok=True)

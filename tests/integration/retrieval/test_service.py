@@ -128,7 +128,7 @@ async def test_evidence_scopes_are_isolated_and_preview_keeps_canonical_chain(
     preview = await service.search(
         "子平真诠怎样从月令讨论用神？",
         chart,
-        "基础共识",
+        "子平格局法",
         "hybrid_rerank",
         6,
         "personal_preview",
@@ -141,6 +141,19 @@ async def test_evidence_scopes_are_isolated_and_preview_keeps_canonical_chain(
     assert all(
         hit.document.warning for hit in preview if hit.document.review_status == "machine_verified"
     )
+
+    for selected_school in ("基础共识", "子平格局法", "其他用神体系"):
+        isolated = await service.search(
+            "月令用神与格局",
+            chart,
+            selected_school,
+            "hybrid",
+            10,
+            "personal_preview",
+        )
+        assert all(
+            hit.document.school in {"基础共识", selected_school} for hit in isolated
+        )
 
 
 @pytest.mark.asyncio
@@ -171,7 +184,7 @@ async def test_generic_chart_question_retrieves_its_pattern_candidate_rules(
     hits = await service.search(
         "这个命格如何？",
         chart,
-        "基础共识",
+        "子平格局法",
         "hybrid_rerank",
         6,
         "personal_preview",

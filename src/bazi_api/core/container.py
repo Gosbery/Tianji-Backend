@@ -12,10 +12,13 @@ from bazi_api.integrations.llm import AnswerGenerator
 from bazi_api.modules.charts.service import ChartCalculator
 from bazi_api.modules.conversations.repository import ConversationRepository
 from bazi_api.modules.conversations.service import ChatService
+from bazi_api.modules.experts.repository import ExpertRepository
 from bazi_api.modules.feedback.repository import FeedbackRepository
 from bazi_api.modules.knowledge.repository import KnowledgeRepository
 from bazi_api.modules.observability.repository import TraceRepository
 from bazi_api.modules.retrieval.service import RetrievalService
+from bazi_api.modules.tasks.repository import TaskRepository
+from bazi_api.modules.tasks.service import TaskService
 
 from .config import Settings
 
@@ -34,15 +37,21 @@ class ApplicationContainer:
     feedback: FeedbackRepository
     traces: TraceRepository
     chat: ChatService
+    experts: ExpertRepository
+    task_repository: TaskRepository
+    tasks: TaskService
 
     async def close(self) -> None:
         try:
-            self.database.close()
+            await self.tasks.close()
         finally:
             try:
-                await asyncio.to_thread(self.retrieval.close)
+                self.database.close()
             finally:
-                await self.http_client.aclose()
+                try:
+                    await asyncio.to_thread(self.retrieval.close)
+                finally:
+                    await self.http_client.aclose()
 
 
 async def build_container(settings: Settings) -> ApplicationContainer:
@@ -60,6 +69,8 @@ async def build_container(settings: Settings) -> ApplicationContainer:
     try:
         knowledge = KnowledgeRepository(settings.knowledge_path)
         knowledge.load()
+        experts = ExpertRepository(settings.knowledge_path / "experts", knowledge)
+        experts.load()
         logger.info(
             "knowledge_loaded",
             extra={"provider": "yaml", "hits": len(knowledge.documents("personal_preview"))},
@@ -95,8 +106,19 @@ async def build_container(settings: Settings) -> ApplicationContainer:
             conversations=conversations,
             traces=traces,
             charts=charts,
+            topics=knowledge.topics,
+            experts=experts,
         )
-        return ApplicationContainer(
+        task_repository = TaskRepository(database)
+        tasks = TaskService(
+            repository=task_repository,
+            conversations=conversations,
+            charts=charts,
+            experts=experts,
+            chat=chat,
+            concurrency=3,
+        )
+        container = ApplicationContainer(
             settings=settings,
             http_client=http_client,
             database=database,
@@ -107,7 +129,12 @@ async def build_container(settings: Settings) -> ApplicationContainer:
             feedback=feedback,
             traces=traces,
             chat=chat,
+            experts=experts,
+            task_repository=task_repository,
+            tasks=tasks,
         )
+        await tasks.start()
+        return container
     except BaseException:
         if database is not None:
             database.close()

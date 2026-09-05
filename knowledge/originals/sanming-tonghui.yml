@@ -1,0 +1,2076 @@
+work:
+  id: work-sanming-tonghui
+  title: 三命通会
+  attributed_author: 万民英
+  dynasty: 明
+  edition: luckclub.cn 公开网页录入本（选章）
+  edition_notes: 按固定主题白名单选章；未作跨版本人工校勘。
+  source_url: https://luckclub.cn/bazi/005/
+  rights: public_domain
+  school: 子平综合法
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: &id001
+  - 仅获得单一公开网页录入本，OCR 错字、脱字及版本异文尚未经人工逐字校勘。
+  content_sha256: 869a06594372986ed5fe4ecc86bfc370dfef2ffc8f6e5566783adc6b89755423
+  source_pages:
+  - https://luckclub.cn/bazi/005/
+passages:
+- id: sanming-tonghui-ch026-p001
+  volume: 选章正文
+  chapter_path:
+  - 第26章 论大运
+  sequence: 1
+  text: 夫运者，人生之传舍。探命之说先以三元、四柱、五行、生死、格局致合以定根基，然后考究运气，协而从之以定平生之吉凶也。古人以大运则一辰十岁，折除以三日为年者何？盖一月之终，晦朔周而有三十日，一日之终，昼夜周而有十二时；总十年之运气，凡三日有三十六时，乃见三百六十日为一岁之数；在一月之中有三百六十时，折除节气，算计三千六百日为一辰之十岁也。天论折除之法必用生者日历。过日时数，其节气之数。阳男阴女，大运以生日后未来节气日时为数，顺而行之；阴男阳女，大运以生日前过去节气日时为数，逆而行之。假如甲子阳男十二月二十四日已时生，是月也二十九日申时立春，阳男数以未来之日，自二十四日已时至二十五日已时方是一日之实数，至二十九日申时正得五日三时之节气，实历过六十三日折除，过六十三时折除，计六百三十日，乃一岁奇九月之大运；起于丁丑，必自十二月生日后，实经历过二十有一之日，月运方移宫，是越三岁九月之内，方是甲子十二月生，行一岁奇九月之大运也。
+  normalized_text: 夫运者，人生之传舍。探命之说先以三元、四柱、五行、生死、格局致合以定根基，然后考究运气，协而从之以定平生之吉凶也。古人以大运则一辰十岁，折除以三日为年者何？盖一月之终，晦朔周而有三十日，一日之终，昼夜周而有十二时；总十年之运气，凡三日有三十六时，乃见三百六十日为一岁之数；在一月之中有三百六十时，折除节气，算计三千六百日为一辰之十岁也。天论折除之法必用生者日历。过日时数，其节气之数。阳男阴女，大运以生日后未来节气日时为数，顺而行之；阴男阳女，大运以生日前过去节气日时为数，逆而行之。假如甲子阳男十二月二十四日已时生，是月也二十九日申时立春，阳男数以未来之日，自二十四日已时至二十五日已时方是一日之实数，至二十九日申时正得五日三时之节气，实历过六十三日折除，过六十三时折除，计六百三十日，乃一岁奇九月之大运；起于丁丑，必自十二月生日后，实经历过二十有一之日，月运方移宫，是越三岁九月之内，方是甲子十二月生，行一岁奇九月之大运也。
+  locator: 第26章·论大运·第1条
+  concepts:
+  - 格局
+  - 行运
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 100cc83063720ba981d77ebbf32ff28e8f50f25920399920e272edb3d8f2124a
+  source_pages:
+  - https://luckclub.cn/bazi/005/026/
+- id: sanming-tonghui-ch026-p002
+  volume: 选章正文
+  chapter_path:
+  - 第26章 论大运
+  sequence: 2
+  text: 凡行运，在干兼用地支之神，在支则弃天干之物。盖大运重地支，故有行东方、南方、西方、北方之辨损。用神者欲运制之益，用神者欲运生之身。弱欲运引进旺乡；官欲运生，不欲运伤；煞欲运制，不欲运助。财欲运扶，不欲运劫；印欲运旺，不欲运衰；食欲运生，不欲运枭绝。更看四柱强弱何如，原有原无，原轻原重。如木人用金为官，阳男运出未入申，阴男运出亥人戌；金人用木为财，阳男出丑入寅，阴男出已入辰，俱向禄临马。原有官，行官运发官；原有财，行财运发财；原有灾，行灾运发灾。更看当生年时得气浑浅，四柱得气深，迎运便发，得气浅，须交过运始发，得其中气，运至中则发。
+  normalized_text: 凡行运，在干兼用地支之神，在支则弃天干之物。盖大运重地支，故有行东方、南方、西方、北方之辨损。用神者欲运制之益，用神者欲运生之身。弱欲运引进旺乡；官欲运生，不欲运伤；煞欲运制，不欲运助。财欲运扶，不欲运劫；印欲运旺，不欲运衰；食欲运生，不欲运枭绝。更看四柱强弱何如，原有原无，原轻原重。如木人用金为官，阳男运出未入申，阴男运出亥人戌；金人用木为财，阳男出丑入寅，阴男出已入辰，俱向禄临马。原有官，行官运发官；原有财，行财运发财；原有灾，行灾运发灾。更看当生年时得气浑浅，四柱得气深，迎运便发，得气浅，须交过运始发，得其中气，运至中则发。
+  locator: 第26章·论大运·第2条
+  concepts:
+  - 旺衰
+  - 用神
+  - 行运
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 41942f84ee3577d12700e52b878f9de46e5f0621001e5f9d5624c4db9d7cf756
+  source_pages:
+  - https://luckclub.cn/bazi/005/026/
+- id: sanming-tonghui-ch026-p003
+  volume: 选章正文
+  chapter_path:
+  - 第26章 论大运
+  sequence: 3
+  text: 凡行运，长生主有创建作新之事；到临官、帝旺，主兴盛快乐，发福进财，生子骨肉之庆；到衰病之乡，多退败、破财、疾病等事；到死绝乡，主骨肉死丧，自身衰祸钝闷，百事蹇塞；到败运，主落魄懒惰，酒色昏迷；到胎库成形、冠带之乡，百事得中，安康平易。凡行运至夹贵、华盖、贵人，六合上，及乘生旺气者，皆主善庆，仍须察当生根基，十分则应五分，生时则应十分，福与灾同；凡行运至临官、帝旺上，太岁持之，官员主荐事改秩之喜中。
+  normalized_text: 凡行运，长生主有创建作新之事；到临官、帝旺，主兴盛快乐，发福进财，生子骨肉之庆；到衰病之乡，多退败、破财、疾病等事；到死绝乡，主骨肉死丧，自身衰祸钝闷，百事蹇塞；到败运，主落魄懒惰，酒色昏迷；到胎库成形、冠带之乡，百事得中，安康平易。凡行运至夹贵、华盖、贵人，六合上，及乘生旺气者，皆主善庆，仍须察当生根基，十分则应五分，生时则应十分，福与灾同；凡行运至临官、帝旺上，太岁持之，官员主荐事改秩之喜中。
+  locator: 第26章·论大运·第3条
+  concepts:
+  - 行运
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 36654d20fde37b2df2cb52de00363c75594dfb34b41d4da4e37999246ee51659
+  source_pages:
+  - https://luckclub.cn/bazi/005/026/
+- id: sanming-tonghui-ch028-p001
+  volume: 选章正文
+  chapter_path:
+  - 第28章 论太岁
+  sequence: 4
+  text: 夫太岁者，乃一岁之主宰，诸神之领袖。其说有二：如四柱中生年曰当生太岁，如逐年轮转曰游行太岁。当生太岁乃终身之主，其理已论于前；其逐年太岁游行十二宫，定一年之祸福，为四时之吉凶。盖太岁如君也，大运如臣也。如君臣和悦，其年则吉；若值刑战，其年则凶。经运：岁伤日干，有祸必轻；日犯岁君，灾殃必重。此又分言：岁君伤日者，如庚年克甲日为偏官，譬君治臣，父治子，虽有灾晦，不为大害，何则？上治其下，顺也，其情尚未尽绝；日犯岁君，如甲日克戊年为偏财，譬臣其君，子其父，深为不利，何则？下凌上，逆也，其凶决不能免。若五行有救，四柱有情，如甲日克戊年，四柱原有庚申金，或大运中，亦有将甲木制伏纯粹。不能克戊土为有救；如大运并四柱有一癸字与戊相合为有情。经云：壬以癸妹配戊，凶为吉兆。
+  normalized_text: 夫太岁者，乃一岁之主宰，诸神之领袖。其说有二：如四柱中生年曰当生太岁，如逐年轮转曰游行太岁。当生太岁乃终身之主，其理已论于前；其逐年太岁游行十二宫，定一年之祸福，为四时之吉凶。盖太岁如君也，大运如臣也。如君臣和悦，其年则吉；若值刑战，其年则凶。经运：岁伤日干，有祸必轻；日犯岁君，灾殃必重。此又分言：岁君伤日者，如庚年克甲日为偏官，譬君治臣，父治子，虽有灾晦，不为大害，何则？上治其下，顺也，其情尚未尽绝；日犯岁君，如甲日克戊年为偏财，譬臣其君，子其父，深为不利，何则？下凌上，逆也，其凶决不能免。若五行有救，四柱有情，如甲日克戊年，四柱原有庚申金，或大运中，亦有将甲木制伏纯粹。不能克戊土为有救；如大运并四柱有一癸字与戊相合为有情。经云：壬以癸妹配戊，凶为吉兆。
+  locator: 第28章·论太岁·第1条
+  concepts:
+  - 行运
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: d86f1c8566445c59364bb858fe2aa4c82f6ce1de1a905b7305c809bb4f8f2cbf
+  source_pages:
+  - https://luckclub.cn/bazi/005/028/
+- id: sanming-tonghui-ch028-p002
+  volume: 选章正文
+  chapter_path:
+  - 第28章 论太岁
+  sequence: 5
+  text: 又有真太岁、征太岁之说。经云：生时相逢真太岁。假如甲子生人又见甲子年，谓之真太岁，又名转趾煞，要大运日主与太岁相和相顺，其年则吉；若值刑冲破害，与太岁互相战克则凶。如癸已日逢丁亥流年；日干支冲克太岁曰征，运干支伤冲太岁亦曰征，太岁干支冲日干支亦曰征，其年则凶，灾祸未免。又如甲子流年又是甲子运，谓之岁运并临，独羊刃、七煞为凶，财、官、印绶亦吉。又如甲子日见甲子太岁，谓之日年相并，如君子得之，谓之君臣处会，其年利奏对，有面君之喜，若当省士人得之，有登荐仕进之象，又要与岁君帝座和协，方为奇特；若是常俗小人遇之，最为不善，若生时相和，为灾稍轻。故经云：太岁当头立，诸神不敢当，若无官事扰，定主见重丧。此之谓与！更加以勾林、元亡、咸池、孤苦、宅墓、病死、官符、丧吊、白虎、羊刃、暴败、天厄诸凶煞并临，祸患百出，甚者死。
+  normalized_text: 又有真太岁、征太岁之说。经云：生时相逢真太岁。假如甲子生人又见甲子年，谓之真太岁，又名转趾煞，要大运日主与太岁相和相顺，其年则吉；若值刑冲破害，与太岁互相战克则凶。如癸已日逢丁亥流年；日干支冲克太岁曰征，运干支伤冲太岁亦曰征，太岁干支冲日干支亦曰征，其年则凶，灾祸未免。又如甲子流年又是甲子运，谓之岁运并临，独羊刃、七煞为凶，财、官、印绶亦吉。又如甲子日见甲子太岁，谓之日年相并，如君子得之，谓之君臣处会，其年利奏对，有面君之喜，若当省士人得之，有登荐仕进之象，又要与岁君帝座和协，方为奇特；若是常俗小人遇之，最为不善，若生时相和，为灾稍轻。故经云：太岁当头立，诸神不敢当，若无官事扰，定主见重丧。此之谓与！更加以勾林、元亡、咸池、孤苦、宅墓、病死、官符、丧吊、白虎、羊刃、暴败、天厄诸凶煞并临，祸患百出，甚者死。
+  locator: 第28章·论太岁·第2条
+  concepts:
+  - 十神
+  - 行运
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 42f0edf67d8e0db6803b764fc11cc3d96304718b5ac7619c1735a8687b6b23a0
+  source_pages:
+  - https://luckclub.cn/bazi/005/028/
+- id: sanming-tonghui-ch028-p003
+  volume: 选章正文
+  chapter_path:
+  - 第28章 论太岁
+  sequence: 6
+  text: 假如甲日见戊年太岁，甲又生寅卯亥未，年月日时又重见甲乙字并克，戊年柱中无庚辛已酉丑金局制木，丙丁火局焚木者，太凶。如一命
+  normalized_text: 假如甲日见戊年太岁，甲又生寅卯亥未，年月日时又重见甲乙字并克，戊年柱中无庚辛已酉丑金局制木，丙丁火局焚木者，太凶。如一命
+  locator: 第28章·论太岁·第3条
+  concepts:
+  - 行运
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 0749be12091d2e7ceb3017e497573e2c4104a5ab59e6a1bc073501853a432a10
+  source_pages:
+  - https://luckclub.cn/bazi/005/028/
+- id: sanming-tonghui-ch028-p004
+  volume: 选章正文
+  chapter_path:
+  - 第28章 论太岁
+  sequence: 7
+  text: 戊辰 戊午 戊戌 甲寅，羊刃倒戈，遇壬申年四月，项生恶疮，头将堕死；又一命
+  normalized_text: 戊辰戊午戊戌甲寅，羊刃倒戈，遇壬申年四月，项生恶疮，头将堕死；又一命
+  locator: 第28章·论太岁·第4条
+  concepts:
+  - 行运
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 1f9c527c29634d19686e8f78b355be9328c883e159bbdde62cefe3d8db283789
+  source_pages:
+  - https://luckclub.cn/bazi/005/028/
+- id: sanming-tonghui-ch028-p005
+  volume: 选章正文
+  chapter_path:
+  - 第28章 论太岁
+  sequence: 8
+  text: 乙丑 乙亥 壬申 乙已，运行辛未、丙寅，日干之壬克太岁之丙，日支之庚申克太岁之寅甲，又寅刑已，已刑申，刑寅，行辛未运，合太岁之木局伤官，皆不为吉，其年甲午火旺战克，故死非命。
+  normalized_text: 乙丑乙亥壬申乙已，运行辛未、丙寅，日干之壬克太岁之丙，日支之庚申克太岁之寅甲，又寅刑已，已刑申，刑寅，行辛未运，合太岁之木局伤官，皆不为吉，其年甲午火旺战克，故死非命。
+  locator: 第28章·论太岁·第5条
+  concepts:
+  - 十神
+  - 行运
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 27d7fa4f523759f93726f9235859217c606b62ad58bcd0470abf2555ab0e280a
+  source_pages:
+  - https://luckclub.cn/bazi/005/028/
+- id: sanming-tonghui-ch028-p006
+  volume: 选章正文
+  chapter_path:
+  - 第28章 论太岁
+  sequence: 9
+  text: 大抵日犯岁君，在五阳干则重，在五阴干则轻，若日干是天月德。太岁是用神则无咎，而反有获；天冲地击，柱中原有，流年再遇，亦无大咎；若太岁克当生时，或时克太岁，亦主有灾，却以子位断之。
+  normalized_text: 大抵日犯岁君，在五阳干则重，在五阴干则轻，若日干是天月德。太岁是用神则无咎，而反有获；天冲地击，柱中原有，流年再遇，亦无大咎；若太岁克当生时，或时克太岁，亦主有灾，却以子位断之。
+  locator: 第28章·论太岁·第6条
+  concepts:
+  - 用神
+  - 行运
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: ea47de095e6774a872751456dcd87ff5d15591ce55b37dfd40740f8647d8d73a
+  source_pages:
+  - https://luckclub.cn/bazi/005/028/
+- id: sanming-tonghui-ch029-p001
+  volume: 选章正文
+  chapter_path:
+  - 第29章 总论岁运
+  sequence: 10
+  text: 夫太岁者，年中天子，一岁诸神煞之尊；统正方位，四送六气，迁运四时以成岁功，至尊无上，若人遇克冲压伏，皆为不详之兆。运者协和二十四气，般运一生休咎，扶持四柱，辅弼三元，运与流年二者相为表里，乃人命祸福死生所系，岁用天元，运用地支，凡行好运而日干伤流年天元，为福轻；若行不好运及脱财官运而日干伤岁干，为祸重，若是已发之命，祸患立至，凡行不好运，未可便言衰绝，大要知已发未发，其气数已过未过言之。行运以生月为运元，最怕行运与太岁冲克，若岁运冲月必祸；若岁运与日相对，谓之返吟，岁运压日，谓之伏吟，二者不利六亲，非横破财，不为吉兆。凡岁运吉凶，当生天元，或支中原无官星，天元有正官或原有偏官制伏太过，运遇天元官星，亦可发福；支无财而运干是财，亦可发财；支无煞而运干是煞，亦足为祸。
+  normalized_text: 夫太岁者，年中天子，一岁诸神煞之尊；统正方位，四送六气，迁运四时以成岁功，至尊无上，若人遇克冲压伏，皆为不详之兆。运者协和二十四气，般运一生休咎，扶持四柱，辅弼三元，运与流年二者相为表里，乃人命祸福死生所系，岁用天元，运用地支，凡行好运而日干伤流年天元，为福轻；若行不好运及脱财官运而日干伤岁干，为祸重，若是已发之命，祸患立至，凡行不好运，未可便言衰绝，大要知已发未发，其气数已过未过言之。行运以生月为运元，最怕行运与太岁冲克，若岁运冲月必祸；若岁运与日相对，谓之返吟，岁运压日，谓之伏吟，二者不利六亲，非横破财，不为吉兆。凡岁运吉凶，当生天元，或支中原无官星，天元有正官或原有偏官制伏太过，运遇天元官星，亦可发福；支无财而运干是财，亦可发财；支无煞而运干是煞，亦足为祸。
+  locator: 第29章·总论岁运·第1条
+  concepts:
+  - 十神
+  - 行运
+  - 六亲
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 5f025d4a3285e9b62c99e174e19d7448d6b0af47821eaa96b78d89f0d6a9b2bb
+  source_pages:
+  - https://luckclub.cn/bazi/005/029/
+- id: sanming-tonghui-ch029-p002
+  volume: 选章正文
+  chapter_path:
+  - 第29章 总论岁运
+  sequence: 11
+  text: 晦气者，乃不明之象，昏昧之道也，即甲已乙庚之例，以合则晦也，日干与时干不宜与太岁元天元合，合则名为晦气。又要分日干合太岁，如甲日已年之例，太岁合日干，如已日甲年之例。甲合已灾重，已合甲灾轻，岁位近者灾重，远者灾轻，如岁在日前五辰而遇合，谓之太岁入宅，晦气临门，主灾厄。
+  normalized_text: 晦气者，乃不明之象，昏昧之道也，即甲已乙庚之例，以合则晦也，日干与时干不宜与太岁元天元合，合则名为晦气。又要分日干合太岁，如甲日已年之例，太岁合日干，如已日甲年之例。甲合已灾重，已合甲灾轻，岁位近者灾重，远者灾轻，如岁在日前五辰而遇合，谓之太岁入宅，晦气临门，主灾厄。
+  locator: 第29章·总论岁运·第2条
+  concepts:
+  - 行运
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: de353162d97a6eb20df242c51973e5e812d985f460fe8150948ef7bba44cdc2d
+  source_pages:
+  - https://luckclub.cn/bazi/005/029/
+- id: sanming-tonghui-ch029-p003
+  volume: 选章正文
+  chapter_path:
+  - 第29章 总论岁运
+  sequence: 12
+  text: 大运不宜与太岁相克相冲，尤忌运克岁，与日犯同，主破耗丧事，有贵人禄马解之稍吉，八字有救无虞。
+  normalized_text: 大运不宜与太岁相克相冲，尤忌运克岁，与日犯同，主破耗丧事，有贵人禄马解之稍吉，八字有救无虞。
+  locator: 第29章·总论岁运·第3条
+  concepts:
+  - 行运
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: acf42a140cee8f151aeef2f3ca9a9f2ac52adc13504d7040a11208ad767a2c85
+  source_pages:
+  - https://luckclub.cn/bazi/005/029/
+- id: sanming-tonghui-ch049-p001
+  volume: 选章正文
+  chapter_path:
+  - 第49章 论正印
+  sequence: 13
+  text: 正印，乃五行之正库，金命见乙丑，木癸未，火甲戌，水土壬辰、丙辰是也。《言谈》云：“生逢正印，必拜玉堂。”《妙选》云：“五行入垣，官居五府。”可见得本家正印为贵。本主同德为上，帝座为中，胎月为下。主人重厚魁梧，功名昭着。本家印又得贵格扶之，更妙。若木得水印，火得木印，多兼他权外财。若身克印，或印克身，废而复兴。若水人得火印，火人带水印，次于本家印，然须本主有旺气，方吉。若克破别无福救，或空亡，只作清闲道僧、无成举人。若五行有清气，则绝世高人；有煞则贫贱。
+  normalized_text: 正印，乃五行之正库，金命见乙丑，木癸未，火甲戌，水土壬辰、丙辰是也。《言谈》云：“生逢正印，必拜玉堂。”《妙选》云：“五行入垣，官居五府。”可见得本家正印为贵。本主同德为上，帝座为中，胎月为下。主人重厚魁梧，功名昭着。本家印又得贵格扶之，更妙。若木得水印，火得木印，多兼他权外财。若身克印，或印克身，废而复兴。若水人得火印，火人带水印，次于本家印，然须本主有旺气，方吉。若克破别无福救，或空亡，只作清闲道僧、无成举人。若五行有清气，则绝世高人；有煞则贫贱。
+  locator: 第49章·论正印·第1条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: d58024c5e5c291998d40ee282d4ed9b83a487e6437dbc529e0c52a049989fb91
+  source_pages:
+  - https://luckclub.cn/bazi/005/049/
+- id: sanming-tonghui-ch049-p002
+  volume: 选章正文
+  chapter_path:
+  - 第49章 论正印
+  sequence: 14
+  text: 有贵人夹印，如丙丁火命以甲戌为正印，却得酉亥夹之，酉亥乃丙丁贵人；壬癸水命以壬辰为正印，却得卯已夹之，卯已乃壬癸贵人。
+  normalized_text: 有贵人夹印，如丙丁火命以甲戌为正印，却得酉亥夹之，酉亥乃丙丁贵人；壬癸水命以壬辰为正印，却得卯已夹之，卯已乃壬癸贵人。
+  locator: 第49章·论正印·第2条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: ac75cd9e6edcde0f328fcc47a3bf5d24f9038232ad879f7f793923a14719290e
+  source_pages:
+  - https://luckclub.cn/bazi/005/049/
+- id: sanming-tonghui-ch049-p003
+  volume: 选章正文
+  chapter_path:
+  - 第49章 论正印
+  sequence: 15
+  text: 有华盖印，如亥卯未得癸未之类。
+  normalized_text: 有华盖印，如亥卯未得癸未之类。
+  locator: 第49章·论正印·第3条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 6b393ec9862e788bc56682cd709dab8cb5283719ebc5d11c0a279ae7ddce1649
+  source_pages:
+  - https://luckclub.cn/bazi/005/049/
+- id: sanming-tonghui-ch049-p004
+  volume: 选章正文
+  chapter_path:
+  - 第49章 论正印
+  sequence: 16
+  text: 有文章印，如戊寅见癸未，辛已见甲戌，庚申见乙丑，癸亥见丙辰，乙亥见壬辰，乃纳音克身，干神复制。戊午得癸未，庚子得乙丑，丁酉得壬辰，己卯得申戌，辛酉得丙辰，干神制支神合之类。
+  normalized_text: 有文章印，如戊寅见癸未，辛已见甲戌，庚申见乙丑，癸亥见丙辰，乙亥见壬辰，乃纳音克身，干神复制。戊午得癸未，庚子得乙丑，丁酉得壬辰，己卯得申戌，辛酉得丙辰，干神制支神合之类。
+  locator: 第49章·论正印·第4条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 8bfb279160c096d48cddd8f8d888eab45eef96e85050beae26440b997e8c639b
+  source_pages:
+  - https://luckclub.cn/bazi/005/049/
+- id: sanming-tonghui-ch049-p005
+  volume: 选章正文
+  chapter_path:
+  - 第49章 论正印
+  sequence: 17
+  text: 诸印要逢库墓，若生旺扶助互换，禄马贵人并相合者，至贵之命。最忌刑冲破害，三合六合上见鬼，如甲戌日得癸酉时，则减力。水命人得本家印无益；得木印损气；得土印，支干有交涉者，名官印；无交涉者，名鬼印。
+  normalized_text: 诸印要逢库墓，若生旺扶助互换，禄马贵人并相合者，至贵之命。最忌刑冲破害，三合六合上见鬼，如甲戌日得癸酉时，则减力。水命人得本家印无益；得木印损气；得土印，支干有交涉者，名官印；无交涉者，名鬼印。
+  locator: 第49章·论正印·第5条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: f23dfb0d7d35f7d5de9e6bb258f13f2892addb41a0e3836c68f87b42f37c460e
+  source_pages:
+  - https://luckclub.cn/bazi/005/049/
+- id: sanming-tonghui-ch049-p006
+  volume: 选章正文
+  chapter_path:
+  - 第49章 论正印
+  sequence: 18
+  text: 又有福聚印，如年、月、日、时、胎五位俱无气衰败，得正印偏印俱在此，印上或库或旺，虽有煞神，至是受制，此之谓福聚印。
+  normalized_text: 又有福聚印，如年、月、日、时、胎五位俱无气衰败，得正印偏印俱在此，印上或库或旺，虽有煞神，至是受制，此之谓福聚印。
+  locator: 第49章·论正印·第6条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 956231939f43cb7896d5eb566df3785a5b7db657861e93d69e5ea1e8b57ab5f3
+  source_pages:
+  - https://luckclub.cn/bazi/005/049/
+- id: sanming-tonghui-ch049-p007
+  volume: 选章正文
+  chapter_path:
+  - 第49章 论正印
+  sequence: 19
+  text: 有祸聚印，如癸巳人带壬辰印，柱多逢水，俱墓于辰，则癸巳受煞；以巳为命，巳火遇多则本命病，此之谓祸聚印。
+  normalized_text: 有祸聚印，如癸巳人带壬辰印，柱多逢水，俱墓于辰，则癸巳受煞；以巳为命，巳火遇多则本命病，此之谓祸聚印。
+  locator: 第49章·论正印·第7条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: f168b24f659e70c1122232beb62f3f5220dd4322a2e4c1837dbad850d1449f44
+  source_pages:
+  - https://luckclub.cn/bazi/005/049/
+- id: sanming-tonghui-ch049-p008
+  volume: 选章正文
+  chapter_path:
+  - 第49章 论正印
+  sequence: 20
+  text: 有破福成祸印，如水人得水印，或月日时多带土来，本家印见鬼盛，是谓破福成祸。
+  normalized_text: 有破福成祸印，如水人得水印，或月日时多带土来，本家印见鬼盛，是谓破福成祸。
+  locator: 第49章·论正印·第8条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 4f30c8a9b488558f9d4fb41dcce381334c0b4a0d841c8d39f2801af68f79959e
+  source_pages:
+  - https://luckclub.cn/bazi/005/049/
+- id: sanming-tonghui-ch049-p009
+  volume: 选章正文
+  chapter_path:
+  - 第49章 论正印
+  sequence: 21
+  text: 有带煞印，印中见贵煞，如壬子见壬辰、丙辰，子至辰谓之华盖，壬人见辰为贵。若印中反克本命，无福神往还，名带煞，主凶。
+  normalized_text: 有带煞印，印中见贵煞，如壬子见壬辰、丙辰，子至辰谓之华盖，壬人见辰为贵。若印中反克本命，无福神往还，名带煞，主凶。
+  locator: 第49章·论正印·第9条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: b74fdccf2f9b50cb49d3d465eda0fd54d91282107903042beddd10fcf7ff625e
+  source_pages:
+  - https://luckclub.cn/bazi/005/049/
+- id: sanming-tonghui-ch049-p010
+  volume: 选章正文
+  chapter_path:
+  - 第49章 论正印
+  sequence: 22
+  text: 有临空印，乃印落空亡，支无六合，见官贵，至贱而无成也。
+  normalized_text: 有临空印，乃印落空亡，支无六合，见官贵，至贱而无成也。
+  locator: 第49章·论正印·第10条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: f7c8286549350570a14ba84beb684d93a16ca31ba76385189a6740b75c86eb2e
+  source_pages:
+  - https://luckclub.cn/bazi/005/049/
+- id: sanming-tonghui-ch049-p011
+  volume: 选章正文
+  chapter_path:
+  - 第49章 论正印
+  sequence: 23
+  text: 有自刑印，如庚戌人带乙丑，金人见金印固好，丑戌相刑，以金刑金，此类不如无。虽有少福，亦终贱。余准此推。
+  normalized_text: 有自刑印，如庚戌人带乙丑，金人见金印固好，丑戌相刑，以金刑金，此类不如无。虽有少福，亦终贱。余准此推。
+  locator: 第49章·论正印·第11条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 53794e30cf5a4dab4e690d69b76a1c0bb311266e659c1674fcf83d17a070f480
+  source_pages:
+  - https://luckclub.cn/bazi/005/049/
+- id: sanming-tonghui-ch049-p012
+  volume: 选章正文
+  chapter_path:
+  - 第49章 论正印
+  sequence: 24
+  text: 凡论印，更得真五行与纳音同气，尤妙。但主少安逸，不利六亲，难为子息。
+  normalized_text: 凡论印，更得真五行与纳音同气，尤妙。但主少安逸，不利六亲，难为子息。
+  locator: 第49章·论正印·第12条
+  concepts:
+  - 六亲
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 066f1db879d4acbba0d2708b9c6195cc75a132d6dd205031813f78890166a059
+  source_pages:
+  - https://luckclub.cn/bazi/005/049/
+- id: sanming-tonghui-ch070-p001
+  volume: 选章正文
+  chapter_path:
+  - 第70章 论古人立印食官财名义
+  sequence: 25
+  text: 徐子平论格局，独以印、食、官、财四者为纲。其立名之义云何？盖造化流行天地间，不过阴阳五行而已。阴阳五行，交相为用，不过生克制化而已。今指甲乙为例，以日干论甲乙，在五行属木，甲阳而乙阴也。如人命得甲乙，生谓之日主属我，生我者壬癸水，我生者丙丁火，克我者庚辛金，我克者戊己土，而十干尽之矣。生我者，有父母之义，故立名印绶。印，荫也。绶，受也。譬父母有恩德荫庇子孙，子孙得受其福。朝廷设官分职，畀以印绶，使之掌管。官而无印，何所凭据？人无父母，何所怙恃？其理通一无二，故曰印绶。我生者，有子孙之义，故立名食神。食者，如虫之食物，盖伤之也。虫得食物则饱，人得食则益，被食则损造化。以子成而致养，即人子致养父母之道也。故曰食神。克我者，我受制于人之义，故立名官煞。官者，官也。煞者，害也。朝廷以官与人，以身属之公家，任其驱使，赴汤蹈火，不敢有违，至于盖棺而后已，是官害之也。凡人梦棺而得官，亦是此义，故曰官煞。我克者，是人受制于我之义，故立名妻财，如人成家立产，须得妻室内助，故曰妻财。是四者，术家立名之大义。然生近乎身，克隔乎位，造化喜生恶煞，乃自然之理也。中间阴阳从类，阴阳配合，各有至理存焉。生我，我生，如壬生甲、癸生乙，甲食丙、乙食丁，是阴生阴，阳生阳，阴食阴，阳食阳，为阴阳各从其类，故甲喜壬生死，木滋死水中则多年不坏；不喜癸生死，木被雨水淋漓不逾所则朽。甲喜食丙，以丙能制庚煞，而甲始得安其身；不喜食丁，以丁能伤官，而甲不得成其材。以其义也。克我、我克，如辛克甲，庚克乙，甲克己，乙克戊，是阴克阳，阳克阴，阴匹阳，阳匹阴，乃阴阳配合之理。故甲见辛为正官，见庚为偏官。官喜正，不喜偏，掌印佐贰，职有不同。甲见己为正妻，见戊为偏妻。妻贵正，不贵偏，敌体侍立，分则有别，此其理也。至若官怕伤，被伤则祸，财怕劫，被劫则分；印怕财，贪财则坏；食怕枭，逢枭则夺。其理与人事无二，学者明于人事，斯可以言造化矣。夫五行展转生克，皆子为父母复仇之义。故甲乙生丙丁为子，甲乙畏庚辛，赖丙丁克制之。丙丁生戊己为子，丙定畏壬癸，赖戊己克制之。戊己生庚辛为子，戊己畏甲乙，赖庚辛克制之。庚辛生壬癸为子，庚辛畏丙丁，赖壬癸克制之。壬癸生甲乙为子，壬癸畏戊己，赖甲乙克制之。
+  normalized_text: 徐子平论格局，独以印、食、官、财四者为纲。其立名之义云何？盖造化流行天地间，不过阴阳五行而已。阴阳五行，交相为用，不过生克制化而已。今指甲乙为例，以日干论甲乙，在五行属木，甲阳而乙阴也。如人命得甲乙，生谓之日主属我，生我者壬癸水，我生者丙丁火，克我者庚辛金，我克者戊己土，而十干尽之矣。生我者，有父母之义，故立名印绶。印，荫也。绶，受也。譬父母有恩德荫庇子孙，子孙得受其福。朝廷设官分职，畀以印绶，使之掌管。官而无印，何所凭据？人无父母，何所怙恃？其理通一无二，故曰印绶。我生者，有子孙之义，故立名食神。食者，如虫之食物，盖伤之也。虫得食物则饱，人得食则益，被食则损造化。以子成而致养，即人子致养父母之道也。故曰食神。克我者，我受制于人之义，故立名官煞。官者，官也。煞者，害也。朝廷以官与人，以身属之公家，任其驱使，赴汤蹈火，不敢有违，至于盖棺而后已，是官害之也。凡人梦棺而得官，亦是此义，故曰官煞。我克者，是人受制于我之义，故立名妻财，如人成家立产，须得妻室内助，故曰妻财。是四者，术家立名之大义。然生近乎身，克隔乎位，造化喜生恶煞，乃自然之理也。中间阴阳从类，阴阳配合，各有至理存焉。生我，我生，如壬生甲、癸生乙，甲食丙、乙食丁，是阴生阴，阳生阳，阴食阴，阳食阳，为阴阳各从其类，故甲喜壬生死，木滋死水中则多年不坏；不喜癸生死，木被雨水淋漓不逾所则朽。甲喜食丙，以丙能制庚煞，而甲始得安其身；不喜食丁，以丁能伤官，而甲不得成其材。以其义也。克我、我克，如辛克甲，庚克乙，甲克己，乙克戊，是阴克阳，阳克阴，阴匹阳，阳匹阴，乃阴阳配合之理。故甲见辛为正官，见庚为偏官。官喜正，不喜偏，掌印佐贰，职有不同。甲见己为正妻，见戊为偏妻。妻贵正，不贵偏，敌体侍立，分则有别，此其理也。至若官怕伤，被伤则祸，财怕劫，被劫则分；印怕财，贪财则坏；食怕枭，逢枭则夺。其理与人事无二，学者明于人事，斯可以言造化矣。夫五行展转生克，皆子为父母复仇之义。故甲乙生丙丁为子，甲乙畏庚辛，赖丙丁克制之。丙丁生戊己为子，丙定畏壬癸，赖戊己克制之。戊己生庚辛为子，戊己畏甲乙，赖庚辛克制之。庚辛生壬癸为子，庚辛畏丙丁，赖壬癸克制之。壬癸生甲乙为子，壬癸畏戊己，赖甲乙克制之。
+  locator: 第70章·论古人立印食官财名义·第1条
+  concepts:
+  - 十神
+  - 格局
+  - 六亲
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: d486aea1b496036f0400c5c07f2b964ed75fca910acfaa696ad67c79c1f0d249
+  source_pages:
+  - https://luckclub.cn/bazi/005/070/
+- id: sanming-tonghui-ch070-p002
+  volume: 选章正文
+  chapter_path:
+  - 第70章 论古人立印食官财名义
+  sequence: 26
+  text: 地支十二，其理亦同，虽动静不同，方圆有异，而生克一也。试言之：北方亥子水，生东方寅卯木，东方寅卯木，生南方巳午火，土寄旺于火，生西方申酉金，西方申酉金，生北方亥子水。然亥子间丑一位而后接寅卯，寅卯间辰一位而后接巳午，巳午间未一位而后接申酉，申酉间戌一位而后接亥子。土立四维，五行均赖。故巳酉合丑为金局，申子合辰为水局，亥卯合未为木局，寅午合戌为火局。金生水，水生木，木生火，火生土，土生金，相生而无间也。丑为金库，生亥子而克寅卯；辰为水库，生寅卯而克巳午；未为木库，生巳午而受金克；戌为火库，克申酉而受水制。东南主生，西北主杀，此天地之大机也。且辰戌丑未，奠安四维，金木水火，咸赖之以生藏。《易》曰：“成言乎艮，终言乎坤。”此土之功用在五行为尤大也。
+  normalized_text: 地支十二，其理亦同，虽动静不同，方圆有异，而生克一也。试言之：北方亥子水，生东方寅卯木，东方寅卯木，生南方巳午火，土寄旺于火，生西方申酉金，西方申酉金，生北方亥子水。然亥子间丑一位而后接寅卯，寅卯间辰一位而后接巳午，巳午间未一位而后接申酉，申酉间戌一位而后接亥子。土立四维，五行均赖。故巳酉合丑为金局，申子合辰为水局，亥卯合未为木局，寅午合戌为火局。金生水，水生木，木生火，火生土，土生金，相生而无间也。丑为金库，生亥子而克寅卯；辰为水库，生寅卯而克巳午；未为木库，生巳午而受金克；戌为火库，克申酉而受水制。东南主生，西北主杀，此天地之大机也。且辰戌丑未，奠安四维，金木水火，咸赖之以生藏。《易》曰：“成言乎艮，终言乎坤。”此土之功用在五行为尤大也。
+  locator: 第70章·论古人立印食官财名义·第2条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: dccdc38f9e7d7112a87922cdb78cadd949541cf817844c0352ac95d2fac4d9fc
+  source_pages:
+  - https://luckclub.cn/bazi/005/070/
+- id: sanming-tonghui-ch070-p003
+  volume: 选章正文
+  chapter_path:
+  - 第70章 论古人立印食官财名义
+  sequence: 27
+  text: 舍干支而总言之，甲生亥死午，乙生午死亥，就禄于寅卯，是甲乙、寅卯同也。丙生寅死酉，丁生酉死寅，就禄于巳午，是丙丁、巳午同也。庚生巳死子，辛生子死巳，就禄于申酉，是庚辛、申酉同也。壬生申死卯，癸生卯死申，就禄于亥子，是壬癸、亥子同也。戊生寅死酉，己生酉死寅，就禄于巳午，与火同位，子随母旺之义，而辰戌丑未，乃其正位也。由是天干地支，相合配偶，生克制化，旺相休囚，其名为印、为枭、为食、为伤、为官、为煞、为财、为劫，刑冲破害，虚邀暗合，而变化无穷矣。徐子平识破此理，故只论财、官、印、食，分为六格，而人命之富贵、贫贱、寿夭，穷通举不外是其余格局，不过自此而推之耳。
+  normalized_text: 舍干支而总言之，甲生亥死午，乙生午死亥，就禄于寅卯，是甲乙、寅卯同也。丙生寅死酉，丁生酉死寅，就禄于巳午，是丙丁、巳午同也。庚生巳死子，辛生子死巳，就禄于申酉，是庚辛、申酉同也。壬生申死卯，癸生卯死申，就禄于亥子，是壬癸、亥子同也。戊生寅死酉，己生酉死寅，就禄于巳午，与火同位，子随母旺之义，而辰戌丑未，乃其正位也。由是天干地支，相合配偶，生克制化，旺相休囚，其名为印、为枭、为食、为伤、为官、为煞、为财、为劫，刑冲破害，虚邀暗合，而变化无穷矣。徐子平识破此理，故只论财、官、印、食，分为六格，而人命之富贵、贫贱、寿夭，穷通举不外是其余格局，不过自此而推之耳。
+  locator: 第70章·论古人立印食官财名义·第3条
+  concepts:
+  - 格局
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 00a901d769a7a8cf9a134eed32970234c903727d87eedf3ae64db88c6e1fe0ef
+  source_pages:
+  - https://luckclub.cn/bazi/005/070/
+- id: sanming-tonghui-ch071-p001
+  volume: 选章正文
+  chapter_path:
+  - 第71章 论正官
+  sequence: 28
+  text: 正官者，乃甲见辛、乙见庚之例。阴阳配合，相制有用，成其道也。故正官为六格之首，止许一位，多则不宜。正官先看月令，然后方看其余。以五行之气，惟月令当时为最，况四柱各管年限，年管十五，失之太早，时管五十后，失之太迟。故只此月令为正，余格例此。甲日生酉月，乙生申巳，丙生子，丁生亥，戊生卯，己生寅，庚生午，辛生寅巳，壬生午未丑，癸生辰巳戌月，皆为正气。官星更天干透出，如甲见辛酉，乙见庚申之例，谓之支藏干透，余位不宜再见，又须日主健旺，得财印两扶，柱中不见伤煞，行运引至官乡，大富大贵命也。大忌刑冲破害、伤官七煞、贪合忘官、劫财分福，为破格。如甲生酉月，见卯为冲、酉为刑、午为破、戌为害、丙为合、乙为劫、丁为伤克、庚为混杂、须是官星纯一，五行和粹，方以正官论。若见前忌柱中，虽有物去之，亦不纯粹，若官星结局，又有财资扶，非行身旺地不发。官止一二，无财有印，身弱无妨，若四柱皆归背禄，宜推岁运向背财官旺地。何如？若财官满目，日主衰弱，不能负荷，徒劳无用，运至财煞旺乡，多染痨瘵，但有七煞行运复遇，便是徒流之命。又曰甲生酉月，辛金正禄，若见丁伤，支中无局，时引归衰败死绝之地，或有制合去之衰绝之火，岂能伤其旺禄。若时引官星临衰败死绝之位，反引丁火归生旺之乡或临煞地，降官失职，祸生无疑。时为归息之地，吉凶全在时消息。日主用神太盛，宜时以节制之；日主用神渐衰，宜时以补助之。柱中虽有凶神，时能节制，亦不能为祸。此看命之要法也。又曰甲生丑月，内有辛金，又值酉时，己是重犯，若天干复透辛多，更行西方，力不胜任，变官为鬼，旺处必倾，多致灾夭，须有合制方吉。若自身乘旺，如甲寅、乙卯等日，更有印生助，官星虽多亦不为害。甲生戌月，虽坐火库，若不成局，无党不能为害。又曰取官星不必专泥月令支辰，或月干，或年日时支干，只一处有，不曾损伤，皆可取用。故经云：明干有气明干取，明干无气暗中取。若明干无气，引归地支，或有助托，运行得地，亦不减月内官星之福。又曰凡论官星，略见一位食神坐实，便能损局，惟月令隐禄，见食却为三奇之贵。大要看官食虚实何如，若官星坐实，合神略虚，随官助贵；合神坐实，官星渐弱，官随合神，谓之贪合忘官。又曰正官格，要行印乡，即是逢官看印，柱中原有印随，官因轻重，日干强弱，以观所以之运，身弱印轻，要补其印，身旺官轻，要补其官，行伤官运即是背禄，行身旺运即是逐马。《三命铃》云：凡禄命身三等官，各禀五行，率以其性推之，如以金为官，职位清峻，多掌刑狱钱谷之任，决断明敏，遇行年太岁在丑为官库。若以木为官主，品秩清高，和俗守慎，遇行年太岁在未为官库。以火为官主，官序炎赫，为性猛烈，用刑惨酷，亦主发歇不常，遇行年太岁在戌为官库。以水为官主，职卑位下，级升序进，谦和得众，矜恤孤寡，亦有道性，遇行年太岁在辰为官库。以土为官主，官序稳当，难侵犯，厚重质直，法令分明，遇行年太岁在辰为官库。凡五行之官，各随其性则吉，若失其性，则主为官不久。西蜀知命者云：凡人年月日时，四干迭相，官印足者，主贵。历观大命，遇两印者颇多，如吕吉甫学士，
+  normalized_text: 正官者，乃甲见辛、乙见庚之例。阴阳配合，相制有用，成其道也。故正官为六格之首，止许一位，多则不宜。正官先看月令，然后方看其余。以五行之气，惟月令当时为最，况四柱各管年限，年管十五，失之太早，时管五十后，失之太迟。故只此月令为正，余格例此。甲日生酉月，乙生申巳，丙生子，丁生亥，戊生卯，己生寅，庚生午，辛生寅巳，壬生午未丑，癸生辰巳戌月，皆为正气。官星更天干透出，如甲见辛酉，乙见庚申之例，谓之支藏干透，余位不宜再见，又须日主健旺，得财印两扶，柱中不见伤煞，行运引至官乡，大富大贵命也。大忌刑冲破害、伤官七煞、贪合忘官、劫财分福，为破格。如甲生酉月，见卯为冲、酉为刑、午为破、戌为害、丙为合、乙为劫、丁为伤克、庚为混杂、须是官星纯一，五行和粹，方以正官论。若见前忌柱中，虽有物去之，亦不纯粹，若官星结局，又有财资扶，非行身旺地不发。官止一二，无财有印，身弱无妨，若四柱皆归背禄，宜推岁运向背财官旺地。何如？若财官满目，日主衰弱，不能负荷，徒劳无用，运至财煞旺乡，多染痨瘵，但有七煞行运复遇，便是徒流之命。又曰甲生酉月，辛金正禄，若见丁伤，支中无局，时引归衰败死绝之地，或有制合去之衰绝之火，岂能伤其旺禄。若时引官星临衰败死绝之位，反引丁火归生旺之乡或临煞地，降官失职，祸生无疑。时为归息之地，吉凶全在时消息。日主用神太盛，宜时以节制之；日主用神渐衰，宜时以补助之。柱中虽有凶神，时能节制，亦不能为祸。此看命之要法也。又曰甲生丑月，内有辛金，又值酉时，己是重犯，若天干复透辛多，更行西方，力不胜任，变官为鬼，旺处必倾，多致灾夭，须有合制方吉。若自身乘旺，如甲寅、乙卯等日，更有印生助，官星虽多亦不为害。甲生戌月，虽坐火库，若不成局，无党不能为害。又曰取官星不必专泥月令支辰，或月干，或年日时支干，只一处有，不曾损伤，皆可取用。故经云：明干有气明干取，明干无气暗中取。若明干无气，引归地支，或有助托，运行得地，亦不减月内官星之福。又曰凡论官星，略见一位食神坐实，便能损局，惟月令隐禄，见食却为三奇之贵。大要看官食虚实何如，若官星坐实，合神略虚，随官助贵；合神坐实，官星渐弱，官随合神，谓之贪合忘官。又曰正官格，要行印乡，即是逢官看印，柱中原有印随，官因轻重，日干强弱，以观所以之运，身弱印轻，要补其印，身旺官轻，要补其官，行伤官运即是背禄，行身旺运即是逐马。《三命铃》云：凡禄命身三等官，各禀五行，率以其性推之，如以金为官，职位清峻，多掌刑狱钱谷之任，决断明敏，遇行年太岁在丑为官库。若以木为官主，品秩清高，和俗守慎，遇行年太岁在未为官库。以火为官主，官序炎赫，为性猛烈，用刑惨酷，亦主发歇不常，遇行年太岁在戌为官库。以水为官主，职卑位下，级升序进，谦和得众，矜恤孤寡，亦有道性，遇行年太岁在辰为官库。以土为官主，官序稳当，难侵犯，厚重质直，法令分明，遇行年太岁在辰为官库。凡五行之官，各随其性则吉，若失其性，则主为官不久。西蜀知命者云：凡人年月日时，四干迭相，官印足者，主贵。历观大命，遇两印者颇多，如吕吉甫学士，
+  locator: 第71章·论正官·第1条
+  concepts:
+  - 十神
+  - 旺衰
+  - 用神
+  - 格局
+  - 行运
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 22519d604c959d3c38942eb56e514bc7a279f3c8bff29c4c73bd5d28ba102e03
+  source_pages:
+  - https://luckclub.cn/bazi/005/071/
+- id: sanming-tonghui-ch071-p002
+  volume: 选章正文
+  chapter_path:
+  - 第71章 论正官
+  sequence: 29
+  text: 壬申 己酉 丁巳 庚子，壬与己，庚与丁为官，壬与庚、己与丁为印。又云：看官星，有天官乡，取月干制岁干，如六甲年正月建丙寅，五月庚午，六月辛未，庚辛金能制甲木，戊癸即相带而行，甲癸人在午未，乙丙人在辰巳，丁戊人在寅卯，己庚人在戌亥，辛壬人在申酉，若人遇之，当食天禄，贵处朝伦。有地官乡，取月建制岁干，如岁干是甲乙，属木，七八月见申，属金，金能制木，甲乙人在申酉，丙丁人亥子，戊己人在寅卯，庚辛人在巳午，壬癸人在辰戌丑未，若人遇之，主早承休荫，官序易升。有真官乡，取命前三辰月干与命干合，如丙子人二月生，为命前三辰是辛卯，丙与辛合，故丙子二月生人为真官，中生之类，君子遇之，职居近侍，小人遇之，亦主富豪。如刘行素御史，
+  normalized_text: 壬申己酉丁巳庚子，壬与己，庚与丁为官，壬与庚、己与丁为印。又云：看官星，有天官乡，取月干制岁干，如六甲年正月建丙寅，五月庚午，六月辛未，庚辛金能制甲木，戊癸即相带而行，甲癸人在午未，乙丙人在辰巳，丁戊人在寅卯，己庚人在戌亥，辛壬人在申酉，若人遇之，当食天禄，贵处朝伦。有地官乡，取月建制岁干，如岁干是甲乙，属木，七八月见申，属金，金能制木，甲乙人在申酉，丙丁人亥子，戊己人在寅卯，庚辛人在巳午，壬癸人在辰戌丑未，若人遇之，主早承休荫，官序易升。有真官乡，取命前三辰月干与命干合，如丙子人二月生，为命前三辰是辛卯，丙与辛合，故丙子二月生人为真官，中生之类，君子遇之，职居近侍，小人遇之，亦主富豪。如刘行素御史，
+  locator: 第71章·论正官·第2条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 301714a66f12f3e5c941dc99d7a066431914e12a6e917ae60fd44bb3b0f14a55
+  source_pages:
+  - https://luckclub.cn/bazi/005/071/
+- id: sanming-tonghui-ch071-p003
+  volume: 选章正文
+  chapter_path:
+  - 第71章 论正官
+  sequence: 30
+  text: 丙子 辛卯 丙子 辛卯，正合此说。又云：术者以甲见辛为官，不知真五行克纳音为真官，此最紧福坤。干头自见官而得合者为上，有诸神来朝者最佳。如甲寅生，纳音水，得己亥，甲己为真土，是纳音见真五行克也。若不见太岁本干克，但于日月时上见乙庚亦是。若止见庚，谓之偏官，比之全者减力，又不见乙庚，止见乙巳、乙丑、乙酉，余位中多见申，不见申止得三五分力，余仿此。又如己酉、己卯见丁壬，壬子、壬午见乙庚，虽纳音见真五行克为官，奈本干同受克，故不作真官，而作真鬼断之，大小运流年逢之，灾尤重。此亦看官星者所当知。《喜忌篇》云：“五行正官，忌冲刑克破之官。”《五言》云：“有官要有印，无刑足可夸，不为金殿客，也作富豪家。”《秘诀》云：“官星重见，只作煞推，再至官乡，灾非难免，若是太多，制之为福。”古歌云：“正气官星用月支，喜逢财印到年时，破害冲空俱不犯，富贵双全报尔知。”又：“官星不可被刑冲，官煞同来吉变凶，化煞为官方是吉，化官为煞祸重重。”又“官星大抵要身强，身弱须求气旺方，印绶兼行财旺地，无冲伤破是荣昌。”又：“生月官星坐禄乡，日辰生旺福无疆，有财有印无伤破，年少成名坐玉堂。”又：“月逢正禄号真官，不犯刑伤禄最宽，日主兴隆名利显，运逢财印步金銮。”又：“印多官多为贵命，官旺身衰反为病，官多身旺化为财，财旺身衰贫病并。”又：“正官大抵要纯和，四柱无伤掇显科，时上喜逢财健旺，柱中欣见印生多。提纲独遇为真贵，年位重逄乃太多，别处若有煞来混，反为辛苦受奔波。”合诸说，观正官喜忌见矣。
+  normalized_text: 丙子辛卯丙子辛卯，正合此说。又云：术者以甲见辛为官，不知真五行克纳音为真官，此最紧福坤。干头自见官而得合者为上，有诸神来朝者最佳。如甲寅生，纳音水，得己亥，甲己为真土，是纳音见真五行克也。若不见太岁本干克，但于日月时上见乙庚亦是。若止见庚，谓之偏官，比之全者减力，又不见乙庚，止见乙巳、乙丑、乙酉，余位中多见申，不见申止得三五分力，余仿此。又如己酉、己卯见丁壬，壬子、壬午见乙庚，虽纳音见真五行克为官，奈本干同受克，故不作真官，而作真鬼断之，大小运流年逢之，灾尤重。此亦看官星者所当知。《喜忌篇》云：“五行正官，忌冲刑克破之官。”《五言》云：“有官要有印，无刑足可夸，不为金殿客，也作富豪家。”《秘诀》云：“官星重见，只作煞推，再至官乡，灾非难免，若是太多，制之为福。”古歌云：“正气官星用月支，喜逢财印到年时，破害冲空俱不犯，富贵双全报尔知。”又：“官星不可被刑冲，官煞同来吉变凶，化煞为官方是吉，化官为煞祸重重。”又“官星大抵要身强，身弱须求气旺方，印绶兼行财旺地，无冲伤破是荣昌。”又：“生月官星坐禄乡，日辰生旺福无疆，有财有印无伤破，年少成名坐玉堂。”又：“月逢正禄号真官，不犯刑伤禄最宽，日主兴隆名利显，运逢财印步金銮。”又：“印多官多为贵命，官旺身衰反为病，官多身旺化为财，财旺身衰贫病并。”又：“正官大抵要纯和，四柱无伤掇显科，时上喜逢财健旺，柱中欣见印生多。提纲独遇为真贵，年位重逄乃太多，别处若有煞来混，反为辛苦受奔波。”合诸说，观正官喜忌见矣。
+  locator: 第71章·论正官·第3条
+  concepts:
+  - 十神
+  - 旺衰
+  - 行运
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 365c93b48472af7636e6ba5d2ee1db9ae07cef673fad589c9a23de873cd6fabb
+  source_pages:
+  - https://luckclub.cn/bazi/005/071/
+- id: sanming-tonghui-ch134-p001
+  volume: 选章正文
+  chapter_path:
+  - 第134章 论正财
+  sequence: 31
+  text: 正财者，乃甲见己、乙见戊之例。受我克制，为我之妻，譬人娶妻，妻赍财嫁我，我必精神康强，而后可享用，若衰微不振，虽妻财丰厚，但能目视，终不得用。故财要得时乘旺，不偏正混乱，不重叠多见，自家日主有力，皆能发福。若财多身弱，柱无印助，财少身强，柱有比劫，太过不及，皆不为福。《珞》云：若月令得财局，身衰逢印资助，当作富论，如先见印，却怕见财。《独步》云：先财后印，反成其福，先印后财，反成其辱是也。用财不宜明露，柱见比劫，则宜透出，使人共见则不能夺。赋云：财宜藏，藏则丰厚，露则浮荡是也。凡财格，喜见官星显露，别无伤损，或更食生印助日主健旺，富贵双全。如干支见煞，亦能享用，即逢财看煞之义。大怕枭，夺则不能生，刃劫则不能享，库逢空则不能聚。如甲生午月，见壬伤，丙卯破，乙夺；乙生巳月，见癸伤，丁亥破，甲夺；壬生戌月，甲子旬戌落空亡之类。余以例推。又曰：财为养命之源，凡人八字不可无财，但不要太多，多则不清，若柱原无财而行财运，乃有名无实，如财多身弱，又行官乡财旺之地，见财盗气，官克身，不惟不发禄，且祸患百出。又曰：财为马，官为禄，二者不可缺一，实难两全，原有财星宜行官运，原有官星宜行财运，行财运生官，行官运发财，若柱中原无官星，只是财多，又行财运，亦能成就名利，间有登科者。盖财不畏多，多则暗生官也，须得身旺方能胜任，若无财，官多身受其制，反不为吉，柱中无官，只取有财为福。又曰：财官与煞，用月支者，所谓以支为命，日干者，所谓以干为禄，若月支有财官，干头不露，自足为福，若地支无财官，干头明露，乃虚诈无实之命，纵行旺运，亦不济事。苟月支无而年时日支有，亦可取用，月地支坐财官，谓之得时，日地支坐财官谓之得位，时地支坐财官，谓之有成。得时为上，得位次之，有成又次之，兼得一二尤妙。年主祖父富贵，中年后无用。又云：庚辛日生于正月，别位有火为煞，以克庚辛，虽年月见寅卯，亦无祖财，一生熬煎，遇发财处必成灾祸，以木旺生火，害日干之金，天元羸弱，财党煞生，不能为福。又云：正财之格，主人诚实，行事俭约，赋性聪明，惟有悭吝，若财旺身衰，主妻秉男权，持家干蛊，又主有好子替力，反得优游之乐，运行比劫，妻妾多危。《独步》云：财旺生官，富而且贵，露官藏财，无不高位，藏则丰厚，露则虚费，冲者宜透，实则滋利。《中书奥旨》云：我去克他为妻财，干强则富。又云：身弱财多，喜兄弟羊刃为助。又云：财旺者遇比无妨。又云：妻财明朗，乔木相求，财星入墓，必定刑妻，支下伏财，偏房宠妾。口诀云：财星太过愚。又云：大运、流年、三合财乡，必主红鸾吉兆。《千里马》云：财源被劫，父命先倾。又云：男逢财多身弱，妻话偏听，财星得位，因妻致富成家，财遇长生，田园万顷，财旺生官，白身荣显。《元理赋》云：大贵者用财而不用官。又云：财临旺地人多福。又云：孤寡者只为财神被劫。秘诀云：财生身旺两相停，不喜再见比肩。《万祺》云：正财逢生旺而优游享福，遇劫财则晦滞呻吟，官星若见，平生惹是招非，七煞若逢，处事少成多败。财旺身衰，祸深福浅，财多身弱，要印扶身，身旺财衰，怕劫分夺，财食入库者福厚，例食求财者贫夭。诗曰：正财喜旺食丰盈，日主刚强力可胜，若是财多身自弱，平生破败事无成。又：正财还与月官同，最怕干支遇破冲，岁运若临财旺处，须教得富胜陶公。又：正财切忌劫财神，破害刑冲不可论，岁运那堪逢刃地，命延不死也遭。财星得位正当权，日主高强名利全，印绶若逢相济助，金珠满柜福绵绵。又：身旺无官只取财，财神冲破却为灾，身衰财旺还知夭，官盛身强福禄媒。又：财多如何不发财，只因身弱少培栽，运到比肩身旺地，富贵荣华次第来。又：财多身弱刃刚强，身旺之乡大不祥，凤寡鸾孤寒夜怨，房中妻哭两三场。又：财神忌透只宜藏，身旺逢之大吉昌，切忌比劫相遇会，一生名利被分张。又：财多身旺足荣欢，身旺财多化作官，身衰财多财累己，是非不竞起争端。合诸说，观正财喜忌见矣。
+  normalized_text: 正财者，乃甲见己、乙见戊之例。受我克制，为我之妻，譬人娶妻，妻赍财嫁我，我必精神康强，而后可享用，若衰微不振，虽妻财丰厚，但能目视，终不得用。故财要得时乘旺，不偏正混乱，不重叠多见，自家日主有力，皆能发福。若财多身弱，柱无印助，财少身强，柱有比劫，太过不及，皆不为福。《珞》云：若月令得财局，身衰逢印资助，当作富论，如先见印，却怕见财。《独步》云：先财后印，反成其福，先印后财，反成其辱是也。用财不宜明露，柱见比劫，则宜透出，使人共见则不能夺。赋云：财宜藏，藏则丰厚，露则浮荡是也。凡财格，喜见官星显露，别无伤损，或更食生印助日主健旺，富贵双全。如干支见煞，亦能享用，即逢财看煞之义。大怕枭，夺则不能生，刃劫则不能享，库逢空则不能聚。如甲生午月，见壬伤，丙卯破，乙夺；乙生巳月，见癸伤，丁亥破，甲夺；壬生戌月，甲子旬戌落空亡之类。余以例推。又曰：财为养命之源，凡人八字不可无财，但不要太多，多则不清，若柱原无财而行财运，乃有名无实，如财多身弱，又行官乡财旺之地，见财盗气，官克身，不惟不发禄，且祸患百出。又曰：财为马，官为禄，二者不可缺一，实难两全，原有财星宜行官运，原有官星宜行财运，行财运生官，行官运发财，若柱中原无官星，只是财多，又行财运，亦能成就名利，间有登科者。盖财不畏多，多则暗生官也，须得身旺方能胜任，若无财，官多身受其制，反不为吉，柱中无官，只取有财为福。又曰：财官与煞，用月支者，所谓以支为命，日干者，所谓以干为禄，若月支有财官，干头不露，自足为福，若地支无财官，干头明露，乃虚诈无实之命，纵行旺运，亦不济事。苟月支无而年时日支有，亦可取用，月地支坐财官，谓之得时，日地支坐财官谓之得位，时地支坐财官，谓之有成。得时为上，得位次之，有成又次之，兼得一二尤妙。年主祖父富贵，中年后无用。又云：庚辛日生于正月，别位有火为煞，以克庚辛，虽年月见寅卯，亦无祖财，一生熬煎，遇发财处必成灾祸，以木旺生火，害日干之金，天元羸弱，财党煞生，不能为福。又云：正财之格，主人诚实，行事俭约，赋性聪明，惟有悭吝，若财旺身衰，主妻秉男权，持家干蛊，又主有好子替力，反得优游之乐，运行比劫，妻妾多危。《独步》云：财旺生官，富而且贵，露官藏财，无不高位，藏则丰厚，露则虚费，冲者宜透，实则滋利。《中书奥旨》云：我去克他为妻财，干强则富。又云：身弱财多，喜兄弟羊刃为助。又云：财旺者遇比无妨。又云：妻财明朗，乔木相求，财星入墓，必定刑妻，支下伏财，偏房宠妾。口诀云：财星太过愚。又云：大运、流年、三合财乡，必主红鸾吉兆。《千里马》云：财源被劫，父命先倾。又云：男逢财多身弱，妻话偏听，财星得位，因妻致富成家，财遇长生，田园万顷，财旺生官，白身荣显。《元理赋》云：大贵者用财而不用官。又云：财临旺地人多福。又云：孤寡者只为财神被劫。秘诀云：财生身旺两相停，不喜再见比肩。《万祺》云：正财逢生旺而优游享福，遇劫财则晦滞呻吟，官星若见，平生惹是招非，七煞若逢，处事少成多败。财旺身衰，祸深福浅，财多身弱，要印扶身，身旺财衰，怕劫分夺，财食入库者福厚，例食求财者贫夭。诗曰：正财喜旺食丰盈，日主刚强力可胜，若是财多身自弱，平生破败事无成。又：正财还与月官同，最怕干支遇破冲，岁运若临财旺处，须教得富胜陶公。又：正财切忌劫财神，破害刑冲不可论，岁运那堪逢刃地，命延不死也遭。财星得位正当权，日主高强名利全，印绶若逢相济助，金珠满柜福绵绵。又：身旺无官只取财，财神冲破却为灾，身衰财旺还知夭，官盛身强福禄媒。又：财多如何不发财，只因身弱少培栽，运到比肩身旺地，富贵荣华次第来。又：财多身弱刃刚强，身旺之乡大不祥，凤寡鸾孤寒夜怨，房中妻哭两三场。又：财神忌透只宜藏，身旺逢之大吉昌，切忌比劫相遇会，一生名利被分张。又：财多身旺足荣欢，身旺财多化作官，身衰财多财累己，是非不竞起争端。合诸说，观正财喜忌见矣。
+  locator: 第134章·论正财·第1条
+  concepts:
+  - 十神
+  - 旺衰
+  - 行运
+  - 六亲
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 18f42c232969b19347fb4f7af560f4870b46929431962d9add33e1146af05bcc
+  source_pages:
+  - https://luckclub.cn/bazi/005/134/
+- id: sanming-tonghui-ch139-p001
+  volume: 选章正文
+  chapter_path:
+  - 第139章 论偏财
+  sequence: 32
+  text: 何谓偏财？乃甲见戊、乙见己之例。非妻所带，乃众人之财也。切忌有姊妹兄弟分夺，柱无官星，祸患百出。经曰：偏财好出，亦不惧藏，唯怕分夺，及落空亡，有一于此，官将不成，财将不住。如财弱必待历旺乡而荣，财盛无往不利，但恐身势无力，不能胜任。偏财格，主人慷慨，不甚吝财，与人有情而多诈，若是得地，不止财丰，亦能旺官，以财盛自生官，运行旺相，福禄俱臻，一遇官乡，便可发福。柱中原带官星，便作好命看，若兄弟辈出，纵入官乡，发福必渺。偏财月令所带最重，不宜柱中多逢。年上偏财生旺，月令柱中通气，主受伯叔祖考产业丰隆，或外祖产业恩养。大要日主兴隆，财星生旺，运向财旺之乡发福。若见刑冲破害，比劫分夺，或财星太衰，日主太弱，或财多生煞，皆破祖劳碌之命。凡月令有财，主少年富贵，若生时不得地，或有劫败，更运临凶地，晚年祖财破尽，终身困穷，先富后贫。若年月本无，日时带财，别无劫败冲克，则主自家成立，中晚之年大发。若柱中财多身弱，少年又径休败之地，多事频并，百不如意，中密年后忽临父母之地，或三合可以助我，则勃然而兴。若少年乘旺，老来脱局，不唯守穷途而ゐ惶，抑且是非蜂起，以财能利己，亦能招谤故也。若四柱相生，别带贵格，不值空亡，又行旺运，三合财星，皆是贵命，其福禄浅深，随格轻重言之。又曰：凡人命有两位财，身弱不妨，元用正财，身旺发财，元用偏财，身旺脱财。又云：偏正二财，喜忌大同，唯有喜官星不喜官星小异，有正财不若有偏财，偏财重实，其福则厚，最怕劫败比肩，在年最重，在月稍次，一名孤辰，一名逐马，主克妻害子，破财贫薄，又防阴贼小人同类相伤，柱中元犯此忌，运行财旺之地，亦可发福，再行比劫，退败而身死者有之，遭官破败者有之。《通明赋》云：月上偏财，无劫无败，富甲人间。《相心赋》云：偏财透露，轻财好义，爱人趋奉，好说是非，嗜酒贪花，亦系如此。《惊神赋》云：偏财身旺，趁求商贾之人。《奥旨》云：偏财能益寿延年。《千里马》云：出现偏财，少爱正妻，多爱妾。古歌曰：偏财元是众人财，最忌干支兄弟来，身强财旺皆为福，若带官星更妙哉！又：偏财身旺要官星，运入乡发利名，姊妹弟兄分夺去，功名不遂祸随生。又；偏财财位发他乡，慷慨风流性要强，别立家园三两处，因名因利自家忙。
+  normalized_text: 何谓偏财？乃甲见戊、乙见己之例。非妻所带，乃众人之财也。切忌有姊妹兄弟分夺，柱无官星，祸患百出。经曰：偏财好出，亦不惧藏，唯怕分夺，及落空亡，有一于此，官将不成，财将不住。如财弱必待历旺乡而荣，财盛无往不利，但恐身势无力，不能胜任。偏财格，主人慷慨，不甚吝财，与人有情而多诈，若是得地，不止财丰，亦能旺官，以财盛自生官，运行旺相，福禄俱臻，一遇官乡，便可发福。柱中原带官星，便作好命看，若兄弟辈出，纵入官乡，发福必渺。偏财月令所带最重，不宜柱中多逢。年上偏财生旺，月令柱中通气，主受伯叔祖考产业丰隆，或外祖产业恩养。大要日主兴隆，财星生旺，运向财旺之乡发福。若见刑冲破害，比劫分夺，或财星太衰，日主太弱，或财多生煞，皆破祖劳碌之命。凡月令有财，主少年富贵，若生时不得地，或有劫败，更运临凶地，晚年祖财破尽，终身困穷，先富后贫。若年月本无，日时带财，别无劫败冲克，则主自家成立，中晚之年大发。若柱中财多身弱，少年又径休败之地，多事频并，百不如意，中密年后忽临父母之地，或三合可以助我，则勃然而兴。若少年乘旺，老来脱局，不唯守穷途而ゐ惶，抑且是非蜂起，以财能利己，亦能招谤故也。若四柱相生，别带贵格，不值空亡，又行旺运，三合财星，皆是贵命，其福禄浅深，随格轻重言之。又曰：凡人命有两位财，身弱不妨，元用正财，身旺发财，元用偏财，身旺脱财。又云：偏正二财，喜忌大同，唯有喜官星不喜官星小异，有正财不若有偏财，偏财重实，其福则厚，最怕劫败比肩，在年最重，在月稍次，一名孤辰，一名逐马，主克妻害子，破财贫薄，又防阴贼小人同类相伤，柱中元犯此忌，运行财旺之地，亦可发福，再行比劫，退败而身死者有之，遭官破败者有之。《通明赋》云：月上偏财，无劫无败，富甲人间。《相心赋》云：偏财透露，轻财好义，爱人趋奉，好说是非，嗜酒贪花，亦系如此。《惊神赋》云：偏财身旺，趁求商贾之人。《奥旨》云：偏财能益寿延年。《千里马》云：出现偏财，少爱正妻，多爱妾。古歌曰：偏财元是众人财，最忌干支兄弟来，身强财旺皆为福，若带官星更妙哉！又：偏财身旺要官星，运入乡发利名，姊妹弟兄分夺去，功名不遂祸随生。又；偏财财位发他乡，慷慨风流性要强，别立家园三两处，因名因利自家忙。
+  locator: 第139章·论偏财·第1条
+  concepts:
+  - 十神
+  - 旺衰
+  - 六亲
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 42fd3d070bbfe8a5a8223e15a0d095b065680a04d56211dbb00eadfcbf5c5031
+  source_pages:
+  - https://luckclub.cn/bazi/005/139/
+- id: sanming-tonghui-ch143-p001
+  volume: 选章正文
+  chapter_path:
+  - 第143章 偏正财合论
+  sequence: 33
+  text: 《精纪》有生成财，如甲乙见戊己土为财，申子辰上坐生旺库，戊申、戊辰、戊子支干成合是也。凡命入贵格，除贵外，须主大富，仍多历钱谷之任；若不入贵格，又无福神助，亦是富豪百姓。若自生自旺，甲人见戊午、己亥之例，主富。余仿此。
+  normalized_text: 《精纪》有生成财，如甲乙见戊己土为财，申子辰上坐生旺库，戊申、戊辰、戊子支干成合是也。凡命入贵格，除贵外，须主大富，仍多历钱谷之任；若不入贵格，又无福神助，亦是富豪百姓。若自生自旺，甲人见戊午、己亥之例，主富。余仿此。
+  locator: 第143章·偏正财合论·第1条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 4b57291590ab9898bb90728d5ce562eaaa4a58ade7028878440fcbc785804f51
+  source_pages:
+  - https://luckclub.cn/bazi/005/143/
+- id: sanming-tonghui-ch143-p002
+  volume: 选章正文
+  chapter_path:
+  - 第143章 偏正财合论
+  sequence: 34
+  text: 有生合财，如甲人见戊癸，己人见癸戊，庚人见甲己等类，主成立富贵。
+  normalized_text: 有生合财，如甲人见戊癸，己人见癸戊，庚人见甲己等类，主成立富贵。
+  locator: 第143章·偏正财合论·第2条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: e40ccb488dec8b2eb3c9265304b687e260830a23866b68ca406ba485b7d0028a
+  source_pages:
+  - https://luckclub.cn/bazi/005/143/
+- id: sanming-tonghui-ch143-p003
+  volume: 选章正文
+  chapter_path:
+  - 第143章 偏正财合论
+  sequence: 35
+  text: 有子母财，如木命人见火月、土日时之类，主平生多见喜事。
+  normalized_text: 有子母财，如木命人见火月、土日时之类，主平生多见喜事。
+  locator: 第143章·偏正财合论·第3条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 39fd208828e6e2f5d4e6dfcdbd0d8b6a13376ce23be1884a52473ed242b15558
+  source_pages:
+  - https://luckclub.cn/bazi/005/143/
+- id: sanming-tonghui-ch143-p004
+  volume: 选章正文
+  chapter_path:
+  - 第143章 偏正财合论
+  sequence: 36
+  text: 有类财煞，寅午戌人见乙庚，巳酉丑人见丁壬，申子辰人见戊癸，亥卯未人见甲号，一名幽微煞，主名利并行。
+  normalized_text: 有类财煞，寅午戌人见乙庚，巳酉丑人见丁壬，申子辰人见戊癸，亥卯未人见甲号，一名幽微煞，主名利并行。
+  locator: 第143章·偏正财合论·第4条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 6a6c91547b15062bd267bdc4f7f86bc6c05b0cee47ffede6df000c14e3e1d2d0
+  source_pages:
+  - https://luckclub.cn/bazi/005/143/
+- id: sanming-tonghui-ch143-p005
+  volume: 选章正文
+  chapter_path:
+  - 第143章 偏正财合论
+  sequence: 37
+  text: 有财会煞，寅午戌人见辛丑，巳酉丑人见乙未，申子辰人见丙戌，亥卯未人见戊辰，此妻财聚会之神，遇者主富足及有美妻横财，却防妻人毒药害命。
+  normalized_text: 有财会煞，寅午戌人见辛丑，巳酉丑人见乙未，申子辰人见丙戌，亥卯未人见戊辰，此妻财聚会之神，遇者主富足及有美妻横财，却防妻人毒药害命。
+  locator: 第143章·偏正财合论·第5条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 5440f8772061d5d137870bc465df2bfd1318a7b04b93659524ef895c894589a4
+  source_pages:
+  - https://luckclub.cn/bazi/005/143/
+- id: sanming-tonghui-ch143-p006
+  volume: 选章正文
+  chapter_path:
+  - 第143章 偏正财合论
+  sequence: 38
+  text: 有名位财，乃食神中见库，如戊子火人见庚戌，戊食庚，火库在戌，克金为财，逢此者一生受禄。
+  normalized_text: 有名位财，乃食神中见库，如戊子火人见庚戌，戊食庚，火库在戌，克金为财，逢此者一生受禄。
+  locator: 第143章·偏正财合论·第6条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 778f6e04705b6d7fe84042d42fac45ce27b66c78db3243f352677ea1fc74ded8
+  source_pages:
+  - https://luckclub.cn/bazi/005/143/
+- id: sanming-tonghui-ch143-p007
+  volume: 选章正文
+  chapter_path:
+  - 第143章 偏正财合论
+  sequence: 39
+  text: 有长生财，如甲用戊己为财见戊申，癸用丙丁为财见丙寅之例，此类多得外财。
+  normalized_text: 有长生财，如甲用戊己为财见戊申，癸用丙丁为财见丙寅之例，此类多得外财。
+  locator: 第143章·偏正财合论·第7条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 2e014bd639eacbe5f9f70ecb398b28760ca62fcbb410ea6cca3ed3d3eb8071ec
+  source_pages:
+  - https://luckclub.cn/bazi/005/143/
+- id: sanming-tonghui-ch143-p008
+  volume: 选章正文
+  chapter_path:
+  - 第143章 偏正财合论
+  sequence: 40
+  text: 又曰：术者多以甲见戊、乙见己类为财，不知甲己见丙辛、丙辛见戊癸等类为真财，生居有气旺相之位，主富盛。又纳音本干自见真五行，如乙亥人月日时中见庚，乙亥纳音火，乙庚真金，干头自是财也，此名天财，主富足优逸。若纳音反制克干头，如丁卯火却能制乙庚金，此名鬼财，主一生得世财，或为豪猾胥吏起家。戊寅、戊申得丙辛，乙酉、乙卯得戊癸，准此。更带辰戌丑未，主为艺术，大获世财。
+  normalized_text: 又曰：术者多以甲见戊、乙见己类为财，不知甲己见丙辛、丙辛见戊癸等类为真财，生居有气旺相之位，主富盛。又纳音本干自见真五行，如乙亥人月日时中见庚，乙亥纳音火，乙庚真金，干头自是财也，此名天财，主富足优逸。若纳音反制克干头，如丁卯火却能制乙庚金，此名鬼财，主一生得世财，或为豪猾胥吏起家。戊寅、戊申得丙辛，乙酉、乙卯得戊癸，准此。更带辰戌丑未，主为艺术，大获世财。
+  locator: 第143章·偏正财合论·第8条
+  concepts: []
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: ec3f2dc659201f234ded019ccc5cc50c24c2bc27fa86b60de405dc47ae9cf858
+  source_pages:
+  - https://luckclub.cn/bazi/005/143/
+- id: sanming-tonghui-ch144-p001
+  volume: 选章正文
+  chapter_path:
+  - 第144章 论印绶
+  sequence: 41
+  text: 印绶者，乃五行生我之名。如甲乙在亥子月，丙丁在寅卯月之类，乃我气之源，为生气，为父母，能护我官星，使无伤克，譬人生得物相助相养，受现成之福，岂不为妙？此格主聪明，多智慧，性慈惠，语善良，迟讷体，貌丰厚，能饮食，平生少病，不逢凶横，但吝财耳，为官多为正官，受宣敕不拘文武，皆掌印信，喜官星，以官能生印。经云：印赖官生。又云：有官无印，即非真官，有印有官，方成厚福是也。忌财星，以财能破印。经云：印绶生月岁时，忌见财星，运入财乡，却宜退身避位是也。岁运同论，印绶不逢损伤，多受父母倚荫，资财见成，安享富贵，诸命相比，当以印绶多者为上，月最要，日时次之，年干虽重，须归禄月日时，方可取用，若年露印，月日时无，亦不济事。四柱元有官星为妙，若印绶少，官鬼多，或入他格，又不可专言印绶，若印绶复遇拱禄、专禄、归禄、鼠贵、夹贵、时贵等格，尤为奇特，但主少子或无子，印绶多者清孤。凡印绶，喜七煞，但煞不可太多，多则伤身。原无七煞，行运遇之则发；原有七煞，行财运，或印绶死绝，或临墓地，皆凶。经云：煞能生印，畏行财乡，破印助鬼，决主不详。凡格喜身旺，惟印绶喜生弱，若元局带财伤印，运行比劫身旺，亦能发福，无则不宜，如无官煞财神，又行身旺，主平常。
+  normalized_text: 印绶者，乃五行生我之名。如甲乙在亥子月，丙丁在寅卯月之类，乃我气之源，为生气，为父母，能护我官星，使无伤克，譬人生得物相助相养，受现成之福，岂不为妙？此格主聪明，多智慧，性慈惠，语善良，迟讷体，貌丰厚，能饮食，平生少病，不逢凶横，但吝财耳，为官多为正官，受宣敕不拘文武，皆掌印信，喜官星，以官能生印。经云：印赖官生。又云：有官无印，即非真官，有印有官，方成厚福是也。忌财星，以财能破印。经云：印绶生月岁时，忌见财星，运入财乡，却宜退身避位是也。岁运同论，印绶不逢损伤，多受父母倚荫，资财见成，安享富贵，诸命相比，当以印绶多者为上，月最要，日时次之，年干虽重，须归禄月日时，方可取用，若年露印，月日时无，亦不济事。四柱元有官星为妙，若印绶少，官鬼多，或入他格，又不可专言印绶，若印绶复遇拱禄、专禄、归禄、鼠贵、夹贵、时贵等格，尤为奇特，但主少子或无子，印绶多者清孤。凡印绶，喜七煞，但煞不可太多，多则伤身。原无七煞，行运遇之则发；原有七煞，行财运，或印绶死绝，或临墓地，皆凶。经云：煞能生印，畏行财乡，破印助鬼，决主不详。凡格喜身旺，惟印绶喜生弱，若元局带财伤印，运行比劫身旺，亦能发福，无则不宜，如无官煞财神，又行身旺，主平常。
+  locator: 第144章·论印绶·第1条
+  concepts:
+  - 十神
+  - 旺衰
+  - 行运
+  - 六亲
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: c0ff7a49b9eec0da6747141c9b84383c46826f1ec02334ee4889b6123b94bb11
+  source_pages:
+  - https://luckclub.cn/bazi/005/144/
+- id: sanming-tonghui-ch144-p002
+  volume: 选章正文
+  chapter_path:
+  - 第144章 论印绶
+  sequence: 42
+  text: 《渊源论》：印绶，如甲日遇子月为正印，亥月为偏印，最喜逢天月德，子天德在巽，月德在壬，亥天德在乙，月德在甲，时要见酉辛正官为妙，或申庚七煞，却要见比劫助身，合煞为贵，畏戊己财星损印，忌丙丁食伤生财破印；乙逢亥子月，喜忌与甲同。
+  normalized_text: 《渊源论》：印绶，如甲日遇子月为正印，亥月为偏印，最喜逢天月德，子天德在巽，月德在壬，亥天德在乙，月德在甲，时要见酉辛正官为妙，或申庚七煞，却要见比劫助身，合煞为贵，畏戊己财星损印，忌丙丁食伤生财破印；乙逢亥子月，喜忌与甲同。
+  locator: 第144章·论印绶·第2条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 8a9dbe091c0c17626ba65a5235cb347cd42ca03d0716f9a7d2031b78eb9d8377
+  source_pages:
+  - https://luckclub.cn/bazi/005/144/
+- id: sanming-tonghui-ch144-p003
+  volume: 选章正文
+  chapter_path:
+  - 第144章 论印绶
+  sequence: 43
+  text: 丙日逢卯月正印，天德在坤，月德在甲，寅月偏印，天德在丁，月德在丙，喜见子癸正官，或壬亥七煞，却要比劫助身合煞，畏申庚酉辛财星损印，忌戊己食伤生财破印；丁逢寅卯月，喜忌与丙同。
+  normalized_text: 丙日逢卯月正印，天德在坤，月德在甲，寅月偏印，天德在丁，月德在丙，喜见子癸正官，或壬亥七煞，却要比劫助身合煞，畏申庚酉辛财星损印，忌戊己食伤生财破印；丁逢寅卯月，喜忌与丙同。
+  locator: 第144章·论印绶·第3条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: b52174a5807a1d6eb97aa9e98ab0528592f892023abce0beecdea2dc1778861b
+  source_pages:
+  - https://luckclub.cn/bazi/005/144/
+- id: sanming-tonghui-ch144-p004
+  volume: 选章正文
+  chapter_path:
+  - 第144章 论印绶
+  sequence: 44
+  text: 戊日逢午月正印，天德在亥，月德在丙，巳月偏印，天德在辛，月德在庚，喜逢卯乙正官，寅甲七煞，见煞却宜比劫助身合煞，忌见壬癸之财坏印，申庚辛食伤生财破印；己生巳午月，喜忌与戊同。
+  normalized_text: 戊日逢午月正印，天德在亥，月德在丙，巳月偏印，天德在辛，月德在庚，喜逢卯乙正官，寅甲七煞，见煞却宜比劫助身合煞，忌见壬癸之财坏印，申庚辛食伤生财破印；己生巳午月，喜忌与戊同。
+  locator: 第144章·论印绶·第4条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 1a2ea50c05f4ce7d87f46a18f5b1b7ff1a4e07a4eabd0c422bbe0226b9ca5dee
+  source_pages:
+  - https://luckclub.cn/bazi/005/144/
+- id: sanming-tonghui-ch144-p005
+  volume: 选章正文
+  chapter_path:
+  - 第144章 论印绶
+  sequence: 45
+  text: 庚日生午月正印，天德在乾，月德在丙，巳月偏印，天德在辛，月德在庚，喜见午丁官星，巳丙七煞，见煞却宜比劫助身合煞，忌甲乙寅卯旺财坏印，壬癸伤食，午财破印；辛生巳午月，喜忌与庚同。
+  normalized_text: 庚日生午月正印，天德在乾，月德在丙，巳月偏印，天德在辛，月德在庚，喜见午丁官星，巳丙七煞，见煞却宜比劫助身合煞，忌甲乙寅卯旺财坏印，壬癸伤食，午财破印；辛生巳午月，喜忌与庚同。
+  locator: 第144章·论印绶·第5条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: e5ec5d2e1d31fabf455fb33f1db056fb1c1cd81341df6d2316958ddeb916b55e
+  source_pages:
+  - https://luckclub.cn/bazi/005/144/
+- id: sanming-tonghui-ch144-p006
+  volume: 选章正文
+  chapter_path:
+  - 第144章 论印绶
+  sequence: 46
+  text: 壬日生酉月正印，天德在寅，月德在庚，申月偏印，天德在癸，月德在壬，喜时逢巳午正官或己戊七煞，却宜见比劫助身合煞，忌丙丁旺财坏印，甲乙食伤，午财破印；癸生申酉月，喜忌与壬同。
+  normalized_text: 壬日生酉月正印，天德在寅，月德在庚，申月偏印，天德在癸，月德在壬，喜时逢巳午正官或己戊七煞，却宜见比劫助身合煞，忌丙丁旺财坏印，甲乙食伤，午财破印；癸生申酉月，喜忌与壬同。
+  locator: 第144章·论印绶·第6条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 57e23ee1c572562ca5d5dae085fdad5d4f4e5b3c781b5b7ff963e5473ef24490
+  source_pages:
+  - https://luckclub.cn/bazi/005/144/
+- id: sanming-tonghui-ch144-p007
+  volume: 选章正文
+  chapter_path:
+  - 第144章 论印绶
+  sequence: 47
+  text: 经云：官刑不犯，印绶与天德同宫。又曰：素食慈心，印绶喜逢于天德。如孟重都宪：
+  normalized_text: 经云：官刑不犯，印绶与天德同宫。又曰：素食慈心，印绶喜逢于天德。如孟重都宪：
+  locator: 第144章·论印绶·第7条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 7f9c43a8e52a41aef948f984e05bd6689b2ca37dfa76f9fac55b13cc712d42d4
+  source_pages:
+  - https://luckclub.cn/bazi/005/144/
+- id: sanming-tonghui-ch144-p008
+  volume: 选章正文
+  chapter_path:
+  - 第144章 论印绶
+  sequence: 48
+  text: 乙亥 丁亥 乙丑 丙戌，是印绶与天德同宫。一命
+  normalized_text: 乙亥丁亥乙丑丙戌，是印绶与天德同宫。一命
+  locator: 第144章·论印绶·第8条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: b03892eac3d934acd8cc76fef5aeae7e8d0bc2773622e79f609bfba6a423109f
+  source_pages:
+  - https://luckclub.cn/bazi/005/144/
+- id: sanming-tonghui-ch144-p009
+  volume: 选章正文
+  chapter_path:
+  - 第144章 论印绶
+  sequence: 49
+  text: 甲寅 丙寅 丙寅 丁酉，是天德在丁，月德在丙，印绶在寅。一命
+  normalized_text: 甲寅丙寅丙寅丁酉，是天德在丁，月德在丙，印绶在寅。一命
+  locator: 第144章·论印绶·第9条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: c60bceae354786b44853f55a01133accd87ddbd125b2f8b60eefbdae7fb51f31
+  source_pages:
+  - https://luckclub.cn/bazi/005/144/
+- id: sanming-tonghui-ch144-p010
+  volume: 选章正文
+  chapter_path:
+  - 第144章 论印绶
+  sequence: 50
+  text: 庚申 庚辰 庚子 壬午，是天德月德俱在壬，印绶在辰是也。此格大要生旺，最忌死绝。如果乙见亥子为印，见金成其仁义生养，印元见土则混杂其格，运行西北，官印为福，若时引归卯辰巳地，或运行此地，财印归死绝，流年再遇财克印，决入黄泉无疑。印绶合格，行大运最忌印绶变合，遇地支三合，或变为伤局，或变成财局，或变成煞局，最为不吉。
+  normalized_text: 庚申庚辰庚子壬午，是天德月德俱在壬，印绶在辰是也。此格大要生旺，最忌死绝。如果乙见亥子为印，见金成其仁义生养，印元见土则混杂其格，运行西北，官印为福，若时引归卯辰巳地，或运行此地，财印归死绝，流年再遇财克印，决入黄泉无疑。印绶合格，行大运最忌印绶变合，遇地支三合，或变为伤局，或变成财局，或变成煞局，最为不吉。
+  locator: 第144章·论印绶·第10条
+  concepts:
+  - 十神
+  - 行运
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: b0ab8d7ede99277cf2e7e88297a4a1536a8dc2b6f28988ff5d75dbab7447f5b0
+  source_pages:
+  - https://luckclub.cn/bazi/005/144/
+- id: sanming-tonghui-ch144-p011
+  volume: 选章正文
+  chapter_path:
+  - 第144章 论印绶
+  sequence: 51
+  text: 赋云：金赖土生，土厚而金遭埋没。木从水养，水盛而木必漂流。火炎土燥，则不能生物（如己日得午之类）。刚金不能生水（如庚日得戌之类）。旺土见旺火，逢此必主眼疾痈疽热病。粪土不能生金，燥金不能生水，绝水不能生木，遇此宜详看，不可一概印绶论。若水得金生而逢秋，乃水清金白，秀丽堪夸，一水三金，号曰体全之象。火得木生而值春，为木秀火明，发焰红绿，见金则伤其木，灭火之焰。是金木二印，多者俱作吉论。若火印多者火燥土烈，水印多者水泛木浮，土印多者土重金埋，皆不为吉。
+  normalized_text: 赋云：金赖土生，土厚而金遭埋没。木从水养，水盛而木必漂流。火炎土燥，则不能生物（如己日得午之类）。刚金不能生水（如庚日得戌之类）。旺土见旺火，逢此必主眼疾痈疽热病。粪土不能生金，燥金不能生水，绝水不能生木，遇此宜详看，不可一概印绶论。若水得金生而逢秋，乃水清金白，秀丽堪夸，一水三金，号曰体全之象。火得木生而值春，为木秀火明，发焰红绿，见金则伤其木，灭火之焰。是金木二印，多者俱作吉论。若火印多者火燥土烈，水印多者水泛木浮，土印多者土重金埋，皆不为吉。
+  locator: 第144章·论印绶·第11条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: d21ae2c0d71fa8e48f5ae788e2f7ce59903ea6ccb1d8f45063732b5b5c6d9688
+  source_pages:
+  - https://luckclub.cn/bazi/005/144/
+- id: sanming-tonghui-ch144-p012
+  volume: 选章正文
+  chapter_path:
+  - 第144章 论印绶
+  sequence: 52
+  text: 又云：甲日子月，忌己巳时，怕午冲；乙日亥月，忌戊辰时，怕巳冲。丙日卯月，忌辛卯时，怕酉冲，寅月忌庚寅时，怕申冲；丁日寅月，忌庚子时，怕申冲，卯月忌辛丑时，怕酉冲。戊日午月，忌癸卯时，怕子冲；己日巳月，怕壬子、壬戌时，忌亥冲。庚日午月，忌己卯、乙酉时，怕子冲，巳月忌戊寅时，怕亥冲；辛日巳月，忌庚寅、甲午时，怕亥冲，午月忌辛卯、乙未时，怕子冲。壬日酉月，忌丁未时，怕卯冲，申月忌丙午时，怕寅冲，酉月忌丁巳时怕卯冲。以上日干，皆喜见比肩疏通，忌见食伤销印生财，犯此，物运又临身印衰乡财旺之地，必然贪财坏印，剥官退职。
+  normalized_text: 又云：甲日子月，忌己巳时，怕午冲；乙日亥月，忌戊辰时，怕巳冲。丙日卯月，忌辛卯时，怕酉冲，寅月忌庚寅时，怕申冲；丁日寅月，忌庚子时，怕申冲，卯月忌辛丑时，怕酉冲。戊日午月，忌癸卯时，怕子冲；己日巳月，怕壬子、壬戌时，忌亥冲。庚日午月，忌己卯、乙酉时，怕子冲，巳月忌戊寅时，怕亥冲；辛日巳月，忌庚寅、甲午时，怕亥冲，午月忌辛卯、乙未时，怕子冲。壬日酉月，忌丁未时，怕卯冲，申月忌丙午时，怕寅冲，酉月忌丁巳时怕卯冲。以上日干，皆喜见比肩疏通，忌见食伤销印生财，犯此，物运又临身印衰乡财旺之地，必然贪财坏印，剥官退职。
+  locator: 第144章·论印绶·第12条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: be42fa4ed672cfa28b1e81292c1ecc0f23ee3be68c96419d6246694fbe799fa5
+  source_pages:
+  - https://luckclub.cn/bazi/005/144/
+- id: sanming-tonghui-ch144-p013
+  volume: 选章正文
+  chapter_path:
+  - 第144章 论印绶
+  sequence: 53
+  text: 经云：印绶、财星重见，百事难通。又云：月印纯粹，无财星，主文章中黄甲。又曰：身旺印多，财运无妨，身弱有印，煞运何伤！又曰：印绶有根，喜遇财星，印绶无根，忌见财曜，官星者，印绶之根也，印绶有官有财，则财生官，官生印，印生身，身克财则荣贵，故不忌。又云：印绶有根，逢财则发，逢官则显，逢合则晦，逢冲则灾。《通明赋》云：财印交错，论其气禀之轻重，倘若财轻而印气重，舍财取印，其贵可知；倘若印气轻而财气重，舍印取财，虽有背禄，支干重旺，反作资财。《宝鉴》云：印绶财伤，母年早丧。《奥旨》云：印绶被伤，失宗业，抛离故里。《络绎赋》云：印临子位，受子之荣。《千里马》云：逢印看官，而遇官十有七贵。《造微论》云：印绶逢华，尊居翰苑。《万祺赋》云：正印见财则凶，逢官则吉，有官无印，纵富贵而伤残，有印无官，纵荣华而有失，四柱愁逢死绝，三元喜见长生。古诗云：命逢印绶福非轻，年少从容享见成，旺相印多偏福厚，受恩承荫立功名。又：月逢印绶喜官星，运入官乡福必清，死绝运临身不利，再行财运百无成。又：印绶无亏享福全，为官承荫有田园，官膺宣敕盈财谷，日用盘餐费万钱。又：重重印绶格清奇，更要支中仔细推，支上咸池干带合，风流浪荡破家儿。又：印绶重重享见成，食神只恐暗相刑，早年若不归泉路，孤苦离乡宿疾萦。又：印绶不宜身太旺，总然无事也平常，除非原命多官煞，却有声名作栋梁。又：印绶生人旺气纯，官煞多遇转精神，印行死绝并财地，无救终为泉下人。合诸说，观印绶喜忌见矣。
+  normalized_text: 经云：印绶、财星重见，百事难通。又云：月印纯粹，无财星，主文章中黄甲。又曰：身旺印多，财运无妨，身弱有印，煞运何伤！又曰：印绶有根，喜遇财星，印绶无根，忌见财曜，官星者，印绶之根也，印绶有官有财，则财生官，官生印，印生身，身克财则荣贵，故不忌。又云：印绶有根，逢财则发，逢官则显，逢合则晦，逢冲则灾。《通明赋》云：财印交错，论其气禀之轻重，倘若财轻而印气重，舍财取印，其贵可知；倘若印气轻而财气重，舍印取财，虽有背禄，支干重旺，反作资财。《宝鉴》云：印绶财伤，母年早丧。《奥旨》云：印绶被伤，失宗业，抛离故里。《络绎赋》云：印临子位，受子之荣。《千里马》云：逢印看官，而遇官十有七贵。《造微论》云：印绶逢华，尊居翰苑。《万祺赋》云：正印见财则凶，逢官则吉，有官无印，纵富贵而伤残，有印无官，纵荣华而有失，四柱愁逢死绝，三元喜见长生。古诗云：命逢印绶福非轻，年少从容享见成，旺相印多偏福厚，受恩承荫立功名。又：月逢印绶喜官星，运入官乡福必清，死绝运临身不利，再行财运百无成。又：印绶无亏享福全，为官承荫有田园，官膺宣敕盈财谷，日用盘餐费万钱。又：重重印绶格清奇，更要支中仔细推，支上咸池干带合，风流浪荡破家儿。又：印绶重重享见成，食神只恐暗相刑，早年若不归泉路，孤苦离乡宿疾萦。又：印绶不宜身太旺，总然无事也平常，除非原命多官煞，却有声名作栋梁。又：印绶生人旺气纯，官煞多遇转精神，印行死绝并财地，无救终为泉下人。合诸说，观印绶喜忌见矣。
+  locator: 第144章·论印绶·第13条
+  concepts:
+  - 十神
+  - 旺衰
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: a365715a74f57fb41e60af7018c324883d1ed22003f049348ec3cec9e5fe172e
+  source_pages:
+  - https://luckclub.cn/bazi/005/144/
+- id: sanming-tonghui-ch151-p001
+  volume: 选章正文
+  chapter_path:
+  - 第151章 论伤官
+  sequence: 54
+  text: 伤官者，我生彼之谓，乃甲见丁、乙见丙之类，甲用辛为官，丁火乘旺，盗我之气，克制辛金，使不辅甲为贵，故名伤官。伤官格务要伤尽，方作贵看，元有官星，伤之则重。经云：“伤官见官，祸患百端”是也。伤官虽凶，乃我所生，自家之物，伤尽则能生财，财旺则能生官，造化展转有情。如月令在伤官，四柱作合结局，皆在伤位，无冲无破，不见一点官星，谓之伤尽。又有月支伤官，时上伤官，四柱无官星，亦谓伤尽。更身旺、财旺或印旺，名标金榜，一品贵人。此格主多材艺，傲物气高，心险无忌惮，多谋少遂，弄巧成拙，常以天下之人不如己，而人亦惮之恶之。伤官无财主贫穷，盖生财气者即食神伤官，盗财气者即七煞官星，所以伤官要见财，不要见官。假如甲生午月，木不南奔，身势太柔，岂可再逢金制？金能盗土之气，所以不要见官。既无官星，而柱却无一点财可恃，虽聪明机巧，不过虚名虚利。经云“伤官无财可倚，虽巧必贫”是也。
+  normalized_text: 伤官者，我生彼之谓，乃甲见丁、乙见丙之类，甲用辛为官，丁火乘旺，盗我之气，克制辛金，使不辅甲为贵，故名伤官。伤官格务要伤尽，方作贵看，元有官星，伤之则重。经云：“伤官见官，祸患百端”是也。伤官虽凶，乃我所生，自家之物，伤尽则能生财，财旺则能生官，造化展转有情。如月令在伤官，四柱作合结局，皆在伤位，无冲无破，不见一点官星，谓之伤尽。又有月支伤官，时上伤官，四柱无官星，亦谓伤尽。更身旺、财旺或印旺，名标金榜，一品贵人。此格主多材艺，傲物气高，心险无忌惮，多谋少遂，弄巧成拙，常以天下之人不如己，而人亦惮之恶之。伤官无财主贫穷，盖生财气者即食神伤官，盗财气者即七煞官星，所以伤官要见财，不要见官。假如甲生午月，木不南奔，身势太柔，岂可再逢金制？金能盗土之气，所以不要见官。既无官星，而柱却无一点财可恃，虽聪明机巧，不过虚名虚利。经云“伤官无财可倚，虽巧必贫”是也。
+  locator: 第151章·论伤官·第1条
+  concepts:
+  - 十神
+  - 旺衰
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: a1b6f67761c9d1663d68a4d84aecf35cde90e9f366acec1819feef293e17ecc9
+  source_pages:
+  - https://luckclub.cn/bazi/005/151/
+- id: sanming-tonghui-ch151-p002
+  volume: 选章正文
+  chapter_path:
+  - 第151章 论伤官
+  sequence: 55
+  text: 伤官格用财，亦有用印者。《天玄赋》云：伤官用印宜去财，用财宜去印，倘使财印两全，将何发福？身旺者用财，身弱者用印，用印者须去财方能发福，用财者不论印亦主亨通，伤官用印，不忌官煞，去财方发，元犯伤官，须要见财则发。伤官最喜行财运，印绶身旺次之，不喜行官乡，四柱伤官多而见官者，不宜复行伤运，一位无妨。又曰：伤官格务要伤尽，若柱见伤官，而官星隐显，伤之不尽，岁运再见官星，官来乘旺，再见刑冲破害，刃煞克身，身弱财旺，必主徒流死亡，五行有救，亦残疾。若四柱无官而遇伤煞重者，运入官乡，岁君又遇，若不目疾，必主灾破。
+  normalized_text: 伤官格用财，亦有用印者。《天玄赋》云：伤官用印宜去财，用财宜去印，倘使财印两全，将何发福？身旺者用财，身弱者用印，用印者须去财方能发福，用财者不论印亦主亨通，伤官用印，不忌官煞，去财方发，元犯伤官，须要见财则发。伤官最喜行财运，印绶身旺次之，不喜行官乡，四柱伤官多而见官者，不宜复行伤运，一位无妨。又曰：伤官格务要伤尽，若柱见伤官，而官星隐显，伤之不尽，岁运再见官星，官来乘旺，再见刑冲破害，刃煞克身，身弱财旺，必主徒流死亡，五行有救，亦残疾。若四柱无官而遇伤煞重者，运入官乡，岁君又遇，若不目疾，必主灾破。
+  locator: 第151章·论伤官·第2条
+  concepts:
+  - 十神
+  - 旺衰
+  - 行运
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: d55c3092dda36ead7bff2427c015fff2ad1f4c436d1dfebe360e80b16aceab93
+  source_pages:
+  - https://luckclub.cn/bazi/005/151/
+- id: sanming-tonghui-ch151-p003
+  volume: 选章正文
+  chapter_path:
+  - 第151章 论伤官
+  sequence: 56
+  text: 经云：五行伤官，惟火人土伤官，土人金伤官忌见官星，若金人水，水人木，木人火，不忌。盖火以水为官，以土为伤，水畏土克，土得水无益；土以木为官，以金为伤，木畏金克，金得木无益，所以火土伤官格忌见官星。金以水为伤，以火为官，水虽克火，若金寒水冷，不得火温，难以济物，况水得火成既济之功；水以木为伤，以土为官，木虽克土，若水泛木浮，不得土止，难以存活，况木得土成栽培之力；木以火为伤，以金为官，火虽克金，若木繁火息，不得金削脱，难以通明，况金得火成器物之象，所以金水木伤官格不忌官星。故经云：“伤官火土宜伤尽，金水伤官要见官，木火见官官要旺，土金官去反成官，惟有水木伤官格，财官两见始为欢”是也。又曰：伤官伤尽，亦有不作福者，伤官见官，亦有不作祸者。如一命
+  normalized_text: 经云：五行伤官，惟火人土伤官，土人金伤官忌见官星，若金人水，水人木，木人火，不忌。盖火以水为官，以土为伤，水畏土克，土得水无益；土以木为官，以金为伤，木畏金克，金得木无益，所以火土伤官格忌见官星。金以水为伤，以火为官，水虽克火，若金寒水冷，不得火温，难以济物，况水得火成既济之功；水以木为伤，以土为官，木虽克土，若水泛木浮，不得土止，难以存活，况木得土成栽培之力；木以火为伤，以金为官，火虽克金，若木繁火息，不得金削脱，难以通明，况金得火成器物之象，所以金水木伤官格不忌官星。故经云：“伤官火土宜伤尽，金水伤官要见官，木火见官官要旺，土金官去反成官，惟有水木伤官格，财官两见始为欢”是也。又曰：伤官伤尽，亦有不作福者，伤官见官，亦有不作祸者。如一命
+  locator: 第151章·论伤官·第3条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 1d180b5f34c8b23bf563284031d1503ac4486779cde919cee54ba46e0bf6cf2c
+  source_pages:
+  - https://luckclub.cn/bazi/005/151/
+- id: sanming-tonghui-ch151-p004
+  volume: 选章正文
+  chapter_path:
+  - 第151章 论伤官
+  sequence: 57
+  text: 丁未 丁未 丙午 丙午，丙日坐午，日主自旺，有二午、二丁、二未，财官俱伤，虽伤官伤尽，奈四柱火气太旺，窃气又重，运行东南火旺之乡，无一点财气，身空旺无倚，至贫之人，切不可见伤官伤尽身旺，便作好命看。又如甲日生人，柱有辛为官，又有丁伤官，若生秋月官旺，虽逢丁火或居亥、子之上，或见午伏壬、癸之下，则丁不能伤官，终为有官爵之命，岁运遇煞官印绶，俱吉，忌身衰败运，切不可见伤官格有官星，便不作好命看。又曰：人命原有些小伤官，不能损贵气，或运入官乡，官自旺强健，或入印运制伏伤煞，或有财生助，或从化入于别格，不失为好命，怕再行伤地，病而不起者有之，否则文书口舌，官事破败，殃祸踵至。柱元有财，又行财运，亦可成就功名利禄，一行官煞地，或财衰败死绝地，即失财禄，非官讼则丧服重并。又曰：四柱伤官，惟年干伤官最重，谓之福基受伤，终身不可除去，若月支更有，甚于伤身七煞。如甲日人，以辛为官，见丁卯年，生寅午戌月，是伤官重犯，又有卯为劫刃，名背禄逐马，主为人退悔，反伤祖荫，运行官乡，流年再见，或煞旺身弱运，必祸。若月令真正伤官，又见官星，如甲日生午月，见辛未时，午中丁火伤辛；乙日生巳月，见庚或甲申时，巳中丙火伤庚；丙日午月，见戊子、癸巳时，午中己土伤癸之例。大要日主健旺，再临伤官运，可发名利，日主微弱，运历财官乡，祸不可言。又曰：伤官，如甲日见丁，喜壬合癸破；乙见丙，喜辛合壬破；丙见己，喜甲合乙破；丁见戊，喜癸合甲破；戊见辛，喜丙合丁破；己见庚，喜乙合丙破；庚见癸，喜戊合己破；癸见甲，喜己合庚破。
+  normalized_text: 丁未丁未丙午丙午，丙日坐午，日主自旺，有二午、二丁、二未，财官俱伤，虽伤官伤尽，奈四柱火气太旺，窃气又重，运行东南火旺之乡，无一点财气，身空旺无倚，至贫之人，切不可见伤官伤尽身旺，便作好命看。又如甲日生人，柱有辛为官，又有丁伤官，若生秋月官旺，虽逢丁火或居亥、子之上，或见午伏壬、癸之下，则丁不能伤官，终为有官爵之命，岁运遇煞官印绶，俱吉，忌身衰败运，切不可见伤官格有官星，便不作好命看。又曰：人命原有些小伤官，不能损贵气，或运入官乡，官自旺强健，或入印运制伏伤煞，或有财生助，或从化入于别格，不失为好命，怕再行伤地，病而不起者有之，否则文书口舌，官事破败，殃祸踵至。柱元有财，又行财运，亦可成就功名利禄，一行官煞地，或财衰败死绝地，即失财禄，非官讼则丧服重并。又曰：四柱伤官，惟年干伤官最重，谓之福基受伤，终身不可除去，若月支更有，甚于伤身七煞。如甲日人，以辛为官，见丁卯年，生寅午戌月，是伤官重犯，又有卯为劫刃，名背禄逐马，主为人退悔，反伤祖荫，运行官乡，流年再见，或煞旺身弱运，必祸。若月令真正伤官，又见官星，如甲日生午月，见辛未时，午中丁火伤辛；乙日生巳月，见庚或甲申时，巳中丙火伤庚；丙日午月，见戊子、癸巳时，午中己土伤癸之例。大要日主健旺，再临伤官运，可发名利，日主微弱，运历财官乡，祸不可言。又曰：伤官，如甲日见丁，喜壬合癸破；乙见丙，喜辛合壬破；丙见己，喜甲合乙破；丁见戊，喜癸合甲破；戊见辛，喜丙合丁破；己见庚，喜乙合丙破；庚见癸，喜戊合己破；癸见甲，喜己合庚破。
+  locator: 第151章·论伤官·第4条
+  concepts:
+  - 十神
+  - 旺衰
+  - 行运
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 1fd75864d9c505ed1209784b3cc1464d6194900f42d4c6a1cc710d756884c598
+  source_pages:
+  - https://luckclub.cn/bazi/005/151/
+- id: sanming-tonghui-ch151-p005
+  volume: 选章正文
+  chapter_path:
+  - 第151章 论伤官
+  sequence: 58
+  text: 《万祺》云：伤官元辰无官星，又行伤官运，此为窃气太过，即一木叠逢火位，名为散气之文，非贫则夭，喜身旺及官乡，伤官见官，再剥再滞，运入官乡局中，反吉，即伤官伤尽却喜见官星。伤官若带财见印，祸不轻。伤官若带印，官煞不为刑，伤官多者宜行印，即食多用印。伤官少者又行印乡，即枭神夺食。伤官若带印，不宜逢财，伤官若带官，不宜行制伏，伤官用财，不宜行此劫，伤官用印，不忌见官煞，伤官若见官星重叠，莫作官星论。伤官用官，在年月必要剥官，运在日时，不宜被伤，一见被伤，祸不可言，不可临墓，住寿难延。《千里马》云：伤官见官，妙入印财之地。又云：伤官逢财而有子。《相心赋》云：伤官伤尽，多艺多能，使心机而傲物气高，多谲诈而侮人志大，颧高骨峻，眼大眉粗。《景鉴》云：伤官无财而带刃，行奸弄巧。《通明赋》云：重见伤官，身必辛勤劳苦。又云：伤官多而身旺无依，定为僧道艺术为士。秘诀云：伤官太重，子必有亏。又云：年带伤官，父母不全，月带伤官，兄弟不完，时整伤官，子息凶顽，日带伤官，妻妾不贤。又云：伤官不尽，须防不测之灾，伤官逢财，乃享优游之福，七煞同来，疾损须忧，身旺无依，孤克难免，伤官遇劫，聚财如柳絮随风，伤官无印，求利似荷钱擎雨。
+  normalized_text: 《万祺》云：伤官元辰无官星，又行伤官运，此为窃气太过，即一木叠逢火位，名为散气之文，非贫则夭，喜身旺及官乡，伤官见官，再剥再滞，运入官乡局中，反吉，即伤官伤尽却喜见官星。伤官若带财见印，祸不轻。伤官若带印，官煞不为刑，伤官多者宜行印，即食多用印。伤官少者又行印乡，即枭神夺食。伤官若带印，不宜逢财，伤官若带官，不宜行制伏，伤官用财，不宜行此劫，伤官用印，不忌见官煞，伤官若见官星重叠，莫作官星论。伤官用官，在年月必要剥官，运在日时，不宜被伤，一见被伤，祸不可言，不可临墓，住寿难延。《千里马》云：伤官见官，妙入印财之地。又云：伤官逢财而有子。《相心赋》云：伤官伤尽，多艺多能，使心机而傲物气高，多谲诈而侮人志大，颧高骨峻，眼大眉粗。《景鉴》云：伤官无财而带刃，行奸弄巧。《通明赋》云：重见伤官，身必辛勤劳苦。又云：伤官多而身旺无依，定为僧道艺术为士。秘诀云：伤官太重，子必有亏。又云：年带伤官，父母不全，月带伤官，兄弟不完，时整伤官，子息凶顽，日带伤官，妻妾不贤。又云：伤官不尽，须防不测之灾，伤官逢财，乃享优游之福，七煞同来，疾损须忧，身旺无依，孤克难免，伤官遇劫，聚财如柳絮随风，伤官无印，求利似荷钱擎雨。
+  locator: 第151章·论伤官·第5条
+  concepts:
+  - 十神
+  - 旺衰
+  - 六亲
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: e466c5445f43c3eb83ffeea84c376fac82300279ef29db32d1bad26e49a7534e
+  source_pages:
+  - https://luckclub.cn/bazi/005/151/
+- id: sanming-tonghui-ch151-p006
+  volume: 选章正文
+  chapter_path:
+  - 第151章 论伤官
+  sequence: 59
+  text: 古歌云：伤官原是产业神，伤尽真为大贵人，若是伤官伤不尽，官来乘旺祸非轻。又：月令逢官在伤乡，伤轻减力尚无妨，若见刑冲并破害，定知为官不久长。又：伤官伤尽复生财，财旺生官互换来，四柱若无官显露，便言富贵莫疑猜。又：伤官遇者本非宜，财有官无是福基，时日月伤官格局，运行财旺贵无疑。又：伤官伤尽始为奇，又恐伤多反不宜，此格局中千变化，详推须要用心机。又：伤官无官最忌剥，运入官乡反见奇，岁运命中逢印绶，诚为富贵定无疑。又：伤官不忌比肩逢，七煞偏官理亦同，若是无官当忌比，如逢身旺却嫌重。又：伤官不尽又逢官，斩绞徒流祸百端，月犯父子无全美，日犯自己主伤残；时伤子息多狼狈，须知富贵不周全，若是伤官居太岁，必招横祸逢斯年。合诸说观之，伤官喜忌尽矣。
+  normalized_text: 古歌云：伤官原是产业神，伤尽真为大贵人，若是伤官伤不尽，官来乘旺祸非轻。又：月令逢官在伤乡，伤轻减力尚无妨，若见刑冲并破害，定知为官不久长。又：伤官伤尽复生财，财旺生官互换来，四柱若无官显露，便言富贵莫疑猜。又：伤官遇者本非宜，财有官无是福基，时日月伤官格局，运行财旺贵无疑。又：伤官伤尽始为奇，又恐伤多反不宜，此格局中千变化，详推须要用心机。又：伤官无官最忌剥，运入官乡反见奇，岁运命中逢印绶，诚为富贵定无疑。又：伤官不忌比肩逢，七煞偏官理亦同，若是无官当忌比，如逢身旺却嫌重。又：伤官不尽又逢官，斩绞徒流祸百端，月犯父子无全美，日犯自己主伤残；时伤子息多狼狈，须知富贵不周全，若是伤官居太岁，必招横祸逢斯年。合诸说观之，伤官喜忌尽矣。
+  locator: 第151章·论伤官·第6条
+  concepts:
+  - 十神
+  - 旺衰
+  - 格局
+  - 行运
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 1727fcbe6774ef9a1091527e18efc1a8cd249218f5b44465412d9e870246e898
+  source_pages:
+  - https://luckclub.cn/bazi/005/151/
+- id: sanming-tonghui-ch152-p001
+  volume: 选章正文
+  chapter_path:
+  - 第152章 论食神
+  sequence: 60
+  text: 食神者，日干所生顺数第三位，乃甲食丙、乙食丁之例。甲生丙为泄气，丙生戊为甲偏财，偏财是天禄自然之财，不劳己之心力，享见成福禄。甲丙有父子之道，如子旺相，生起财禄以奉其父母，岂不安享？又甲见庚为煞，见戊为财，其食神丙火能制伏庚煞，使不得克伤甲木，能生戊财，使为甲木所用。凡命遇财煞之地，食神旺相，煞被食制，不敢为祸，财被食生，充裕不竭，故食神一名寿星，一名爵星，良有以也。此格要日主食神俱生旺，无冲破，主人财厚食丰，福量宽弘，肥体肥大，优游自足，有子息，有寿考。四柱见财食在岁月上，祖父荫业丰隆，在日时，妻男获福，怕母子俱衰绝，两皆无成。故经云：“食神宜食生食旺，不可食衰食绝。”又云：“食神生旺，胜似财官”是也。食神大忌偏印为倒食，主为人有始无终，容貌欹邪，身材琐小，心性局促，多愁无成。假如甲见丙为食，柱中有壬作甲木偏印，克制丙火不能生戊土，不能制庚金，使甲木受制退财，岂不窘乎？《元理赋》云：食神制煞，逢枭不贫则夭。《一行》云：阳日食神暗合官星，阴日食神暗合正印，官印不要明显，但得食神纯粹，主贵而有禄，富而有寿，食神只宜一位，不宜太多，恐窃本元之气。经云：“一木叠逢火位，名为散气之父”是也。
+  normalized_text: 食神者，日干所生顺数第三位，乃甲食丙、乙食丁之例。甲生丙为泄气，丙生戊为甲偏财，偏财是天禄自然之财，不劳己之心力，享见成福禄。甲丙有父子之道，如子旺相，生起财禄以奉其父母，岂不安享？又甲见庚为煞，见戊为财，其食神丙火能制伏庚煞，使不得克伤甲木，能生戊财，使为甲木所用。凡命遇财煞之地，食神旺相，煞被食制，不敢为祸，财被食生，充裕不竭，故食神一名寿星，一名爵星，良有以也。此格要日主食神俱生旺，无冲破，主人财厚食丰，福量宽弘，肥体肥大，优游自足，有子息，有寿考。四柱见财食在岁月上，祖父荫业丰隆，在日时，妻男获福，怕母子俱衰绝，两皆无成。故经云：“食神宜食生食旺，不可食衰食绝。”又云：“食神生旺，胜似财官”是也。食神大忌偏印为倒食，主为人有始无终，容貌欹邪，身材琐小，心性局促，多愁无成。假如甲见丙为食，柱中有壬作甲木偏印，克制丙火不能生戊土，不能制庚金，使甲木受制退财，岂不窘乎？《元理赋》云：食神制煞，逢枭不贫则夭。《一行》云：阳日食神暗合官星，阴日食神暗合正印，官印不要明显，但得食神纯粹，主贵而有禄，富而有寿，食神只宜一位，不宜太多，恐窃本元之气。经云：“一木叠逢火位，名为散气之父”是也。
+  locator: 第152章·论食神·第1条
+  concepts:
+  - 十神
+  - 六亲
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 01ecefbffaf13d7d9597432b1860f54a076a709d9d1211e98dcc8483d230b293
+  source_pages:
+  - https://luckclub.cn/bazi/005/152/
+- id: sanming-tonghui-ch152-p002
+  volume: 选章正文
+  chapter_path:
+  - 第152章 论食神
+  sequence: 61
+  text: 食多者宜行印运，食少者不宜，是枭神夺食，故食喜旺禄相助，月令建禄最佳，时禄次之，更逢贵人运，行食神生旺之地，大地福禄。忌身衰枭旺，柱中虽喜见财，亦不宜多，多则不清，不过一富翁而已。食神重见，变为伤官，令人少子，纵有，或带破拗性，又不可入墓，即是伤官入墓，住寿难延。大忌空亡，更有官煞显露，为太医师巫术数九流之士，若食神逢克，又遇空亡，则不贵，再行死绝或枭运，则因食上气上生灾，翻胃噎食，缺衣食，忍饥寒而已。又曰：甲日食丙，柱中无壬癸亥子方好，如有水气，丙自受制，屈伏于人，己身不能卓立，岂能生物以养其父？如无此制，又要生旺向禄，如丙生夏月，运历东南，火土俱旺，其甲用财必厚。若生三春甲旺，丙火虽得生，不知戊己气薄，须历南方火土俱旺，方许发福。又如庚以壬为食，运历北方水旺之地，发财必厚，东方木旺之乡，发福必紧。细论之，庚以壬为食，长生于申，当断申地福重，暴败在酉，壬水至酉，便不为佳，以壬生甲木为庚之财，即自生分发身之财，非婚配正妻之财，甲至酉地为木困金乡，壬水自败，木岂能助养其父？当断此运平平。行至戌运，如干遇壬甲，亦只断其半吉半凶，逢戊可断其有灾，见庚可断其微福。亥运当言其大吉，子运癸水伤官，伤重泄本身之气，又庚死于子，甲败于子，当断生祸身灾。运至丑，庚金之库，水旺之乡，又有己丑助庚甲冠带成人之地，可断此十年发。寅运亦吉，卯运有灾，余例此推。又曰：食神忌枭，亦有不畏者。如己亥不畏丁倒食，丁与壬合化木，而壬禄在亥；丙午不畏甲倒食，甲与己合化土，而己禄在午；乙巳不畏癸倒食，戊癸化火，乙巳亦火；癸巳不畏辛倒食，丙辛化水，癸贵在巳；庚为众阳之首，不畏戊倒食，戊，阳气归源之数，见戊作喜神论；已不倒食辛，阴气初发散之源；庚不倒食壬，阳气初发散之源；辛有丁，不畏己倒食，为丁养育辛金也，况有丁处便有己土，阴阳干涉，得清福之助。
+  normalized_text: 食多者宜行印运，食少者不宜，是枭神夺食，故食喜旺禄相助，月令建禄最佳，时禄次之，更逢贵人运，行食神生旺之地，大地福禄。忌身衰枭旺，柱中虽喜见财，亦不宜多，多则不清，不过一富翁而已。食神重见，变为伤官，令人少子，纵有，或带破拗性，又不可入墓，即是伤官入墓，住寿难延。大忌空亡，更有官煞显露，为太医师巫术数九流之士，若食神逢克，又遇空亡，则不贵，再行死绝或枭运，则因食上气上生灾，翻胃噎食，缺衣食，忍饥寒而已。又曰：甲日食丙，柱中无壬癸亥子方好，如有水气，丙自受制，屈伏于人，己身不能卓立，岂能生物以养其父？如无此制，又要生旺向禄，如丙生夏月，运历东南，火土俱旺，其甲用财必厚。若生三春甲旺，丙火虽得生，不知戊己气薄，须历南方火土俱旺，方许发福。又如庚以壬为食，运历北方水旺之地，发财必厚，东方木旺之乡，发福必紧。细论之，庚以壬为食，长生于申，当断申地福重，暴败在酉，壬水至酉，便不为佳，以壬生甲木为庚之财，即自生分发身之财，非婚配正妻之财，甲至酉地为木困金乡，壬水自败，木岂能助养其父？当断此运平平。行至戌运，如干遇壬甲，亦只断其半吉半凶，逢戊可断其有灾，见庚可断其微福。亥运当言其大吉，子运癸水伤官，伤重泄本身之气，又庚死于子，甲败于子，当断生祸身灾。运至丑，庚金之库，水旺之乡，又有己丑助庚甲冠带成人之地，可断此十年发。寅运亦吉，卯运有灾，余例此推。又曰：食神忌枭，亦有不畏者。如己亥不畏丁倒食，丁与壬合化木，而壬禄在亥；丙午不畏甲倒食，甲与己合化土，而己禄在午；乙巳不畏癸倒食，戊癸化火，乙巳亦火；癸巳不畏辛倒食，丙辛化水，癸贵在巳；庚为众阳之首，不畏戊倒食，戊，阳气归源之数，见戊作喜神论；已不倒食辛，阴气初发散之源；庚不倒食壬，阳气初发散之源；辛有丁，不畏己倒食，为丁养育辛金也，况有丁处便有己土，阴阳干涉，得清福之助。
+  locator: 第152章·论食神·第2条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 52f578533b0df83f3563847d3651d971ecdcb1182249dcd1473dc1ffec8588d9
+  source_pages:
+  - https://luckclub.cn/bazi/005/152/
+- id: sanming-tonghui-ch152-p003
+  volume: 选章正文
+  chapter_path:
+  - 第152章 论食神
+  sequence: 62
+  text: 食神者，十干福禄之会，君子得之显达丰赡，小人得之周旋给足，在福聚之地则官崇禄厚，在祸聚之地则职卑命薄。如以甲子论，食丙子为福星之贵，食丙寅为长生之禄，又为禄马同乡，食神学堂之贵，丙辰为正印，丙午为自刑破命，丙申为克身破禄，丙戌为身衰破空亡，余干例推。若遇生旺、库、印、天乙、天官、华盖、文星、学堂、官印禄马之类，为福聚之地，遇克破、空亡、恶煞、刑害、休、败、死、绝，为祸聚之地。又曰：甲乙食丙丁，加寅卯巳午之上；丙丁食戊己，加辰戌丑未之上；戊己食庚辛，加巳午申酉之上；庚辛食壬癸，加申酉亥子之上；壬癸食甲乙，加亥子寅卯之上，谓之食神见生旺，更带禄马旺相，文为两制两省，武为建节防团，无，亦主财帛丰厚，食神与禄全见，四柱顺当为妙。
+  normalized_text: 食神者，十干福禄之会，君子得之显达丰赡，小人得之周旋给足，在福聚之地则官崇禄厚，在祸聚之地则职卑命薄。如以甲子论，食丙子为福星之贵，食丙寅为长生之禄，又为禄马同乡，食神学堂之贵，丙辰为正印，丙午为自刑破命，丙申为克身破禄，丙戌为身衰破空亡，余干例推。若遇生旺、库、印、天乙、天官、华盖、文星、学堂、官印禄马之类，为福聚之地，遇克破、空亡、恶煞、刑害、休、败、死、绝，为祸聚之地。又曰：甲乙食丙丁，加寅卯巳午之上；丙丁食戊己，加辰戌丑未之上；戊己食庚辛，加巳午申酉之上；庚辛食壬癸，加申酉亥子之上；壬癸食甲乙，加亥子寅卯之上，谓之食神见生旺，更带禄马旺相，文为两制两省，武为建节防团，无，亦主财帛丰厚，食神与禄全见，四柱顺当为妙。
+  locator: 第152章·论食神·第3条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: ba91cd1970ac296b5206233a1e5465476b3a1d08870482cf973f89666c2e1ef3
+  source_pages:
+  - https://luckclub.cn/bazi/005/152/
+- id: sanming-tonghui-ch152-p004
+  volume: 选章正文
+  chapter_path:
+  - 第152章 论食神
+  sequence: 63
+  text: 《壶中子》云：犯倒食，在命多被人挠，重叠带者，在幼儿则言乏乳，在老人则言缺食。正食而有余者富贵，争食而不足者贫贱，有余如甲人得两丙三丙，不足如柱中两甲止有一丙之类。又曰：日主时干重叠相食者，曰吞啖脑子，时日俱食，主头风脑漏，早克母死，后无子送终，若吞中逢吞，如甲人逢壬日时，又逢庚字，主贫死沟壑，有干合解则缓。《相心赋》云：食神最能饮食，体厚而好讴歌。《奥旨篇》云：月令值食，身健旺，善饮食，姿质丰肥，四柱有吉曜相扶，堆金积玉，声名显着。《幽微赋》云：食神旺相，老寿弥高。《元理赋》云：食居先，煞居后，功名显达。《宝鉴赋》云：月露食神时露官，荣显乌台助国臣。《万祺赋》云：食神名为吉曜制煞，号称寿星，干强日旺，富贵之士，食旺身衰，蹭蹬之人，逢财旺则食前方丈，遇印绶则甑底生尘，见一位者锺铭鼎鼐，二三者陋巷簟瓢，羊刃重临，平生劳碌，刑克相会，一世奔波。
+  normalized_text: 《壶中子》云：犯倒食，在命多被人挠，重叠带者，在幼儿则言乏乳，在老人则言缺食。正食而有余者富贵，争食而不足者贫贱，有余如甲人得两丙三丙，不足如柱中两甲止有一丙之类。又曰：日主时干重叠相食者，曰吞啖脑子，时日俱食，主头风脑漏，早克母死，后无子送终，若吞中逢吞，如甲人逢壬日时，又逢庚字，主贫死沟壑，有干合解则缓。《相心赋》云：食神最能饮食，体厚而好讴歌。《奥旨篇》云：月令值食，身健旺，善饮食，姿质丰肥，四柱有吉曜相扶，堆金积玉，声名显着。《幽微赋》云：食神旺相，老寿弥高。《元理赋》云：食居先，煞居后，功名显达。《宝鉴赋》云：月露食神时露官，荣显乌台助国臣。《万祺赋》云：食神名为吉曜制煞，号称寿星，干强日旺，富贵之士，食旺身衰，蹭蹬之人，逢财旺则食前方丈，遇印绶则甑底生尘，见一位者锺铭鼎鼐，二三者陋巷簟瓢，羊刃重临，平生劳碌，刑克相会，一世奔波。
+  locator: 第152章·论食神·第4条
+  concepts:
+  - 十神
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 8f1bfe2f56430dca1c20b2f020fede97b186739fcf8505543636753304734761
+  source_pages:
+  - https://luckclub.cn/bazi/005/152/
+- id: sanming-tonghui-ch152-p005
+  volume: 选章正文
+  chapter_path:
+  - 第152章 论食神
+  sequence: 64
+  text: 古歌云：食神制煞吉非常，财旺妻荣子更强，柱中若要吞啖煞，管教金殿佐君王。又：食神逢禄号天厨，冲克空亡官煞无，死绝运临偏印地，寿星合处福交孚。又：食神印绶不宜逢，惟见财官福更隆，食神喜行身旺地，逢枭逢比总成空。又：食神生旺最堪讠夸，惟行水木土金佳，官煞更无来混杂，平生衣禄足荣华。又：甲人见丙本盗气，丙去生财号食神，心广体胖衣禄厚，若临偏印主孤贫。又：食神生旺无刑克，命逢此格胜财官，更得身旺逢财地，青春年少步金銮。又：食神无损寿绵长，庶母逢之不可当，若无偏财来救护，命如秋草带冬霜。又：食神月上号天厨，人命逢之富有余，切忌枭来明减福，最嫌冲去暗消除。生财化鬼兼无病，制煞为祥信有储，士子如逢利甲第，官封要职领天书。合诸说，观食神喜忌尽矣。
+  normalized_text: 古歌云：食神制煞吉非常，财旺妻荣子更强，柱中若要吞啖煞，管教金殿佐君王。又：食神逢禄号天厨，冲克空亡官煞无，死绝运临偏印地，寿星合处福交孚。又：食神印绶不宜逢，惟见财官福更隆，食神喜行身旺地，逢枭逢比总成空。又：食神生旺最堪讠夸，惟行水木土金佳，官煞更无来混杂，平生衣禄足荣华。又：甲人见丙本盗气，丙去生财号食神，心广体胖衣禄厚，若临偏印主孤贫。又：食神生旺无刑克，命逢此格胜财官，更得身旺逢财地，青春年少步金銮。又：食神无损寿绵长，庶母逢之不可当，若无偏财来救护，命如秋草带冬霜。又：食神月上号天厨，人命逢之富有余，切忌枭来明减福，最嫌冲去暗消除。生财化鬼兼无病，制煞为祥信有储，士子如逢利甲第，官封要职领天书。合诸说，观食神喜忌尽矣。
+  locator: 第152章·论食神·第5条
+  concepts:
+  - 十神
+  - 旺衰
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: e6cb609a2242a372ab2f31e9d20c1f909f7b72e74dac0b371f5cf8ed842d345f
+  source_pages:
+  - https://luckclub.cn/bazi/005/152/
+- id: sanming-tonghui-ch162-p001
+  volume: 选章正文
+  chapter_path:
+  - 第162章 论性情相貌
+  sequence: 65
+  text: 夫贵贱观乎八字，性情应乎五行。善、恶、仁、义、礼、智、信，心之所主；喜、怒、哀、乐、爱、恶、欲，性之所生。东方震位木，号青龙，名曰曲直，五常主仁。其色青，其味酸，其性直，其情和。旺相主有博爱恻隐之心，慈祥恺悌之意；济物利人，恤孤念寡，直朴清高，行藏慷慨；丰姿秀丽，骨格修长，手足纤腻，口尖发美，面色青白，语句轩昂，此则木盛多仁之义。休囚主瘦长发少，拗性偏心，嫉妒不仁，此则木衰情寡之义也。死绝则眉眼不正，悭吝鄙啬，肌肉干燥，项长喉结，行坐不稳，身多欹侧。遇火色带赤，见土则色带黄，逢金则色带白，见水则色带黑。其余四行例见。
+  normalized_text: 夫贵贱观乎八字，性情应乎五行。善、恶、仁、义、礼、智、信，心之所主；喜、怒、哀、乐、爱、恶、欲，性之所生。东方震位木，号青龙，名曰曲直，五常主仁。其色青，其味酸，其性直，其情和。旺相主有博爱恻隐之心，慈祥恺悌之意；济物利人，恤孤念寡，直朴清高，行藏慷慨；丰姿秀丽，骨格修长，手足纤腻，口尖发美，面色青白，语句轩昂，此则木盛多仁之义。休囚主瘦长发少，拗性偏心，嫉妒不仁，此则木衰情寡之义也。死绝则眉眼不正，悭吝鄙啬，肌肉干燥，项长喉结，行坐不稳，身多欹侧。遇火色带赤，见土则色带黄，逢金则色带白，见水则色带黑。其余四行例见。
+  locator: 第162章·论性情相貌·第1条
+  concepts:
+  - 性情
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 79bdfe6fa9e0f19a1517cdc23f7fd7a444b163051d345412fbbe35b354a840cf
+  source_pages:
+  - https://luckclub.cn/bazi/005/162/
+- id: sanming-tonghui-ch162-p002
+  volume: 选章正文
+  chapter_path:
+  - 第162章 论性情相貌
+  sequence: 66
+  text: 火属南方，名曰炎上，五常主礼。其色赤，其味苦，其性急，其性恭。旺相主有辞让端谨之风，恭敬谦和之义；威仪凛烈，淳朴尊崇；面貌上尖下阔，形体头小脚长，印堂窄而眉浓，鼻准露而耳小；精神闪烁，语言急速，性燥无毒，聪明有为。太过则声焦面赤，摇膝好动。不及则黄瘦尖楞，诡诈妒毒，言语妄诞，有始无终。
+  normalized_text: 火属南方，名曰炎上，五常主礼。其色赤，其味苦，其性急，其性恭。旺相主有辞让端谨之风，恭敬谦和之义；威仪凛烈，淳朴尊崇；面貌上尖下阔，形体头小脚长，印堂窄而眉浓，鼻准露而耳小；精神闪烁，语言急速，性燥无毒，聪明有为。太过则声焦面赤，摇膝好动。不及则黄瘦尖楞，诡诈妒毒，言语妄诞，有始无终。
+  locator: 第162章·论性情相貌·第2条
+  concepts:
+  - 性情
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 0fd47e02fe9520e445de1b23d155a8ecce5cfe2d127bd80f1635d1b59118bfc5
+  source_pages:
+  - https://luckclub.cn/bazi/005/162/
+- id: sanming-tonghui-ch162-p003
+  volume: 选章正文
+  chapter_path:
+  - 第162章 论性情相貌
+  sequence: 67
+  text: 土属中央，名曰稼穑，五常主信，其色黄，其味甘，其性重，其情厚。旺相主言行相顾，忠孝至诚，好敬神佛，不爽欺信；背圆腰阔，鼻大口方，眉清目秀，面肥色黄；度量宽厚，处事有方。太过则执一古朴，愚拙不明。不及则颜色忧滞，面偏鼻低，声音重浊，事理不通，狠毒乖戾，不得众情，颠倒失信，悭啬妄为。
+  normalized_text: 土属中央，名曰稼穑，五常主信，其色黄，其味甘，其性重，其情厚。旺相主言行相顾，忠孝至诚，好敬神佛，不爽欺信；背圆腰阔，鼻大口方，眉清目秀，面肥色黄；度量宽厚，处事有方。太过则执一古朴，愚拙不明。不及则颜色忧滞，面偏鼻低，声音重浊，事理不通，狠毒乖戾，不得众情，颠倒失信，悭啬妄为。
+  locator: 第162章·论性情相貌·第3条
+  concepts:
+  - 性情
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: fb7da49d828c58bd85268b4d4bf6e86828168b688123c911e17d98af6478a557
+  source_pages:
+  - https://luckclub.cn/bazi/005/162/
+- id: sanming-tonghui-ch162-p004
+  volume: 选章正文
+  chapter_path:
+  - 第162章 论性情相貌
+  sequence: 68
+  text: 金属西方，名曰从革，五常主义。其色白，其味辛，其性刚，其情烈。旺相则英勇豪杰，仗义疏财，知廉耻，识羞恶；骨肉相应，体健神清，面方白净，眉高眼深，鼻直耳红，声音清亮，刚毅果决。太过则好勇无谋，贪欲不仁。不及则悭吝贪酷，事多挫忘。有三思、少决断，克薄内毒，喜淫好杀，身材瘦小。
+  normalized_text: 金属西方，名曰从革，五常主义。其色白，其味辛，其性刚，其情烈。旺相则英勇豪杰，仗义疏财，知廉耻，识羞恶；骨肉相应，体健神清，面方白净，眉高眼深，鼻直耳红，声音清亮，刚毅果决。太过则好勇无谋，贪欲不仁。不及则悭吝贪酷，事多挫忘。有三思、少决断，克薄内毒，喜淫好杀，身材瘦小。
+  locator: 第162章·论性情相貌·第4条
+  concepts:
+  - 性情
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 80e0823f1b0e9749977ca8c9937335076aae477bce6813208d582a96f44a8251
+  source_pages:
+  - https://luckclub.cn/bazi/005/162/
+- id: sanming-tonghui-ch162-p005
+  volume: 选章正文
+  chapter_path:
+  - 第162章 论性情相貌
+  sequence: 69
+  text: 水属北方，名曰润下，五常主智，其色黑，其味咸，其性聪明，其情良善。旺相则机关深远，足智多谋，学识过人，诡诈无极；面黑光彩，语言清和。太过则是非好动，飘荡贪淫。不及则人物矮小，行事反复，情性不常，胆小无略。此虽五行之喻，实与人事相干。以上五行、情性参以命中所遇吉凶神煞断之，大抵生旺者主长大，死绝者主矮小。若有煞临，不在此限，又从煞上断。若有克，则从所克之五行断，又概取日时，上纳音，看有克无克，并神煞所临有气无气，断其形状、性情，无有不验。
+  normalized_text: 水属北方，名曰润下，五常主智，其色黑，其味咸，其性聪明，其情良善。旺相则机关深远，足智多谋，学识过人，诡诈无极；面黑光彩，语言清和。太过则是非好动，飘荡贪淫。不及则人物矮小，行事反复，情性不常，胆小无略。此虽五行之喻，实与人事相干。以上五行、情性参以命中所遇吉凶神煞断之，大抵生旺者主长大，死绝者主矮小。若有煞临，不在此限，又从煞上断。若有克，则从所克之五行断，又概取日时，上纳音，看有克无克，并神煞所临有气无气，断其形状、性情，无有不验。
+  locator: 第162章·论性情相貌·第5条
+  concepts:
+  - 性情
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 285b2eaa20555a011d1e61fdc8943512d2e2c003c444a46ae4a177510ed0f108
+  source_pages:
+  - https://luckclub.cn/bazi/005/162/
+- id: sanming-tonghui-ch162-p006
+  volume: 选章正文
+  chapter_path:
+  - 第162章 论性情相貌
+  sequence: 70
+  text: 又曰：推人性行，只在日时上，看本五行，不论纳音。命若入格而逢生旺，主天性明白，遇物不逆，动必应机，言语声高，突破口大度，临事能断，公平不疑，犯难不畏，平生不以财物为吝，好施与不私己，奢泰欢乐，多情尚义，防有不善终之患。若命入贵格而逢死绝者，主为性寡合，机深意密，多疑多忌，动拘礼节，谨顾行止，修饰仪貌，常自检约，不妄设施，防有阴谋之患。若小人之命已入贱局而逢生旺者，主性无常，不自检束，为事不顾危亡，好斗争，恃强压弱，亲近恶党，不事家业，必竟不得善终；死绝则为性淫邪，动必巧伪，畜缩执拗，举动修饰，专美言词，好自矜炫，临事无断，少是多非，一身无立。《宰公要诀》云：志高量远，盖因水处深源；笃信守仁，只为土成山岳；仁慈敏厚，木成甲乙之方；性速辨明，火应丙丁之位；誉高义重，因金归合庚辛处。于中者，正性不移，或盛或衰，性情变易。水乘衰败，性昏无赖；土力太微，蔽执寡用；木归蹇地，太柔而治事无规；火数未兴，小辨而太伤无决；金当浅薄，虽义而有始无终，是五行得地失地，太过不及，皆能为凶也。《壶中子》云：言词狡猾，诞时合值六虚，六虚住处谩语神，凡人得之，心好撰饰，虚词并重；遇者必狡猾，平生妨克尊亲，漂流他国，作事多虚声。
+  normalized_text: 又曰：推人性行，只在日时上，看本五行，不论纳音。命若入格而逢生旺，主天性明白，遇物不逆，动必应机，言语声高，突破口大度，临事能断，公平不疑，犯难不畏，平生不以财物为吝，好施与不私己，奢泰欢乐，多情尚义，防有不善终之患。若命入贵格而逢死绝者，主为性寡合，机深意密，多疑多忌，动拘礼节，谨顾行止，修饰仪貌，常自检约，不妄设施，防有阴谋之患。若小人之命已入贱局而逢生旺者，主性无常，不自检束，为事不顾危亡，好斗争，恃强压弱，亲近恶党，不事家业，必竟不得善终；死绝则为性淫邪，动必巧伪，畜缩执拗，举动修饰，专美言词，好自矜炫，临事无断，少是多非，一身无立。《宰公要诀》云：志高量远，盖因水处深源；笃信守仁，只为土成山岳；仁慈敏厚，木成甲乙之方；性速辨明，火应丙丁之位；誉高义重，因金归合庚辛处。于中者，正性不移，或盛或衰，性情变易。水乘衰败，性昏无赖；土力太微，蔽执寡用；木归蹇地，太柔而治事无规；火数未兴，小辨而太伤无决；金当浅薄，虽义而有始无终，是五行得地失地，太过不及，皆能为凶也。《壶中子》云：言词狡猾，诞时合值六虚，六虚住处谩语神，凡人得之，心好撰饰，虚词并重；遇者必狡猾，平生妨克尊亲，漂流他国，作事多虚声。
+  locator: 第162章·论性情相貌·第6条
+  concepts:
+  - 性情
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 47b72d27a2ac7b128be49de599920b68635341921514a6e29f99bf2d45e69089
+  source_pages:
+  - https://luckclub.cn/bazi/005/162/
+- id: sanming-tonghui-ch163-p001
+  volume: 选章正文
+  chapter_path:
+  - 第163章 论疾病先知五脏六腑所
+  sequence: 71
+  text: 歌诀：甲胆乙肝丙小肠，丁心戊胃己脾乡；庚是大肠辛属肺，壬系膀胱癸肾藏；三焦亦向壬中寄，包络同归入癸乡。又曰：甲头乙顶丙肩求，丁心戊肋己属腹；庚是脐轮辛属股，壬胫癸足一身由。又曰：子属膀胱水道耳，丑为胞肚及脾乡；寅胆发脉并两手，卯本十指内肝方；辰土为皮肩胸类，已面咽齿下宾肛；午火精神司眼目，未土胃腕隔脊梁；申金大肠经络肺，酉中精血小肠藏；戌土命门腿踝足，亥水为头及肾囊；若依此法推人病，歧伯雷公也播扬。又曰：午头巳未两肩均，左右二膊是辰申；卯酉双肋寅戌腿，丑亥属脚子为阴。又曰：乾首坤腹坎耳俦，震足巽股艮手留；兑口离目分八卦，凡看疾病此推求。
+  normalized_text: 歌诀：甲胆乙肝丙小肠，丁心戊胃己脾乡；庚是大肠辛属肺，壬系膀胱癸肾藏；三焦亦向壬中寄，包络同归入癸乡。又曰：甲头乙顶丙肩求，丁心戊肋己属腹；庚是脐轮辛属股，壬胫癸足一身由。又曰：子属膀胱水道耳，丑为胞肚及脾乡；寅胆发脉并两手，卯本十指内肝方；辰土为皮肩胸类，已面咽齿下宾肛；午火精神司眼目，未土胃腕隔脊梁；申金大肠经络肺，酉中精血小肠藏；戌土命门腿踝足，亥水为头及肾囊；若依此法推人病，歧伯雷公也播扬。又曰：午头巳未两肩均，左右二膊是辰申；卯酉双肋寅戌腿，丑亥属脚子为阴。又曰：乾首坤腹坎耳俦，震足巽股艮手留；兑口离目分八卦，凡看疾病此推求。
+  locator: 第163章·论疾病先知五脏六腑所·第1条
+  concepts:
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: adcd056ea36aec505d0b2caacece96d61ca89c03c6598c8f2728c28366b3ca73
+  source_pages:
+  - https://luckclub.cn/bazi/005/163/
+- id: sanming-tonghui-ch163-p002
+  volume: 选章正文
+  chapter_path:
+  - 第163章 论疾病先知五脏六腑所
+  sequence: 72
+  text: 夫疾病皆因五行不和，即人身五脏不和也。盖五行通于五脏，六腑通于九窍，凡十干受病属六腑，十二支受病属五脏。丙丁己午火局南离，主病在上；壬癸亥子水局北坎，主病在下；甲乙寅卯属震，主病在左；庚辛申酉属兑，主病在右；戊己辰戌丑未属坤艮，主病在脾胃及中脘。诸风晕掉、眼光日昏，血不调畅、早年落发、筋青瓜枯，属肝家甲乙寅卯木受亏主病故也；诸脓血疮疥、舌苦喑哑者，属心家丙丁巳午火受亏主病故也；浮肿、脚气、黄肿、口臭、翻胃、脾寒膈热者，属脾家戊己辰戌丑未土受亏主病故也；鼻塞酒槁、语蹇气结、咳嗽喊者，属肺家庚辛申酉受亏主病故也；白浊、白带、霍乱、泻痢、疝气小肠，属肾家壬癸亥子受亏主病故也。
+  normalized_text: 夫疾病皆因五行不和，即人身五脏不和也。盖五行通于五脏，六腑通于九窍，凡十干受病属六腑，十二支受病属五脏。丙丁己午火局南离，主病在上；壬癸亥子水局北坎，主病在下；甲乙寅卯属震，主病在左；庚辛申酉属兑，主病在右；戊己辰戌丑未属坤艮，主病在脾胃及中脘。诸风晕掉、眼光日昏，血不调畅、早年落发、筋青瓜枯，属肝家甲乙寅卯木受亏主病故也；诸脓血疮疥、舌苦喑哑者，属心家丙丁巳午火受亏主病故也；浮肿、脚气、黄肿、口臭、翻胃、脾寒膈热者，属脾家戊己辰戌丑未土受亏主病故也；鼻塞酒槁、语蹇气结、咳嗽喊者，属肺家庚辛申酉受亏主病故也；白浊、白带、霍乱、泻痢、疝气小肠，属肾家壬癸亥子受亏主病故也。
+  locator: 第163章·论疾病先知五脏六腑所·第2条
+  concepts:
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 162c183c842e6706f2824bb4c6f799bb664c301f8ec4827fb64f7a046499a6cc
+  source_pages:
+  - https://luckclub.cn/bazi/005/163/
+- id: sanming-tonghui-ch163-p003
+  volume: 选章正文
+  chapter_path:
+  - 第163章 论疾病先知五脏六腑所
+  sequence: 73
+  text: 甲乙见庚辛申酉多者，内主肝胆惊悸、劳瘵、手足顽麻、筋骨疼痛；外主头目眩晕、口眼歪斜、左瘫右痪，迭扑损伤。遇丙丁火多无水相济，则痰喘咯血、中风不语、皮肤干燥，内热口干。女人主血气欠调、有孕者堕胎。小儿急慢惊风、夜啼咳嗽、面色青黯是也。
+  normalized_text: 甲乙见庚辛申酉多者，内主肝胆惊悸、劳瘵、手足顽麻、筋骨疼痛；外主头目眩晕、口眼歪斜、左瘫右痪，迭扑损伤。遇丙丁火多无水相济，则痰喘咯血、中风不语、皮肤干燥，内热口干。女人主血气欠调、有孕者堕胎。小儿急慢惊风、夜啼咳嗽、面色青黯是也。
+  locator: 第163章·论疾病先知五脏六腑所·第3条
+  concepts:
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 4c5d8696c236a3adc864ade6ff453062536f346ebb98b26e7f3c86ded3ba5896
+  source_pages:
+  - https://luckclub.cn/bazi/005/163/
+- id: sanming-tonghui-ch163-p004
+  volume: 选章正文
+  chapter_path:
+  - 第163章 论疾病先知五脏六腑所
+  sequence: 74
+  text: 丙丁见壬癸亥子多者，内主心气疼痛、颠痫舌强、口痛咽哑、急慢惊风、语言蹇涩；外主潮热发狂、眼暗失明、小肠疝气、疮疥脓血、小便淋浊。妇女主干血气经脉不调。小儿主痘疹、疥癣，面色红赤是也。
+  normalized_text: 丙丁见壬癸亥子多者，内主心气疼痛、颠痫舌强、口痛咽哑、急慢惊风、语言蹇涩；外主潮热发狂、眼暗失明、小肠疝气、疮疥脓血、小便淋浊。妇女主干血气经脉不调。小儿主痘疹、疥癣，面色红赤是也。
+  locator: 第163章·论疾病先知五脏六腑所·第4条
+  concepts:
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 406a27c00b9352785bd455237e1dbc60dc373906d8ec388d8a7115fb62826d80
+  source_pages:
+  - https://luckclub.cn/bazi/005/163/
+- id: sanming-tonghui-ch163-p005
+  volume: 选章正文
+  chapter_path:
+  - 第163章 论疾病先知五脏六腑所
+  sequence: 75
+  text: 戊已见甲乙寅卯多者，内主脾胃不和，翻胃隔食、气噎蛊胀泄泻黄肿、择拣饮食、呕吐恶心；外主右手沉重、湿毒流注、胸腹痞塞。妇女主饮食不甘、吞酸、虚弱、呵欠困倦。小儿主五疳五软、内热好睡、面色痿黄是也。
+  normalized_text: 戊已见甲乙寅卯多者，内主脾胃不和，翻胃隔食、气噎蛊胀泄泻黄肿、择拣饮食、呕吐恶心；外主右手沉重、湿毒流注、胸腹痞塞。妇女主饮食不甘、吞酸、虚弱、呵欠困倦。小儿主五疳五软、内热好睡、面色痿黄是也。
+  locator: 第163章·论疾病先知五脏六腑所·第5条
+  concepts:
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: a2489be16cd1840d852d933889074c341651fba473771c5c1978764d29dfb5eb
+  source_pages:
+  - https://luckclub.cn/bazi/005/163/
+- id: sanming-tonghui-ch163-p006
+  volume: 选章正文
+  chapter_path:
+  - 第163章 论疾病先知五脏六腑所
+  sequence: 76
+  text: 庚辛见丙丁巳午多者，内主肠风痔漏、粪后下血、痰火咳嗽、气喘吐血、魉魉失魂、虚烦劳症；外主皮肤枯燥、肺风鼻赤、疽肿发背、脓血无力。妇女主痰嗽、血产。小儿主脓血、痢疾、面色黄白是也。
+  normalized_text: 庚辛见丙丁巳午多者，内主肠风痔漏、粪后下血、痰火咳嗽、气喘吐血、魉魉失魂、虚烦劳症；外主皮肤枯燥、肺风鼻赤、疽肿发背、脓血无力。妇女主痰嗽、血产。小儿主脓血、痢疾、面色黄白是也。
+  locator: 第163章·论疾病先知五脏六腑所·第6条
+  concepts:
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 0e0b53b60e4a9a1593d75c5fb6add75da8375dd0a6a6fdb4adbe20f53243d777
+  source_pages:
+  - https://luckclub.cn/bazi/005/163/
+- id: sanming-tonghui-ch163-p007
+  volume: 选章正文
+  chapter_path:
+  - 第163章 论疾病先知五脏六腑所
+  sequence: 77
+  text: 壬癸见戊已辰戌丑未多者，内主遗精盗汗夜梦鬼交、血浊虚损、寒战咬牙、耳聋眼盲、伤寒感冒；外主风虫牙痛、偏坠肾气、腰痛膝痛、淋沥、吐泻、怕冷恶寒。女人白带鬼胎、经水不调。小儿主耳中生疮、小肠疼痛、夜间作炒、面色黧里是也。
+  normalized_text: 壬癸见戊已辰戌丑未多者，内主遗精盗汗夜梦鬼交、血浊虚损、寒战咬牙、耳聋眼盲、伤寒感冒；外主风虫牙痛、偏坠肾气、腰痛膝痛、淋沥、吐泻、怕冷恶寒。女人白带鬼胎、经水不调。小儿主耳中生疮、小肠疼痛、夜间作炒、面色黧里是也。
+  locator: 第163章·论疾病先知五脏六腑所·第7条
+  concepts:
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 6d4594dd4b740c9a379f9aaabdcf485a68352d30d830172b36200e20d41c8806
+  source_pages:
+  - https://luckclub.cn/bazi/005/163/
+- id: sanming-tonghui-ch163-p008
+  volume: 选章正文
+  chapter_path:
+  - 第163章 论疾病先知五脏六腑所
+  sequence: 78
+  text: 赋云：筋骨疼痛，盍因木被金伤；眼目暗昏，必是火遭水克；土虚逢木旺之乡，脾伤定论；金弱遇火炎之地，血疾无疑。又云：木逢金克，定主腰肋之灾；火被水伤，必主眼目之疾；心肺喘满，亦干金火相刑；脾胃损伤，盍因土水战克。支水干头有火遭，必腹病心懵；支火干头有水遇，则内障睛盲。炎上烦焦蒸土曜，头秃眼昏；润下纯湿无土制，肾虚耳闭；荧惑乘旺临离巽，中风失音；太白坚利合兑坤，兵前落魄。又云：心受病，口不能言；肝受病，目不能视；脾受病，口不能食；肺受病，鼻不能嗅；肾受病，耳不能听，各从所主，以证虚实。噫！人病百端，理无二焉，望问闻切，乃医家之妙用；生克制化，为术士之玄征，若能参究根源标本，不离斯法。论曰：康泰生于和合，疾病起于刑伤。究五行衰旺之理，推百病表里之详，内应五脏，外属四肢。且如木气休囚，两鬓消疏而不发；火临死绝，双瞳昏暗而无光；火中隐土少水制，则心神恍惚；木下藏金无水收，则腿足损伤。甲乙兑生逢壬癸，醉乡而死；丙丁坎育遇庚辛，沟港而亡。水盛木浮，多生泄痢；土重金埋，常病气高。诸风掉眩，乙木旺而辛金衰；疼痒疮疡，丁火盛而癸水弱；痞塞肿满，只因己土太过；愤郁病痿，盖为辛金不及。甲乙能伤戊已，无救而缺唇；丙丁善克庚辛，少制而喑哑。火中有土，项生瘰疬之灾；水中有土，腹患蛊肿之病。用神受制而被刑，亡于棒杖；上下逢鬼而无救，死作悬梁。四柱重冲多凶而他乡丧体，五行衰败不足而瘟疫亡身。水败腰驼，莫用轩岐之法；金刑龟背，安施卢扁之方。庚辛气秀，西方见木而亡于兵刃；甲乙败绝，坤南无水，而骨肉飞；辛巳、丙申遇刑，臂虚而人生六指；己卯、戊寅逢敌，胃弱而常病疮疽；乙未、甲午逢金，人多鳖头；癸卯、已丑相刑，病生腰膝；甲申、乙酉，幼年多病肝经；辛卯、庚寅，晚年劳伤筋骨。丙火上炎，丈夫每忌于身心；丁火下湿，女人虚痨而血产。日时衰败，大患难疗；干支刑害，小疾不疗。气相得而安和，气相逆而灾殄。病症不离于六脉，死生难越乎五行，细究兴衰，万不失一。古歌曰：戊己生时气不全，月时两处见伤官；必当头面有亏损，脓血之疮苦少年。又曰：丙丁日干五行衰，七煞加临三合来，升合日求衣食缺，耳聋残疾面尘埃。又：壬癸重重叠叠排，时辰设若见天财；纵然头面无癍癞，定主其人眼目灾。
+  normalized_text: 赋云：筋骨疼痛，盍因木被金伤；眼目暗昏，必是火遭水克；土虚逢木旺之乡，脾伤定论；金弱遇火炎之地，血疾无疑。又云：木逢金克，定主腰肋之灾；火被水伤，必主眼目之疾；心肺喘满，亦干金火相刑；脾胃损伤，盍因土水战克。支水干头有火遭，必腹病心懵；支火干头有水遇，则内障睛盲。炎上烦焦蒸土曜，头秃眼昏；润下纯湿无土制，肾虚耳闭；荧惑乘旺临离巽，中风失音；太白坚利合兑坤，兵前落魄。又云：心受病，口不能言；肝受病，目不能视；脾受病，口不能食；肺受病，鼻不能嗅；肾受病，耳不能听，各从所主，以证虚实。噫！人病百端，理无二焉，望问闻切，乃医家之妙用；生克制化，为术士之玄征，若能参究根源标本，不离斯法。论曰：康泰生于和合，疾病起于刑伤。究五行衰旺之理，推百病表里之详，内应五脏，外属四肢。且如木气休囚，两鬓消疏而不发；火临死绝，双瞳昏暗而无光；火中隐土少水制，则心神恍惚；木下藏金无水收，则腿足损伤。甲乙兑生逢壬癸，醉乡而死；丙丁坎育遇庚辛，沟港而亡。水盛木浮，多生泄痢；土重金埋，常病气高。诸风掉眩，乙木旺而辛金衰；疼痒疮疡，丁火盛而癸水弱；痞塞肿满，只因己土太过；愤郁病痿，盖为辛金不及。甲乙能伤戊已，无救而缺唇；丙丁善克庚辛，少制而喑哑。火中有土，项生瘰疬之灾；水中有土，腹患蛊肿之病。用神受制而被刑，亡于棒杖；上下逢鬼而无救，死作悬梁。四柱重冲多凶而他乡丧体，五行衰败不足而瘟疫亡身。水败腰驼，莫用轩岐之法；金刑龟背，安施卢扁之方。庚辛气秀，西方见木而亡于兵刃；甲乙败绝，坤南无水，而骨肉飞；辛巳、丙申遇刑，臂虚而人生六指；己卯、戊寅逢敌，胃弱而常病疮疽；乙未、甲午逢金，人多鳖头；癸卯、已丑相刑，病生腰膝；甲申、乙酉，幼年多病肝经；辛卯、庚寅，晚年劳伤筋骨。丙火上炎，丈夫每忌于身心；丁火下湿，女人虚痨而血产。日时衰败，大患难疗；干支刑害，小疾不疗。气相得而安和，气相逆而灾殄。病症不离于六脉，死生难越乎五行，细究兴衰，万不失一。古歌曰：戊己生时气不全，月时两处见伤官；必当头面有亏损，脓血之疮苦少年。又曰：丙丁日干五行衰，七煞加临三合来，升合日求衣食缺，耳聋残疾面尘埃。又：壬癸重重叠叠排，时辰设若见天财；纵然头面无癍癞，定主其人眼目灾。
+  locator: 第163章·论疾病先知五脏六腑所·第8条
+  concepts:
+  - 十神
+  - 旺衰
+  - 用神
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 2ddf9d0b26d9603c1f44fa6e71567a42186360364ac909ad0de8186441b2e0ab
+  source_pages:
+  - https://luckclub.cn/bazi/005/163/
+- id: sanming-tonghui-ch163-p009
+  volume: 选章正文
+  chapter_path:
+  - 第163章 论疾病先知五脏六腑所
+  sequence: 79
+  text: 又曰：人之生也，受气于父，成形于母。五脏和平者无疾，战克太过不及者主疾。《内经》云：东方实西方虚，泻南方补北方。东方实者，木太过也；西方虚者，金不及也；泻南方者，火太过也；补北方者，水不及也。是以五行太过不及，皆主疾也。若水升而火降，火降而金清，金清而木平，木平而土不及克，五脏各得中和之气，疾病何自生焉？《阴阳书》：金刚火强，自刑其方，木落归本，水流趋东。所以论三刑，刑则残害，言太过而身疾也。若只取不及为疾，必有一偏之失。凡五行有死绝而成疾者：水死绝，多肾气腰足攻注，滑泄便溺不利之疾；火死绝，主肠气结塞、惊悸健忘，精神不安之疾；木死绝虚风目涩眩晕，筋急、爪甲桔悴、喜怒颠倒，择饮择食之疾；金死绝，主气虚喘急、咳嗽、皮毛焦燥干啬、骨节疼痛、涕泪、大肠泄痢、便血之疾；土死绝，主面黄、减食、隔噻吐逆、肢体怠惰、喜卧嗜睡、多思足虑、耳聋、神浊健忘、少喜动作之疾。
+  normalized_text: 又曰：人之生也，受气于父，成形于母。五脏和平者无疾，战克太过不及者主疾。《内经》云：东方实西方虚，泻南方补北方。东方实者，木太过也；西方虚者，金不及也；泻南方者，火太过也；补北方者，水不及也。是以五行太过不及，皆主疾也。若水升而火降，火降而金清，金清而木平，木平而土不及克，五脏各得中和之气，疾病何自生焉？《阴阳书》：金刚火强，自刑其方，木落归本，水流趋东。所以论三刑，刑则残害，言太过而身疾也。若只取不及为疾，必有一偏之失。凡五行有死绝而成疾者：水死绝，多肾气腰足攻注，滑泄便溺不利之疾；火死绝，主肠气结塞、惊悸健忘，精神不安之疾；木死绝虚风目涩眩晕，筋急、爪甲桔悴、喜怒颠倒，择饮择食之疾；金死绝，主气虚喘急、咳嗽、皮毛焦燥干啬、骨节疼痛、涕泪、大肠泄痢、便血之疾；土死绝，主面黄、减食、隔噻吐逆、肢体怠惰、喜卧嗜睡、多思足虑、耳聋、神浊健忘、少喜动作之疾。
+  locator: 第163章·论疾病先知五脏六腑所·第9条
+  concepts:
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 410478e4e8d2273be514f0534af84dbeffb13800fc207afaf1d7305be9453518
+  source_pages:
+  - https://luckclub.cn/bazi/005/163/
+- id: sanming-tonghui-ch163-p010
+  volume: 选章正文
+  chapter_path:
+  - 第163章 论疾病先知五脏六腑所
+  sequence: 80
+  text: 有相克而成疾者：金火相克，生旺则疡疮瘫肿，死绝则痨瘵呕血；土木相克，生旺主疲闷昏眩、风麻、小肠疾痛肿，死绝主吐食症块，疽癖积滞之疾，或主中风；金木相克，生旺主肢足骨节不完、眼目之疾，死绝主气虚精脱、痨疾瘫痪之疾；水土相克，主脾湿泄泻、中满痰嗽不利之疾。
+  normalized_text: 有相克而成疾者：金火相克，生旺则疡疮瘫肿，死绝则痨瘵呕血；土木相克，生旺主疲闷昏眩、风麻、小肠疾痛肿，死绝主吐食症块，疽癖积滞之疾，或主中风；金木相克，生旺主肢足骨节不完、眼目之疾，死绝主气虚精脱、痨疾瘫痪之疾；水土相克，主脾湿泄泻、中满痰嗽不利之疾。
+  locator: 第163章·论疾病先知五脏六腑所·第10条
+  concepts:
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: b81291b3b422a0f730d421dd491487b29b7b4ff9f055ce0614e6b7b9c10fd2e4
+  source_pages:
+  - https://luckclub.cn/bazi/005/163/
+- id: sanming-tonghui-ch163-p011
+  volume: 选章正文
+  chapter_path:
+  - 第163章 论疾病先知五脏六腑所
+  sequence: 81
+  text: 有相生而生疾者：火木相生，生旺则上盛隔壅，目赤头风；死绝则伤寒作狂、闷乱疾。火土相生，生旺则胃实；死绝则唇焦红气、热结大便不利。金水是相生，生旺则气滞，死绝则晴滑；水木相生，生旺则呕吐胃虚；死绝则精败、伤寒粘疟。金土相生，生旺则多虚无肌肉死绝肠鸣茧作。
+  normalized_text: 有相生而生疾者：火木相生，生旺则上盛隔壅，目赤头风；死绝则伤寒作狂、闷乱疾。火土相生，生旺则胃实；死绝则唇焦红气、热结大便不利。金水是相生，生旺则气滞，死绝则晴滑；水木相生，生旺则呕吐胃虚；死绝则精败、伤寒粘疟。金土相生，生旺则多虚无肌肉死绝肠鸣茧作。
+  locator: 第163章·论疾病先知五脏六腑所·第11条
+  concepts:
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: eecf73c83ce07366452305f8dfdf3bc591f14c4757b199f03b14e1c343b99dd0
+  source_pages:
+  - https://luckclub.cn/bazi/005/163/
+- id: sanming-tonghui-ch163-p012
+  volume: 选章正文
+  chapter_path:
+  - 第163章 论疾病先知五脏六腑所
+  sequence: 82
+  text: 凡水土木相逢于无气之处，主蛊气肠胀、吐逆之疾；凡金水火相逢于无气之地，主痢疾，金主大肠，水火守之，阴阳不和也。
+  normalized_text: 凡水土木相逢于无气之处，主蛊气肠胀、吐逆之疾；凡金水火相逢于无气之地，主痢疾，金主大肠，水火守之，阴阳不和也。
+  locator: 第163章·论疾病先知五脏六腑所·第12条
+  concepts:
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: bfd35985017426859d8c0c660587f93af939526f3839edaa40de362279580b2e
+  source_pages:
+  - https://luckclub.cn/bazi/005/163/
+- id: sanming-tonghui-ch163-p013
+  volume: 选章正文
+  chapter_path:
+  - 第163章 论疾病先知五脏六腑所
+  sequence: 83
+  text: 凡水逢土，多主翻胃疾；土多而无水气疏之，主聋聩疾。盖肾水不流则翻胃，气不能则为聩也。
+  normalized_text: 凡水逢土，多主翻胃疾；土多而无水气疏之，主聋聩疾。盖肾水不流则翻胃，气不能则为聩也。
+  locator: 第163章·论疾病先知五脏六腑所·第13条
+  concepts:
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 5280d729057c93468ff8afb45b713e5c1eed8b8270eb89f207a018967b81b793
+  source_pages:
+  - https://luckclub.cn/bazi/005/163/
+- id: sanming-tonghui-ch163-p014
+  volume: 选章正文
+  chapter_path:
+  - 第163章 论疾病先知五脏六腑所
+  sequence: 84
+  text: 又曰：凡论残疾病症，先论日干，次详月令，然后通年时看之，伤官主残疾，煞重亦然。乾卦在亥，亥为天门，六辛生人得此日此时，多主盲聋。亥属肾，肾通耳，丙火遭水克也；子位坎宫，伤官煞重相刑，主下部疾；寅宫艮土，主脾胃，面色痿黄之疾；辰属震；此月带伤官，少年主多惊疾，盖震者动也。轻则主惊脾胃疾，重则主足疾。巳为巽，伤官煞重，主妇女血气不调，劳疾；午为离为目，伤官煞重，主失明头风之症；申属坤。为众阴，伤官煞重，主腰脚筋骨之疾；伤官伤尽者不在此论；酉为兑，属口齿不完之疾。戌为火库，主下血痔漏之疾。丑未伤官，亦主脾胃。伤官煞旺者，年年病瘟，主用上下战克、五行无救助，主身体不完，头面残伤。
+  normalized_text: 又曰：凡论残疾病症，先论日干，次详月令，然后通年时看之，伤官主残疾，煞重亦然。乾卦在亥，亥为天门，六辛生人得此日此时，多主盲聋。亥属肾，肾通耳，丙火遭水克也；子位坎宫，伤官煞重相刑，主下部疾；寅宫艮土，主脾胃，面色痿黄之疾；辰属震；此月带伤官，少年主多惊疾，盖震者动也。轻则主惊脾胃疾，重则主足疾。巳为巽，伤官煞重，主妇女血气不调，劳疾；午为离为目，伤官煞重，主失明头风之症；申属坤。为众阴，伤官煞重，主腰脚筋骨之疾；伤官伤尽者不在此论；酉为兑，属口齿不完之疾。戌为火库，主下血痔漏之疾。丑未伤官，亦主脾胃。伤官煞旺者，年年病瘟，主用上下战克、五行无救助，主身体不完，头面残伤。
+  locator: 第163章·论疾病先知五脏六腑所·第14条
+  concepts:
+  - 十神
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 8bcb7f2835ca7ccd6b79e71e356c82707e3ef13e81048609696c4488eb836c58
+  source_pages:
+  - https://luckclub.cn/bazi/005/163/
+- id: sanming-tonghui-ch163-p015
+  volume: 选章正文
+  chapter_path:
+  - 第163章 论疾病先知五脏六腑所
+  sequence: 85
+  text: 又曰：凡一切诸煞亦有主疾者，劫煞主小肠，又主耳聋、咽喉疾；官符主腰脚疾；咸池主酒色、劳瘵、脓血、便溺疾；赘耗主暗昧，或赘疣疾；飞廉名天瞽，支干无气，主无目。凡禄因食致疾，须带煞克身方是。
+  normalized_text: 又曰：凡一切诸煞亦有主疾者，劫煞主小肠，又主耳聋、咽喉疾；官符主腰脚疾；咸池主酒色、劳瘵、脓血、便溺疾；赘耗主暗昧，或赘疣疾；飞廉名天瞽，支干无气，主无目。凡禄因食致疾，须带煞克身方是。
+  locator: 第163章·论疾病先知五脏六腑所·第15条
+  concepts:
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 80f3e42ca76033a4b4e4633ff9d9832887d29f192f72e5bb107ea04d46244f00
+  source_pages:
+  - https://luckclub.cn/bazi/005/163/
+- id: sanming-tonghui-ch163-p016
+  volume: 选章正文
+  chapter_path:
+  - 第163章 论疾病先知五脏六腑所
+  sequence: 86
+  text: 凡命见真冲气散，或真刑气散，多是废疾之人。甲辰、甲戊、乙丑、乙未，土木交加，主瘫痪之疾；丙申、丁酉，金火交加，主血筋所伤；戊子、己亥，水土交加，主脾胃之疾；庚寅、辛卯，金木交加，主筋骨劳嗽之疾。
+  normalized_text: 凡命见真冲气散，或真刑气散，多是废疾之人。甲辰、甲戊、乙丑、乙未，土木交加，主瘫痪之疾；丙申、丁酉，金火交加，主血筋所伤；戊子、己亥，水土交加，主脾胃之疾；庚寅、辛卯，金木交加，主筋骨劳嗽之疾。
+  locator: 第163章·论疾病先知五脏六腑所·第16条
+  concepts:
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 486a3641ffb5b9456d1aef7234521288b5d574a7b8554385d495169b0588a7e1
+  source_pages:
+  - https://luckclub.cn/bazi/005/163/
+- id: sanming-tonghui-ch163-p017
+  volume: 选章正文
+  chapter_path:
+  - 第163章 论疾病先知五脏六腑所
+  sequence: 87
+  text: 凡欲推疾病灾厄，先看禄命身三等，大小运如何？若三命无气，禄马败绝，但得禄财、命财、旺相，亦不至死。若父病推其子命，如子命遇孤辰、寡宿、丧门、吊客及白衣煞临命，其父必有不可救之疾。夫妻亦准此推。
+  normalized_text: 凡欲推疾病灾厄，先看禄命身三等，大小运如何？若三命无气，禄马败绝，但得禄财、命财、旺相，亦不至死。若父病推其子命，如子命遇孤辰、寡宿、丧门、吊客及白衣煞临命，其父必有不可救之疾。夫妻亦准此推。
+  locator: 第163章·论疾病先知五脏六腑所·第17条
+  concepts:
+  - 六亲
+  - 健康
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: ee70e60faeabbdfde1c81884c169b08574ab4fef000d8aa28b1f85a83adb39f7
+  source_pages:
+  - https://luckclub.cn/bazi/005/163/
+- id: sanming-tonghui-ch182-p001
+  volume: 选章正文
+  chapter_path:
+  - 第182章 论六亲
+  sequence: 88
+  text: 或问：阴阳何所配合为夫妇而成六亲？答云：如甲以乙为妹，配以庚金为妻；丙以丁为妹，配以壬水为妻；戊以己配甲；庚以辛配丙；壬以癸配戊，一阴一阳配成夫妇，有夫妇然后有父子，有父子然后有兄弟。六亲者，父母兄弟妻子也。六甲娶己为妻，甲己合而生庚辛为子。男取克干为子，女取干生为息，则己者庚辛之母，庚为父，乙为母，故谓阴干生我为母，我克阳干者为父，克我者为官为子，我克者为财为妻，比和者为兄弟姊妹，生我妻阴干为文母，妻克阳干为丈人，克我女者为女婿，食神为孙，其余六亲俱于十干变化取用。
+  normalized_text: 或问：阴阳何所配合为夫妇而成六亲？答云：如甲以乙为妹，配以庚金为妻；丙以丁为妹，配以壬水为妻；戊以己配甲；庚以辛配丙；壬以癸配戊，一阴一阳配成夫妇，有夫妇然后有父子，有父子然后有兄弟。六亲者，父母兄弟妻子也。六甲娶己为妻，甲己合而生庚辛为子。男取克干为子，女取干生为息，则己者庚辛之母，庚为父，乙为母，故谓阴干生我为母，我克阳干者为父，克我者为官为子，我克者为财为妻，比和者为兄弟姊妹，生我妻阴干为文母，妻克阳干为丈人，克我女者为女婿，食神为孙，其余六亲俱于十干变化取用。
+  locator: 第182章·论六亲·第1条
+  concepts:
+  - 十神
+  - 六亲
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 7554a8e07fa390fe3bd5c930cb825dbab471e97d00936ec85336e7a5dd88b343
+  source_pages:
+  - https://luckclub.cn/bazi/005/182/
+- id: sanming-tonghui-ch182-p002
+  volume: 选章正文
+  chapter_path:
+  - 第182章 论六亲
+  sequence: 89
+  text: 且如六甲生人，以癸水为母，癸为正印，如遇己土正财；戊土为父（戊合癸也），戊是偏财，如遇比劫，则父有伤。六乙生人亦以癸为母，癸是偏印；以戊为父，戊是正财。甲乙俱以庚辛为子，庚金为男，在甲则为七煞，在乙则为正官也；辛金为女，在乙则为七煞，在甲则为正官也。己土为妻，戊土为妾，谓乙木克己土也。虽云阴见阴不成配合，然阴木克不得阳土，且妇人以阴为正也，故云甲乙俱以己为妻，戊为妾。如女人则甲遇庚七煞，乙遇庚正官，皆夫星也。谓庚是阳男为正夫，属阳不可以辛阴为夫也，但阳见阳多无情，阴见阳则夫妇和鸣。
+  normalized_text: 且如六甲生人，以癸水为母，癸为正印，如遇己土正财；戊土为父（戊合癸也），戊是偏财，如遇比劫，则父有伤。六乙生人亦以癸为母，癸是偏印；以戊为父，戊是正财。甲乙俱以庚辛为子，庚金为男，在甲则为七煞，在乙则为正官也；辛金为女，在乙则为七煞，在甲则为正官也。己土为妻，戊土为妾，谓乙木克己土也。虽云阴见阴不成配合，然阴木克不得阳土，且妇人以阴为正也，故云甲乙俱以己为妻，戊为妾。如女人则甲遇庚七煞，乙遇庚正官，皆夫星也。谓庚是阳男为正夫，属阳不可以辛阴为夫也，但阳见阳多无情，阴见阳则夫妇和鸣。
+  locator: 第182章·论六亲·第2条
+  concepts:
+  - 十神
+  - 六亲
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: a1dfa0c28bd745e7b344873cbfe6dfe3f558be1b90216d983ed970e70275f789
+  source_pages:
+  - https://luckclub.cn/bazi/005/182/
+- id: sanming-tonghui-ch182-p003
+  volume: 选章正文
+  chapter_path:
+  - 第182章 论六亲
+  sequence: 90
+  text: 或云：取正财为妻，偏财为妾；女甲则辛为正夫，取阴阳之正合也。甲乙生人俱以甲为兄姊，乙为弟妹，以丁为婆，生我父者为祖母，丁生戊也。壬水为公，壬与丁合也。又以丁火为丈母，生我妻者为我外母，丁生己配与甲作正妻也。壬为丈人，壬与丁合也。妻之兄弟为妻舅。己土为妻，戊土为妻兄妻舅。癸水则是舅之妻为妗也。其余八干俱以类推。女人取用与男不同，我生者为子，克我者为夫，生我夫者为姑，克我姑者为公，其余父母兄弟皆与男同断，但须辨其阴阳耳，如甲乙干则以丙为男，丁为女，庚为夫，辛为夫之兄弟，己为姑，甲为公也。经云：以年为祖业，月为父母兄弟门户，日为妻妾己身，时为子息。须看四柱之中父母兄弟妻子星具何地？论旺相休囚而言其吉凶。如父母星坐长生旺库禄马贵人之地，则主父母富贵福寿荣耀；如坐空刑克煞死亡衰败交并之地，则主父母贫薄破伤刑夭，或死于外及不善终；若带刑带破害，虽居于生旺库之地，主父母有寿而贫贱。兄弟星若生得时得令，坐长生库旺禄马贵人之地，则主兄富贵荣华成群；如坐刑克煞刃死绝衰败之地，兄弟不得力；如坐长生旺库而遇刑冲破害者，虽有兄弟而仇敌及不得力。如妻妾星坐生旺库禄马贵人之地，或有物以生之，主妻妾富贵荣华，美貌多才；如坐空刑克煞羊刃死绝冲败之地，则主妻妾贫薄丑貌刑夭淫乱、残疾或产亡不得力；如坐生旺禄马之地，被刑冲克煞，妻虽有寿亦主破相贫薄。如子息星坐生旺禄马贵人官印之地，有物以相生，主子息荣华聪明，多得送老；如坐禄马贵人居于死绝之地，虽有聪明俊秀，不送老也。如居生旺之地被刑冲破害，有子主愚顽或残疾送老；如居死绝又刑冲破害劫财之地，不得子之力，纵有子主残疾破相或不才。女命如子居生旺之地，主多子；如坐禄马贵人，主子富贵福寿；如坐空刑克煞并冲羊刃死绝之地，主子不得力。或问：甲乙日主以戊癸为父母，四柱干支并无癸水，只戊壬人二字显于干头，或藏于地支，则论何者为父母？答曰：本经所谓明干有时明干取，明干无时暗中求是也。如柱无癸字只有戊字是甲乙之父，将父求其母，如无母只将壬为母，亦须论戊为父。其戊壬不得系婚配，非儿女嫁娶，必是服内成亲，或母多父岁，或失婚而再配也。或又问甲日主月支年支是乙木，时支是甲木，乙先甲后，何为兄？何为弟？答曰：不论先后，只以强为兄，弱为弟。夫人之生也，上父母，下妻子，中兄弟，其联属离合，命之为也。言命不及六亲，自是偏见。
+  normalized_text: 或云：取正财为妻，偏财为妾；女甲则辛为正夫，取阴阳之正合也。甲乙生人俱以甲为兄姊，乙为弟妹，以丁为婆，生我父者为祖母，丁生戊也。壬水为公，壬与丁合也。又以丁火为丈母，生我妻者为我外母，丁生己配与甲作正妻也。壬为丈人，壬与丁合也。妻之兄弟为妻舅。己土为妻，戊土为妻兄妻舅。癸水则是舅之妻为妗也。其余八干俱以类推。女人取用与男不同，我生者为子，克我者为夫，生我夫者为姑，克我姑者为公，其余父母兄弟皆与男同断，但须辨其阴阳耳，如甲乙干则以丙为男，丁为女，庚为夫，辛为夫之兄弟，己为姑，甲为公也。经云：以年为祖业，月为父母兄弟门户，日为妻妾己身，时为子息。须看四柱之中父母兄弟妻子星具何地？论旺相休囚而言其吉凶。如父母星坐长生旺库禄马贵人之地，则主父母富贵福寿荣耀；如坐空刑克煞死亡衰败交并之地，则主父母贫薄破伤刑夭，或死于外及不善终；若带刑带破害，虽居于生旺库之地，主父母有寿而贫贱。兄弟星若生得时得令，坐长生库旺禄马贵人之地，则主兄富贵荣华成群；如坐刑克煞刃死绝衰败之地，兄弟不得力；如坐长生旺库而遇刑冲破害者，虽有兄弟而仇敌及不得力。如妻妾星坐生旺库禄马贵人之地，或有物以生之，主妻妾富贵荣华，美貌多才；如坐空刑克煞羊刃死绝冲败之地，则主妻妾贫薄丑貌刑夭淫乱、残疾或产亡不得力；如坐生旺禄马之地，被刑冲克煞，妻虽有寿亦主破相贫薄。如子息星坐生旺禄马贵人官印之地，有物以相生，主子息荣华聪明，多得送老；如坐禄马贵人居于死绝之地，虽有聪明俊秀，不送老也。如居生旺之地被刑冲破害，有子主愚顽或残疾送老；如居死绝又刑冲破害劫财之地，不得子之力，纵有子主残疾破相或不才。女命如子居生旺之地，主多子；如坐禄马贵人，主子富贵福寿；如坐空刑克煞并冲羊刃死绝之地，主子不得力。或问：甲乙日主以戊癸为父母，四柱干支并无癸水，只戊壬人二字显于干头，或藏于地支，则论何者为父母？答曰：本经所谓明干有时明干取，明干无时暗中求是也。如柱无癸字只有戊字是甲乙之父，将父求其母，如无母只将壬为母，亦须论戊为父。其戊壬不得系婚配，非儿女嫁娶，必是服内成亲，或母多父岁，或失婚而再配也。或又问甲日主月支年支是乙木，时支是甲木，乙先甲后，何为兄？何为弟？答曰：不论先后，只以强为兄，弱为弟。夫人之生也，上父母，下妻子，中兄弟，其联属离合，命之为也。言命不及六亲，自是偏见。
+  locator: 第182章·论六亲·第3条
+  concepts:
+  - 十神
+  - 六亲
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 439129d1378d33b4d92fcde806eceb354eb7100fc990344e5903f1aa8f267fdd
+  source_pages:
+  - https://luckclub.cn/bazi/005/182/
+- id: sanming-tonghui-ch182-p004
+  volume: 选章正文
+  chapter_path:
+  - 第182章 论六亲
+  sequence: 91
+  text: 赋云：年逢刃煞，幼年早丧爹娘；时遇刃伤，未年却损儿女。冲者无兄弟，刑者损六亲。岁月官财印全，三代祖先富贵；日时煞刃逢枭，半路妻儿亏损。男命伤官多损子，女命伤官多克夫；伤官见财而有子，七煞有制乃多儿。财重刑伤父母，鬼旺后代迂荣；劫财重重父早丧，破印太重母先亡。岁月财官旺相，公父显荣；日时禄马相生，妻儿贤俊。印伏藏而财秉令，庶出奸生；正财旺而身失时，母年早丧。偏官偏印偏财叠逢，必然偏庶；正官正印正财独遇的，是正宗男。月中劫背绝财官，父终外土；岁月背逐更冲害，公葬他乡。日逢刃，时逢枭，妻妾产亡；岁值煞，月值伤，兄弟难有。月令伤官多夺长，时行神煞兄弟无。男命劫叠外家希，女命煞重亲骨绝。印旺妨儿女，财重妒公姑。岁月叠煞有刑害，公姑遭伤；日时背逐无救助，妻子离克。正财偏财复见合，虽多妻妾主滥淫；偏官正官更冲害，任有丈夫而偷奸。旺夫伤子，乃食神而受伤；旺子伤夫，察官星而丧绝。女命印旺官轻，夫权在手；男命财多身弱，妻语惬心。日下伤官持刃，夫必恶亡；月中带印刑冲，母家零落。刃健煞刚，祖墓微薄；官强财旺，后代昌荣，日逢背禄逐马，多破祖离乡之客；时遇财旺生官，有兴家助国之男。煞刃月逢，有父无母。偏官叠见，多生女子少生男；偏财复逢，少爱正妻多爱妾。财源得地，因妻致富成家，其妻抑且有为；官位临垣，显己增崇祖业，而男亦须兴旺，月官印，年伤官，父优祖劣；日财位，时劫财，父兴子败。比劫重婚必迟，官星生儿必早。男逢伤官阳刃，逢官煞，不可断其无嗣；女命伤官枭印，行财官，亦堪决其有子女。人食重遇，官轻夫衰子旺。男命煞旺逢比劫，兄有弟无；太过不及，兄弟俱无。库位中和同气，主有煞生旺官败绝，女子盛而男子衰。财官旺身，主休夫家兴而祖家失。女比劫太多，夫有绝妻之义；男子财胜劫重，妻怀私欲之心。年月印绶相生，受现成之基业；日时伤官伤尽，发不义之横财。年上官星，父祖为官；月上官星，兄弟必贵。男逢比劫定伤妻，女入印枭难嗣子。羊刃逢伤官七煞，骨肉亲友伤情；三合六合相和，友善五湖四海。
+  normalized_text: 赋云：年逢刃煞，幼年早丧爹娘；时遇刃伤，未年却损儿女。冲者无兄弟，刑者损六亲。岁月官财印全，三代祖先富贵；日时煞刃逢枭，半路妻儿亏损。男命伤官多损子，女命伤官多克夫；伤官见财而有子，七煞有制乃多儿。财重刑伤父母，鬼旺后代迂荣；劫财重重父早丧，破印太重母先亡。岁月财官旺相，公父显荣；日时禄马相生，妻儿贤俊。印伏藏而财秉令，庶出奸生；正财旺而身失时，母年早丧。偏官偏印偏财叠逢，必然偏庶；正官正印正财独遇的，是正宗男。月中劫背绝财官，父终外土；岁月背逐更冲害，公葬他乡。日逢刃，时逢枭，妻妾产亡；岁值煞，月值伤，兄弟难有。月令伤官多夺长，时行神煞兄弟无。男命劫叠外家希，女命煞重亲骨绝。印旺妨儿女，财重妒公姑。岁月叠煞有刑害，公姑遭伤；日时背逐无救助，妻子离克。正财偏财复见合，虽多妻妾主滥淫；偏官正官更冲害，任有丈夫而偷奸。旺夫伤子，乃食神而受伤；旺子伤夫，察官星而丧绝。女命印旺官轻，夫权在手；男命财多身弱，妻语惬心。日下伤官持刃，夫必恶亡；月中带印刑冲，母家零落。刃健煞刚，祖墓微薄；官强财旺，后代昌荣，日逢背禄逐马，多破祖离乡之客；时遇财旺生官，有兴家助国之男。煞刃月逢，有父无母。偏官叠见，多生女子少生男；偏财复逢，少爱正妻多爱妾。财源得地，因妻致富成家，其妻抑且有为；官位临垣，显己增崇祖业，而男亦须兴旺，月官印，年伤官，父优祖劣；日财位，时劫财，父兴子败。比劫重婚必迟，官星生儿必早。男逢伤官阳刃，逢官煞，不可断其无嗣；女命伤官枭印，行财官，亦堪决其有子女。人食重遇，官轻夫衰子旺。男命煞旺逢比劫，兄有弟无；太过不及，兄弟俱无。库位中和同气，主有煞生旺官败绝，女子盛而男子衰。财官旺身，主休夫家兴而祖家失。女比劫太多，夫有绝妻之义；男子财胜劫重，妻怀私欲之心。年月印绶相生，受现成之基业；日时伤官伤尽，发不义之横财。年上官星，父祖为官；月上官星，兄弟必贵。男逢比劫定伤妻，女入印枭难嗣子。羊刃逢伤官七煞，骨肉亲友伤情；三合六合相和，友善五湖四海。
+  locator: 第182章·论六亲·第4条
+  concepts:
+  - 十神
+  - 旺衰
+  - 六亲
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: f3e4009c5ea2b19f6e4414f5b7b4046bf4641d5a9acec69c44304bcb9ba81b74
+  source_pages:
+  - https://luckclub.cn/bazi/005/182/
+- id: sanming-tonghui-ch182-p005
+  volume: 选章正文
+  chapter_path:
+  - 第182章 论六亲
+  sequence: 92
+  text: 又曰：凡推六亲，男命以年为父，胎为母，月为兄弟，官员以月为僚友，日为己身妻妾，时为子孙，官员以时为帝座祸福。凡是子午卯酉日生，主娶子午卯酉命妻，若妻申子辰生、丑生、甲己生者，皆不永。如克过头，妻再醮，不在此限。凡命四柱内有我克者为妻，无我克者，名曰局中无妻，却看所生日在何地？如在财旺之乡，当有得力之妻。更带贵人禄马，年主妻带官嫁夫。若在本命时财死墓绝败处，定主克陷，或一生鳏居。若日禄在时上遇见，如六丙日得癸巳时，六壬日得辛亥时之类，名曰誉煞，不惟主富，亦主因妻有官。若日带年之官，或年之印，主妻夺夫权，或禄出妻荫，或妻权贵之家，驸马郡马之类。日坐命财，更在财生旺之乡，主得妻财，又主妻贤明。日坐贵人，主妻有望族，或贤淑美丽。若命带日刑，日带年冲破年、羊刃、劫煞、六厄、元辰、空亡，或三四娶，或无妻。
+  normalized_text: 又曰：凡推六亲，男命以年为父，胎为母，月为兄弟，官员以月为僚友，日为己身妻妾，时为子孙，官员以时为帝座祸福。凡是子午卯酉日生，主娶子午卯酉命妻，若妻申子辰生、丑生、甲己生者，皆不永。如克过头，妻再醮，不在此限。凡命四柱内有我克者为妻，无我克者，名曰局中无妻，却看所生日在何地？如在财旺之乡，当有得力之妻。更带贵人禄马，年主妻带官嫁夫。若在本命时财死墓绝败处，定主克陷，或一生鳏居。若日禄在时上遇见，如六丙日得癸巳时，六壬日得辛亥时之类，名曰誉煞，不惟主富，亦主因妻有官。若日带年之官，或年之印，主妻夺夫权，或禄出妻荫，或妻权贵之家，驸马郡马之类。日坐命财，更在财生旺之乡，主得妻财，又主妻贤明。日坐贵人，主妻有望族，或贤淑美丽。若命带日刑，日带年冲破年、羊刃、劫煞、六厄、元辰、空亡，或三四娶，或无妻。
+  locator: 第182章·论六亲·第5条
+  concepts:
+  - 六亲
+  graph_refs:
+  - work:sanming-tonghui
+  - school:sanming-tonghui
+  status: machine_verified
+  verification_level: single_source_integrity
+  confidence: 0.6
+  source_count: 1
+  collation_method: archive_sha256+explicit_chapter_whitelist+article_container_only+layer_split+stable_ids
+  unresolved_variants: *id001
+  content_sha256: 94ba0b858c0c0236bfe072b351b47e28ef32aa8e5c340ca746f1486094acb3bc
+  source_pages:
+  - https://luckclub.cn/bazi/005/182/

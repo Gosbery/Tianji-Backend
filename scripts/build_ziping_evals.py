@@ -39,6 +39,7 @@ def case(
         "question": question,
         "expected_ids": expected_ids,
         "expected_policy": expected_policy,
+        "school": "子平格局法",
     }
 
 
@@ -151,12 +152,9 @@ def build(corpus: dict[str, object]) -> list[dict[str, object]]:
         cases.append(
             case(
                 f"zp-boundary-{index:02d}",
-                "boundary_refusal",
+                "prediction",
                 question,
                 ["concept-evidence-boundary", *ids[chapter]],
-                "hard_refusal"
-                if index in {1, 2, 3, 4, 6, 7, 11, 15}
-                else "explain_boundary",
             )
         )
 
@@ -221,7 +219,7 @@ def build(corpus: dict[str, object]) -> list[dict[str, object]]:
         "chapter_location": 47,
         "concept_paraphrase": 30,
         "cross_chapter": 20,
-        "boundary_refusal": 20,
+        "prediction": 20,
         "traditional_variant": 18,
         "citation_chain": 15,
     }

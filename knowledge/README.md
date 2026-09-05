@@ -59,6 +59,21 @@ passages:
 赵展如原刊影印本，当前作品、段落、2 条注释、248 张候选卡及相关图谱均标记为
 `machine_verified + single_source_integrity`，只进入个人预览通道。
 
+首批主题选章复用《子平真诠》，并加入《滴天髓阐微》《渊海子平》《三命通会》
+《神峰通考》《命理约言》。章节白名单位于 `imports/classic-selections.yml`，可重复构建：
+
+```bash
+.venv/bin/python scripts/import_classic_selections.py
+.venv/bin/python scripts/build_classic_graph.py
+.venv/bin/python scripts/build_classic_topic_evals.py
+.venv/bin/python scripts/verify_classic_knowledge.py
+```
+
+导入器只读取来源页的 `article#article-content`，明确排除站方白话译文、关键词和现代启示。
+《滴天髓阐微》的口诀、原注、任铁樵注与命例分别进入原典、注释和命例卡；其他书的显式
+“眉批”也从正文剥离。五书当前都只有单一网页录入底本，因此状态固定为
+`machine_verified + single_source_integrity`，置信度不高于 0.65，未经人工逐字校勘不得发布。
+
 ## Layer 2：现代注释
 
 译文、注解和研究笔记分别使用 `translation`、`commentary`、`research_note`。每条注释用 `passage_refs` 指回一条或多条原文，并保留作者、出版物、流派和分歧。
@@ -129,11 +144,15 @@ uv run python scripts/build_ziping_rule_cards.py
 命例卡的定位是“展示规则怎样落到四柱”，不是相似命盘预测器。检索命例后仍须先算当前命盘，
 只比较相同的结构事实，并明确不同条件；不得因一柱或一字相同照搬古人的身份、财富或吉凶评价。
 
+所有经典选章卡遵守统一解释边界：过往事件只作既定规则的回溯验证；未来只输出条件式趋势、
+时间窗口和不确定性；健康材料只作为传统文献观点，不用于疾病诊断、寿命或死亡时间预测、
+治疗用药及停药建议。古籍的身份、性别、婚姻和疾病断语保留历史原貌，但不得直接转述成现实结论。
+
 `exclusions` 中的 `day_master=甲`、`day_master_element=木`、`day_master_yin_yang=阳` 可由检索器执行过滤；自然语言限制应写入 `conditions`、`exceptions` 或 `prohibited_uses`。
 
 ## Layer 4：流派关系图谱
 
-图谱包含 `person`、`concept`、`rule`、`school`、`work`、`source` 等节点，以及带来源的有向边。图谱负责查询扩展和关联召回，不能独立支持回答。
+图谱包含 `person`、`concept`、`rule`、`school`、`work`、`source`、`topic` 等节点，以及带来源的有向边。图谱负责查询扩展和关联召回，不能独立支持回答。经典选章使用 `covers`、`comments_on` 和 `illustrates` 保存作品覆盖主题、注本关系及命例用途；只有原文明确支持时才允许建立 `disagrees_with`。
 
 ```yaml
 nodes:
@@ -153,6 +172,16 @@ edges:
 状态信任级别、v2 必填推理字段和显式图谱引用。
 正式内容只能引用 `reviewed` 来源；机器校勘内容只能引用 `machine_verified` 或 `reviewed` 来源。
 默认只有 `reviewed` 进入检索；个人预览额外纳入 `machine_verified`。
+
+## 主题与后世解读目录
+
+`catalog/young-user-topics.yml` 保存定性主题优先级、常见问法、检索词、风险等级及关联作品。
+该目录由仓储校验后注入会话检索，替代代码中的固定咨询词表。它只表达产品内容建设顺序，
+不声称任何平台的精确搜索量。
+
+`catalog/later-commentaries.yml` 保存任铁樵、徐乐吾、袁树珊和韦千里等后世解读的版本关系、
+主题侧重、版权状态和全文资格。只有公版且存在合法可复现底本的条目才可标为全文可导入；
+版权期内或授权不明的著作只能保存书目信息、观点标签与合法短引。
 
 ## 审核流程
 

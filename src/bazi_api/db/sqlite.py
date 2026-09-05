@@ -34,7 +34,10 @@ class SQLiteDatabase:
                 CREATE TABLE IF NOT EXISTS sessions (
                     id TEXT PRIMARY KEY,
                     created_at TEXT NOT NULL,
-                    updated_at TEXT NOT NULL
+                    updated_at TEXT NOT NULL,
+                    chart_fingerprint TEXT NOT NULL DEFAULT '',
+                    school TEXT NOT NULL DEFAULT '基础共识',
+                    evidence_scope TEXT NOT NULL DEFAULT 'reviewed_only'
                 );
                 CREATE TABLE IF NOT EXISTS messages (
                     id TEXT PRIMARY KEY,
@@ -43,6 +46,7 @@ class SQLiteDatabase:
                     content TEXT NOT NULL,
                     payload_json TEXT NOT NULL DEFAULT '{}',
                     created_at TEXT NOT NULL,
+                    turn_index INTEGER NOT NULL DEFAULT 0,
                     FOREIGN KEY(session_id) REFERENCES sessions(id)
                 );
                 CREATE UNIQUE INDEX IF NOT EXISTS idx_messages_id_session
@@ -58,6 +62,13 @@ class SQLiteDatabase:
                     hits_json TEXT NOT NULL,
                     latency_ms INTEGER NOT NULL,
                     token_usage INTEGER,
+                    message_id TEXT NOT NULL DEFAULT '',
+                    generation_model TEXT NOT NULL DEFAULT '',
+                    prompt_version TEXT NOT NULL DEFAULT '',
+                    question_policy TEXT NOT NULL DEFAULT 'evidence_answer',
+                    policy_decision TEXT NOT NULL DEFAULT 'allow',
+                    citations_validated INTEGER NOT NULL DEFAULT 0,
+                    degradation_reason TEXT NOT NULL DEFAULT '',
                     created_at TEXT NOT NULL,
                     FOREIGN KEY(session_id) REFERENCES sessions(id)
                 );
@@ -79,6 +90,39 @@ class SQLiteDatabase:
                     created_at TEXT NOT NULL,
                     FOREIGN KEY(session_id) REFERENCES sessions(id)
                 );
+                CREATE TABLE IF NOT EXISTS tasks (
+                    id TEXT PRIMARY KEY,
+                    title TEXT NOT NULL,
+                    expert_id TEXT NOT NULL,
+                    expert_version TEXT NOT NULL,
+                    expert_name TEXT NOT NULL,
+                    birth_json TEXT NOT NULL,
+                    chart_json TEXT NOT NULL,
+                    school TEXT NOT NULL,
+                    evidence_scope TEXT NOT NULL DEFAULT 'personal_preview',
+                    mode TEXT NOT NULL DEFAULT 'hybrid_rerank',
+                    archived INTEGER NOT NULL DEFAULT 0,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL,
+                    FOREIGN KEY(id) REFERENCES sessions(id)
+                );
+                CREATE TABLE IF NOT EXISTS generation_jobs (
+                    id TEXT PRIMARY KEY,
+                    task_id TEXT NOT NULL,
+                    question TEXT NOT NULL,
+                    status TEXT NOT NULL,
+                    progress TEXT NOT NULL DEFAULT '',
+                    error TEXT NOT NULL DEFAULT '',
+                    assistant_message_id TEXT NOT NULL DEFAULT '',
+                    attempt_count INTEGER NOT NULL DEFAULT 0,
+                    recovery_count INTEGER NOT NULL DEFAULT 0,
+                    cancel_requested INTEGER NOT NULL DEFAULT 0,
+                    created_at TEXT NOT NULL,
+                    started_at TEXT,
+                    finished_at TEXT,
+                    updated_at TEXT NOT NULL,
+                    FOREIGN KEY(task_id) REFERENCES tasks(id)
+                );
                 """
             )
             trace_columns = {
@@ -89,11 +133,35 @@ class SQLiteDatabase:
                 "evidence_scope": "TEXT NOT NULL DEFAULT 'reviewed_only'",
                 "model_version": "TEXT NOT NULL DEFAULT ''",
                 "index_version": "TEXT NOT NULL DEFAULT ''",
+                "message_id": "TEXT NOT NULL DEFAULT ''",
+                "generation_model": "TEXT NOT NULL DEFAULT ''",
+                "prompt_version": "TEXT NOT NULL DEFAULT ''",
+                "question_policy": "TEXT NOT NULL DEFAULT 'evidence_answer'",
+                "policy_decision": "TEXT NOT NULL DEFAULT 'allow'",
+                "citations_validated": "INTEGER NOT NULL DEFAULT 0",
+                "degradation_reason": "TEXT NOT NULL DEFAULT ''",
             }.items():
                 if name not in trace_columns:
                     self.connection.execute(
                         f"ALTER TABLE retrieval_traces ADD COLUMN {name} {definition}"
                     )
+            session_columns = {
+                row[1] for row in self.connection.execute("PRAGMA table_info(sessions)")
+            }
+            for name, definition in {
+                "chart_fingerprint": "TEXT NOT NULL DEFAULT ''",
+                "school": "TEXT NOT NULL DEFAULT '基础共识'",
+                "evidence_scope": "TEXT NOT NULL DEFAULT 'reviewed_only'",
+            }.items():
+                if name not in session_columns:
+                    self.connection.execute(f"ALTER TABLE sessions ADD COLUMN {name} {definition}")
+            message_columns = {
+                row[1] for row in self.connection.execute("PRAGMA table_info(messages)")
+            }
+            if "turn_index" not in message_columns:
+                self.connection.execute(
+                    "ALTER TABLE messages ADD COLUMN turn_index INTEGER NOT NULL DEFAULT 0"
+                )
             rate_event_columns = {
                 row[1]
                 for row in self.connection.execute("PRAGMA table_info(feedback_rate_events)")
@@ -118,6 +186,13 @@ class SQLiteDatabase:
                     ON feedback_rate_events(session_id, created_at DESC);
                 CREATE INDEX IF NOT EXISTS idx_feedback_rate_client_created
                     ON feedback_rate_events(client_key, created_at DESC);
+                CREATE INDEX IF NOT EXISTS idx_tasks_updated
+                    ON tasks(archived, updated_at DESC);
+                CREATE INDEX IF NOT EXISTS idx_generation_jobs_status_created
+                    ON generation_jobs(status, created_at);
+                CREATE UNIQUE INDEX IF NOT EXISTS idx_generation_jobs_active_task
+                    ON generation_jobs(task_id)
+                    WHERE status IN ('queued', 'running');
                 """
             )
         logger.info(

@@ -93,9 +93,12 @@ def chapter_number(passage_id: str) -> int:
     return int(match.group(1))
 
 
-def concise_claim(text: str) -> str:
+def concise_claim(text: str) -> str | None:
     sentences = [item.strip() for item in re.split(r"(?<=[。！？])", text) if item.strip()]
-    claim = "".join(sentences[:2])
+    declarative = [item for item in sentences if not item.rstrip().endswith(("？", "?"))]
+    if not declarative:
+        return None
+    claim = "".join(declarative[:2])
     if len(claim) <= 220:
         return claim
     return claim[:217].rstrip("，；：") + "……"
@@ -213,7 +216,7 @@ def reasoning_fields(chapter: int) -> dict[str, object]:
         "premises": ["四柱干支、月令和日主已经准确排定", "当前采用《子平真诠》的月令格局语境"],
         "conditions": [f"仅在讨论{focus}时应用本条", "把本条与后续成败、救应和气候规则共同核对"],
         "exceptions": ["原文未覆盖的流派定义或现代延伸不得自动并入"],
-        "break_conditions": ["脱离月令与四柱位置孤立套用术语", "把关系名称直接翻译成具体人生事件"],
+        "break_conditions": ["脱离月令与四柱位置孤立套用术语"],
         "rescue_conditions": ["退回可验证的干支事实", "补齐月令、透藏、合冲与上下文后再判断"],
         "counterexamples": [f"只见关键词便断定已满足“{focus}”，未核对本条的上下文"],
         "priority": 65,
@@ -221,25 +224,32 @@ def reasoning_fields(chapter: int) -> dict[str, object]:
     }
 
 
-def make_rule(passage: dict[str, object]) -> dict[str, object]:
+def make_rule(passage: dict[str, object]) -> dict[str, object] | None:
     passage_id = str(passage["id"])
     chapter = chapter_number(passage_id)
     text = str(passage["text"])
     paragraph = int(re.search(r"-p(\d+)$", passage_id).group(1))  # type: ignore[union-attr]
     focus = CHAPTER_FOCUS[chapter]
+    conclusion = concise_claim(text)
+    question_only = conclusion is None
+    if question_only:
+        question = text.rstrip("？?").strip()
+        conclusion = f"本段仅提出“{question}”这一待辨问题，须结合本章后续段落后形成规则结论。"
     fields = merge_signals(reasoning_fields(chapter), source_reasoning_signals(text))
     return {
         "id": f"ziping-rule-ch{chapter:02d}-p{paragraph:03d}",
         "title": f"第{chapter}章规则{paragraph}：{focus}",
         "schema_version": 2,
-        "card_type": "method" if chapter in LUCK_CHAPTERS else "rule",
+        "card_type": (
+            "boundary" if question_only else ("method" if chapter in LUCK_CHAPTERS else "rule")
+        ),
         "content": text,
-        "rule": f"在“{focus}”的判断链中，按本段原文逐项核对，不把例举结构缩成单一关键词。",
+        "rule": f"在“{focus}”的判断链中，应核验本段结论：{conclusion}",
         "school": "子平格局法",
         "concepts": list(passage.get("concepts", [])) or ["格局"],
-        "conclusion": concise_claim(text),
+        "conclusion": conclusion,
         **fields,
-        "exclusions": ["不用于保证具体人生事件", "不用于替代人工校勘或专业决策"],
+        "exclusions": [],
         "prohibited_uses": ["不得省略前提与破格条件只引用结论", "不得把机器校勘内容标作人工审核"],
         "source_refs": [{"passage_id": passage_id}],
         "graph_refs": list(passage.get("graph_refs", [])),
@@ -284,7 +294,7 @@ def make_case(passage: dict[str, object]) -> dict[str, object]:
             "对照所引规则逐项检查前提、成格要素、破格因素与救应",
             "只保留与当前四柱事实相同的推理步骤，并明确不同之处",
         ],
-        "exclusions": ["历史命例不能证明现代职业、财富或吉凶必然相同"],
+        "exclusions": [],
         "prohibited_uses": ["不得只因一柱或一字相同就类推整个人生"],
         "source_refs": [{"passage_id": passage_id}],
         "graph_refs": list(passage.get("graph_refs", [])),
@@ -314,14 +324,25 @@ def main() -> None:
             selected.append(passage)
             seen_nonpriority.add(chapter)
 
-    cards = [make_rule(passage) for passage in selected]
+    built_rules = [make_rule(passage) for passage in selected]
+    cards = [card for card in built_rules if card is not None]
+    rejected = [
+        str(passage["id"])
+        for passage, card in zip(selected, built_rules, strict=True)
+        if card is None
+    ]
     by_id = {str(passage["id"]): passage for passage in passages}
     cards.extend(make_case(by_id[passage_id]) for passage_id in sorted(CASE_PASSAGES))
     OUTPUT.write_text(
         yaml.safe_dump({"cards": cards}, allow_unicode=True, sort_keys=False, width=100),
         encoding="utf-8",
     )
-    print(f"wrote {len(cards)} cards ({len(selected)} rules, {len(CASE_PASSAGES)} cases)")
+    unique_rules = len({str(card.get("rule", "")) for card in cards if card["card_type"] != "case"})
+    print(
+        f"wrote {len(cards)} cards ({len(cards) - len(CASE_PASSAGES)} rules, "
+        f"{len(CASE_PASSAGES)} cases, {len(rejected)} question-only passages rejected, "
+        f"{unique_rules} unique rule claims)"
+    )
 
 
 if __name__ == "__main__":
