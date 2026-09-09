@@ -29,10 +29,20 @@ jobs:
         env:
           EMBEDDING_PROVIDER: hash
           RERANKER_PROVIDER: lexical
+          VECTOR_BACKEND: memory
           PYTHONPATH: src
         run: >-
           uv run python -m bazi_api.cli.evaluate
           --mode hybrid
           --limit 10
           --answer-mode offline
+          --require-acceptance
           --baseline evals/baselines/questions.hash.hybrid.json
+          --output evaluation-report.json
+      - name: Upload evaluation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: offline-retrieval-report
+          path: evaluation-report.json
+          if-no-files-found: ignore

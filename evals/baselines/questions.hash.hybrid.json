@@ -1,28 +1,107 @@
 {
   "cases": 61,
   "chart_profiles": 4,
-  "recall_at_k": 1.0,
-  "recall_at_5": 1.0,
-  "mrr_at_10": 0.9508,
-  "evidence_text_consistency": 1.0,
-  "evidence_id_resolution": 1.0,
-  "citation_chain_rate": 1.0,
+  "recall_at_k": 0.9344,
+  "recall_at_5": 0.9344,
+  "mrr_at_10": 0.8864,
+  "evidence_text_consistency": 1,
+  "evidence_id_resolution": 1,
+  "citation_chain_rate": 1,
   "retrieval_match_policy": "document_id_or_resolvable_trace_ref",
   "by_category": {
-    "direct": 1.0,
-    "concept": 1.0,
-    "conflict": 1.0,
-    "boundary": 1.0,
-    "cross_concept": 1.0
+    "direct": 0.9737,
+    "concept": 1,
+    "conflict": 0,
+    "boundary": 0.8333,
+    "cross_concept": 1
   },
-  "misses": [],
+  "misses": [
+    {
+      "id": "q004",
+      "question": "金是否可以直接解释成财富？",
+      "expected": [
+        "element-metal"
+      ],
+      "retrieved": [
+        "stem-xin",
+        "annotation:project-foundation:14",
+        "stem-geng",
+        "annotation:project-foundation:7",
+        "annotation:project-foundation:8",
+        "branch-zi",
+        "annotation:project-foundation:2",
+        "annotation:project-foundation:11",
+        "annotation:project-foundation:13",
+        "annotation:project-foundation:1"
+      ]
+    },
+    {
+      "id": "q049",
+      "question": "不同八字流派为什么可能给出不同结论？",
+      "expected": [
+        "concept-schools"
+      ],
+      "retrieved": [
+        "annotation:project-foundation:11",
+        "annotation:project-foundation:15",
+        "annotation:project-foundation:6",
+        "concept-yinyang",
+        "annotation:project-foundation:2",
+        "annotation:project-foundation:8",
+        "annotation:project-foundation:14",
+        "annotation:project-foundation:13",
+        "annotation:project-foundation:16",
+        "annotation:project-foundation:1"
+      ]
+    },
+    {
+      "id": "q055",
+      "question": "两个流派的换日规则不同，产品应该怎么办？",
+      "expected": [
+        "concept-schools",
+        "concept-time-pillar"
+      ],
+      "retrieved": [
+        "annotation:project-foundation:13",
+        "annotation:project-foundation:11",
+        "annotation:project-foundation:7",
+        "annotation:project-foundation:15",
+        "concept-evidence-boundary",
+        "concept-yinyang",
+        "annotation:project-foundation:8",
+        "concept-time-pillar",
+        "annotation:project-foundation:12",
+        "annotation:project-foundation:14"
+      ]
+    },
+    {
+      "id": "q060",
+      "question": "只看一个五行可以预测婚姻结果吗？",
+      "expected": [
+        "concept-four-pillars",
+        "concept-evidence-boundary"
+      ],
+      "retrieved": [
+        "concept-relations",
+        "annotation:project-foundation:14",
+        "annotation:project-foundation:8",
+        "annotation:project-foundation:11",
+        "annotation:project-foundation:2",
+        "element-metal",
+        "element-wood",
+        "element-fire",
+        "concept-evidence-boundary",
+        "annotation:project-foundation:9"
+      ]
+    }
+  ],
   "answer_quality": {
-    "citation_validity_rate": 1.0,
+    "citation_validity_rate": 1,
     "policy_cases": 61,
-    "policy_accuracy_rate": 1.0,
-    "answer_allowed_rate": 1.0,
+    "policy_accuracy_rate": 1,
+    "answer_allowed_rate": 1,
     "uncertainty_cases": 1,
-    "uncertainty_trigger_rate": 1.0,
+    "uncertainty_trigger_rate": 1,
     "failures": []
   },
   "acceptance": {
@@ -45,10 +124,10 @@
   "embedding_provider": "hash",
   "reranker_provider": "lexical",
   "model_version": "hash-blake2b-char-ngram-v1-d384",
-  "index_version": "76a1a330ce14d5e7",
+  "index_version": "7bc23bc53eeff731",
   "cache": {
-    "hits": 625,
-    "misses": 2
+    "hits": 3439,
+    "misses": 0
   },
   "tuning": {
     "dense_recall_limit": 30,
@@ -64,8 +143,8 @@
     "concept_boost_per_match": 0.006,
     "concept_boost_max": 0.02,
     "evidence_chain_score_ratio": 0.98,
-    "bm25_heading_boost": 50.0,
-    "bm25_topic_boost": 12.0,
+    "bm25_heading_boost": 50,
+    "bm25_topic_boost": 12,
     "exact_title_boost": 0.5,
     "chapter_heading_boost": 0.4,
     "chapter_topic_boost": 0.12
