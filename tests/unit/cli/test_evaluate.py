@@ -92,7 +92,7 @@ def test_provider_typos_fail_configuration(
         Settings.model_validate({**_settings(tmp_path).model_dump(), field: value})
 
 
-def test_answer_quality_checks_citations_and_allows_prediction_output() -> None:
+def test_answer_quality_requires_verified_support_and_safety() -> None:
     invalid = evaluate_generated_answer(
         GenerationResult(
             answer="[2] 可以断定结果。",
@@ -111,6 +111,8 @@ def test_answer_quality_checks_citations_and_allows_prediction_output() -> None:
             followups=[],
             citations_validated=True,
             uncertainty_validated=True,
+            evidence_validated=True,
+            safety_validated=True,
         ),
         [_hit()],
         expected_policy="evidence_answer",
@@ -154,26 +156,26 @@ def test_answer_quality_checks_citations_and_allows_prediction_output() -> None:
     assert invalid == {
         "citation_valid": False,
         "policy_correct": True,
-        "answer_allowed": True,
+        "answer_allowed": False,
         "uncertainty_triggered": False,
     }
     assert all(valid.values())
     assert superficial == {
-        "citation_valid": True,
+        "citation_valid": False,
         "policy_correct": True,
-        "answer_allowed": True,
+        "answer_allowed": False,
         "uncertainty_triggered": False,
     }
     assert reversal == {
-        "citation_valid": True,
+        "citation_valid": False,
         "policy_correct": True,
-        "answer_allowed": True,
+        "answer_allowed": False,
         "uncertainty_triggered": True,
     }
     assert contradictory == {
-        "citation_valid": True,
+        "citation_valid": False,
         "policy_correct": True,
-        "answer_allowed": True,
+        "answer_allowed": False,
         "uncertainty_triggered": False,
     }
 
@@ -192,6 +194,26 @@ def test_answer_quality_checks_citations_and_allows_prediction_output() -> None:
     )
     assert refused["policy_correct"]
     assert not refused["answer_allowed"]
+
+
+def test_model_fallback_never_passes_answer_quality() -> None:
+    generated = GenerationResult(
+        answer="资料摘录 [1]",
+        uncertainties=["模型核验失败"],
+        followups=[],
+        citations_validated=True,
+        evidence_validated=True,
+        safety_validated=True,
+        uncertainty_validated=True,
+        degradation_reason="model_output_failed_validation",
+    )
+
+    checks = evaluate_generated_answer(
+        generated, [_hit()], expected_policy="evidence_answer", expects_uncertainty=True
+    )
+
+    assert not checks["citation_valid"]
+    assert not checks["answer_allowed"]
 
 
 def test_baseline_comparison_fails_on_regression() -> None:

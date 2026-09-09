@@ -6,7 +6,9 @@ import sqlite3
 from contextlib import suppress
 from typing import Any
 
+from bazi_api.core.async_utils import run_sync
 from bazi_api.core.errors import ExpertNotFoundError
+from bazi_api.db.task_lock import TaskExecutionLock
 from bazi_api.modules.charts.schemas import BirthInput, ChartFacts
 from bazi_api.modules.charts.service import ChartCalculator
 from bazi_api.modules.conversations.repository import ConversationRepository
@@ -58,32 +60,41 @@ class TaskService:
         self._wake = asyncio.Event()
         self._running: dict[str, asyncio.Task[Any]] = {}
         self._closing = False
+        self._execution_lock = TaskExecutionLock(repository.database)
 
     async def start(self) -> None:
-        recovered, failed = await asyncio.to_thread(self.repository.recover_interrupted)
-        if recovered or failed:
-            logger.warning(
-                "generation_jobs_recovered",
-                extra={"hits": recovered, "failed": failed},
-            )
-        self._closing = False
-        self._workers = [
-            asyncio.create_task(self._worker(index), name=f"task-worker-{index}")
-            for index in range(self.concurrency)
-        ]
-        self._wake.set()
+        self._execution_lock.acquire()
+        try:
+            recovered, failed = await run_sync(self.repository.recover_interrupted)
+            if recovered or failed:
+                logger.warning(
+                    "generation_jobs_recovered",
+                    extra={"hits": recovered, "failed": failed},
+                )
+            self._closing = False
+            for index in range(self.concurrency):
+                worker = self._worker(index)
+                try:
+                    self._workers.append(asyncio.create_task(worker, name=f"task-worker-{index}"))
+                except BaseException:
+                    worker.close()
+                    raise
+            self._wake.set()
+        except BaseException:
+            await self.close()
+            raise
 
     async def close(self) -> None:
         self._closing = True
         self._wake.set()
         for worker in self._workers:
             worker.cancel()
-        for job in tuple(self._running.values()):
-            job.cancel()
-        for worker in self._workers:
-            with suppress(asyncio.CancelledError):
-                await worker
-        self._workers.clear()
+        try:
+            await asyncio.gather(*self._workers, return_exceptions=True)
+        finally:
+            self._workers.clear()
+            self._running.clear()
+            self._execution_lock.release()
 
     def create(
         self,
@@ -114,18 +125,18 @@ class TaskService:
         return {**task, "messages": history["messages"]}
 
     async def enqueue(self, task_id: str, question: str) -> dict[str, Any]:
-        job = await asyncio.to_thread(self.repository.enqueue, task_id, question)
+        job = await run_sync(self.repository.enqueue, task_id, question)
         await self.events.publish(self._event("queued", job))
         self._wake.set()
         return job
 
     async def cancel(self, task_id: str, job_id: str) -> dict[str, Any]:
-        job = await asyncio.to_thread(self.repository.get_job, job_id)
+        job = await run_sync(self.repository.get_job, job_id)
         if job["task_id"] != task_id:
             from bazi_api.core.errors import TaskNotFoundError
 
             raise TaskNotFoundError("生成任务不属于该任务")
-        job = await asyncio.to_thread(self.repository.cancel, job_id)
+        job = await run_sync(self.repository.cancel, job_id)
         running = self._running.get(job_id)
         if running is not None:
             running.cancel()
@@ -133,19 +144,19 @@ class TaskService:
         return job
 
     async def retry(self, task_id: str, job_id: str) -> dict[str, Any]:
-        job = await asyncio.to_thread(self.repository.get_job, job_id)
+        job = await run_sync(self.repository.get_job, job_id)
         if job["task_id"] != task_id:
             from bazi_api.core.errors import TaskNotFoundError
 
             raise TaskNotFoundError("生成任务不属于该任务")
-        job = await asyncio.to_thread(self.repository.retry, job_id)
+        job = await run_sync(self.repository.retry, job_id)
         await self.events.publish(self._event("queued", job))
         self._wake.set()
         return job
 
     async def _worker(self, _: int) -> None:
         while not self._closing:
-            job = await asyncio.to_thread(self.repository.claim_next)
+            job = await run_sync(self.repository.claim_next)
             if job is None:
                 self._wake.clear()
                 try:
@@ -162,21 +173,19 @@ class TaskService:
             except asyncio.CancelledError:
                 if self._closing:
                     raise
-                await asyncio.to_thread(self.repository.mark_cancelled, job["id"])
-                cancelled = await asyncio.to_thread(self.repository.get_job, job["id"])
+                await run_sync(self.repository.mark_cancelled, job["id"])
+                cancelled = await run_sync(self.repository.get_job, job["id"])
                 await self.events.publish(self._event("cancelled", cancelled))
             except Exception:
                 logger.exception("task_generation_failed", extra={"job_id": job["id"]})
-                await asyncio.to_thread(
-                    self.repository.mark_failed, job["id"], "回答生成失败，请稍后重试"
-                )
-                failed = await asyncio.to_thread(self.repository.get_job, job["id"])
+                await run_sync(self.repository.mark_failed, job["id"], "回答生成失败，请稍后重试")
+                failed = await run_sync(self.repository.get_job, job["id"])
                 await self.events.publish(self._event("failed", failed))
             finally:
                 self._running.pop(job["id"], None)
 
     async def _run_job(self, job: dict[str, Any]) -> None:
-        task = await asyncio.to_thread(self.repository.get, job["task_id"])
+        task = await run_sync(self.repository.get, job["task_id"])
         request = ChatRequest(
             chart=ChartFacts.model_validate(task["chart"]),
             question=job["question"],
@@ -188,15 +197,15 @@ class TaskService:
         )
 
         async def progress(message: str) -> None:
-            await asyncio.to_thread(self.repository.update_progress, job["id"], message)
-            updated = await asyncio.to_thread(self.repository.get_job, job["id"])
+            await run_sync(self.repository.update_progress, job["id"], message)
+            updated = await run_sync(self.repository.get_job, job["id"])
             await self.events.publish(self._event("progress", updated))
 
         def complete(connection: sqlite3.Connection, message_id: str) -> None:
             self.repository.complete_in_transaction(connection, job["id"], message_id)
 
         response = await self.chat.answer_for_job(request, progress, complete)
-        completed = await asyncio.to_thread(self.repository.get_job, job["id"])
+        completed = await run_sync(self.repository.get_job, job["id"])
         await self.events.publish(
             {**self._event("succeeded", completed), "response": response.model_dump(mode="json")}
         )

@@ -8,7 +8,7 @@ from pathlib import Path
 
 import yaml
 
-from bazi_api.modules.retrieval.schemas import RetrievalDocument
+from bazi_api.modules.retrieval.schemas import KnowledgeRuleContext, RetrievalDocument
 
 from .schemas import (
     BibliographyCatalog,
@@ -586,6 +586,9 @@ class KnowledgeRepository:
                     content_sha256=card.content_sha256 or self._content_sha256(card.content),
                     version=card.version,
                     rerank_text="\n".join(part for part in rerank_parts if part),
+                    rule_context=KnowledgeRuleContext.model_validate(
+                        card.model_dump(include=set(KnowledgeRuleContext.model_fields))
+                    ),
                 )
             )
         return docs

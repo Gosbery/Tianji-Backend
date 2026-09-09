@@ -16,4 +16,7 @@ class HealthResponse(BaseModel):
     vector_backend: str
     index_version: str
     embedding_cache: dict[str, int]
+    vector_documents: int = Field(default=0, ge=0)
+    vector_coverage: float = Field(default=0.0, ge=0.0, le=1.0)
+    embedding_build_required: bool = False
     default_retrieval_mode: Literal["hybrid_rerank"]

@@ -9,6 +9,7 @@ import time
 from collections.abc import AsyncIterator, Awaitable, Callable
 from contextlib import suppress
 
+from bazi_api.core.async_utils import run_sync
 from bazi_api.core.errors import ExpertNotFoundError
 from bazi_api.integrations.llm import AnswerGenerator, GenerationResult
 from bazi_api.modules.charts.service import ChartCalculator
@@ -71,7 +72,7 @@ class ChatService:
         chart = self.charts.calculate(request.chart.birth)
         chart_fingerprint = self.chart_fingerprint(chart)
         requested_session_id = str(request.session_id) if request.session_id else None
-        session_id, is_new_session = await asyncio.to_thread(
+        session_id, is_new_session = await run_sync(
             self.conversations.resolve_session,
             requested_session_id,
             chart_fingerprint=chart_fingerprint,
@@ -81,7 +82,7 @@ class ChatService:
         history = (
             []
             if is_new_session
-            else await asyncio.to_thread(self.conversations.recent_context, session_id, 4)
+            else await run_sync(self.conversations.recent_context, session_id, 4)
         )
         if on_progress is not None:
             await on_progress("命盘信息已核验，正在检索相关资料")
@@ -243,7 +244,7 @@ class ChatService:
         )
         if on_progress is not None:
             await on_progress("资料整理完成，正在保存本次分析")
-        message_id = await asyncio.to_thread(
+        message_id = await run_sync(
             self._persist_answer,
             session_id,
             is_new_session,
@@ -282,7 +283,7 @@ class ChatService:
         if request.session_id is None:
             return
         chart = self.charts.calculate(request.chart.birth)
-        await asyncio.to_thread(
+        await run_sync(
             self.conversations.resolve_session,
             str(request.session_id),
             chart_fingerprint=self.chart_fingerprint(chart),

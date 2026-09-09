@@ -79,12 +79,31 @@ def hit() -> RetrievalHit:
     )
 
 
+def verification_response(request: httpx.Request) -> httpx.Response | None:
+    payload = json.loads(request.content)
+    system = payload.get("system") or payload["messages"][0]["content"]
+    if not system.startswith("你是独立的答案核验器"):
+        return None
+    content = json.dumps({
+        "supported": True,
+        "safe": True,
+        "complete": True,
+        "issues": [],
+        "missing_aspects": [],
+    })
+    if "system" in payload:
+        return httpx.Response(200, json={"content": [{"type": "text", "text": content}]})
+    return httpx.Response(200, json={"choices": [{"message": {"content": content}}]})
+
+
 @pytest.mark.asyncio
 async def test_llm_retries_then_falls_back_without_response_format() -> None:
     payloads: list[dict[str, object]] = []
     idempotency_keys: list[str] = []
 
     def handler(request: httpx.Request) -> httpx.Response:
+        if verified := verification_response(request):
+            return verified
         payloads.append(json.loads(request.content))
         idempotency_keys.append(request.headers["Idempotency-Key"])
         if len(payloads) == 1:
@@ -135,6 +154,8 @@ async def test_anthropic_provider_uses_messages_protocol() -> None:
     captured: dict[str, object] = {}
 
     def handler(request: httpx.Request) -> httpx.Response:
+        if verified := verification_response(request):
+            return verified
         captured["url"] = str(request.url)
         captured["headers"] = dict(request.headers)
         captured["payload"] = json.loads(request.content)
@@ -185,6 +206,8 @@ async def test_anthropic_provider_uses_messages_protocol() -> None:
 async def test_streaming_buffers_until_answer_passes_validation() -> None:
     captured: dict[str, object] = {}
     def handler(request: httpx.Request) -> httpx.Response:
+        if verified := verification_response(request):
+            return verified
         captured["payload"] = json.loads(request.content)
         return httpx.Response(
             200,
@@ -224,6 +247,8 @@ async def test_anthropic_retries_when_thinking_exhausts_output_tokens() -> None:
     idempotency_keys: list[str] = []
 
     def handler(request: httpx.Request) -> httpx.Response:
+        if verified := verification_response(request):
+            return verified
         payloads.append(json.loads(request.content))
         idempotency_keys.append(request.headers["Idempotency-Key"])
         if len(payloads) == 1:
@@ -306,6 +331,8 @@ async def test_no_evidence_skips_model_but_prediction_request_calls_it() -> None
     requests = 0
 
     def handler(request: httpx.Request) -> httpx.Response:
+        if verified := verification_response(request):
+            return verified
         nonlocal requests
         requests += 1
         return httpx.Response(
@@ -380,10 +407,10 @@ async def test_llm_output_without_valid_citations_falls_back_after_one_repair() 
             "如何理解正官？", chart(), [hit()]
         )
 
-    assert result.policy_decision == "allow"
+    assert result.policy_decision == "refuse_invalid_citations"
     assert requests == 2
-    assert "[1] **证据**" in result.answer
-    assert result.citations_validated
+    assert "证据内容" not in result.answer
+    assert not result.citations_validated
     assert result.degradation_reason == "model_output_failed_validation"
 
 
@@ -392,6 +419,8 @@ async def test_llm_repairs_out_of_range_citation_once() -> None:
     requests = 0
 
     def handler(request: httpx.Request) -> httpx.Response:
+        if verified := verification_response(request):
+            return verified
         nonlocal requests
         requests += 1
         answer = "越界引用 [99]" if requests == 1 else "已修复引用 [1]"
@@ -428,7 +457,9 @@ def test_citation_validation_normalizes_named_bracket_labels() -> None:
     )
 
     assert result.answer == "命盘事实 （格局参考），资料依据 [1]。"
-    assert result.citations_validated
+    assert result.citation_format_validated
+    assert not result.citations_validated
+    assert not AnswerGenerator._generation_is_trusted(result)
 
 
 def test_generation_validation_removes_internal_luck_labels_from_user_text() -> None:
@@ -468,7 +499,7 @@ def test_generation_validation_removes_review_and_candidate_language() -> None:
 
 
 @pytest.mark.asyncio
-async def test_llm_allows_deterministic_prediction_with_valid_citation() -> None:
+async def test_llm_rejects_deterministic_prediction_with_valid_citation() -> None:
     def handler(request: httpx.Request) -> httpx.Response:
         return httpx.Response(
             200,
@@ -497,14 +528,16 @@ async def test_llm_allows_deterministic_prediction_with_valid_citation() -> None
             "如何理解正官？", chart(), [hit()]
         )
 
-    assert result.policy_decision == "allow"
-    assert result.answer == "明年中大奖，已经可以确定 [1]"
-    assert result.degradation_reason == ""
+    assert result.policy_decision == "refuse_invalid_citations"
+    assert "中大奖" not in result.answer
+    assert result.degradation_reason == "model_output_failed_validation"
 
 
 @pytest.mark.asyncio
 async def test_llm_allows_bazi_prediction_answer() -> None:
     def handler(request: httpx.Request) -> httpx.Response:
+        if verified := verification_response(request):
+            return verified
         return httpx.Response(
             200,
             json={
@@ -540,7 +573,7 @@ async def test_llm_allows_bazi_prediction_answer() -> None:
 
 
 @pytest.mark.asyncio
-async def test_llm_allows_personal_assertion_with_bazi_terms() -> None:
+async def test_llm_rejects_deterministic_personal_assertion_with_bazi_terms() -> None:
     def handler(request: httpx.Request) -> httpx.Response:
         return httpx.Response(
             200,
@@ -569,6 +602,6 @@ async def test_llm_allows_personal_assertion_with_bazi_terms() -> None:
             "如何理解财格？", chart(), [hit()]
         )
 
-    assert result.policy_decision == "allow"
-    assert result.answer == "命主明年一定发财 [1]。"
-    assert result.degradation_reason == ""
+    assert result.policy_decision == "refuse_invalid_citations"
+    assert "一定发财" not in result.answer
+    assert result.degradation_reason == "model_output_failed_validation"

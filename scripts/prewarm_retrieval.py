@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Download local models when needed and prewarm the full preview index."""
+"""Build the resumable preview embedding cache, with an optional search benchmark."""
 
 from __future__ import annotations
 
+import argparse
 import asyncio
+import json
 import statistics
 import time
 from datetime import date
@@ -19,7 +21,7 @@ from bazi_api.modules.knowledge.repository import KnowledgeRepository
 from bazi_api.modules.retrieval.service import RetrievalService
 
 
-async def main() -> None:
+async def main(*, benchmark: bool = False) -> None:
     settings = get_settings()
     settings.ensure_directories()
     repository = KnowledgeRepository(settings.knowledge_path)
@@ -32,13 +34,15 @@ async def main() -> None:
         ),
         transport=httpx.AsyncHTTPTransport(retries=settings.http_connect_retries),
     ) as http_client:
-        await prewarm(settings, repository, http_client)
+        await prewarm(settings, repository, http_client, benchmark=benchmark)
 
 
 async def prewarm(
     settings: Settings,
     repository: KnowledgeRepository,
     http_client: httpx.AsyncClient,
+    *,
+    benchmark: bool = False,
 ) -> None:
     started = time.perf_counter()
     retrieval = await RetrievalService.create(
@@ -49,7 +53,26 @@ async def prewarm(
         repository.graph_edges,
         http_client,
     )
-    index_ms = int((time.perf_counter() - started) * 1000)
+    try:
+        report = {
+            "documents": len(retrieval.documents),
+            "vector_documents": len(retrieval.vectors.documents),
+            "model_version": retrieval.model_version,
+            "index_version": retrieval.index_version,
+            "cache": retrieval.cache_stats,
+            "index_load_ms": int((time.perf_counter() - started) * 1000),
+        }
+        expected_version = create_embedding_provider(settings, http_client).model_version
+        if retrieval.model_version != expected_version:
+            raise RuntimeError("Requested embedding model failed; its cache is not ready")
+        if benchmark:
+            report.update(await benchmark_search(retrieval))
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+    finally:
+        await asyncio.to_thread(retrieval.close)
+
+
+async def benchmark_search(retrieval: RetrievalService) -> dict[str, object]:
     chart = ChartCalculator().calculate(
         BirthInput(date=date(1990, 1, 1), time=clock_time(12, 0), name="模型预热")
     )
@@ -88,19 +111,18 @@ async def prewarm(
         )
         latencies.append((time.perf_counter() - benchmark_started) * 1000)
     p95_ms = int(statistics.quantiles(latencies, n=20)[18])
-    print(
-        {
-            "documents": len(retrieval.documents),
-            "model_version": retrieval.model_version,
-            "index_version": retrieval.index_version,
-            "cache": retrieval.cache_stats,
-            "index_load_ms": index_ms,
-            "warmup_query_ms": query_ms,
-            "warm_query_p95_ms": p95_ms,
-            "evidence": [hit.document.id for hit in hits],
-        }
-    )
+    return {
+        "warmup_query_ms": query_ms,
+        "warm_query_p95_ms": p95_ms,
+        "evidence": [hit.document.id for hit in hits],
+    }
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--benchmark",
+        action="store_true",
+        help="Also load the reranker and benchmark queries (uses both models in memory)",
+    )
+    asyncio.run(main(benchmark=parser.parse_args().benchmark))

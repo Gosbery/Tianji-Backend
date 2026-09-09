@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-import asyncio
 import json
 import sqlite3
 import threading
 from collections.abc import Sequence
 from pathlib import Path
 
+from bazi_api.core.async_utils import run_sync
 from bazi_api.integrations.embeddings import EmbeddingProvider
 
 
@@ -30,26 +30,33 @@ class EmbeddingCache:
                 """
             )
 
+    async def cached(
+        self, provider: EmbeddingProvider, content_hashes: Sequence[str]
+    ) -> dict[str, list[float]]:
+        return await run_sync(self._read, provider.model_version, set(content_hashes))
+
     async def vectors(
         self,
         provider: EmbeddingProvider,
         content_hashes: Sequence[str],
         texts: Sequence[str],
+        *,
+        batch_size: int = 8,
     ) -> tuple[list[list[float]], dict[str, int]]:
         if len(content_hashes) != len(texts):
             raise ValueError("content_hashes and texts must have the same length")
-        cached = await asyncio.to_thread(
-            self._read, provider.model_version, set(content_hashes)
-        )
+        if batch_size < 1:
+            raise ValueError("Embedding cache batch size must be positive")
+        cached = await self.cached(provider, content_hashes)
         missing_hashes = [item for item in content_hashes if item not in cached]
         unique_missing = list(dict.fromkeys(missing_hashes))
         text_by_hash = dict(zip(content_hashes, texts, strict=True))
-        if unique_missing:
-            embedded = await provider.embed([text_by_hash[item] for item in unique_missing])
-            cached.update(dict(zip(unique_missing, embedded, strict=True)))
-            await asyncio.to_thread(
-                self._write, provider.model_version, cached, set(unique_missing)
-            )
+        for start in range(0, len(unique_missing), batch_size):
+            batch_hashes = unique_missing[start : start + batch_size]
+            embedded = await provider.embed([text_by_hash[item] for item in batch_hashes])
+            batch_vectors = dict(zip(batch_hashes, embedded, strict=True))
+            await run_sync(self._write, provider.model_version, batch_vectors, set(batch_hashes))
+            cached.update(batch_vectors)
         return (
             [cached[item] for item in content_hashes],
             {"hits": len(content_hashes) - len(missing_hashes), "misses": len(unique_missing)},
@@ -58,14 +65,19 @@ class EmbeddingCache:
     def _read(self, model_version: str, hashes: set[str]) -> dict[str, list[float]]:
         if not hashes:
             return {}
-        placeholders = ",".join("?" for _ in hashes)
+        result: dict[str, list[float]] = {}
+        ordered_hashes = sorted(hashes)
         with self.lock:
-            rows = self.connection.execute(
-                f"SELECT content_sha256, vector_json FROM embedding_cache "
-                f"WHERE model_version = ? AND content_sha256 IN ({placeholders})",
-                [model_version, *sorted(hashes)],
-            ).fetchall()
-        return {str(row[0]): json.loads(row[1]) for row in rows}
+            for start in range(0, len(ordered_hashes), 500):
+                batch_hashes = ordered_hashes[start : start + 500]
+                placeholders = ",".join("?" for _ in batch_hashes)
+                rows = self.connection.execute(
+                    f"SELECT content_sha256, vector_json FROM embedding_cache "
+                    f"WHERE model_version = ? AND content_sha256 IN ({placeholders})",
+                    [model_version, *batch_hashes],
+                )
+                result.update((str(row[0]), json.loads(row[1])) for row in rows)
+        return result
 
     def _write(
         self,

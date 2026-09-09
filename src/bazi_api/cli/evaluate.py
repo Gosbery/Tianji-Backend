@@ -116,13 +116,19 @@ def evaluate_generated_answer(
     citations = [int(item) for item in re.findall(r"\[(\d+)\]", generated.answer)]
     citations_in_range = all(1 <= item <= len(hits) for item in citations)
     citation_exempt = generated.policy_decision == "refuse_no_evidence"
+    verified = generated.evidence_validated and generated.safety_validated
+    valid_source = not generated.degradation_reason or (
+        generated.degradation_reason == "offline_references"
+        and generated.model_version == "offline-references"
+    )
     citation_valid = (
         generated.citations_validated
+        and (citation_exempt or (verified and valid_source))
         and citations_in_range
         and (citation_exempt or (bool(citations) if hits else not citations))
     )
     policy_correct = generated.question_policy == expected_policy
-    answer_allowed = generated.policy_decision == "allow"
+    answer_allowed = generated.policy_decision == "allow" and verified and valid_source
     uncertainty_triggered = not expects_uncertainty or (
         generated.uncertainty_validated
         and any(isinstance(item, str) and bool(item.strip()) for item in generated.uncertainties)

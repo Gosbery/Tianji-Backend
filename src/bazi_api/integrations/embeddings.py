@@ -9,6 +9,7 @@ from typing import Protocol
 
 import httpx
 
+from bazi_api.core.async_utils import run_sync
 from bazi_api.core.config import Settings
 from bazi_api.core.errors import InvalidUpstreamResponseError, UpstreamServiceError
 
@@ -51,43 +52,132 @@ class HashEmbeddingProvider:
 
 
 class SentenceTransformerEmbeddingProvider:
-    def __init__(self, model_name: str, local_files_only: bool = False) -> None:
+    def __init__(
+        self,
+        model_name: str,
+        local_files_only: bool = False,
+        *,
+        device: str = "cpu",
+        batch_size: int = 2,
+        max_seq_length: int = 512,
+        window_overlap: int = 64,
+    ) -> None:
+        if batch_size < 1:
+            raise ValueError("Embedding batch size must be positive")
+        if max_seq_length < 3 or not 0 <= window_overlap < max_seq_length - 2:
+            raise ValueError("Embedding overlap must be smaller than the token window")
         self.model_name = model_name
         self.local_files_only = local_files_only
-        self.model_version = f"sentence-transformers:{model_name}"
+        self.device = device
+        self.batch_size = batch_size
+        self.max_seq_length = max_seq_length
+        self.window_overlap = window_overlap
+        self.model_version = (
+            f"sentence-transformers:{model_name}:tokens{max_seq_length}"
+            f":overlap{window_overlap}:weighted-window-mean-v1"
+        )
         self.model = None
         self.dimension = 0
         self._model_lock = threading.Lock()
+        self._disabled = False
 
     async def embed(self, texts: list[str]) -> list[list[float]]:
-        vectors = await asyncio.to_thread(self._encode, texts)
-        return vectors.tolist()
+        if not texts:
+            return []
+        return await run_sync(self._encode, texts)
 
-    def _encode(self, texts: list[str]):  # type: ignore[no-untyped-def]
+    def _encode(self, texts: list[str]) -> list[list[float]]:
         with self._model_lock:
-            if self.model is None:
-                try:
-                    from sentence_transformers import SentenceTransformer
-                except ImportError as exc:
-                    raise RuntimeError(
-                        "sentence-transformers 未安装，请安装 requirements-local-ml.txt"
-                    ) from exc
-                logger.info(
-                    "embedding_model_loading",
-                    extra={"provider": self.model_version},
-                )
-                self.model = SentenceTransformer(
-                    self.model_name, local_files_only=self.local_files_only
-                )
-                get_dimension = getattr(self.model, "get_embedding_dimension", None)
-                if get_dimension is None:
-                    get_dimension = self.model.get_sentence_embedding_dimension
-                self.dimension = int(get_dimension())
-            return self.model.encode(
-                texts,
-                normalize_embeddings=True,
-                show_progress_bar=False,
+            if self._disabled:
+                raise RuntimeError("Local embedding is disabled after a failure; restart to retry")
+            try:
+                if self.model is None:
+                    try:
+                        from sentence_transformers import SentenceTransformer
+                    except ImportError as exc:
+                        raise RuntimeError(
+                            "sentence-transformers 未安装，请安装 requirements-local-ml.txt"
+                        ) from exc
+                    logger.info(
+                        "embedding_model_loading",
+                        extra={"provider": self.model_version},
+                    )
+                    self.model = SentenceTransformer(
+                        self.model_name,
+                        local_files_only=self.local_files_only,
+                        device=self.device,
+                    )
+                    self.model.max_seq_length = self.max_seq_length
+                    self.model.eval()
+                    get_dimension = getattr(self.model, "get_embedding_dimension", None)
+                    if get_dimension is None:
+                        get_dimension = self.model.get_sentence_embedding_dimension
+                    self.dimension = int(get_dimension())
+                return self._encode_windows(texts)
+            except Exception:
+                self.model = None
+                self._disabled = True
+                raise
+
+    def _encode_windows(self, texts: list[str]) -> list[list[float]]:
+        import torch
+
+        assert self.model is not None
+        tokenizer = self.model.tokenizer
+        special_tokens = tokenizer.num_special_tokens_to_add(pair=False)
+        token_budget = self.max_seq_length - special_tokens
+        if token_budget <= self.window_overlap:
+            raise ValueError("Embedding token window leaves no space after special tokens")
+        sums = [[0.0] * self.dimension for _ in texts]
+        batch: list[dict[str, object]] = []
+        owners: list[tuple[int, int]] = []
+
+        def encode_batch() -> None:
+            features = tokenizer.pad(batch, padding=True, return_tensors="pt")
+            features = {name: value.to(self.device) for name, value in features.items()}
+            with torch.inference_mode():
+                vectors = self.model(features)["sentence_embedding"].detach().cpu().tolist()
+            for (owner, weight), vector in zip(owners, vectors, strict=True):
+                norm = math.sqrt(sum(value * value for value in vector)) or 1.0
+                for index, value in enumerate(vector):
+                    sums[owner][index] += value / norm * weight
+            batch.clear()
+            owners.clear()
+
+        for owner, text in enumerate(texts):
+            windows = tokenizer(
+                text,
+                add_special_tokens=True,
+                truncation=True,
+                max_length=self.max_seq_length,
+                stride=self.window_overlap,
+                return_overflowing_tokens=True,
+                return_attention_mask=True,
+                return_token_type_ids=False,
+                padding=False,
+                verbose=False,
             )
+            for index, token_ids in enumerate(windows["input_ids"]):
+                if not isinstance(token_ids, list) or len(token_ids) > self.max_seq_length:
+                    raise RuntimeError("Embedding tokenizer must support bounded overflow windows")
+                batch.append(
+                    {
+                        "input_ids": token_ids,
+                        "attention_mask": windows["attention_mask"][index],
+                    }
+                )
+                # Overlapping windows contribute according to newly covered tokens.
+                overlap = self.window_overlap if index else 0
+                owners.append((owner, max(1, len(token_ids) - special_tokens - overlap)))
+                if len(batch) == self.batch_size:
+                    encode_batch()
+        if batch:
+            encode_batch()
+        result = []
+        for vector in sums:
+            norm = math.sqrt(sum(value * value for value in vector)) or 1.0
+            result.append([value / norm for value in vector])
+        return result
 
 
 class RemoteEmbeddingProvider:
@@ -141,7 +231,12 @@ def create_embedding_provider(
 ) -> EmbeddingProvider:
     if settings.embedding_provider == "sentence_transformer":
         return SentenceTransformerEmbeddingProvider(
-            settings.embedding_model, settings.local_models_only
+            settings.embedding_model,
+            settings.local_models_only,
+            device=settings.local_embedding_device,
+            batch_size=settings.local_embedding_batch_size,
+            max_seq_length=settings.local_embedding_max_seq_length,
+            window_overlap=settings.local_embedding_window_overlap,
         )
     if settings.embedding_provider == "remote":
         if http_client is None:

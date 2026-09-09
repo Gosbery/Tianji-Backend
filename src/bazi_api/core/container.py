@@ -83,6 +83,10 @@ async def build_container(settings: Settings) -> ApplicationContainer:
             graph_nodes=knowledge.graph_nodes,
             graph_edges=knowledge.graph_edges,
             http_client=http_client,
+            embed_missing=(
+                settings.embedding_provider != "sentence_transformer"
+                or settings.build_embeddings_on_startup
+            ),
         )
         logger.info(
             "retrieval_index_ready",

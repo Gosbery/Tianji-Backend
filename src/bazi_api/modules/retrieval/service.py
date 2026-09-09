@@ -9,7 +9,7 @@ import re
 import threading
 import unicodedata
 import uuid
-from collections import Counter, defaultdict
+from collections import Counter, defaultdict, deque
 
 import httpx
 
@@ -18,6 +18,7 @@ try:
 except ImportError:  # The transparent fallback is sufficient for the seed corpus.
     bm25s = None  # type: ignore[assignment]
 
+from bazi_api.core.async_utils import run_sync
 from bazi_api.core.config import Settings
 from bazi_api.core.errors import (
     InvalidUpstreamResponseError,
@@ -407,22 +408,42 @@ class LexicalReranker:
 
 class CrossEncoderReranker:
     def __init__(
-        self, model_name: str, fallback: LexicalReranker, local_files_only: bool = False
+        self,
+        model_name: str,
+        fallback: LexicalReranker,
+        local_files_only: bool = False,
+        *,
+        device: str = "cpu",
+        batch_size: int = 2,
+        max_length: int = 512,
     ) -> None:
+        if batch_size < 1 or max_length < 1:
+            raise ValueError("Reranker batch size and maximum length must be positive")
         self.model_name = model_name
         self.local_files_only = local_files_only
+        self.device = device
+        self.batch_size = batch_size
+        self.max_length = max_length
         self.model = None
         self.fallback = fallback
         self._lock = threading.Lock()
+        self._disabled = False
 
     def score(self, query: str, documents: list[RetrievalDocument]) -> list[float]:
-        try:
-            with self._lock:
+        if not documents:
+            return []
+        with self._lock:
+            if self._disabled:
+                return self.fallback.score(query, documents)
+            try:
                 if self.model is None:
                     from sentence_transformers import CrossEncoder
 
                     self.model = CrossEncoder(
-                        self.model_name, local_files_only=self.local_files_only
+                        self.model_name,
+                        local_files_only=self.local_files_only,
+                        device=self.device,
+                        max_length=self.max_length,
                     )
                 pairs = [
                     (
@@ -435,15 +456,20 @@ class CrossEncoderReranker:
                     for doc in documents
                 ]
                 return [
-                    float(value) for value in self.model.predict(pairs, show_progress_bar=False)
+                    float(value)
+                    for value in self.model.predict(
+                        pairs, batch_size=self.batch_size, show_progress_bar=False
+                    )
                 ]
-        except Exception:  # Local model absence must not make the knowledge base unavailable.
-            logger.warning(
-                "reranker_fallback",
-                extra={"provider": self.model_name},
-                exc_info=True,
-            )
-            return self.fallback.score(query, documents)
+            except Exception:  # Retry large model failures only after a service restart.
+                self.model = None
+                self._disabled = True
+                logger.warning(
+                    "reranker_fallback",
+                    extra={"provider": self.model_name},
+                    exc_info=True,
+                )
+        return self.fallback.score(query, documents)
 
 
 class KnowledgeGraphIndex:
@@ -519,30 +545,55 @@ class RetrievalService:
         graph_nodes: list[GraphNode] | None = None,
         graph_edges: list[GraphEdge] | None = None,
         http_client: httpx.AsyncClient | None = None,
+        *,
+        embed_missing: bool = True,
     ) -> RetrievalService:
         texts = [cls._embedding_text(doc) for doc in documents]
         content_hashes = [
             hashlib.sha256(f"{doc.content_sha256}\n{text}".encode()).hexdigest()
             for doc, text in zip(documents, texts, strict=True)
         ]
+        vector_documents = documents
+        vector_hashes = content_hashes
         cache = await asyncio.to_thread(EmbeddingCache, settings.embedding_cache_path)
         try:
-            try:
-                embeddings, cache_stats = await cache.vectors(
-                    embedding_provider, content_hashes, texts
-                )
-            except Exception:
-                logger.warning(
-                    "embedding_provider_fallback",
-                    extra={"provider": embedding_provider.model_version},
-                    exc_info=True,
-                )
-                from bazi_api.integrations.embeddings import HashEmbeddingProvider
+            if not embed_missing:
+                cached = await cache.cached(embedding_provider, content_hashes)
+                indexed = [
+                    (doc, content_hash)
+                    for doc, content_hash in zip(documents, content_hashes, strict=True)
+                    if content_hash in cached
+                ]
+                vector_documents = [doc for doc, _ in indexed]
+                vector_hashes = [content_hash for _, content_hash in indexed]
+                embeddings = [cached[content_hash] for content_hash in vector_hashes]
+                cache_stats = {
+                    "hits": len(indexed),
+                    "misses": len(set(content_hashes) - cached.keys()),
+                }
+            else:
+                try:
+                    embeddings, cache_stats = await cache.vectors(
+                        embedding_provider,
+                        content_hashes,
+                        texts,
+                        batch_size=settings.local_embedding_cache_batch_size,
+                    )
+                except Exception:
+                    logger.warning(
+                        "embedding_provider_fallback",
+                        extra={"provider": embedding_provider.model_version},
+                        exc_info=True,
+                    )
+                    from bazi_api.integrations.embeddings import HashEmbeddingProvider
 
-                embedding_provider = HashEmbeddingProvider()
-                embeddings, cache_stats = await cache.vectors(
-                    embedding_provider, content_hashes, texts
-                )
+                    embedding_provider = HashEmbeddingProvider()
+                    embeddings, cache_stats = await cache.vectors(
+                        embedding_provider,
+                        content_hashes,
+                        texts,
+                        batch_size=settings.local_embedding_cache_batch_size,
+                    )
         finally:
             await asyncio.to_thread(cache.close)
         lexical_reranker = LexicalReranker(
@@ -555,16 +606,24 @@ class RetrievalService:
                 settings.reranker_model,
                 lexical_reranker,
                 settings.local_models_only,
+                device=settings.reranker_device,
+                batch_size=settings.reranker_batch_size,
+                max_length=settings.reranker_max_length,
             )
         else:
             reranker = lexical_reranker
         tuning_payload = json.dumps(
             retrieval_tuning(settings), sort_keys=True, separators=(",", ":")
         )
-        vector_payload = "\n".join([embedding_provider.model_version, *sorted(content_hashes)])
+        vector_payload = "\n".join([embedding_provider.model_version, *sorted(vector_hashes)])
         vector_index_version = hashlib.sha256(vector_payload.encode("utf-8")).hexdigest()[:16]
         index_payload = "\n".join(
-            [embedding_provider.model_version, *sorted(content_hashes), tuning_payload]
+            [
+                embedding_provider.model_version,
+                *sorted(content_hashes),
+                tuning_payload,
+                vector_index_version,
+            ]
         )
         index_version = hashlib.sha256(index_payload.encode("utf-8")).hexdigest()[:16]
         bm25 = await asyncio.to_thread(
@@ -576,7 +635,7 @@ class RetrievalService:
             settings.bm25_b,
         )
         vectors = await asyncio.to_thread(
-            VectorIndex, settings, documents, embeddings, vector_index_version
+            VectorIndex, settings, vector_documents, embeddings, vector_index_version
         )
         service = cls(
             documents=documents,
@@ -631,13 +690,30 @@ class RetrievalService:
         retrieval_query = normalize_retrieval_text(" ".join([query, *chart_terms, *expanded_terms]))
         if mode == "dense":
             dense = await self._dense_search(retrieval_query, allowed)
-            if dense:
-                hits = self._hits_from_single(dense, "dense", limit)
+            unindexed = allowed - self.vectors.documents.keys()
+            if dense and unindexed:
+                sparse_missing = await asyncio.to_thread(
+                    self.bm25.search, retrieval_query, unindexed, self.settings.sparse_recall_limit
+                )
+                hits = [
+                    RetrievalHit(
+                        document=self.documents[document_id],
+                        score=score,
+                        matched_by=sorted(components),
+                        component_scores=raw,
+                    )
+                    for document_id, score, components, raw in self._rrf(
+                        {"dense": dense, "bm25-unindexed": sparse_missing},
+                        self.settings.retrieval_rrf_k,
+                    )
+                ]
+            elif dense:
+                hits = self._hits_from_single(dense, "dense")
             else:
                 sparse_fallback = await asyncio.to_thread(
                     self.bm25.search, retrieval_query, allowed, self.settings.sparse_recall_limit
                 )
-                hits = self._hits_from_single(sparse_fallback, "bm25-fallback", limit)
+                hits = self._hits_from_single(sparse_fallback, "bm25-fallback")
             hits = self._diversify_hits(hits, limit)
             self._apply_school_priority(preferred_schools or [], hits)
             return self._expand_evidence_chain(hits, allowed, limit)
@@ -668,7 +744,7 @@ class RetrievalService:
         if mode == "hybrid_rerank" and hits:
             candidates = hits[: self.settings.rerank_limit]
             remainder = hits[self.settings.rerank_limit :]
-            rerank_scores = await asyncio.to_thread(
+            rerank_scores = await run_sync(
                 self.reranker.score, query, [hit.document for hit in candidates]
             )
             for hit, rerank_score in zip(candidates, rerank_scores, strict=True):
@@ -756,9 +832,12 @@ class RetrievalService:
         hits.sort(key=lambda hit: hit.score, reverse=True)
 
     async def _dense_search(self, query: str, allowed: set[str]) -> list[tuple[str, float]]:
+        allowed = allowed.intersection(self.vectors.documents)
+        if not allowed:
+            return []
         try:
             query_vector = (await self.embedding_provider.embed([query]))[0]
-            return await asyncio.to_thread(
+            return await run_sync(
                 self.vectors.search,
                 query_vector,
                 allowed,
@@ -914,7 +993,8 @@ class RetrievalService:
     def _expand_evidence_chain(
         self, hits: list[RetrievalHit], allowed: set[str], limit: int
     ) -> list[RetrievalHit]:
-        base = hits[:limit]
+        base = hits[: max(0, limit)]
+        by_id = {hit.document.id: hit for hit in base}
         parent: RetrievalHit | None = None
         canonical: RetrievalDocument | None = None
         for candidate in base:
@@ -922,36 +1002,58 @@ class RetrievalService:
                 continue
             resolved = self._find_canonical_reference(candidate.document, allowed)
             if resolved is not None:
-                parent = candidate
-                canonical = resolved
+                parent, canonical = candidate, resolved
                 break
         if parent is None or canonical is None:
             return base
-        linked = next(
-            (hit for hit in base if hit.document.id == canonical.id),
-            RetrievalHit(
+
+        linked = by_id.get(canonical.id)
+        if linked is None:
+            linked = RetrievalHit(
                 document=canonical,
                 score=parent.score * self.settings.evidence_chain_score_ratio,
                 matched_by=["evidence_chain"],
                 component_scores={"evidence_chain": parent.score},
-            ),
-        )
+            )
         without_linked = [hit for hit in base if hit.document.id != canonical.id]
         parent_index = without_linked.index(parent)
         ordered = [
             *without_linked[: parent_index + 1],
             linked,
             *without_linked[parent_index + 1 :],
-        ]
-        return ordered[:limit]
+        ][:limit]
+        seen = {hit.document.id for hit in ordered}
+        if limit < 4 or canonical.id not in seen or len(ordered) >= limit:
+            return ordered
+
+        # Additional provenance may fill spare slots, never replace ranked evidence.
+        for candidate in ordered:
+            if candidate.document.id == parent.document.id or candidate.document.kind not in {
+                "knowledge_card",
+                "modern_annotation",
+            }:
+                continue
+            canonical = self._find_canonical_reference(candidate.document, allowed)
+            if canonical is None or canonical.id in seen:
+                continue
+            linked = by_id.get(canonical.id)
+            if linked is None:
+                linked = RetrievalHit(
+                    document=canonical,
+                    score=candidate.score * self.settings.evidence_chain_score_ratio,
+                    matched_by=["evidence_chain"],
+                    component_scores={"evidence_chain": candidate.score},
+                )
+            return [*ordered, linked]
+        return ordered
 
     def _find_canonical_reference(
         self, document: RetrievalDocument, allowed: set[str]
     ) -> RetrievalDocument | None:
-        queue = list(document.trace_refs)
+        queue = deque(document.trace_refs)
         visited: set[str] = set()
         while queue:
-            reference = queue.pop(0)
+            reference = queue.popleft()
             if reference in visited or reference not in allowed:
                 continue
             visited.add(reference)
@@ -1010,7 +1112,7 @@ class RetrievalService:
         hits.sort(key=lambda hit: hit.score, reverse=True)
 
     def _hits_from_single(
-        self, ranking: list[tuple[str, float]], component: str, limit: int
+        self, ranking: list[tuple[str, float]], component: str
     ) -> list[RetrievalHit]:
         return [
             RetrievalHit(
@@ -1019,7 +1121,7 @@ class RetrievalService:
                 matched_by=[component],
                 component_scores={component: score},
             )
-            for document_id, score in ranking[:limit]
+            for document_id, score in ranking
         ]
 
     def _rrf(
@@ -1074,6 +1176,8 @@ class RetrievalService:
 
     @staticmethod
     def _diversify_hits(hits: list[RetrievalHit], limit: int) -> list[RetrievalHit]:
+        if limit <= 0:
+            return []
         selected: list[RetrievalHit] = []
         seen_families: set[str] = set()
         chapter_counts: Counter[str] = Counter()
@@ -1082,7 +1186,7 @@ class RetrievalService:
                 ref for ref in hit.document.trace_refs if ref != hit.document.id and "-ch" in ref
             ]
             family = canonical_refs[0] if canonical_refs else hit.document.id
-            chapter_match = re.search(r"-ch(\d+)-", family)
+            chapter_match = re.search(r"^(.+?-ch\d+)-", family)
             chapter = chapter_match.group(1) if chapter_match else ""
             if family in seen_families or (chapter and chapter_counts[chapter] >= 2):
                 continue

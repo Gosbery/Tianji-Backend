@@ -18,6 +18,7 @@ class Settings(BaseSettings):
 
     app_name: str = "命盘显微镜 API"
     environment: str = "development"
+    app_access_key: str = Field(default="", repr=False, max_length=512)
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
     llm_provider: Literal["openai", "anthropic"] = "openai"
     openai_api_key: str = ""
@@ -37,6 +38,11 @@ class Settings(BaseSettings):
 
     embedding_provider: Literal["sentence_transformer", "remote", "hash"] = "sentence_transformer"
     embedding_model: str = "BAAI/bge-m3"
+    local_embedding_device: Literal["cpu", "mps", "cuda"] = "cpu"
+    local_embedding_batch_size: int = Field(default=2, ge=1, le=32)
+    local_embedding_max_seq_length: int = Field(default=512, ge=64, le=8192)
+    local_embedding_window_overlap: int = Field(default=64, ge=0, le=1024)
+    local_embedding_cache_batch_size: int = Field(default=8, ge=1, le=128)
     remote_embedding_model: str = ""
     vector_backend: Literal["memory", "qdrant"] = "memory"
     qdrant_path: Path = BACKEND_ROOT / "data/qdrant"
@@ -44,6 +50,10 @@ class Settings(BaseSettings):
     qdrant_api_key: str = ""
     reranker_provider: Literal["cross_encoder", "lexical"] = "cross_encoder"
     reranker_model: str = "BAAI/bge-reranker-v2-m3"
+    reranker_device: str = "cpu"
+    reranker_batch_size: int = Field(default=2, ge=1, le=32)
+    reranker_max_length: int = Field(default=512, ge=128, le=2048)
+    build_embeddings_on_startup: bool = False
     local_models_only: bool = False
     embedding_cache_path: Path = BACKEND_ROOT / "data/embedding-cache.sqlite3"
     dense_recall_limit: int = Field(default=30, ge=1, le=1000)
@@ -90,6 +100,19 @@ class Settings(BaseSettings):
         if isinstance(value, str):
             return [item.strip() for item in value.split(",") if item.strip()]
         return value
+
+    @field_validator("app_access_key")
+    @classmethod
+    def validate_access_key(cls, value: str) -> str:
+        if value and len(value.strip()) < 32:
+            raise ValueError("APP_ACCESS_KEY 至少需要 32 个字符")
+        return value
+
+    @model_validator(mode="after")
+    def validate_local_embedding_settings(self) -> Self:
+        if self.local_embedding_window_overlap >= self.local_embedding_max_seq_length - 2:
+            raise ValueError("Local embedding overlap must be smaller than the token window")
+        return self
 
     @model_validator(mode="after")
     def validate_http_settings(self) -> Self:
