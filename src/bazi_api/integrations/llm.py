@@ -520,6 +520,7 @@ class AnswerGenerator:
             }
         return parsed if isinstance(parsed, dict) else {"answer": str(parsed)}
 
+
 def _explicit_safety_violation(generated: GenerationResult) -> bool:
     # These obvious cases cannot be overridden by a permissive verifier response.
     patterns = (
