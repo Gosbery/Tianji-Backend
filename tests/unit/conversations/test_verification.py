@@ -192,7 +192,8 @@ async def test_verification_query_construction_and_hits(tmp_path: Path) -> None:
 
 
 @pytest.mark.asyncio
-async def test_history_exposes_verification_hits_as_response_field(tmp_path: Path) -> None:
+async def test_history_round_trips_verification_result(tmp_path: Path) -> None:
+    """落库的 {query, hits, latency_ms} 必须能原样经 history 读回（否则历史接口 500）。"""
     database = SQLiteDatabase(tmp_path / "app.db")
     try:
         conversations = ConversationRepository(database)
@@ -203,13 +204,16 @@ async def test_history_exposes_verification_hits_as_response_field(tmp_path: Pat
             traces=TraceRepository(database),
             tasks=FakeTasks(),  # type: ignore[arg-type]
         )
-        await verification.verify(response.session_id, response.message_id)
+        result = await verification.verify(response.session_id, response.message_id)
 
         history = ConversationHistory.model_validate(conversations.history(response.session_id))
         assistant = next(item for item in history.messages if item.role == "assistant")
         assert assistant.response is not None
-        # payload 里的核验结果是 {query, hits, latency_ms}，对外只暴露 hits 列表。
-        assert [item.id for item in assistant.response.verification or []] == ["doc:1"]
+        stored = assistant.response.verification
+        assert stored is not None
+        assert stored.query == result.query
+        assert [item.id for item in stored.hits] == ["doc:1"]
+        assert stored.latency_ms >= 0
         assert assistant.response.mode == "direct"
     finally:
         database.close()

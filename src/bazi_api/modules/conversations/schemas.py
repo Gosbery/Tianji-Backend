@@ -44,6 +44,12 @@ class ChatRequest(BaseModel):
     evidence_scope: Literal["reviewed_only", "personal_preview"] = "reviewed_only"
 
 
+class VerificationResult(BaseModel):
+    query: str
+    hits: list[Evidence]
+    latency_ms: int = 0
+
+
 class ChatResponse(BaseModel):
     session_id: str
     message_id: str
@@ -57,7 +63,7 @@ class ChatResponse(BaseModel):
     policy_decision: str = "allow"
     citations_validated: bool = False
     degradation_reason: str = ""
-    verification: list[Evidence] | None = None
+    verification: VerificationResult | None = None
 
 
 class VerificationRequest(BaseModel):

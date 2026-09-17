@@ -88,11 +88,6 @@ class ConversationRepository:
         for row in rows:
             item = self._message_dict(row)
             payload = item.pop("payload")
-            # 核验结果在 payload 里存 {query, hits, latency_ms}，对外只暴露 hits 列表。
-            stored_verification = payload.get("verification")
-            if isinstance(stored_verification, dict):
-                hits = stored_verification.get("hits")
-                payload["verification"] = hits if isinstance(hits, list) else []
             response = None
             if row["role"] == "assistant" and {"evidence", "mode", "latency_ms"}.issubset(payload):
                 response = {
