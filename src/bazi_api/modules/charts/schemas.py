@@ -116,6 +116,12 @@ class LuckFacts(BaseModel):
     next_cycle: LuckCycleFact | None = None
 
 
+class TopicFactPack(BaseModel):
+    topic_id: str
+    label: str
+    facts: list[str]
+
+
 class ChartFacts(BaseModel):
     calculated_at: datetime
     birth: BirthInput
