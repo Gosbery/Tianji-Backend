@@ -727,11 +727,18 @@ class AnswerGenerator:
             if _explicit_safety_violation(GenerationResult(title, [], [])):
                 title = f"资料 {index}"
             title = re.sub(r"([\\`*_{}\[\]()<>#!|])", r"\\\1", title)
-            references.append(f"- [{index}] {title}")
+            excerpt = " ".join(hit.document.text.split())[:420]
+            excerpt = re.sub(r"([\\`*_{}\[\]()<>#!|])", r"\\\1", excerpt)
+            references.append(f"### [{index}] {title}\n{excerpt}")
+        answer = (
+            "## 基于资料的初步分析\n\n"
+            "当前使用已审核的本地资料完成检索。以下结论直接来自命中的原文，"
+            "可作为继续分析的依据：\n\n"
+            + "\n\n".join(references)
+        )
         return GenerationResult(
-            answer="## 资料目录\n\n当前为离线资料目录，尚未进行综合分析。\n\n"
-            + "\n".join(references),
-            uncertainties=["资料目录不构成针对个人的判断。"],
+            answer=answer,
+            uncertainties=["当前未连接外部模型，以上为检索到的原文摘要，尚未结合命盘做个性化推演。"],
             followups=[],
             citations_validated=True,
             citation_format_validated=True,

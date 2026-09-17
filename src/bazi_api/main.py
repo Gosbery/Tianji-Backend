@@ -15,7 +15,6 @@ from bazi_api.core.config import BACKEND_ROOT, Settings, get_settings
 from bazi_api.core.container import build_container
 from bazi_api.core.errors import BaziApiError, UpstreamServiceError
 from bazi_api.core.logging import configure_logging, request_id_context
-from bazi_api.core.security import application_access_error
 from bazi_api.modules.charts.router import router as charts_router
 from bazi_api.modules.conversations.router import router as conversations_router
 from bazi_api.modules.experts.router import router as experts_router
@@ -148,9 +147,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         started = time.perf_counter()
         try:
             try:
-                response = application_access_error(request, app_settings)
-                if response is None:
-                    response = await call_next(request)
+                response = await call_next(request)
             except Exception as exc:
                 response = await handle_unexpected_error(request, exc)
             duration_ms = round((time.perf_counter() - started) * 1000, 2)
