@@ -1,55 +1,81 @@
-# Offline Retrieval Baselines
+# Retrieval Baselines
 
-`questions.hash.hybrid.json` pins the dataset, retrieval index, model, settings,
-and measured scores for the CI quality gate. An identity mismatch must fail;
+`questions.bm25.json` pins the dataset, retrieval index, model, settings, and
+measured scores for the CI quality gate. An identity mismatch must fail;
 changing the index version alone does not validate a replacement baseline.
 
-## 2026-09-09 Migration
+## Baseline identity
 
-The previous baseline used index `76a1a330ce14d5e7` and 627 indexed documents
-(625 cache hits plus 2 misses). The expanded corpus contains 3,439 documents.
-The fixed question set remains 61 cases with digest
-`4abc4c1ca341313ebdc869c856e9eab126e295b79553f71d6b0efdcef2dc7ce7`.
+| Field | Value |
+| --- | --- |
+| `mode` | `bm25` |
+| `model_version` | `bm25-lexicon-v1` |
+| `index_version` | `35c40017a256c023` |
+| `dataset` | `questions.json` (61 cases) |
+| `dataset_sha256` | `bd97eb14beb5fcd9e8e5c34bf963d77c8d9a50fd0bd094c58f066c5cac90e051` |
+| `limit` | `10` |
+| `evidence_scope` | `reviewed_only` |
+| `answer_mode` | `off` |
+| `max_regression` | `0.02` |
 
-| Evaluation | Index | Recall@5 | MRR@10 |
+## Measured scores (2026-09-17)
+
+| Evaluation | Recall@5 | MRR@10 |
+| --- | --- | --- |
+| `questions.json` (61 cases, this baseline) | 0.7869 | 0.5998 |
+| `multi-turn.json` (10 cases, no baseline file) | 0.9000 | 0.6950 |
+
+`evidence_text_consistency`, `evidence_id_resolution`, and `citation_chain_rate`
+remain `1.0` on the main question set. Thirteen cases miss: `q004`, `q006`,
+`q007`, `q014`, `q018`, `q028`, `q029`, `q032`, `q035`, `q036`, `q046`,
+`q056`, `q058`. They are kept in the baseline report; expected evidence IDs and
+scoring rules were not adjusted to pass them.
+
+## Why the acceptance thresholds were lowered
+
+The previous `hybrid` baseline recorded `Recall@5 = 0.9344` / `MRR@10 = 0.8864`
+against the local vector stack (hash embeddings plus a lexical reranker) and
+enforced absolute gates of `Recall@5 >= 0.90` and `MRR@10 >= 0.80`.
+
+That stack was deleted by design. The main answer path no longer retrieves at
+all: the model answers directly from the computed chart and topic facts. The
+knowledge base is now an **on-demand verification channel** — a BM25-only
+lookup used to check a specific term or passage when the user asks for one —
+so retrieval quality is measured against a deliberately smaller, non-vector
+index and the old 0.90/0.80 gates are unreachable rather than regressed.
+
+The gates are re-based on the measured BM25 numbers with margin instead of
+being dropped:
+
+| Gate | Old | New | Measured |
 | --- | --- | --- | --- |
-| Historical smaller corpus | `76a1a330ce14d5e7` | 1.0000 | 0.9508 |
-| Parent retrieval implementation (`38a903d`), current corpus | `7229c7a012eb8446` | 0.9344 | 0.8864 |
-| Current implementation (`31382b2`), current corpus | `7bc23bc53eeff731` | 0.9344 | 0.8864 |
+| `recall_at_5` | 0.90 | 0.75 | 0.7869 |
+| `mrr_at_10` | 0.80 | 0.55 | 0.5998 |
+| `multi_turn_recall_at_5` | 0.90 | 0.85 | 0.9000 |
 
-The comparison of parent and current retrieval implementations held the current
-data, query preparation, settings, hash embeddings, offline answer generation,
-and evaluation code constant. The current implementation was also evaluated
-again before refreshing this baseline. It introduces no additional misses in
-this comparison. Both the parent and current CI runs failed against the obsolete
-index identity: GitHub Actions runs `33937493549` and `34330599084`.
-
-The historical score loss is real and is not a claim of improved quality. This
-baseline migration records the expanded corpus's measured state. Cases `q004`,
-`q049`, `q055`, and `q060` remain misses and are retained in the baseline report.
-They concern single-element inference limits, school differences, and day-change
-rules. The historical report remains available in Git history before this update.
-Neither expected evidence IDs nor scoring rules were changed to pass these cases.
-
-The maximum regression tolerance stays at 0.02. CI also explicitly enforces the
-existing absolute acceptance checks, including Recall@5 >= 0.90 and MRR@10 >= 0.80.
-Citation checks remain enabled. These measure offline evidence retrieval and a
-source-directory answer, not the factual accuracy of live LLM answers.
+`evidence_text_consistency == 1.0` and `evidence_id_resolution == 1.0` are
+unchanged: citation identifiers must still resolve and quoted passages must
+still match the source text.
 
 ## Reproduction
 
-Run from the backend directory with the development and retrieval dependencies:
+Run from the backend directory:
 
 ```bash
-EMBEDDING_PROVIDER=hash RERANKER_PROVIDER=lexical VECTOR_BACKEND=memory PYTHONPATH=src \
-  uv run python -m bazi_api.cli.evaluate --mode hybrid --limit 10 \
-  --answer-mode offline --require-acceptance \
-  --baseline evals/baselines/questions.hash.hybrid.json \
-  --output /tmp/bazi-offline-evaluation.json
+PYTHONPATH=src uv run python -m bazi_api.cli.evaluate --mode bm25 --limit 10 \
+  --output evals/baselines/questions.bm25.json
 ```
 
-For a deliberate corpus or retrieval configuration migration, first generate a
-candidate report without `--baseline`, inspect every changed score and miss, and
-record the reason for the new reference. Do not raise the regression tolerance,
-remove identity checks, or discard failing cases to make CI green. GitHub Actions
+CI compares against the baseline and enforces acceptance:
+
+```bash
+PYTHONPATH=src uv run python -m bazi_api.cli.evaluate --mode bm25 --limit 10 \
+  --require-acceptance --baseline evals/baselines/questions.bm25.json \
+  --output evaluation-report.json
+```
+
+For a deliberate corpus or configuration migration, first generate a candidate
+report without `--baseline`, inspect every changed score and miss, and record
+the reason for the new reference. Do not raise the regression tolerance, remove
+identity checks, or discard failing cases to make CI green. GitHub Actions
 uploads the generated report as `offline-retrieval-report` for inspection.

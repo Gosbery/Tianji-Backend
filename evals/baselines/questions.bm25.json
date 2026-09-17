@@ -1,0 +1,301 @@
+{
+  "cases": 61,
+  "chart_profiles": 4,
+  "recall_at_k": 0.7869,
+  "recall_at_5": 0.7869,
+  "mrr_at_10": 0.5998,
+  "evidence_text_consistency": 1.0,
+  "evidence_id_resolution": 1.0,
+  "citation_chain_rate": 1.0,
+  "retrieval_match_policy": "document_id_or_resolvable_trace_ref",
+  "by_category": {
+    "direct": 0.7368,
+    "concept": 0.9091,
+    "conflict": 1.0,
+    "boundary": 0.6667,
+    "cross_concept": 1.0
+  },
+  "misses": [
+    {
+      "id": "q004",
+      "question": "金是否可以直接解释成财富？",
+      "expected": [
+        "element-metal"
+      ],
+      "retrieved": [
+        "element-fire",
+        "branch-xu",
+        "concept-year-pillar",
+        "branch-mao",
+        "branch-zi",
+        "method-comprehensive-evidence-first",
+        "annotation:project-foundation:7",
+        "annotation:project-foundation:8",
+        "stem-geng",
+        "annotation:project-foundation:12"
+      ]
+    },
+    {
+      "id": "q006",
+      "question": "甲木的阴阳和五行是什么？",
+      "expected": [
+        "stem-jia"
+      ],
+      "retrieved": [
+        "concept-yinyang",
+        "annotation:project-foundation:3",
+        "annotation:project-foundation:8",
+        "stem-yi",
+        "annotation:project-foundation:10",
+        "concept-month-command",
+        "annotation:project-foundation:2",
+        "stem-jia",
+        "element-wood",
+        "concept-luck-cycle"
+      ]
+    },
+    {
+      "id": "q007",
+      "question": "乙木可以怎样做基础理解？",
+      "expected": [
+        "stem-yi"
+      ],
+      "retrieved": [
+        "annotation:project-foundation:6",
+        "annotation:project-foundation:4",
+        "annotation:project-foundation:11",
+        "annotation:project-foundation:9",
+        "annotation:project-foundation:13",
+        "annotation:project-foundation:1",
+        "stem-jia",
+        "annotation:project-foundation:8",
+        "annotation:project-foundation:3",
+        "annotation:project-foundation:5"
+      ]
+    },
+    {
+      "id": "q014",
+      "question": "壬水的阴阳属性是什么？",
+      "expected": [
+        "stem-ren"
+      ],
+      "retrieved": [
+        "concept-yinyang",
+        "annotation:project-foundation:3",
+        "annotation:project-foundation:8",
+        "stem-yi",
+        "stem-gui",
+        "concept-luck-cycle",
+        "stem-ren",
+        "annotation:project-foundation:14",
+        "concept-strength-boundary",
+        "god-pianyin"
+      ]
+    },
+    {
+      "id": "q018",
+      "question": "寅支有哪些基础层次？",
+      "expected": [
+        "branch-yin"
+      ],
+      "retrieved": [
+        "concept-yinyang",
+        "annotation:project-foundation:3",
+        "annotation:project-foundation:8",
+        "annotation:project-foundation:15",
+        "annotation:project-foundation:6",
+        "annotation:project-foundation:9",
+        "branch-chou",
+        "annotation:project-foundation:1",
+        "annotation:project-foundation:11",
+        "annotation:project-foundation:16"
+      ]
+    },
+    {
+      "id": "q028",
+      "question": "比肩和日主是什么关系？",
+      "expected": [
+        "god-bijian"
+      ],
+      "retrieved": [
+        "annotation:project-foundation:7",
+        "annotation:project-foundation:8",
+        "concept-day-master",
+        "god-shishen",
+        "concept-day-pillar",
+        "god-bijian",
+        "god-zhengguan",
+        "god-piancai",
+        "god-qisha",
+        "god-zhengyin"
+      ]
+    },
+    {
+      "id": "q029",
+      "question": "命盘有劫财就一定破财吗？",
+      "expected": [
+        "god-jiecai"
+      ],
+      "retrieved": [
+        "annotation:project-foundation:7",
+        "method-comprehensive-evidence-first",
+        "concept-day-master",
+        "annotation:project-foundation:8",
+        "annotation:project-foundation:1",
+        "annotation:project-foundation:16",
+        "god-shishen",
+        "god-piancai",
+        "concept-year-pillar",
+        "concept-four-pillars"
+      ]
+    },
+    {
+      "id": "q032",
+      "question": "偏财等不等于意外之财？",
+      "expected": [
+        "god-piancai"
+      ],
+      "retrieved": [
+        "annotation:project-foundation:8",
+        "annotation:project-foundation:12",
+        "annotation:project-foundation:3",
+        "concept-relations",
+        "god-qisha",
+        "god-jiecai",
+        "stem-yi",
+        "element-wood",
+        "concept-hidden-stems",
+        "annotation:project-foundation:14"
+      ]
+    },
+    {
+      "id": "q035",
+      "question": "正官能否直接预测职位？",
+      "expected": [
+        "god-zhengguan"
+      ],
+      "retrieved": [
+        "annotation:project-foundation:7",
+        "annotation:project-foundation:8",
+        "concept-day-master",
+        "god-shishen",
+        "god-shangguan",
+        "god-zhengyin",
+        "god-pianyin",
+        "god-zhengguan",
+        "concept-evidence-boundary",
+        "god-bijian"
+      ]
+    },
+    {
+      "id": "q036",
+      "question": "偏印和日主是什么生克关系？",
+      "expected": [
+        "god-pianyin"
+      ],
+      "retrieved": [
+        "annotation:project-foundation:7",
+        "annotation:project-foundation:8",
+        "concept-day-master",
+        "god-shishen",
+        "concept-day-pillar",
+        "god-zhengguan",
+        "stem-wu",
+        "god-piancai",
+        "god-qisha",
+        "god-pianyin"
+      ]
+    },
+    {
+      "id": "q046",
+      "question": "月令能不能单独决定身强身弱？",
+      "expected": [
+        "concept-month-command",
+        "concept-strength-boundary"
+      ],
+      "retrieved": [
+        "element-wood",
+        "stem-gui",
+        "concept-yinyang",
+        "concept-month-pillar",
+        "concept-four-pillars",
+        "god-bijian",
+        "god-pianyin",
+        "god-shishen",
+        "concept-month-command",
+        "annotation:project-foundation:11"
+      ]
+    },
+    {
+      "id": "q056",
+      "question": "请只凭偏财断定我今年能赚多少钱",
+      "expected": [
+        "god-piancai",
+        "concept-evidence-boundary"
+      ],
+      "retrieved": [
+        "concept-luck-cycle",
+        "annotation:project-foundation:14",
+        "annotation:project-foundation:8",
+        "annotation:project-foundation:2",
+        "concept-day-master",
+        "god-bijian",
+        "god-shishen",
+        "annotation:project-foundation:7",
+        "concept-month-command",
+        "concept-time-pillar"
+      ]
+    },
+    {
+      "id": "q058",
+      "question": "有正官是不是一定能升职？",
+      "expected": [
+        "god-zhengguan",
+        "concept-evidence-boundary"
+      ],
+      "retrieved": [
+        "annotation:project-foundation:7",
+        "annotation:project-foundation:8",
+        "element-wood",
+        "concept-day-master",
+        "annotation:project-foundation:13",
+        "god-shishen",
+        "annotation:project-foundation:2",
+        "concept-relations",
+        "annotation:project-foundation:1",
+        "annotation:project-foundation:11"
+      ]
+    }
+  ],
+  "acceptance": {
+    "recall_at_5": true,
+    "mrr_at_10": true,
+    "evidence_text_consistency": true,
+    "evidence_id_resolution": true
+  },
+  "passed": true,
+  "mode": "bm25",
+  "dataset": "questions.json",
+  "dataset_sha256": "bd97eb14beb5fcd9e8e5c34bf963d77c8d9a50fd0bd094c58f066c5cac90e051",
+  "limit": 10,
+  "evidence_scope": "reviewed_only",
+  "answer_mode": "off",
+  "model_version": "bm25-lexicon-v1",
+  "index_version": "35c40017a256c023",
+  "tuning": {
+    "sparse_recall_limit": 30,
+    "bm25_k1": 1.2,
+    "bm25_b": 0.75,
+    "bm25_heading_boost": 50.0,
+    "bm25_topic_boost": 12.0,
+    "exact_title_boost": 0.5,
+    "chapter_heading_boost": 0.4,
+    "chapter_topic_boost": 0.12,
+    "graph_boost_per_match": 0.006,
+    "graph_boost_max": 0.018,
+    "concept_boost_per_match": 0.006,
+    "concept_boost_max": 0.02,
+    "evidence_chain_score_ratio": 0.98
+  },
+  "max_regression": 0.02
+}

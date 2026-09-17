@@ -34,6 +34,7 @@ jobs:
           --limit 10
           --answer-mode off
           --require-acceptance
+          --baseline evals/baselines/questions.bm25.json
           --output evaluation-report.json
       - name: Upload evaluation report
         if: always()
