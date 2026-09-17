@@ -313,3 +313,100 @@ async def test_process_crash_releases_lock_and_preserves_job_recovery(tmp_path: 
         await asyncio.to_thread(process.communicate, timeout=5)
         await service.close()
         database.close()
+
+
+SECRET_QUESTION = "我的命盘在 2049 年是否会暴富"
+SECRET_ANSWER = "这是只应出现在任务详情里的答案正文"
+EVENT_JOB_FIELDS = {
+    "id",
+    "task_id",
+    "topic_id",
+    "status",
+    "progress",
+    "error",
+    "assistant_message_id",
+    "attempt_count",
+    "recovery_count",
+    "created_at",
+    "started_at",
+    "finished_at",
+    "updated_at",
+}
+
+
+class SecretGenerator:
+    async def generate_direct(self, *_: object, **__: object) -> GenerationResult:
+        return GenerationResult(answer=SECRET_ANSWER, uncertainties=[], followups=[])
+
+
+def test_event_payload_drops_question_and_answer_body() -> None:
+    """广播载荷只保留驱动刷新的标识与状态，问题与答案正文一律不出现。"""
+    job = {
+        "id": "job-1",
+        "task_id": "task-1",
+        "question": SECRET_QUESTION,
+        "topic_id": "topic:wealth",
+        "status": "succeeded",
+        "progress": "分析完成",
+        "error": "",
+        "assistant_message_id": "message-1",
+        "attempt_count": 1,
+        "recovery_count": 0,
+        "created_at": "2026-09-17T00:00:00Z",
+        "started_at": None,
+        "finished_at": "2026-09-17T00:00:01Z",
+        "updated_at": "2026-09-17T00:00:01Z",
+    }
+
+    event = TaskService._event("succeeded", job)
+
+    assert event["type"] == "succeeded"
+    assert event["task_id"] == "task-1"
+    assert set(event["job"]) == EVENT_JOB_FIELDS
+    assert event["job"]["assistant_message_id"] == "message-1"
+    assert SECRET_QUESTION not in json.dumps(event, ensure_ascii=False)
+
+
+@pytest.mark.asyncio
+async def test_event_stream_payload_carries_no_question_or_answer_body(tmp_path: Path) -> None:
+    database = SQLiteDatabase(tmp_path / "app.db")
+    chat = ChatService(
+        generator=SecretGenerator(),  # type: ignore[arg-type]
+        conversations=ConversationRepository(database),
+        traces=TraceRepository(database),
+        charts=ChartCalculator(),
+    )
+    service = build_service(database, chat)
+    queue = service.events.subscribe()
+    task = add_task(service.repository)
+    try:
+        await service.start()
+        await service.enqueue(str(task["id"]), SECRET_QUESTION)
+        events: list[dict[str, object]] = []
+        while True:
+            event = await asyncio.wait_for(queue.get(), timeout=5)
+            events.append(event)
+            if event["type"] in {"succeeded", "failed"}:
+                break
+
+        # 工作线程可能在 enqueue 自身的 queued 事件之前就认领任务，因此只断言集合。
+        types = [event["type"] for event in events]
+        assert set(types) <= {"queued", "running", "progress", "succeeded", "failed", "cancelled"}
+        assert "queued" in types
+        assert events[-1]["type"] == "succeeded"
+        for event in events:
+            serialized = json.dumps(event, ensure_ascii=False)
+            assert SECRET_QUESTION not in serialized
+            assert SECRET_ANSWER not in serialized
+            assert "response" not in event
+            assert set(event["job"]) == EVENT_JOB_FIELDS  # type: ignore[arg-type]
+
+        final_job = events[-1]["job"]
+        assert final_job["status"] == "succeeded"  # type: ignore[index]
+        assert final_job["assistant_message_id"]  # type: ignore[index]
+        # 正文仍在任务详情里，前端刷新后可读到。
+        assert SECRET_ANSWER in json.dumps(service.detail(str(task["id"])), ensure_ascii=False)
+    finally:
+        service.events.unsubscribe(queue)
+        await service.close()
+        database.close()

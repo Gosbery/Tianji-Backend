@@ -27,6 +27,9 @@ src/bazi_api/
 
 每个模块只创建实际需要的层：HTTP 放在 `router.py`，接口数据放在 `schemas.py`，数据读写放在 `repository.py`，业务流程放在 `service.py`。排盘和检索不是 CRUD，因此没有人为添加空的 repository。
 
+话题事实里的流年表按**立春**换年，与排盘的节气口径一致：每一行标注该流年的起算日，
+例如 `2026-02-04 立春起：丙午`；立春之前仍属上一年，因此 2026-01-20 的当前流年是乙巳。
+
 ## 知识库角色与直接解读
 
 主回答不经过检索：`charts/` 先做确定性排盘并计算话题事实，`conversations/` 把这些结构化事实连同用户问题一起交给 LLM，由模型直接生成解读。知识库因此退为**按需查典核验通道**——只有用户明确要求核对某个术语、条文或原文出处时，才用 bm25 在 `knowledge/` 语料中检索并返回证据，供人核对，不参与主回答的生成路径。
@@ -38,23 +41,29 @@ src/bazi_api/
 ```bash
 uv sync --extra dev
 cp .env.example .env
-# Set APP_ACCESS_KEY in .env before starting (see below).
 uv run uvicorn bazi_api.main:app --app-dir src --host 127.0.0.1 --port 8000
 ```
 
-API 文档：[http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+## 访问控制与暴露面
 
-## 访问控制
+**本工作台没有访问控制，也没有任何凭证。** 因此它**必须只绑回环地址**
+（`--host 127.0.0.1`），不要绑 `0.0.0.0`，不要做端口转发，不要暴露到公网或局域网。
+任何能连上 8000 端口的人都可以读写全部任务、会话与反馈数据。
+需要跨机访问时，请自行在前面加一层带认证的反向代理或 SSH 隧道，而不是改绑定地址。
 
-当前应用是单用户工作台。前后端必须配置相同的 `APP_ACCESS_KEY`，至少 32 个字符。
-使用 `python -c "import secrets; print(secrets.token_urlsafe(32))"` 生成随机口令，分别填入
-后端 `.env` 和前端 `.env.local`；不要使用 `NEXT_PUBLIC_` 前缀或将口令提交到版本库。
-浏览器首次访问时以用户名 `bazi` 和该口令登录。更换口令后需要重启前后端。
+既然没有凭证可挡，暴露面按“默认不可见”收敛：
 
-所有 HTTP 接口都要求认证，包括任务、会话、事件流、健康检查、API 文档和旧版入口。
-浏览器使用 HTTP Basic；程序调用也可通过 `X-Bazi-Access-Key` 请求头传入口令。
-缺少配置时返回 `503`，缺少或错误凭证返回 `401`，不会自动开放本机或代理来源。
-公网部署必须使用 HTTPS。共享口令意味着共享同一工作台，不提供多人账号之间的数据隔离。
+- 交互式文档、ReDoc 与 OpenAPI schema 全部关闭：`/docs`、`/redoc`、`/openapi.json`
+  一律返回 `404`，不向未授权方公开接口清单。
+- 旧版 `/api/*` 兼容镜像默认关闭（`LEGACY_API_ENABLED=false`），返回 `404`；
+  迁移旧客户端时才临时打开，打开后这些路由会带回 `Deprecation` 与 `Sunset` 响应头。
+- `/api/v1/observability/*` 自带独立 key：未配置 `OBSERVABILITY_API_KEY` 时端点整体
+  返回 `404`；已配置时，缺少或错误的 `Authorization: Bearer <key>` 返回 `401`。
+  观测轨迹包含用户问题与完整证据，不要和主接口一起开放。
+- 其余 `/api/v1/*`（任务、会话、排盘、反馈、查典）**在无凭证下即可访问**，这是有意为之，
+  不是配置遗漏。
+
+前端同样只监听回环地址（`next dev --hostname 127.0.0.1`）。
 
 ## 模型配置
 
@@ -80,8 +89,7 @@ ANTHROPIC_CHAT_MODEL=claude-sonnet-4-6
 
 检索轨迹包含用户问题与完整证据，默认不开放。需要查看时设置
 `OBSERVABILITY_API_KEY`，并以 `Authorization: Bearer <key>` 访问
-`/api/v1/observability/*`。观测接口还需要应用访问口令，可同时发送 `X-Bazi-Access-Key`
-和观测专用的 `Authorization: Bearer <key>`。会话 ID 只由服务端签发。
+`/api/v1/observability/*`。会话 ID 只由服务端签发。
 
 同一 SQLite 数据库只允许一个后端服务进程；该进程内可并发处理多个生成任务。
 应用在恢复任务前取得操作系统文件锁，第二个进程会明确拒绝启动。关闭或进程退出后释放锁，
@@ -118,8 +126,6 @@ uv run python -m pytest -q
 PYTHONPATH=src uv run python -m bazi_api.cli.evaluate --mode bm25 --limit 10
 PYTHONPATH=src uv run python -m bazi_api.cli.evaluate --mode bm25 --limit 10 \
   --dataset ziping-zhenquan.json --scope personal_preview
-PYTHONPATH=src uv run python -m bazi_api.cli.evaluate_policy \
-  --dataset policy-adversarial.json --require-perfect
 PYTHONPATH=src uv run python -m bazi_api.cli.export_feedback_candidates \
   --database data/app.db --output evals/candidates/feedback.json
 ```
@@ -166,12 +172,12 @@ CI 和 `make eval` 用 `--baseline evals/baselines/questions.bm25.json` 与 `--m
 基线绑定 `dataset_sha256`、`cases`、`limit`、`answer_mode`、`model_version`、`index_version`
 和检索参数，任一项不一致即拒绝比较，所以语料或配置变更必须先重新生成候选报告并人工确认。
 
-### 策略评测的口径
+### 已删除的“策略评测门”
 
-`evaluate_policy` 的“策略分类”在改造前后都只是一个常量（改造前返回 `"evidence_answer"`，
-现在返回 `"direct_answer"`），没有真正的分类器。因此这个门**只校验数据集形状**
-（必填字段、`expected_policy` 的合法取值、数据集非空），其 `policy_accuracy_rate` 恒为 `1.0`，
-**不衡量任何策略分类准确率**。它保留下来是为了防止数据集被写成不可用的形状，不能当作模型能力的证据。
+主流程只剩 direct 一条通道后，问题策略恒为 `direct_answer`，此前的 `evaluate_policy` 只是把
+常量和自己比较，命中率恒为 `1.0`，**不衡量任何模型能力**。这个恒真的门已从 CLI、`make eval`
+和数据集（`evals/policy-adversarial.json`）中删除，不要再把它当作质量证据。
+`cli/evaluate.py` 的 `_load_cases` 仍会校验数据集里的 `expected_policy` 字段，数据集本身未改动。
 
 负反馈导出只生成 `pending_human_review` 候选，不会自动加入固定题库或在线修改模型。
 
@@ -191,10 +197,9 @@ CI 和 `make eval` 用 `--baseline evals/baselines/questions.bm25.json` 与 `--m
 - `POST /api/v1/feedback`
 - `GET /api/v1/observability/recent`
 
-兼容用的 `/api/*` 路由会返回 `Deprecation` 和 `Sunset` 响应头；客户端迁移完成后可设置
-`LEGACY_API_ENABLED=false` 关闭。跨域请求仅允许 `GET`、`POST` 以及应用实际使用的请求头。
-
-原有 `/api/*` 地址暂时作为隐藏的兼容入口保留，新代码统一使用 `/api/v1/*`。
+兼容用的 `/api/*` 镜像**默认关闭**（`LEGACY_API_ENABLED=false`），关闭时一律 `404`。
+只有在迁移旧客户端时才临时设为 `true`；打开后这些路由会返回 `Deprecation` 和 `Sunset`
+响应头。新代码统一使用 `/api/v1/*`。跨域请求仅允许 `GET`、`POST` 以及应用实际使用的请求头。
 
 当前版本允许回答各类命理预测问题；回答仍区分程序事实、知识依据与命理推演。
 会话绑定命盘指纹、流派和证据范围；上下文不一致时返回

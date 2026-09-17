@@ -11,24 +11,19 @@ from bazi_api.integrations.llm import GenerationResult
 from bazi_api.main import create_app
 
 BACKEND_ROOT = Path(__file__).resolve().parents[2]
-ACCESS_KEY = "test-application-access-key-32-characters"
 
 
 def test_health_and_chart_routes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     settings = Settings(
-        app_access_key=ACCESS_KEY,
         knowledge_path=BACKEND_ROOT / "knowledge",
         database_path=tmp_path / "app.db",
         observability_api_key="test-observability-key",
         llm_provider="openai",
         openai_api_key="",
+        legacy_api_enabled=True,
     )
 
-    with TestClient(
-        create_app(settings),
-        raise_server_exceptions=False,
-        headers={"X-Bazi-Access-Key": ACCESS_KEY},
-    ) as client:
+    with TestClient(create_app(settings), raise_server_exceptions=False) as client:
         direct_calls: list[object] = []
 
         async def fake_generate_direct(
@@ -266,14 +261,13 @@ def test_health_and_chart_routes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 
 def test_health_reports_anthropic_configuration(tmp_path: Path) -> None:
     settings = Settings(
-        app_access_key=ACCESS_KEY,
         knowledge_path=BACKEND_ROOT / "knowledge",
         database_path=tmp_path / "app.db",
         llm_provider="anthropic",
         anthropic_auth_token="configured-secret",
     )
 
-    with TestClient(create_app(settings), headers={"X-Bazi-Access-Key": ACCESS_KEY}) as client:
+    with TestClient(create_app(settings)) as client:
         response = client.get("/api/v1/health")
 
     assert response.status_code == 200

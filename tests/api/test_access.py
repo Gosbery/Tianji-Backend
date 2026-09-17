@@ -1,4 +1,10 @@
-import base64
+"""访问边界测试。
+
+访问控制中间件已按用户决定移除，本文件不再断言 401/503/403 之类的认证行为，
+只固定移除之后仍然成立的边界：文档端点关闭、legacy 镜像默认关闭、
+观测端点自带独立 key、v1 端点在无凭证下可达（这是有意为之）。
+"""
+
 from pathlib import Path
 
 import pytest
@@ -7,144 +13,95 @@ from fastapi.testclient import TestClient
 from bazi_api.core.config import Settings
 from bazi_api.main import create_app
 
-ACCESS_KEY = "test-application-access-key-32-characters"
+
+def _settings(tmp_path: Path, **overrides: object) -> Settings:
+    return Settings(
+        _env_file=None,
+        database_path=tmp_path / "app.db",
+        openai_api_key="",
+        **overrides,  # type: ignore[arg-type]
+    )
 
 
 @pytest.fixture
 def client(tmp_path: Path):
-    settings = Settings(
-        _env_file=None,
-        app_access_key=ACCESS_KEY,
-        database_path=tmp_path / "app.db",
-        openai_api_key="",
-    )
-    with TestClient(create_app(settings)) as client:
+    with TestClient(create_app(_settings(tmp_path))) as client:
         yield client
 
 
-def test_private_endpoints_reject_anonymous_access_before_reading_or_writing(client) -> None:
-    headers = {"X-Bazi-Access-Key": ACCESS_KEY}
+@pytest.mark.parametrize("path", ["/docs", "/redoc", "/openapi.json"])
+def test_documentation_endpoints_are_disabled(client, path: str) -> None:
+    response = client.get(path)
+    assert response.status_code == 404
+
+
+@pytest.mark.parametrize(
+    ("method", "path"),
+    [
+        ("GET", "/api/health"),
+        ("GET", "/api/tasks"),
+        ("POST", "/api/chart"),
+        ("POST", "/api/feedback"),
+    ],
+)
+def test_legacy_api_mirror_is_disabled_by_default(client, method: str, path: str) -> None:
+    response = client.request(method, path, json={} if method == "POST" else None)
+    assert response.status_code == 404, (method, path, response.text)
+    assert "Deprecation" not in response.headers
+    assert "Sunset" not in response.headers
+
+
+def test_legacy_api_mirror_can_be_enabled_explicitly(tmp_path: Path) -> None:
+    with TestClient(create_app(_settings(tmp_path, legacy_api_enabled=True))) as client:
+        response = client.get("/api/health")
+    assert response.status_code == 200
+    assert response.headers["Deprecation"] == "true"
+    assert response.headers["Link"] == '</api/v1/health>; rel="successor-version"'
+    assert response.headers["Cache-Control"] == "private, no-store"
+
+
+def test_observability_needs_its_own_key_and_is_hidden_without_one(tmp_path: Path) -> None:
+    # 未配置 OBSERVABILITY_API_KEY 时端点整体不可见。
+    with TestClient(create_app(_settings(tmp_path))) as client:
+        assert client.get("/api/v1/observability/recent").status_code == 404
+
+    configured = _settings(tmp_path, observability_api_key="test-observability-key")
+    with TestClient(create_app(configured)) as client:
+        assert client.get("/api/v1/observability/recent").status_code == 401
+        authorized = client.get(
+            "/api/v1/observability/recent",
+            headers={"Authorization": "Bearer test-observability-key"},
+        )
+        assert authorized.status_code == 200
+        assert authorized.json() == []
+
+
+def test_v1_endpoints_are_reachable_without_credentials(client) -> None:
+    """访问控制被有意移除：v1 端点不再要求凭证，边界靠回环绑定与网络隔离维持。"""
     created = client.post(
         "/api/v1/tasks",
-        headers=headers,
         json={"birth": {"date": "1990-01-01", "time": "12:00:00", "name": "private-name"}},
     )
     assert created.status_code == 201
     task_id = created.json()["id"]
-    for prefix in ("/api/v1", "/api"):
-        for method, path in (
-            ("GET", "/tasks"),
-            ("GET", f"/tasks/{task_id}"),
-            ("GET", "/tasks/events"),
-            ("GET", f"/conversations/{task_id}"),
-            ("POST", "/tasks"),
-            ("PATCH", f"/tasks/{task_id}"),
-            ("POST", f"/tasks/{task_id}/archive"),
-            ("POST", f"/tasks/{task_id}/restore"),
-            ("POST", f"/tasks/{task_id}/messages"),
-            ("POST", f"/tasks/{task_id}/jobs/job/cancel"),
-            ("POST", f"/tasks/{task_id}/jobs/job/retry"),
-            ("POST", "/chat"),
-            ("POST", "/chat/stream"),
-            ("POST", "/feedback"),
-            ("GET", "/observability/recent"),
-        ):
-            response = client.request(method, prefix + path)
-            assert response.status_code == 401, (method, path, response.text)
-            assert "private-name" not in response.text
-            assert response.headers["WWW-Authenticate"].startswith("Basic ")
-            assert "no-store" in response.headers["Cache-Control"]
 
-    detail = client.get(f"/api/v1/tasks/{task_id}", headers=headers)
-    assert detail.status_code == 200
-    assert detail.headers["Cache-Control"] == "private, no-store"
-    assert detail.json()["archived"] is False
+    for method, path in (
+        ("GET", "/api/v1/health"),
+        ("GET", "/api/v1/tasks"),
+        ("GET", f"/api/v1/tasks/{task_id}"),
+        ("POST", f"/api/v1/tasks/{task_id}/archive"),
+        ("POST", "/api/v1/chart"),
+    ):
+        payload = {"date": "1990-01-01", "time": "12:00:00"} if method == "POST" else None
+        response = client.request(method, path, json=payload)
+        assert response.status_code in {200, 201, 204}, (method, path, response.text)
+        assert "no-store" in response.headers["Cache-Control"]
+
+    detail = client.get(f"/api/v1/tasks/{task_id}")
+    assert detail.json()["archived"] is True
     assert detail.json()["messages"] == []
-    assert client.get("/api/v1/tasks", auth=("bazi", ACCESS_KEY)).status_code == 200
-    assert client.get("/api/v1/tasks", auth=("other", ACCESS_KEY)).status_code == 401
-    assert client.get("/api/v1/tasks", headers={"X-Bazi-Access-Key": "wrong"}).status_code == 401
-    assert (
-        client.get(
-            "/api/v1/tasks", auth=("bazi", ACCESS_KEY), headers={"X-Bazi-Access-Key": "wrong"}
-        ).status_code
-        == 401
-    )
 
 
-@pytest.mark.parametrize("path", ["/api/v1/tasks", "/api/tasks", "/docs", "/openapi.json"])
-def test_unconfigured_application_fails_closed(path: str) -> None:
-    client = TestClient(create_app(Settings(_env_file=None, app_access_key="")))
-    response = client.get(path, auth=("bazi", ACCESS_KEY))
-    assert response.status_code == 503
-    assert response.json()["code"] == "access_unconfigured"
-
-
-@pytest.mark.parametrize(
-    "authorization",
-    [
-        "Basic not-base64!",
-        "Basic /w==",
-        "Bearer token",
-        "Basic",
-        "",
-        "Basic " + base64.b64encode(b"bazi").decode(),
-    ],
-)
-def test_malformed_credentials_are_rejected(authorization: str) -> None:
-    client = TestClient(create_app(Settings(_env_file=None, app_access_key=ACCESS_KEY)))
-    response = client.get("/api/v1/tasks", headers={"Authorization": authorization})
-    assert response.status_code == 401
-
-
-def test_duplicate_credentials_are_rejected() -> None:
-    client = TestClient(create_app(Settings(_env_file=None, app_access_key=ACCESS_KEY)))
-    response = client.get(
-        "/api/v1/tasks",
-        headers=[("X-Bazi-Access-Key", ACCESS_KEY), ("X-Bazi-Access-Key", "wrong")],
-    )
-    assert response.status_code == 401
-
-
-def test_cors_preflight_does_not_require_or_grant_access() -> None:
-    client = TestClient(create_app(Settings(_env_file=None, app_access_key=ACCESS_KEY)))
-    headers = {
-        "Origin": "http://localhost:3000",
-        "Access-Control-Request-Method": "GET",
-        "Access-Control-Request-Headers": "x-bazi-access-key",
-    }
-    assert client.options("/api/v1/tasks", headers=headers).status_code == 200
-    assert client.get("/api/v1/tasks", headers={"Origin": headers["Origin"]}).status_code == 401
-
-
-def test_access_key_must_be_strong_and_is_not_in_settings_repr() -> None:
-    with pytest.raises(ValueError, match="至少"):
-        Settings(_env_file=None, app_access_key="weak")
-    assert ACCESS_KEY not in repr(Settings(_env_file=None, app_access_key=ACCESS_KEY))
-
-
-@pytest.mark.parametrize(
-    "headers",
-    [
-        {"Origin": "https://untrusted.example"},
-        {"Origin": "null"},
-        {"Sec-Fetch-Site": "cross-site"},
-        {"Origin": "http://localhost:3000", "Sec-Fetch-Site": "cross-site"},
-    ],
-)
-def test_authenticated_cross_site_writes_are_rejected(headers: dict[str, str]) -> None:
-    client = TestClient(create_app(Settings(_env_file=None, app_access_key=ACCESS_KEY)))
-    for path in ("/api/v1/tasks/task/archive", "/api/tasks/task/jobs/job/cancel"):
-        response = client.post(path, headers=headers, auth=("bazi", ACCESS_KEY))
-        assert response.status_code == 403
-        assert response.json()["code"] == "cross_site_request"
-
-
-def test_browser_same_origin_and_trusted_frontend_writes_are_allowed(client) -> None:
-    for origin in ("http://testserver", "http://localhost:3000"):
-        response = client.post(
-            "/api/v1/chart",
-            headers={"Origin": origin, "Sec-Fetch-Site": "same-origin"},
-            auth=("bazi", ACCESS_KEY),
-            json={"date": "1990-01-01", "time": "12:00:00"},
-        )
-        assert response.status_code == 200
+def test_application_settings_no_longer_expose_an_access_key() -> None:
+    """APP_ACCESS_KEY 已随访问控制一起移除，配置项不应再存在。"""
+    assert "app_access_key" not in Settings.model_fields

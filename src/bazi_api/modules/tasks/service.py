@@ -20,6 +20,25 @@ from .repository import TaskRepository
 
 logger = logging.getLogger(__name__)
 
+# SSE 广播给所有订阅者，因此只下发驱动前端刷新的标识与状态，
+# 不含问题正文（job.question）或答案正文（succeeded 事件的 response）。
+# 前端收到事件后重新 GET /tasks/{id} 拉取正文。
+EVENT_JOB_FIELDS = (
+    "id",
+    "task_id",
+    "topic_id",
+    "status",
+    "progress",
+    "error",
+    "assistant_message_id",
+    "attempt_count",
+    "recovery_count",
+    "created_at",
+    "started_at",
+    "finished_at",
+    "updated_at",
+)
+
 
 class TaskEventHub:
     def __init__(self) -> None:
@@ -207,16 +226,16 @@ class TaskService:
         def complete(connection: sqlite3.Connection, message_id: str) -> None:
             self.repository.complete_in_transaction(connection, job["id"], message_id)
 
-        response = await self.chat.answer_for_job(request, progress, complete)
+        # 答案正文由 chat.answer_for_job 落库，不再随事件下发：
+        # succeeded 事件只提示前端重新拉取任务详情。
+        await self.chat.answer_for_job(request, progress, complete)
         completed = await run_sync(self.repository.get_job, job["id"])
-        await self.events.publish(
-            {**self._event("succeeded", completed), "response": response.model_dump(mode="json")}
-        )
+        await self.events.publish(self._event("succeeded", completed))
 
     @staticmethod
     def _event(event_type: str, job: dict[str, Any]) -> dict[str, object]:
         return {
             "type": event_type,
             "task_id": job["task_id"],
-            "job": job,
+            "job": {key: job[key] for key in EVENT_JOB_FIELDS},
         }

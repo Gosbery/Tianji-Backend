@@ -4,7 +4,9 @@
 """
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import date
+
+from lunar_python import Solar
 
 from .schemas import ChartFacts, PillarFacts, TopicFactPack
 from .service import CONTROLS, STEM_META, ChartCalculator
@@ -12,7 +14,7 @@ from .service import CONTROLS, STEM_META, ChartCalculator
 HEAVENLY_STEMS = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"]
 EARTHLY_BRANCHES = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"]
 ELEMENT_ORDER = ["木", "火", "土", "金", "水"]
-# 1984 年为甲子年，作为六十甲子锚点。
+# 1984 年立春起为甲子年，作为六十甲子锚点。
 JIAZI_ANCHOR_YEAR = 1984
 
 # 天乙贵人（日干 → 地支，按“甲戊庚牛羊…”常用口诀）。
@@ -49,13 +51,30 @@ TIAN_DE: dict[str, str] = {
 
 
 def annual_ganzhi(year: int) -> str:
+    """`year` 是立春年：立春当日起算，而非公历 1 月 1 日。"""
     offset = (year - JIAZI_ANCHOR_YEAR) % 60
     return HEAVENLY_STEMS[offset % 10] + EARTHLY_BRANCHES[offset % 12]
 
 
-def annual_pillars(start_year: int, years: int = 10) -> list[dict[str, int | str]]:
+def lichun_date(year: int) -> date:
+    """返回公历年 `year` 的立春日期（节气瞬时所在的那一天）。"""
+    solar = Solar.fromYmd(year, 2, 4).getLunar().getJieQiTable()["立春"]
+    if solar.getYear() != year:
+        # 2 月 4 日当天落在邻年节气窗口时，改用年中的锚点日期重新取值。
+        solar = Solar.fromYmd(year, 6, 1).getLunar().getJieQiTable()["立春"]
+    return date(solar.getYear(), solar.getMonth(), solar.getDay())
+
+
+def current_annual_year(today: date | None = None) -> int:
+    """当前流年：以立春为界，立春之前仍算上一年（立春当天即换年）。"""
+    day = today or date.today()
+    return day.year if day >= lichun_date(day.year) else day.year - 1
+
+
+def annual_pillars(start_year: int, years: int = 10) -> list[dict[str, int | str | date]]:
+    """每行给出该流年的立春年、干支与起算日（立春当天）。"""
     return [
-        {"year": year, "ganzhi": annual_ganzhi(year)}
+        {"year": year, "ganzhi": annual_ganzhi(year), "lichun": lichun_date(year)}
         for year in range(start_year, start_year + years)
     ]
 
@@ -172,12 +191,13 @@ def _found_positions(chart: ChartFacts, stem_or_branch: str) -> str:
     return "、".join(hits)
 
 
-def _annual_line(current_year: int) -> str:
-    pillars = annual_pillars(current_year, 10)
-    table = "、".join(f"{item['year']}{item['ganzhi']}" for item in pillars)
+def _annual_line(annual_year: int) -> str:
+    """`annual_year` 是立春年；表中每行标注该流年的起算日（立春）。"""
+    pillars = annual_pillars(annual_year, 10)
+    table = "、".join(f"{item['lichun']:%Y-%m-%d} 立春起：{item['ganzhi']}" for item in pillars)
     return (
-        f"流年（{current_year}—{current_year + 9}）干支依次为：{table}。"
-        "流年由六十甲子推算，属程序计算事实。"
+        f"流年（{annual_year} 立春—{annual_year + 9} 立春）干支依次为：{table}。"
+        "流年按立春换年，与排盘的节气口径一致；由六十甲子推算，属程序计算事实。"
     )
 
 
@@ -253,13 +273,16 @@ def _luck_lines(chart: ChartFacts) -> list[str]:
 
 
 def build_topic_fact_pack(
-    chart: ChartFacts, topic_id: str, *, current_year: int | None = None
+    chart: ChartFacts, topic_id: str, *, today: date | None = None
 ) -> TopicFactPack | None:
-    """按话题汇总确定性事实（查表与计数陈述），未知话题返回 None。"""
+    """按话题汇总确定性事实（查表与计数陈述），未知话题返回 None。
+
+    `today` 决定“当前流年”，按立春换年（默认取本机当天）。
+    """
     label = TOPIC_LABELS.get(topic_id)
     if label is None:
         return None
-    year = current_year or datetime.now().year
+    year = current_annual_year(today)
     facts: list[str] = []
 
     if topic_id == "topic:wealth":

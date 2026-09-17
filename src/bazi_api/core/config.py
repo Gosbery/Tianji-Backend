@@ -18,7 +18,6 @@ class Settings(BaseSettings):
 
     app_name: str = "命盘显微镜 API"
     environment: str = "development"
-    app_access_key: str = Field(default="", repr=False, max_length=512)
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
     llm_provider: Literal["openai", "anthropic"] = "openai"
     openai_api_key: str = ""
@@ -63,7 +62,7 @@ class Settings(BaseSettings):
     feedback_client_rate_limit_per_minute: int = Field(default=30, ge=1, le=10_000)
     internal_proxy_secret: str = ""
     trusted_proxy_cidrs: list[str] = Field(default_factory=list)
-    legacy_api_enabled: bool = True
+    legacy_api_enabled: bool = False
     legacy_api_sunset: str = "Thu, 01 Oct 2026 00:00:00 GMT"
 
     @field_validator("cors_origins", "trusted_proxy_cidrs", mode="before")
@@ -71,13 +70,6 @@ class Settings(BaseSettings):
     def parse_origins(cls, value: object) -> object:
         if isinstance(value, str):
             return [item.strip() for item in value.split(",") if item.strip()]
-        return value
-
-    @field_validator("app_access_key")
-    @classmethod
-    def validate_access_key(cls, value: str) -> str:
-        if value and len(value.strip()) < 32:
-            raise ValueError("APP_ACCESS_KEY 至少需要 32 个字符")
         return value
 
     @model_validator(mode="after")

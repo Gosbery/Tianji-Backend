@@ -5,7 +5,9 @@ from bazi_api.modules.charts.service import ChartCalculator
 from bazi_api.modules.charts.topic_facts import (
     annual_ganzhi,
     annual_pillars,
+    current_annual_year,
     element_distribution,
+    lichun_date,
     peach_blossom_branches,
     tian_de_target,
     tian_yi_branches,
@@ -32,6 +34,33 @@ def test_annual_pillars_covers_requested_window() -> None:
     assert [item["year"] for item in pillars] == list(range(2026, 2036))
     assert pillars[0]["ganzhi"] == "丙午"
     assert pillars[9]["ganzhi"] == "乙卯"  # 2035：offset 51 → 乙卯
+    # 每一行标注该流年的起算日：立春当天。
+    assert [item["lichun"] for item in pillars] == [
+        date(2026, 2, 4),
+        date(2027, 2, 4),
+        date(2028, 2, 4),
+        date(2029, 2, 3),
+        date(2030, 2, 4),
+        date(2031, 2, 4),
+        date(2032, 2, 4),
+        date(2033, 2, 3),
+        date(2034, 2, 4),
+        date(2035, 2, 4),
+    ]
+
+
+def test_lichun_dates_follow_the_solar_terms_table() -> None:
+    assert lichun_date(2025) == date(2025, 2, 3)
+    assert lichun_date(2026) == date(2026, 2, 4)
+    assert lichun_date(2033) == date(2033, 2, 3)
+
+
+def test_current_annual_year_switches_at_lichun() -> None:
+    assert current_annual_year(date(2026, 1, 20)) == 2025
+    assert current_annual_year(date(2026, 2, 3)) == 2025
+    assert current_annual_year(date(2026, 2, 4)) == 2026
+    assert current_annual_year(date(2026, 6, 1)) == 2026
+    assert current_annual_year(date(2026, 12, 31)) == 2026
 
 
 def test_element_distribution_counts_stems_and_hidden_stems() -> None:
@@ -59,7 +88,7 @@ def test_spirit_star_lookup_tables() -> None:
 def test_wealth_pack_reports_star_positions_and_counts() -> None:
     from bazi_api.modules.charts.topic_facts import build_topic_fact_pack
 
-    pack = build_topic_fact_pack(chart(), "topic:wealth", current_year=2026)
+    pack = build_topic_fact_pack(chart(), "topic:wealth", today=date(2026, 6, 1))
 
     assert pack is not None
     assert pack.topic_id == "topic:wealth"
@@ -73,7 +102,7 @@ def test_wealth_pack_reports_star_positions_and_counts() -> None:
 def test_career_pack_reports_officer_and_seal_stars() -> None:
     from bazi_api.modules.charts.topic_facts import build_topic_fact_pack
 
-    pack = build_topic_fact_pack(chart(), "topic:career", current_year=2026)
+    pack = build_topic_fact_pack(chart(), "topic:career", today=date(2026, 6, 1))
 
     joined = "\n".join(pack.facts)
     assert "正官（癸水）藏于月支子" in joined
@@ -84,7 +113,7 @@ def test_career_pack_reports_officer_and_seal_stars() -> None:
 def test_relationship_pack_reports_spouse_palace_by_gender() -> None:
     from bazi_api.modules.charts.topic_facts import build_topic_fact_pack
 
-    pack = build_topic_fact_pack(chart(), "topic:relationships", current_year=2026)
+    pack = build_topic_fact_pack(chart(), "topic:relationships", today=date(2026, 6, 1))
 
     joined = "\n".join(pack.facts)
     assert "配偶宫为日支寅（藏干甲、丙、戊）" in joined
@@ -95,7 +124,7 @@ def test_relationship_pack_reports_spouse_palace_by_gender() -> None:
 def test_social_pack_reports_spirit_stars_with_disclaimer() -> None:
     from bazi_api.modules.charts.topic_facts import build_topic_fact_pack
 
-    pack = build_topic_fact_pack(chart(), "topic:social", current_year=2026)
+    pack = build_topic_fact_pack(chart(), "topic:social", today=date(2026, 6, 1))
 
     joined = "\n".join(pack.facts)
     assert "天乙贵人（日干丙起）在亥、酉，四柱未见" in joined
@@ -107,7 +136,7 @@ def test_social_pack_reports_spirit_stars_with_disclaimer() -> None:
 def test_family_pack_reports_seal_and_peer_stars_without_day_exposure() -> None:
     from bazi_api.modules.charts.topic_facts import build_topic_fact_pack
 
-    pack = build_topic_fact_pack(chart(), "topic:family", current_year=2026)
+    pack = build_topic_fact_pack(chart(), "topic:family", today=date(2026, 6, 1))
 
     assert pack is not None
     assert pack.topic_id == "topic:family"
@@ -126,7 +155,7 @@ def test_family_pack_reports_seal_and_peer_stars_without_day_exposure() -> None:
 def test_study_pack_reports_seal_stars_and_wenchang() -> None:
     from bazi_api.modules.charts.topic_facts import build_topic_fact_pack
 
-    pack = build_topic_fact_pack(chart(), "topic:study", current_year=2026)
+    pack = build_topic_fact_pack(chart(), "topic:study", today=date(2026, 6, 1))
 
     assert pack is not None
     assert pack.topic_id == "topic:study"
@@ -141,7 +170,7 @@ def test_study_pack_reports_seal_stars_and_wenchang() -> None:
 def test_health_pack_reports_element_distribution() -> None:
     from bazi_api.modules.charts.topic_facts import build_topic_fact_pack
 
-    pack = build_topic_fact_pack(chart(), "topic:health", current_year=2026)
+    pack = build_topic_fact_pack(chart(), "topic:health", today=date(2026, 6, 1))
 
     joined = "\n".join(pack.facts)
     assert "火 5 处" in joined
@@ -151,12 +180,38 @@ def test_health_pack_reports_element_distribution() -> None:
 def test_luck_timing_pack_reports_cycles_and_annual_pillars() -> None:
     from bazi_api.modules.charts.topic_facts import build_topic_fact_pack
 
-    pack = build_topic_fact_pack(chart(), "topic:luck-timing", current_year=2026)
+    pack = build_topic_fact_pack(chart(), "topic:luck-timing", today=date(2026, 6, 1))
 
     joined = "\n".join(pack.facts)
     assert "起运" in joined
-    assert "流年（2026—2035）" in joined
-    assert "丙午" in joined
+    assert "流年（2026 立春—2035 立春）" in joined
+    assert "2026-02-04 立春起：丙午" in joined
+    assert "2026-02-04 立春起：丙午、2027-02-04 立春起：丁未" in joined
+    assert "流年按立春换年" in joined
+
+
+def test_annual_line_before_lichun_still_belongs_to_previous_year() -> None:
+    from bazi_api.modules.charts.topic_facts import build_topic_fact_pack
+
+    pack = build_topic_fact_pack(chart(), "topic:luck-timing", today=date(2026, 1, 20))
+
+    assert pack is not None
+    joined = "\n".join(pack.facts)
+    # 2026-01-20 在立春之前，当前流年仍是乙巳（2025 立春年）。
+    assert "流年（2025 立春—2034 立春）" in joined
+    assert "2025-02-03 立春起：乙巳" in joined
+
+
+def test_annual_line_after_lichun_uses_the_current_year() -> None:
+    from bazi_api.modules.charts.topic_facts import build_topic_fact_pack
+
+    pack = build_topic_fact_pack(chart(), "topic:luck-timing", today=date(2026, 6, 1))
+
+    assert pack is not None
+    joined = "\n".join(pack.facts)
+    # 2026-06-01 在立春之后，当前流年为丙午（2026 立春年）。
+    assert "流年（2026 立春—2035 立春）" in joined
+    assert "2026-02-04 立春起：丙午" in joined
 
 
 def test_unknown_topic_returns_none() -> None:

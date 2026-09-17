@@ -56,10 +56,15 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         finally:
             await container.close()
 
+    # 本工作台没有访问控制，因此关闭交互式文档、ReDoc 与 OpenAPI schema，
+    # 不对外暴露接口清单。参见 README「访问控制与暴露面」。
     app = FastAPI(
         title=app_settings.app_name,
         version=_package_version(),
         lifespan=lifespan,
+        docs_url=None,
+        redoc_url=None,
+        openapi_url=None,
     )
 
     @app.exception_handler(BaziApiError)
@@ -157,7 +162,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 if response.headers.get("content-type", "").startswith("text/event-stream")
                 else "private, no-store"
             )
-            if _is_legacy_path(request.url.path):
+            if app_settings.legacy_api_enabled and _is_legacy_path(request.url.path):
                 response.headers["Deprecation"] = "true"
                 if app_settings.legacy_api_sunset:
                     response.headers["Sunset"] = app_settings.legacy_api_sunset
