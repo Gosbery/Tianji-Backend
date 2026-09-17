@@ -233,6 +233,24 @@ class AnswerGenerator:
                 max_retries=self.max_retries,
                 operation=f"llm:{self.model}:direct",
             )
+            if self.provider == "openai" and response.status_code in {400, 422}:
+                logger.warning(
+                    "llm_response_format_fallback",
+                    extra={"provider": self.model, "status_code": response.status_code},
+                )
+                request_payload.pop("response_format", None)
+                response = await post_with_retries(
+                    self.http_client,
+                    endpoint,
+                    headers={
+                        "Authorization": f"Bearer {self.api_key}",
+                        "Idempotency-Key": str(uuid.uuid4()),
+                    },
+                    payload=request_payload,
+                    timeout=self.timeout,
+                    max_retries=self.max_retries,
+                    operation=f"llm:{self.model}:direct:compatibility-fallback",
+                )
             response.raise_for_status()
         except httpx.HTTPError as exc:
             logger.warning(
