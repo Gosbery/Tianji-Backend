@@ -12,8 +12,12 @@ import httpx
 from pydantic import BaseModel, ConfigDict, StrictBool, ValidationError
 
 from bazi_api.core.config import Settings
-from bazi_api.core.errors import InvalidUpstreamResponseError, UpstreamServiceError
-from bazi_api.modules.charts.schemas import ChartFacts
+from bazi_api.core.errors import (
+    InvalidUpstreamResponseError,
+    ServiceUnavailableError,
+    UpstreamServiceError,
+)
+from bazi_api.modules.charts.schemas import ChartFacts, TopicFactPack
 from bazi_api.modules.retrieval.schemas import RetrievalHit
 
 from .http import post_with_retries
@@ -135,6 +139,177 @@ class AnswerGenerator:
         fallback = self._safe_fallback(question_policy, "model_output_failed_validation")
         fallback.token_usage = token_usage or None
         return fallback
+
+    async def generate_direct(
+        self,
+        question: str,
+        chart: ChartFacts,
+        topic_pack: TopicFactPack | None,
+        *,
+        school: str = "基础共识",
+        history: list[dict[str, str]] | None = None,
+        expert_context: str = "",
+    ) -> GenerationResult:
+        if not self.api_key:
+            raise ServiceUnavailableError(
+                "未配置模型 Key，无法直接解读；请在后端 .env 配置 OPENAI_API_KEY"
+                " 或 ANTHROPIC_AUTH_TOKEN"
+            )
+        repair_reason = ""
+        token_usage = 0
+        for _attempt in range(2):
+            generated = await self._generate_direct_once(
+                question,
+                chart,
+                topic_pack,
+                school=school,
+                history=history or [],
+                expert_context=expert_context,
+                repair_reason=repair_reason,
+            )
+            generated.model_version = self.model
+            generated.prompt_version = "direct-v1"
+            token_usage += generated.token_usage or 0
+            if self._direct_output_is_trusted(generated):
+                generated.token_usage = token_usage or None
+                return generated
+            repair_reason = self._direct_failure_reason(generated)
+            logger.warning(
+                "llm_direct_repair", extra={"provider": self.model, "error_code": repair_reason}
+            )
+        fallback = GenerationResult(
+            answer="本次直接解读未通过内容校验，暂不作具体判断，请重试。",
+            uncertainties=["答案未通过安全与完整性校验。"],
+            followups=[],
+            token_usage=token_usage or None,
+            degradation_reason="direct_validation_failed",
+            model_version=self.model,
+            prompt_version="direct-v1",
+        )
+        return fallback
+
+    async def _generate_direct_once(
+        self,
+        question: str,
+        chart: ChartFacts,
+        topic_pack: TopicFactPack | None,
+        *,
+        school: str,
+        history: list[dict[str, str]],
+        expert_context: str,
+        repair_reason: str,
+    ) -> GenerationResult:
+        system = self._direct_system_prompt(school, topic_pack, expert_context)
+        topic_context = (
+            json.dumps(
+                {
+                    "话题": topic_pack.label,
+                    "程序计算事实": topic_pack.facts,
+                },
+                ensure_ascii=False,
+            )
+            if topic_pack
+            else "无（自由提问，未选择话题）"
+        )
+        repair = (
+            f"\n\n上一次输出未通过校验（{repair_reason}）。请重新完整回答，不能复述上次草稿。"
+            if repair_reason
+            else ""
+        )
+        user = (
+            f"命盘：\n{self._chart_context(chart)}\n\n话题事实：\n{topic_context}\n\n"
+            f"近期对话：\n{self._history_context(history) or '无'}\n\n"
+            f"用户问题：{question}{repair}"
+        )
+        request_payload, headers, endpoint = self._model_request(system, user)
+        logger.info("llm_direct_request_started", extra={"provider": self.model})
+        try:
+            response = await post_with_retries(
+                self.http_client,
+                endpoint,
+                headers=headers,
+                payload=request_payload,
+                timeout=self.timeout,
+                max_retries=self.max_retries,
+                operation=f"llm:{self.model}:direct",
+            )
+            response.raise_for_status()
+        except httpx.HTTPError as exc:
+            logger.warning(
+                "llm_request_failed",
+                extra={"provider": self.model, "status_code": _response_status(exc)},
+            )
+            raise UpstreamServiceError() from exc
+        payload = self._response_payload(response)
+        content = self._response_content(payload, self.provider)
+        parsed = self._parse_model_json(content)
+        generated = GenerationResult(
+            answer=str(parsed.get("answer") or ""),
+            uncertainties=self._string_list(parsed.get("uncertainties")),
+            followups=self._string_list(parsed.get("followups")),
+            token_usage=self._token_usage(payload.get("usage")),
+        )
+        generated.answer = _humanize_internal_labels(generated.answer)
+        generated.uncertainties = [
+            _humanize_internal_labels(item) for item in generated.uncertainties
+        ]
+        return generated
+
+    @staticmethod
+    def _direct_output_is_trusted(generated: GenerationResult) -> bool:
+        if not generated.answer.strip():
+            return False
+        if not any(item.strip() for item in generated.uncertainties):
+            return False
+        return not _explicit_safety_violation(generated)
+
+    @staticmethod
+    def _direct_failure_reason(generated: GenerationResult) -> str:
+        if not generated.answer.strip():
+            return "empty_answer"
+        if not any(item.strip() for item in generated.uncertainties):
+            return "missing_uncertainty"
+        return "unsafe_output"
+
+    @staticmethod
+    def _direct_system_prompt(
+        school: str, topic_pack: TopicFactPack | None, expert_context: str = ""
+    ) -> str:
+        topic_line = (
+            f"本次用户选择了「{topic_pack.label}」话题，回答须优先围绕该话题展开。"
+            if topic_pack
+            else "用户未选择固定话题，按问题本身解读。"
+        )
+        prompt = (
+            f"你是采用“{school}”范围的命理解读助手。"
+            "命盘数据中的四柱、月令、透干、根气、大运、流年干支由程序计算，直接采信，不要自行另排。"
+            f"{topic_line}"
+            "话题事实是程序按话题补算的确定性事实（十神位置、干支计数、神煞查表），照实陈述；"
+            "干支计数只是数量对比，不代表身强身弱结论，身强身弱由你结合月令与整体结构判断。"
+            "用户一次询问多个方面、比较对象或时间段时，逐项回应；某项信息不足时在答案或不确定性中点名说明。"
+            "分析步骤不得展示给用户；answer 只保留用户需要的结论、具体表现、时间趋势和建议。"
+            "answer 必须使用清晰的 Markdown 排版：每个主要部分用“## 标题”单独成行；每段最多三句话；"
+            "并列判断和建议使用“- ”或“1. ”列表且每项单独成行；标题、段落和列表之间留一个空行。"
+            "回答必须使用自然中文，不得输出 JSON 字段名或内部枚举值。"
+            "birth 中的 date、time、timezone、gender 均为用户已经提供的输入，不得再次声称缺少"
+            "出生日期、出生时间或性别。"
+            "luck 是程序计算的大运事实；用户询问当前或下一大运时直接使用，"
+            "不得把第一步大运误称为下一步大运。出生地未采集，除非用户主动要求真太阳时校正，"
+            "不得将出生地作为回答前提。"
+            "允许讨论财富、婚姻、感情、健康、事业、考试、诉讼和具体事件，不得只因题材敏感而拒绝回答，"
+            "但必须遵守以下边界：过往只作回溯验证，先列命局条件与对应岁运，再说明与实际事件是否吻合；"
+            "未来只给条件式趋势、时间窗口和不确定性，不得承诺具体年份必然发财、升职、结婚、离婚或发生灾祸。"
+            "健康内容只能说明传统文献观点与生活习惯层面的提醒，不得诊断疾病、预测寿命或死亡时间、"
+            "安排手术、建议治疗用药或停药；用户提到现实症状时应建议咨询有资质的医生。"
+            "古籍中的身份、性别、婚姻和疾病断语要标明历史语境，不得直接复述为现实结论。"
+            "引用传统典籍观点时可以写书名（如《滴天髓》《子平真诠》），"
+            "但不得编造具体篇章、条文编号或原文引文。"
+            "流年表为程序计算的干支，用于时间趋势时结合大运与命局条件说明，不得断言某年必然发生某事。"
+            "只返回 JSON，字段为 answer、uncertainties、followups。"
+        )
+        if expert_context:
+            prompt += f"\n\n专家方法约束：\n{expert_context}"
+        return prompt
 
     async def _verify_generation(
         self,
