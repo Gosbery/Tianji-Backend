@@ -115,7 +115,9 @@ async def send_task_message(
     payload: TaskMessageCreate,
     container: ApplicationContainer = Depends(get_container),
 ) -> GenerationJob:
-    return GenerationJob.model_validate(await container.tasks.enqueue(task_id, payload.question))
+    return GenerationJob.model_validate(
+        await container.tasks.enqueue(task_id, payload.question, payload.topic_id)
+    )
 
 
 @router.post("/tasks/{task_id}/jobs/{job_id}/cancel", response_model=GenerationJob)

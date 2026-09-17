@@ -10,7 +10,7 @@ from bazi_api.modules.conversations.schemas import ConversationMessage
 from bazi_api.modules.knowledge.schemas import EvidenceScope
 
 JobStatus = Literal["queued", "running", "succeeded", "failed", "cancelled"]
-RetrievalMode = Literal["dense", "hybrid", "hybrid_rerank", "lightrag"]
+RetrievalMode = Literal["direct"]
 
 
 class TaskCreate(BaseModel):
@@ -18,7 +18,7 @@ class TaskCreate(BaseModel):
     birth: BirthInput
     expert_id: str = "liang-xiangrun"
     evidence_scope: EvidenceScope = "personal_preview"
-    mode: RetrievalMode = "hybrid_rerank"
+    mode: RetrievalMode = "direct"
 
 
 class TaskRename(BaseModel):
@@ -29,12 +29,14 @@ class TaskRename(BaseModel):
 class TaskMessageCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
     question: str = Field(min_length=2, max_length=1000)
+    topic_id: str | None = None
 
 
 class GenerationJob(BaseModel):
     id: str
     task_id: str
     question: str
+    topic_id: str | None = None
     status: JobStatus
     progress: str = ""
     error: str = ""

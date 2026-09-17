@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from collections.abc import Awaitable, Callable
 from datetime import date, time
 from pathlib import Path
 from types import SimpleNamespace
@@ -33,8 +32,14 @@ class FakeGenerator:
     def __init__(self) -> None:
         self.calls = []
 
-    async def generate(self, *_: object, **kwargs: object) -> GenerationResult:
-        self.calls.append(kwargs)
+    async def generate_direct(
+        self,
+        question: object,
+        _chart: object,
+        _topic_pack: object,
+        **kwargs: object,
+    ) -> GenerationResult:
+        self.calls.append({"question": question, **kwargs})
         return GenerationResult(
             answer="测试回答",
             uncertainties=["测试不确定性"],
@@ -42,24 +47,12 @@ class FakeGenerator:
             token_usage=12,
         )
 
-    async def generate_stream(
-        self,
-        _question: object,
-        _chart: object,
-        _hits: object,
-        on_chunk: Callable[[str], Awaitable[None]],
-        **kwargs: object,
-    ) -> GenerationResult:
-        result = await self.generate(**kwargs)
-        await on_chunk(result.answer)
-        return result
-
 
 def chat_request() -> ChatRequest:
     chart = ChartCalculator().calculate(
         BirthInput(date=date(1990, 1, 1), time=time(12, 0), name="测试")
     )
-    return ChatRequest(chart=chart, question="如何理解日主？", mode="hybrid")
+    return ChatRequest(chart=chart, question="如何理解日主？")
 
 
 def build_service(database: SQLiteDatabase) -> tuple[ChatService, TraceRepository]:
@@ -115,7 +108,7 @@ async def test_chat_stream_emits_chunks_and_terminal_response(tmp_path: Path) ->
         assert "".join(chunks) == "测试回答"
         progress = [event["message"] for event in events if event["type"] == "progress"]
         assert progress[0] == "正在核验命盘信息"
-        assert "已检索到 0 条相关依据" in str(progress[2])
+        assert progress[1] == "命盘信息已核验，正在生成解读"
         assert progress[-1] == "分析完成"
     finally:
         database.close()
@@ -190,7 +183,7 @@ def test_repository_binds_context_and_restores_ordered_history(tmp_path: Path) -
                     "evidence": [],
                     "uncertainties": ["仍需核对"],
                     "followups": [],
-                    "mode": "hybrid",
+                    "mode": "direct",
                     "latency_ms": 1,
                     "policy_decision": "allow",
                     "citations_validated": True,
@@ -211,7 +204,7 @@ def test_repository_binds_context_and_restores_ordered_history(tmp_path: Path) -
                     "evidence": [],
                     "uncertainties": ["仍需核对"],
                     "followups": [],
-                    "mode": "hybrid",
+                    "mode": "direct",
                     "latency_ms": 1,
                     "policy_decision": "allow",
                     "citations_validated": True,

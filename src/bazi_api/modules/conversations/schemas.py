@@ -39,7 +39,8 @@ class ChatRequest(BaseModel):
     session_id: UUID4 | None = None
     expert_id: str = "comprehensive"
     school: str = "基础共识"
-    mode: Literal["dense", "hybrid", "hybrid_rerank", "lightrag"] = "hybrid_rerank"
+    mode: Literal["direct"] = "direct"
+    topic_id: str | None = None
     evidence_scope: Literal["reviewed_only", "personal_preview"] = "reviewed_only"
 
 

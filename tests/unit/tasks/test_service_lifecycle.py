@@ -100,7 +100,7 @@ def add_task(repository: TaskRepository) -> dict[str, object]:
         chart=ChartCalculator().calculate(birth),
         expert=expert,
         evidence_scope="reviewed_only",
-        mode="hybrid",
+        mode="direct",
     )
 
 
@@ -228,7 +228,7 @@ class EmptyRetrieval:
 
 
 class FixedGenerator:
-    async def generate(self, *_: object, **__: object) -> GenerationResult:
+    async def generate_direct(self, *_: object, **__: object) -> GenerationResult:
         return GenerationResult(answer="Test answer", uncertainties=[], followups=[])
 
 

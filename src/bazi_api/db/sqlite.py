@@ -110,6 +110,7 @@ class SQLiteDatabase:
                     id TEXT PRIMARY KEY,
                     task_id TEXT NOT NULL,
                     question TEXT NOT NULL,
+                    topic_id TEXT NOT NULL DEFAULT '',
                     status TEXT NOT NULL,
                     progress TEXT NOT NULL DEFAULT '',
                     error TEXT NOT NULL DEFAULT '',
@@ -161,6 +162,13 @@ class SQLiteDatabase:
             if "turn_index" not in message_columns:
                 self.connection.execute(
                     "ALTER TABLE messages ADD COLUMN turn_index INTEGER NOT NULL DEFAULT 0"
+                )
+            job_columns = {
+                row[1] for row in self.connection.execute("PRAGMA table_info(generation_jobs)")
+            }
+            if "topic_id" not in job_columns:
+                self.connection.execute(
+                    "ALTER TABLE generation_jobs ADD COLUMN topic_id TEXT NOT NULL DEFAULT ''"
                 )
             rate_event_columns = {
                 row[1]

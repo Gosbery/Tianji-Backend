@@ -200,3 +200,57 @@ def test_interrupted_feedback_migration_is_resumed_idempotently(tmp_path: Path) 
         assert feedback_index_owner == "feedback"
     finally:
         reopened.close()
+
+
+def test_generation_jobs_gains_topic_id_column_on_legacy_database(tmp_path: Path) -> None:
+    path = tmp_path / "legacy.db"
+    with sqlite3.connect(path) as connection:
+        connection.execute(
+            """
+            CREATE TABLE generation_jobs (
+                id TEXT PRIMARY KEY,
+                task_id TEXT NOT NULL,
+                question TEXT NOT NULL,
+                status TEXT NOT NULL,
+                progress TEXT NOT NULL DEFAULT '',
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL
+            );
+            """
+        )
+        connection.execute(
+            """
+            INSERT INTO generation_jobs(id, task_id, question, status, created_at, updated_at)
+            VALUES ('job-1', 'task-1', '存量问题', 'queued', 'now', 'now');
+            """
+        )
+
+    database = SQLiteDatabase(path)
+    try:
+        with database.read() as connection:
+            columns = {
+                row[1] for row in connection.execute("PRAGMA table_info(generation_jobs)")
+            }
+            legacy_job = connection.execute(
+                "SELECT topic_id FROM generation_jobs WHERE id = 'job-1'"
+            ).fetchone()
+        with database.transaction() as connection:
+            connection.execute(
+                """
+                INSERT INTO generation_jobs(id, task_id, question, topic_id, status,
+                    created_at, updated_at)
+                VALUES ('job-2', 'task-2', '新问题', 'topic:wealth', 'queued', 'now', 'now')
+                """
+            )
+
+        assert "topic_id" in columns
+        assert legacy_job["topic_id"] == ""
+        with database.read() as connection:
+            assert (
+                connection.execute(
+                    "SELECT topic_id FROM generation_jobs WHERE id = 'job-2'"
+                ).fetchone()["topic_id"]
+                == "topic:wealth"
+            )
+    finally:
+        database.close()

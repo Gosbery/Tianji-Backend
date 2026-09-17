@@ -38,7 +38,7 @@ def create_task(repository: TaskRepository) -> dict[str, object]:
         chart=ChartCalculator().calculate(birth),
         expert=expert(),
         evidence_scope="personal_preview",
-        mode="hybrid_rerank",
+        mode="direct",
     )
 
 
@@ -124,4 +124,16 @@ async def test_three_jobs_run_and_fourth_remains_queued(tmp_path: Path) -> None:
         assert chat.maximum == 3
     finally:
         await service.close()
+        database.close()
+
+
+def test_enqueue_stores_topic_id(tmp_path: Path) -> None:
+    database = SQLiteDatabase(tmp_path / "jobs.db")
+    try:
+        repository = TaskRepository(database)
+        task = create_task(repository)
+        job = repository.enqueue(str(task["id"]), "看下财运", "topic:wealth")
+
+        assert job["topic_id"] == "topic:wealth"
+    finally:
         database.close()

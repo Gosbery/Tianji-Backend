@@ -124,8 +124,10 @@ class TaskService:
         history = self.conversations.history(task_id)
         return {**task, "messages": history["messages"]}
 
-    async def enqueue(self, task_id: str, question: str) -> dict[str, Any]:
-        job = await run_sync(self.repository.enqueue, task_id, question)
+    async def enqueue(
+        self, task_id: str, question: str, topic_id: str | None = None
+    ) -> dict[str, Any]:
+        job = await run_sync(self.repository.enqueue, task_id, question, topic_id)
         await self.events.publish(self._event("queued", job))
         self._wake.set()
         return job
@@ -193,6 +195,7 @@ class TaskService:
             expert_id=task["expert_id"],
             school=task["school"],
             mode=task["mode"],
+            topic_id=job.get("topic_id") or None,
             evidence_scope=task["evidence_scope"],
         )
 

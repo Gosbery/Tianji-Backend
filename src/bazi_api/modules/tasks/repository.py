@@ -102,7 +102,7 @@ class TaskRepository:
                 raise TaskNotFoundError()
         return self.get(task_id)
 
-    def enqueue(self, task_id: str, question: str) -> dict[str, Any]:
+    def enqueue(self, task_id: str, question: str, topic_id: str | None = None) -> dict[str, Any]:
         job_id = str(uuid.uuid4())
         now = _now()
         try:
@@ -115,10 +115,10 @@ class TaskRepository:
                 connection.execute(
                     """
                     INSERT INTO generation_jobs(
-                        id, task_id, question, status, progress, created_at, updated_at
-                    ) VALUES (?, ?, ?, 'queued', '等待生成', ?, ?)
+                        id, task_id, question, topic_id, status, progress, created_at, updated_at
+                    ) VALUES (?, ?, ?, ?, 'queued', '等待生成', ?, ?)
                     """,
-                    (job_id, task_id, question, now, now),
+                    (job_id, task_id, question, topic_id or "", now, now),
                 )
                 connection.execute(
                     "UPDATE tasks SET updated_at = ? WHERE id = ?", (now, task_id)
@@ -323,7 +323,7 @@ class TaskRepository:
         return {
             key: row[key]
             for key in (
-                "id", "task_id", "question", "status", "progress", "error",
+                "id", "task_id", "question", "topic_id", "status", "progress", "error",
                 "assistant_message_id", "attempt_count", "recovery_count", "created_at",
                 "started_at", "finished_at", "updated_at",
             )

@@ -5,6 +5,7 @@ from fastapi.testclient import TestClient
 
 from bazi_api.core.config import Settings
 from bazi_api.integrations.embeddings import SentenceTransformerEmbeddingProvider
+from bazi_api.integrations.llm import GenerationResult
 from bazi_api.main import create_app
 
 
@@ -35,6 +36,12 @@ def test_empty_local_cache_starts_without_loading_embedding_model(
     with TestClient(
         create_app(settings), headers={"X-Bazi-Access-Key": settings.app_access_key}
     ) as client:
+        async def fake_generate_direct(*_: object, **__: object) -> GenerationResult:
+            return GenerationResult(answer="测试回答", uncertainties=[], followups=[])
+
+        monkeypatch.setattr(
+            client.app.state.container.chat.generator, "generate_direct", fake_generate_direct
+        )
         health = client.get("/api/v1/health")
         assert health.status_code == 200
         data = health.json()
@@ -49,7 +56,7 @@ def test_empty_local_cache_starts_without_loading_embedding_model(
             json={
                 "chart": chart.json(),
                 "question": "如何理解日主？",
-                "mode": "hybrid",
+                "mode": "direct",
             },
         )
         assert answer.status_code == 200

@@ -7,6 +7,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from bazi_api.core.config import Settings
+from bazi_api.integrations.llm import GenerationResult
 from bazi_api.main import create_app
 
 BACKEND_ROOT = Path(__file__).resolve().parents[2]
@@ -33,6 +34,21 @@ def test_health_and_chart_routes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
         raise_server_exceptions=False,
         headers={"X-Bazi-Access-Key": ACCESS_KEY},
     ) as client:
+        direct_calls: list[object] = []
+
+        async def fake_generate_direct(
+            question: str, chart: object, topic_pack: object, **_: object
+        ) -> GenerationResult:
+            direct_calls.append(topic_pack)
+            return GenerationResult(
+                answer="## 结论\n\n直接解读测试回答",
+                uncertainties=["仍需核对"],
+                followups=["继续追问"],
+            )
+
+        monkeypatch.setattr(
+            client.app.state.container.chat.generator, "generate_direct", fake_generate_direct
+        )
         health = client.get("/api/v1/health", headers={"X-Request-ID": "api-route-test-request"})
         legacy_health = client.get("/api/health")
         allowed_preflight = client.options(
@@ -77,7 +93,7 @@ def test_health_and_chart_routes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
             json={
                 "chart": chart.json(),
                 "question": "《子平真诠》如何讨论月令用神？",
-                "mode": "hybrid",
+                "mode": "direct",
             },
         )
         preview_chat = client.post(
@@ -85,7 +101,8 @@ def test_health_and_chart_routes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
             json={
                 "chart": chart.json(),
                 "question": "《子平真诠》如何讨论月令用神？",
-                "mode": "hybrid",
+                "mode": "direct",
+                "topic_id": "topic:wealth",
                 "evidence_scope": "personal_preview",
                 "school": "子平格局法",
             },
@@ -96,7 +113,7 @@ def test_health_and_chart_routes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
                 "chart": chart.json(),
                 "question": "如何理解日主？",
                 "session_id": str(uuid.uuid4()),
-                "mode": "hybrid",
+                "mode": "direct",
             },
         )
         invalid_session_chat = client.post(
@@ -105,7 +122,7 @@ def test_health_and_chart_routes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
                 "chart": chart.json(),
                 "question": "如何理解日主？",
                 "session_id": "client-chosen-session",
-                "mode": "hybrid",
+                "mode": "direct",
             },
         )
         mismatched_session_chat = client.post(
@@ -115,7 +132,7 @@ def test_health_and_chart_routes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
                 "question": "继续解释",
                 "session_id": preview_chat.json()["session_id"],
                 "school": "基础共识",
-                "mode": "hybrid",
+                "mode": "direct",
                 "evidence_scope": "personal_preview",
             },
         )
@@ -206,13 +223,15 @@ def test_health_and_chart_routes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
     assert reviewed_chat.status_code == 200
     uuid.UUID(reviewed_chat.json()["session_id"])
     uuid.UUID(reviewed_chat.json()["message_id"])
-    assert not any(
-        item["review_status"] == "machine_verified" for item in reviewed_chat.json()["evidence"]
-    )
+    # direct 模式 evidence 只含命盘事实，且不再区分检索证据的审核范围
+    assert reviewed_chat.json()["mode"] == "direct"
+    assert {item["kind"] for item in reviewed_chat.json()["evidence"]} == {"chart_fact"}
+    assert reviewed_chat.json()["answer"].startswith("## 结论")
     assert preview_chat.status_code == 200
-    assert any(
-        item["review_status"] == "machine_verified" for item in preview_chat.json()["evidence"]
-    )
+    assert preview_chat.json()["mode"] == "direct"
+    assert {item["kind"] for item in preview_chat.json()["evidence"]} == {"chart_fact"}
+    # 话题卡片选择的话题 id 一路贯通到生成调用
+    assert [pack.topic_id for pack in direct_calls if pack is not None] == ["topic:wealth"]
     assert history.status_code == 200
     assert [item["role"] for item in history.json()["messages"]] == ["user", "assistant"]
     assert history.json()["messages"][-1]["response"]["message_id"] == preview_chat.json()[

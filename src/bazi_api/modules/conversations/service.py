@@ -12,7 +12,9 @@ from contextlib import suppress
 from bazi_api.core.async_utils import run_sync
 from bazi_api.core.errors import ExpertNotFoundError
 from bazi_api.integrations.llm import AnswerGenerator, GenerationResult
+from bazi_api.modules.charts.schemas import ChartFacts
 from bazi_api.modules.charts.service import ChartCalculator
+from bazi_api.modules.charts.topic_facts import build_topic_fact_pack
 from bazi_api.modules.experts.repository import ExpertRepository
 from bazi_api.modules.knowledge.schemas import KnowledgeTopic
 from bazi_api.modules.observability.repository import TraceRepository
@@ -84,8 +86,6 @@ class ChatService:
             if is_new_session
             else await run_sync(self.conversations.recent_context, session_id, 4)
         )
-        if on_progress is not None:
-            await on_progress("命盘信息已核验，正在检索相关资料")
         try:
             expert = self.experts.get(request.expert_id) if self.experts else None
         except KeyError as exc:
@@ -97,6 +97,65 @@ class ChatService:
         )
         allowed_schools = expert.allowed_schools if expert else None
         expert_context = self.experts.prompt_context(expert) if self.experts and expert else ""
+        if request.mode == "direct":
+            topic_pack = (
+                build_topic_fact_pack(chart, request.topic_id) if request.topic_id else None
+            )
+            if on_progress is not None:
+                await on_progress(
+                    "话题事实已计算，正在生成解读" if topic_pack else "命盘信息已核验，正在生成解读"
+                )
+            generated = await self.generator.generate_direct(
+                request.question,
+                chart,
+                topic_pack,
+                school=effective_school,
+                history=self._generation_history(history),
+                expert_context=expert_context,
+            )
+            if on_answer_chunk is not None:
+                await on_answer_chunk(generated.answer)
+            if on_progress is not None:
+                await on_progress("回答已生成，正在保存本次分析")
+            evidence = self._chart_evidence(chart)
+            latency_ms = int((time.perf_counter() - started) * 1000)
+            uncertainties = list(dict.fromkeys([*chart.uncertainties, *generated.uncertainties]))
+            message_id = await run_sync(
+                self._persist_answer,
+                session_id,
+                is_new_session,
+                request,
+                generated.answer,
+                evidence,
+                uncertainties,
+                [],
+                latency_ms,
+                generated,
+                chart_fingerprint,
+                on_persist,
+            )
+            logger.info(
+                "chat_answer_persisted",
+                extra={"duration_ms": latency_ms, "hits": 0, "mode": "direct"},
+            )
+            if on_progress is not None:
+                await on_progress("分析完成")
+            return ChatResponse(
+                session_id=session_id,
+                message_id=message_id,
+                answer=generated.answer,
+                evidence=evidence,
+                uncertainties=uncertainties,
+                followups=generated.followups,
+                mode="direct",
+                latency_ms=latency_ms,
+                token_usage=generated.token_usage,
+                policy_decision=generated.policy_decision,
+                citations_validated=generated.citations_validated,
+                degradation_reason=generated.degradation_reason,
+            )
+        if on_progress is not None:
+            await on_progress("命盘信息已核验，正在检索相关资料")
         retrieval_started = time.perf_counter()
         hits = await self.retrieval.search(
             query=self._retrieval_query(request.question, history, self.topics),
@@ -161,10 +220,61 @@ class ChatService:
             )
             for hit in hits
         ]
+        evidence.extend(self._chart_evidence(chart))
+        latency_ms = int((time.perf_counter() - started) * 1000)
+        uncertainties = list(
+            dict.fromkeys(
+                [
+                    *chart.uncertainties,
+                    *generated.uncertainties,
+                    *(hit.document.warning for hit in hits if hit.document.warning),
+                ]
+            )
+        )
+        if on_progress is not None:
+            await on_progress("资料整理完成，正在保存本次分析")
+        message_id = await run_sync(
+            self._persist_answer,
+            session_id,
+            is_new_session,
+            request,
+            generated.answer,
+            evidence,
+            uncertainties,
+            hits,
+            latency_ms,
+            generated,
+            chart_fingerprint,
+            on_persist,
+        )
+        logger.info(
+            "chat_answer_persisted",
+            extra={"duration_ms": latency_ms, "hits": len(hits), "mode": request.mode},
+        )
+        if on_progress is not None:
+            await on_progress("分析完成")
+        return ChatResponse(
+            session_id=session_id,
+            message_id=message_id,
+            answer=generated.answer,
+            evidence=evidence,
+            uncertainties=uncertainties,
+            followups=generated.followups,
+            mode=request.mode,
+            latency_ms=latency_ms,
+            token_usage=generated.token_usage,
+            policy_decision=generated.policy_decision,
+            citations_validated=generated.citations_validated,
+            degradation_reason=generated.degradation_reason,
+        )
+
+    @staticmethod
+    def _chart_evidence(chart: ChartFacts) -> list[Evidence]:
+        """三条确定性命盘事实：日主与四柱、月令与结构关系、大运。"""
         pillars = " ".join(
             f"{pillar.label}{pillar.stem}{pillar.branch}" for pillar in chart.pillars
         )
-        evidence.append(
+        evidence = [
             Evidence(
                 id="chart-fact:day-master",
                 kind="chart_fact",
@@ -178,7 +288,7 @@ class ChatService:
                 score=1.0,
                 matched_by=["deterministic-chart"],
             )
-        )
+        ]
         relation_labels = "、".join(item.label for item in chart.structural_relations) or "未检出"
         pattern_labels = "、".join(item.name for item in chart.pattern_candidates) or "未提出"
         day_roots = (
@@ -232,52 +342,7 @@ class ChatService:
                 concepts=["大运", "起运", chart.luck.direction_label],
             )
         )
-        latency_ms = int((time.perf_counter() - started) * 1000)
-        uncertainties = list(
-            dict.fromkeys(
-                [
-                    *chart.uncertainties,
-                    *generated.uncertainties,
-                    *(hit.document.warning for hit in hits if hit.document.warning),
-                ]
-            )
-        )
-        if on_progress is not None:
-            await on_progress("资料整理完成，正在保存本次分析")
-        message_id = await run_sync(
-            self._persist_answer,
-            session_id,
-            is_new_session,
-            request,
-            generated.answer,
-            evidence,
-            uncertainties,
-            hits,
-            latency_ms,
-            generated,
-            chart_fingerprint,
-            on_persist,
-        )
-        logger.info(
-            "chat_answer_persisted",
-            extra={"duration_ms": latency_ms, "hits": len(hits), "mode": request.mode},
-        )
-        if on_progress is not None:
-            await on_progress("分析完成")
-        return ChatResponse(
-            session_id=session_id,
-            message_id=message_id,
-            answer=generated.answer,
-            evidence=evidence,
-            uncertainties=uncertainties,
-            followups=generated.followups,
-            mode=request.mode,
-            latency_ms=latency_ms,
-            token_usage=generated.token_usage,
-            policy_decision=generated.policy_decision,
-            citations_validated=generated.citations_validated,
-            degradation_reason=generated.degradation_reason,
-        )
+        return evidence
 
     async def validate_session_context(self, request: ChatRequest) -> None:
         if request.session_id is None:
@@ -437,6 +502,7 @@ class ChatService:
                     "uncertainties": uncertainties,
                     "followups": generated.followups,
                     "mode": request.mode,
+                    "topic_id": request.topic_id,
                     "latency_ms": latency_ms,
                     "token_usage": generated.token_usage,
                     "policy_decision": generated.policy_decision,
