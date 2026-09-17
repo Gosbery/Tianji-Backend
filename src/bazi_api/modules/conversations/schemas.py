@@ -57,6 +57,17 @@ class ChatResponse(BaseModel):
     policy_decision: str = "allow"
     citations_validated: bool = False
     degradation_reason: str = ""
+    verification: list[Evidence] | None = None
+
+
+class VerificationRequest(BaseModel):
+    focus: str | None = Field(default=None, max_length=2000)
+
+
+class VerificationResponse(BaseModel):
+    message_id: str
+    query: str
+    hits: list[Evidence]
 
 
 class ConversationMessage(BaseModel):

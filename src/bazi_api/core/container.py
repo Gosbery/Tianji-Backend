@@ -12,6 +12,7 @@ from bazi_api.integrations.llm import AnswerGenerator
 from bazi_api.modules.charts.service import ChartCalculator
 from bazi_api.modules.conversations.repository import ConversationRepository
 from bazi_api.modules.conversations.service import ChatService
+from bazi_api.modules.conversations.verification import VerificationService
 from bazi_api.modules.experts.repository import ExpertRepository
 from bazi_api.modules.feedback.repository import FeedbackRepository
 from bazi_api.modules.knowledge.repository import KnowledgeRepository
@@ -40,6 +41,7 @@ class ApplicationContainer:
     experts: ExpertRepository
     task_repository: TaskRepository
     tasks: TaskService
+    verification: VerificationService
 
     async def close(self) -> None:
         try:
@@ -122,6 +124,13 @@ async def build_container(settings: Settings) -> ApplicationContainer:
             chat=chat,
             concurrency=3,
         )
+        verification = VerificationService(
+            retrieval=retrieval,
+            conversations=conversations,
+            traces=traces,
+            tasks=task_repository,
+            topics=knowledge.topics,
+        )
         container = ApplicationContainer(
             settings=settings,
             http_client=http_client,
@@ -136,6 +145,7 @@ async def build_container(settings: Settings) -> ApplicationContainer:
             experts=experts,
             task_repository=task_repository,
             tasks=tasks,
+            verification=verification,
         )
         await tasks.start()
         return container

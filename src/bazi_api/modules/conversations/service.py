@@ -27,6 +27,51 @@ from .schemas import ChatRequest, ChatResponse, Evidence
 logger = logging.getLogger(__name__)
 
 
+def evidence_from_hits(hits: list[RetrievalHit]) -> list[Evidence]:
+    """检索命中到对外证据的统一映射，回答与核验两条通道共用。"""
+    return [
+        Evidence(
+            id=hit.document.id,
+            kind=hit.document.kind,
+            layer=hit.document.layer,
+            title=hit.document.title,
+            quote=hit.document.text,
+            source=hit.document.source,
+            score=round(hit.score, 6),
+            matched_by=hit.matched_by,
+            trace_refs=hit.document.trace_refs,
+            review_status=hit.document.review_status,
+            verification_level=hit.document.verification_level,
+            confidence=hit.document.confidence,
+            warning=hit.document.warning,
+            unresolved_variants=hit.document.unresolved_variants,
+            concepts=hit.document.concepts,
+        )
+        for hit in hits
+    ]
+
+
+def fortune_topic_terms(
+    question: str, topics: list[KnowledgeTopic] | None = None
+) -> list[str]:
+    """命中的话题所提供的检索扩展词；topics 为 None 时按内置目录兜底。"""
+    if topics is None:
+        from pathlib import Path
+
+        import yaml
+
+        from bazi_api.modules.knowledge.schemas import TopicCatalog
+
+        path = Path(__file__).resolve().parents[4] / "knowledge/catalog/young-user-topics.yml"
+        payload = yaml.safe_load(path.read_text(encoding="utf-8")) if path.exists() else {}
+        topics = TopicCatalog.model_validate(payload).topics if payload else []
+    terms: list[str] = []
+    for topic in topics:
+        if any(marker in question for marker in topic.query_terms):
+            terms.extend(topic.retrieval_terms)
+    return list(dict.fromkeys(terms))
+
+
 class ChatService:
     def __init__(
         self,
@@ -200,26 +245,7 @@ class ChatService:
             )
         if on_progress is not None:
             await on_progress("回答已生成，正在整理引用与不确定性")
-        evidence = [
-            Evidence(
-                id=hit.document.id,
-                kind=hit.document.kind,
-                layer=hit.document.layer,
-                title=hit.document.title,
-                quote=hit.document.text,
-                source=hit.document.source,
-                score=round(hit.score, 6),
-                matched_by=hit.matched_by,
-                trace_refs=hit.document.trace_refs,
-                review_status=hit.document.review_status,
-                verification_level=hit.document.verification_level,
-                confidence=hit.document.confidence,
-                warning=hit.document.warning,
-                unresolved_variants=hit.document.unresolved_variants,
-                concepts=hit.document.concepts,
-            )
-            for hit in hits
-        ]
+        evidence = evidence_from_hits(hits)
         evidence.extend(self._chart_evidence(chart))
         latency_ms = int((time.perf_counter() - started) * 1000)
         uncertainties = list(
@@ -390,7 +416,7 @@ class ChatService:
             "例外",
         )
         contextual = len(question) <= 18 or any(item in question for item in followup_markers)
-        topic_terms = ChatService._fortune_topic_terms(question, topics)
+        topic_terms = fortune_topic_terms(question, topics)
         if not history or not contextual:
             if not topic_terms:
                 return question
@@ -420,26 +446,6 @@ class ChatService:
             item for item in [*topic_terms, previous_question, *context_terms] if item
         )
         return f"{question}\n检索扩展：{expansion}" if expansion else question
-
-    @staticmethod
-    def _fortune_topic_terms(
-        question: str, topics: list[KnowledgeTopic] | None = None
-    ) -> list[str]:
-        if topics is None:
-            from pathlib import Path
-
-            import yaml
-
-            from bazi_api.modules.knowledge.schemas import TopicCatalog
-
-            path = Path(__file__).resolve().parents[4] / "knowledge/catalog/young-user-topics.yml"
-            payload = yaml.safe_load(path.read_text(encoding="utf-8")) if path.exists() else {}
-            topics = TopicCatalog.model_validate(payload).topics if payload else []
-        terms: list[str] = []
-        for topic in topics:
-            if any(marker in question for marker in topic.query_terms):
-                terms.extend(topic.retrieval_terms)
-        return list(dict.fromkeys(terms))
 
     async def answer_stream(self, request: ChatRequest) -> AsyncIterator[dict[str, object]]:
         queue: asyncio.Queue[dict[str, object] | BaseException] = asyncio.Queue()

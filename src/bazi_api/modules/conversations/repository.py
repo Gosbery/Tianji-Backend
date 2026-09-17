@@ -88,6 +88,11 @@ class ConversationRepository:
         for row in rows:
             item = self._message_dict(row)
             payload = item.pop("payload")
+            # 核验结果在 payload 里存 {query, hits, latency_ms}，对外只暴露 hits 列表。
+            stored_verification = payload.get("verification")
+            if isinstance(stored_verification, dict):
+                hits = stored_verification.get("hits")
+                payload["verification"] = hits if isinstance(hits, list) else []
             response = None
             if row["role"] == "assistant" and {"evidence", "mode", "latency_ms"}.issubset(payload):
                 response = {
@@ -107,6 +112,60 @@ class ConversationRepository:
             "evidence_scope": session["evidence_scope"],
             "messages": messages,
         }
+
+    def exchange(self, session_id: str, message_id: str) -> dict[str, Any] | None:
+        """取一条 assistant 消息及其同轮问题、会话流派与证据范围；不存在则 None。"""
+        with self.database.read() as connection:
+            row = connection.execute(
+                """
+                SELECT id, role, content, payload_json, turn_index, created_at
+                FROM messages WHERE session_id = ? AND id = ?
+                """,
+                (session_id, message_id),
+            ).fetchone()
+            if row is None:
+                return None
+            session = connection.execute(
+                "SELECT school, evidence_scope FROM sessions WHERE id = ?", (session_id,)
+            ).fetchone()
+            if session is None:
+                return None
+            question = connection.execute(
+                """
+                SELECT content FROM messages
+                WHERE session_id = ? AND turn_index = ? AND role = 'user'
+                """,
+                (session_id, row["turn_index"]),
+            ).fetchone()
+        item = self._message_dict(row)
+        return {
+            "role": item["role"],
+            "answer": item["content"],
+            "payload": item["payload"],
+            "school": session["school"],
+            "evidence_scope": session["evidence_scope"],
+            "question": question["content"] if question is not None else "",
+        }
+
+    def store_verification(
+        self, session_id: str, message_id: str, verification: dict[str, Any]
+    ) -> None:
+        """把核验结果写进该 assistant 消息 payload 的 verification 键（重跑覆盖）。"""
+        with self.database.transaction() as connection:
+            row = connection.execute(
+                "SELECT payload_json FROM messages WHERE session_id = ? AND id = ?",
+                (session_id, message_id),
+            ).fetchone()
+            if row is None:
+                raise SessionNotFoundError()
+            payload = json.loads(row["payload_json"] or "{}")
+            if not isinstance(payload, dict):
+                payload = {}
+            payload["verification"] = verification
+            connection.execute(
+                "UPDATE messages SET payload_json = ? WHERE session_id = ? AND id = ?",
+                (json.dumps(payload, ensure_ascii=False), session_id, message_id),
+            )
 
     def save_exchange(
         self,

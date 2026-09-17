@@ -10,7 +10,13 @@ from pydantic import UUID4
 from bazi_api.core.container import ApplicationContainer
 from bazi_api.core.dependencies import get_container
 
-from .schemas import ChatRequest, ChatResponse, ConversationHistory
+from .schemas import (
+    ChatRequest,
+    ChatResponse,
+    ConversationHistory,
+    VerificationRequest,
+    VerificationResponse,
+)
 
 router = APIRouter(tags=["conversations"])
 logger = logging.getLogger(__name__)
@@ -54,6 +60,20 @@ async def chat_stream(
             "X-Accel-Buffering": "no",
         },
     )
+
+
+@router.post(
+    "/conversations/{session_id}/messages/{message_id}/verification",
+    response_model=VerificationResponse,
+)
+async def verify_message(
+    session_id: UUID4,
+    message_id: str,
+    payload: VerificationRequest | None = None,
+    container: ApplicationContainer = Depends(get_container),
+) -> VerificationResponse:
+    focus = payload.focus if payload is not None else None
+    return await container.verification.verify(str(session_id), message_id, focus)
 
 
 @router.get("/conversations/{session_id}", response_model=ConversationHistory)
