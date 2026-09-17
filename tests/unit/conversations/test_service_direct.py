@@ -3,7 +3,6 @@ from __future__ import annotations
 import json
 from datetime import date, time
 from pathlib import Path
-from types import SimpleNamespace
 
 import pytest
 
@@ -15,15 +14,6 @@ from bazi_api.modules.conversations.repository import ConversationRepository
 from bazi_api.modules.conversations.schemas import ChatRequest
 from bazi_api.modules.conversations.service import ChatService
 from bazi_api.modules.observability.repository import TraceRepository
-
-
-class FakeRetrieval:
-    settings = SimpleNamespace(result_limit=6)
-    model_version = "test-model"
-    index_version = "test-index"
-
-    async def search(self, **_: object) -> list[object]:
-        raise AssertionError("direct 模式不得调用检索")
 
 
 class FakeDirectGenerator:
@@ -62,7 +52,6 @@ def chat_request(question: str = "看下财运", topic_id: str | None = "topic:w
 def build_service(database: SQLiteDatabase) -> tuple[ChatService, FakeDirectGenerator]:
     generator = FakeDirectGenerator()
     service = ChatService(
-        retrieval=FakeRetrieval(),  # type: ignore[arg-type]
         generator=generator,  # type: ignore[arg-type]
         conversations=ConversationRepository(database),
         traces=TraceRepository(database),

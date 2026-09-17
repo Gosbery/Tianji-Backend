@@ -19,11 +19,6 @@ def test_health_and_chart_routes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
         app_access_key=ACCESS_KEY,
         knowledge_path=BACKEND_ROOT / "knowledge",
         database_path=tmp_path / "app.db",
-        qdrant_path=tmp_path / "qdrant",
-        vector_backend="memory",
-        embedding_provider="hash",
-        reranker_provider="lexical",
-        embedding_cache_path=tmp_path / "embedding-cache.sqlite3",
         observability_api_key="test-observability-key",
         llm_provider="openai",
         openai_api_key="",
@@ -246,9 +241,10 @@ def test_health_and_chart_routes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
     assert traces.status_code == 200
     assert disabled_traces.status_code == 404
     assert traces.json()[0]["evidence_scope"] == "personal_preview"
-    assert traces.json()[0]["model_version"].startswith("hash-")
-    assert traces.json()[0]["index_version"]
-    assert traces.json()[0]["question_policy"] == "evidence_answer"
+    # direct 主流程不检索，因此 trace 不记录任何检索索引身份
+    assert traces.json()[0]["model_version"] == ""
+    assert traces.json()[0]["index_version"] == ""
+    assert traces.json()[0]["question_policy"] == "direct_answer"
     assert "hits_json" not in traces.json()[0]
     assert feedback.status_code == 204
     assert updated_feedback.status_code == 204
@@ -273,11 +269,6 @@ def test_health_reports_anthropic_configuration(tmp_path: Path) -> None:
         app_access_key=ACCESS_KEY,
         knowledge_path=BACKEND_ROOT / "knowledge",
         database_path=tmp_path / "app.db",
-        qdrant_path=tmp_path / "qdrant",
-        vector_backend="memory",
-        embedding_provider="hash",
-        reranker_provider="lexical",
-        embedding_cache_path=tmp_path / "embedding-cache.sqlite3",
         llm_provider="anthropic",
         anthropic_auth_token="configured-secret",
     )

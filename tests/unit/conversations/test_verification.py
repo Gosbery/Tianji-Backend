@@ -82,7 +82,6 @@ def _chart() -> ChartFacts:
 
 async def _answer(database: SQLiteDatabase, conversations: ConversationRepository):
     service = ChatService(
-        retrieval=FakeRetrieval(),  # type: ignore[arg-type]
         generator=FakeGenerator(),  # type: ignore[arg-type]
         conversations=conversations,
         traces=TraceRepository(database),

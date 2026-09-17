@@ -1,13 +1,11 @@
 from __future__ import annotations
 
-import asyncio
 import logging
 from dataclasses import dataclass
 
 import httpx
 
 from bazi_api.db.sqlite import SQLiteDatabase
-from bazi_api.integrations.embeddings import create_embedding_provider
 from bazi_api.integrations.llm import AnswerGenerator
 from bazi_api.modules.charts.service import ChartCalculator
 from bazi_api.modules.conversations.repository import ConversationRepository
@@ -50,16 +48,13 @@ class ApplicationContainer:
             try:
                 self.database.close()
             finally:
-                try:
-                    await asyncio.to_thread(self.retrieval.close)
-                finally:
-                    await self.http_client.aclose()
+                await self.http_client.aclose()
 
 
 async def build_container(settings: Settings) -> ApplicationContainer:
     settings.ensure_directories()
     http_client = httpx.AsyncClient(
-        timeout=max(settings.llm_timeout_seconds, settings.embedding_timeout_seconds, 120.0),
+        timeout=max(settings.llm_timeout_seconds, 120.0),
         limits=httpx.Limits(
             max_connections=settings.http_max_connections,
             max_keepalive_connections=settings.http_max_keepalive_connections,
@@ -77,18 +72,11 @@ async def build_container(settings: Settings) -> ApplicationContainer:
             "knowledge_loaded",
             extra={"provider": "yaml", "hits": len(knowledge.documents("personal_preview"))},
         )
-        embedding_provider = create_embedding_provider(settings, http_client)
         retrieval = await RetrievalService.create(
             settings=settings,
             documents=knowledge.documents("personal_preview"),
-            embedding_provider=embedding_provider,
             graph_nodes=knowledge.graph_nodes,
             graph_edges=knowledge.graph_edges,
-            http_client=http_client,
-            embed_missing=(
-                settings.embedding_provider != "sentence_transformer"
-                or settings.build_embeddings_on_startup
-            ),
         )
         logger.info(
             "retrieval_index_ready",
@@ -107,7 +95,6 @@ async def build_container(settings: Settings) -> ApplicationContainer:
         traces = TraceRepository(database)
         charts = ChartCalculator()
         chat = ChatService(
-            retrieval=retrieval,
             generator=AnswerGenerator(settings, http_client),
             conversations=conversations,
             traces=traces,
@@ -152,7 +139,5 @@ async def build_container(settings: Settings) -> ApplicationContainer:
     except BaseException:
         if database is not None:
             database.close()
-        if retrieval is not None:
-            await asyncio.to_thread(retrieval.close)
         await http_client.aclose()
         raise

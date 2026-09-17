@@ -16,10 +16,6 @@ def client(tmp_path: Path):
         _env_file=None,
         app_access_key=ACCESS_KEY,
         database_path=tmp_path / "app.db",
-        embedding_cache_path=tmp_path / "embeddings.db",
-        embedding_provider="hash",
-        reranker_provider="lexical",
-        vector_backend="memory",
         openai_api_key="",
     )
     with TestClient(create_app(settings)) as client:

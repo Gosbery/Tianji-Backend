@@ -27,7 +27,7 @@
       "ditiansui-ch019-case020",
       "ditiansui-ch019-p022"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "旺衰体用法",
     "expects_uncertainty": false
   },
@@ -71,7 +71,7 @@
       "ditiansui-ch023-case028",
       "ditiansui-ch023-case029"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "旺衰体用法",
     "expects_uncertainty": false
   },
@@ -85,7 +85,7 @@
       "ditiansui-ch037-case002",
       "ditiansui-ch037-case003"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "旺衰体用法",
     "expects_uncertainty": true
   },
@@ -104,7 +104,7 @@
       "ditiansui-ch038-p008",
       "ditiansui-ch038-case007"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "旺衰体用法",
     "expects_uncertainty": false
   },
@@ -119,7 +119,7 @@
       "ditiansui-ch039-case003",
       "ditiansui-ch039-case004"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "旺衰体用法",
     "expects_uncertainty": false
   },
@@ -177,7 +177,7 @@
       "ditiansui-ch060-case034",
       "ditiansui-ch060-case035"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "旺衰体用法",
     "expects_uncertainty": false
   },
@@ -222,7 +222,7 @@
       "ditiansui-ch061-p034",
       "ditiansui-ch061-case024"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "旺衰体用法",
     "expects_uncertainty": true
   },
@@ -243,7 +243,7 @@
       "ditiansui-ch064-p010",
       "ditiansui-ch064-p011"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "旺衰体用法",
     "expects_uncertainty": true
   },
@@ -255,7 +255,7 @@
       "yuanhai-ziping-ch055-p001",
       "yuanhai-ziping-ch055-p002"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平法",
     "expects_uncertainty": true
   },
@@ -272,7 +272,7 @@
       "yuanhai-ziping-ch065-p006",
       "yuanhai-ziping-ch065-p007"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平法",
     "expects_uncertainty": false
   },
@@ -289,7 +289,7 @@
       "yuanhai-ziping-ch077-p006",
       "yuanhai-ziping-ch077-p007"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平法",
     "expects_uncertainty": true
   },
@@ -313,7 +313,7 @@
       "yuanhai-ziping-ch082-p013",
       "yuanhai-ziping-ch082-p014"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平法",
     "expects_uncertainty": true
   },
@@ -330,7 +330,7 @@
       "yuanhai-ziping-ch084-p006",
       "yuanhai-ziping-ch084-p007"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平法",
     "expects_uncertainty": false
   },
@@ -343,7 +343,7 @@
       "yuanhai-ziping-ch142-p002",
       "yuanhai-ziping-ch142-p003"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平法",
     "expects_uncertainty": false
   },
@@ -362,7 +362,7 @@
       "yuanhai-ziping-ch159-p008",
       "yuanhai-ziping-ch159-p009"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平法",
     "expects_uncertainty": true
   },
@@ -386,7 +386,7 @@
       "yuanhai-ziping-ch160-p013",
       "yuanhai-ziping-ch160-p014"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平法",
     "expects_uncertainty": true
   },
@@ -399,7 +399,7 @@
       "sanming-tonghui-ch026-p002",
       "sanming-tonghui-ch026-p003"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平综合法",
     "expects_uncertainty": true
   },
@@ -415,7 +415,7 @@
       "sanming-tonghui-ch028-p005",
       "sanming-tonghui-ch028-p006"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平综合法",
     "expects_uncertainty": true
   },
@@ -428,7 +428,7 @@
       "sanming-tonghui-ch029-p002",
       "sanming-tonghui-ch029-p003"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平综合法",
     "expects_uncertainty": false
   },
@@ -450,7 +450,7 @@
       "sanming-tonghui-ch049-p011",
       "sanming-tonghui-ch049-p012"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平综合法",
     "expects_uncertainty": false
   },
@@ -463,7 +463,7 @@
       "sanming-tonghui-ch071-p002",
       "sanming-tonghui-ch071-p003"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平综合法",
     "expects_uncertainty": true
   },
@@ -474,7 +474,7 @@
     "expected_ids": [
       "sanming-tonghui-ch134-p001"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平综合法",
     "expects_uncertainty": true
   },
@@ -501,7 +501,7 @@
       "sanming-tonghui-ch163-p016",
       "sanming-tonghui-ch163-p017"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平综合法",
     "expects_uncertainty": true
   },
@@ -516,7 +516,7 @@
       "sanming-tonghui-ch182-p004",
       "sanming-tonghui-ch182-p005"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平综合法",
     "expects_uncertainty": false
   },
@@ -527,7 +527,7 @@
     "expected_ids": [
       "shenfeng-tongkao-ch003-p001"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "病药用神法",
     "expects_uncertainty": true
   },
@@ -545,7 +545,7 @@
       "shenfeng-tongkao-ch007-p007",
       "shenfeng-tongkao-ch007-p008"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "病药用神法",
     "expects_uncertainty": false
   },
@@ -561,7 +561,7 @@
       "shenfeng-tongkao-ch008-p005",
       "shenfeng-tongkao-ch008-p006"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "病药用神法",
     "expects_uncertainty": false
   },
@@ -639,7 +639,7 @@
       "shenfeng-tongkao-ch011-p067",
       "shenfeng-tongkao-ch011-p068"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "病药用神法",
     "expects_uncertainty": true
   },
@@ -801,7 +801,7 @@
       "shenfeng-tongkao-ch017-p151",
       "shenfeng-tongkao-ch017-p152"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "病药用神法",
     "expects_uncertainty": false
   },
@@ -812,7 +812,7 @@
     "expected_ids": [
       "shenfeng-tongkao-ch054-p001"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "病药用神法",
     "expects_uncertainty": true
   },
@@ -823,7 +823,7 @@
     "expected_ids": [
       "shenfeng-tongkao-ch055-p001"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "病药用神法",
     "expects_uncertainty": true
   },
@@ -838,7 +838,7 @@
       "shenfeng-tongkao-ch076-p004",
       "shenfeng-tongkao-ch076-p005"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "病药用神法",
     "expects_uncertainty": true
   },
@@ -849,7 +849,7 @@
     "expected_ids": [
       "mingli-yueyan-ch005-p001"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平综合法",
     "expects_uncertainty": false
   },
@@ -860,7 +860,7 @@
     "expected_ids": [
       "mingli-yueyan-ch009-p001"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平综合法",
     "expects_uncertainty": false
   },
@@ -871,7 +871,7 @@
     "expected_ids": [
       "mingli-yueyan-ch017-p001"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平综合法",
     "expects_uncertainty": true
   },
@@ -882,7 +882,7 @@
     "expected_ids": [
       "mingli-yueyan-ch019-p001"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平综合法",
     "expects_uncertainty": true
   },
@@ -893,7 +893,7 @@
     "expected_ids": [
       "mingli-yueyan-ch026-p001"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平综合法",
     "expects_uncertainty": true
   },
@@ -904,7 +904,7 @@
     "expected_ids": [
       "mingli-yueyan-ch040-p001"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平综合法",
     "expects_uncertainty": false
   },
@@ -915,7 +915,7 @@
     "expected_ids": [
       "mingli-yueyan-ch051-p001"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平综合法",
     "expects_uncertainty": false
   },
@@ -926,7 +926,7 @@
     "expected_ids": [
       "mingli-yueyan-ch052-p001"
     ],
-    "expected_policy": "evidence_answer",
+    "expected_policy": "direct_answer",
     "school": "子平综合法",
     "expects_uncertainty": true
   }

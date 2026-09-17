@@ -20,8 +20,6 @@ def make_settings(tmp_path: Path, **overrides: object) -> Settings:
         "openai_base_url": "https://llm.example/v1",
         "openai_chat_model": "test-model",
         "database_path": tmp_path / "app.sqlite3",
-        "embedding_cache_path": tmp_path / "embed.sqlite3",
-        "qdrant_path": tmp_path / "qdrant",
     }
     values.update(overrides)
     return Settings(_env_file=None, **values)  # type: ignore[arg-type]

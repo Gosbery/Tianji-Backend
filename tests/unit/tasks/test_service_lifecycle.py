@@ -218,15 +218,6 @@ async def test_cancelled_start_keeps_lock_until_recovery_thread_finishes(
         database.close()
 
 
-class EmptyRetrieval:
-    settings = SimpleNamespace(result_limit=6)
-    model_version = "test"
-    index_version = "test"
-
-    async def search(self, **_: object) -> list[object]:
-        return []
-
-
 class FixedGenerator:
     async def generate_direct(self, *_: object, **__: object) -> GenerationResult:
         return GenerationResult(answer="Test answer", uncertainties=[], followups=[])
@@ -238,7 +229,6 @@ async def test_cancelled_close_waits_for_answer_persistence_before_unlocking(
 ) -> None:
     database = SQLiteDatabase(tmp_path / "app.db")
     chat = ChatService(
-        retrieval=EmptyRetrieval(),  # type: ignore[arg-type]
         generator=FixedGenerator(),  # type: ignore[arg-type]
         conversations=ConversationRepository(database),
         traces=TraceRepository(database),

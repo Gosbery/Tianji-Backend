@@ -30,37 +30,13 @@ class Settings(BaseSettings):
     llm_temperature: float = Field(default=0.2, ge=0.0, le=2.0)
     llm_max_tokens: int = Field(default=4096, ge=256, le=16_384)
     llm_timeout_seconds: float = Field(default=90.0, gt=0.0, le=600.0)
-    embedding_timeout_seconds: float = Field(default=60.0, gt=0.0, le=300.0)
     http_connect_retries: int = Field(default=2, ge=0, le=5)
     http_request_retries: int = Field(default=2, ge=0, le=5)
     http_max_connections: int = Field(default=50, ge=1, le=500)
     http_max_keepalive_connections: int = Field(default=20, ge=0, le=500)
 
-    embedding_provider: Literal["sentence_transformer", "remote", "hash"] = "sentence_transformer"
-    embedding_model: str = "BAAI/bge-m3"
-    local_embedding_device: Literal["cpu", "mps", "cuda"] = "cpu"
-    local_embedding_batch_size: int = Field(default=2, ge=1, le=32)
-    local_embedding_max_seq_length: int = Field(default=512, ge=64, le=8192)
-    local_embedding_window_overlap: int = Field(default=64, ge=0, le=1024)
-    local_embedding_cache_batch_size: int = Field(default=8, ge=1, le=128)
-    remote_embedding_model: str = ""
-    vector_backend: Literal["memory", "qdrant"] = "memory"
-    qdrant_path: Path = BACKEND_ROOT / "data/qdrant"
-    qdrant_url: str = ""
-    qdrant_api_key: str = ""
-    reranker_provider: Literal["cross_encoder", "lexical"] = "cross_encoder"
-    reranker_model: str = "BAAI/bge-reranker-v2-m3"
-    reranker_device: str = "cpu"
-    reranker_batch_size: int = Field(default=2, ge=1, le=32)
-    reranker_max_length: int = Field(default=512, ge=128, le=2048)
-    build_embeddings_on_startup: bool = False
-    local_models_only: bool = False
-    embedding_cache_path: Path = BACKEND_ROOT / "data/embedding-cache.sqlite3"
-    dense_recall_limit: int = Field(default=30, ge=1, le=1000)
     sparse_recall_limit: int = Field(default=30, ge=1, le=1000)
-    rerank_limit: int = Field(default=20, ge=1, le=1000)
     result_limit: int = Field(default=6, ge=1, le=100)
-    retrieval_rrf_k: int = Field(default=60, gt=0)
     bm25_k1: float = Field(default=1.2, gt=0.0)
     bm25_b: float = Field(default=0.75, ge=0.0, le=1.0)
     bm25_heading_boost: float = Field(default=50.0, ge=0.0)
@@ -68,15 +44,11 @@ class Settings(BaseSettings):
     exact_title_boost: float = Field(default=0.5, ge=0.0)
     chapter_heading_boost: float = Field(default=0.4, ge=0.0)
     chapter_topic_boost: float = Field(default=0.12, ge=0.0)
-    rerank_fused_weight: float = Field(default=0.35, ge=0.0, le=1.0)
-    rerank_model_weight: float = Field(default=0.65, ge=0.0, le=1.0)
     graph_boost_per_match: float = Field(default=0.006, ge=0.0, le=1.0)
     graph_boost_max: float = Field(default=0.018, ge=0.0, le=1.0)
     concept_boost_per_match: float = Field(default=0.006, ge=0.0, le=1.0)
     concept_boost_max: float = Field(default=0.02, ge=0.0, le=1.0)
     evidence_chain_score_ratio: float = Field(default=0.98, ge=0.0, le=1.0)
-    lightrag_base_url: str = ""
-    lightrag_api_key: str = ""
 
     database_path: Path = BACKEND_ROOT / "data/app.db"
     database_busy_timeout_ms: int = Field(default=5000, ge=100, le=60_000)
@@ -109,12 +81,6 @@ class Settings(BaseSettings):
         return value
 
     @model_validator(mode="after")
-    def validate_local_embedding_settings(self) -> Self:
-        if self.local_embedding_window_overlap >= self.local_embedding_max_seq_length - 2:
-            raise ValueError("Local embedding overlap must be smaller than the token window")
-        return self
-
-    @model_validator(mode="after")
     def validate_http_settings(self) -> Self:
         if self.http_max_keepalive_connections > self.http_max_connections:
             raise ValueError("HTTP keepalive 连接数不能超过总连接数")
@@ -130,8 +96,6 @@ class Settings(BaseSettings):
 
     def ensure_directories(self) -> None:
         self.database_path.parent.mkdir(parents=True, exist_ok=True)
-        self.qdrant_path.parent.mkdir(parents=True, exist_ok=True)
-        self.embedding_cache_path.parent.mkdir(parents=True, exist_ok=True)
 
 
 @lru_cache

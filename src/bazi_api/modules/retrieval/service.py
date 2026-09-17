@@ -6,55 +6,39 @@ import json
 import logging
 import math
 import re
-import threading
 import unicodedata
-import uuid
 from collections import Counter, defaultdict, deque
-
-import httpx
 
 try:
     import bm25s
 except ImportError:  # The transparent fallback is sufficient for the seed corpus.
     bm25s = None  # type: ignore[assignment]
 
-from bazi_api.core.async_utils import run_sync
 from bazi_api.core.config import Settings
-from bazi_api.core.errors import (
-    InvalidUpstreamResponseError,
-    ServiceUnavailableError,
-    UpstreamServiceError,
-)
-from bazi_api.integrations.embeddings import EmbeddingProvider
-from bazi_api.integrations.http import post_with_retries
 from bazi_api.modules.charts.schemas import ChartFacts
 from bazi_api.modules.knowledge.schemas import EvidenceScope, GraphEdge, GraphNode
 
-from .cache import EmbeddingCache
 from .schemas import RetrievalDocument, RetrievalHit
 
 logger = logging.getLogger(__name__)
 
 RETRIEVAL_TUNING_FIELDS = (
-    "dense_recall_limit",
     "sparse_recall_limit",
-    "rerank_limit",
     "bm25_k1",
     "bm25_b",
-    "retrieval_rrf_k",
-    "rerank_fused_weight",
-    "rerank_model_weight",
-    "graph_boost_per_match",
-    "graph_boost_max",
-    "concept_boost_per_match",
-    "concept_boost_max",
-    "evidence_chain_score_ratio",
     "bm25_heading_boost",
     "bm25_topic_boost",
     "exact_title_boost",
     "chapter_heading_boost",
     "chapter_topic_boost",
+    "graph_boost_per_match",
+    "graph_boost_max",
+    "concept_boost_per_match",
+    "concept_boost_max",
+    "evidence_chain_score_ratio",
 )
+
+MODEL_VERSION = "bm25-lexicon-v1"
 
 TRADITIONAL_TO_SIMPLIFIED = str.maketrans(
     {
@@ -95,8 +79,8 @@ def normalize_retrieval_text(text: str) -> str:
 
 
 def tokenize_zh(text: str) -> list[str]:
-    words = re.findall(r"[A-Za-z0-9]+|[\u3400-\u9fff]", normalize_retrieval_text(text))
-    chinese = [token for token in words if len(token) == 1 and "\u3400" <= token <= "\u9fff"]
+    words = re.findall(r"[A-Za-z0-9]+|[㐀-鿿]", normalize_retrieval_text(text))
+    chinese = [token for token in words if len(token) == 1 and "㐀" <= token <= "鿿"]
     compact = "".join(chinese)
     bigrams = [compact[index : index + 2] for index in range(max(0, len(compact) - 1))]
     return words + bigrams
@@ -109,8 +93,8 @@ def query_mentions_term(query: str, term: str) -> bool:
     normalized_term = normalize_retrieval_text(term)
     if not normalized_term:
         return False
-    if len(normalized_term) == 1 and "\u3400" <= normalized_term <= "\u9fff":
-        pattern = rf"(?<![\u3400-\u9fff]){re.escape(normalized_term)}(?![\u3400-\u9fff])"
+    if len(normalized_term) == 1 and "㐀" <= normalized_term <= "鿿":
+        pattern = rf"(?<![㐀-鿿]){re.escape(normalized_term)}(?![㐀-鿿])"
         if re.search(pattern, normalized_query) is not None:
             return True
         left_cues = ("的", "属", "为", "是", "看", "论", "中", "里", "与", "和")
@@ -141,8 +125,8 @@ def query_mentions_term(query: str, term: str) -> bool:
         for match in re.finditer(re.escape(normalized_term), normalized_query):
             prefix = normalized_query[: match.start()]
             suffix = normalized_query[match.end() :]
-            left_boundary = not prefix or not ("\u3400" <= prefix[-1] <= "\u9fff")
-            right_boundary = not suffix or not ("\u3400" <= suffix[0] <= "\u9fff")
+            left_boundary = not prefix or not ("㐀" <= prefix[-1] <= "鿿")
+            right_boundary = not suffix or not ("㐀" <= suffix[0] <= "鿿")
             left_ok = left_boundary or prefix.endswith(left_cues)
             right_ok = right_boundary or suffix.startswith(right_cues)
             if left_ok and right_ok:
@@ -276,202 +260,6 @@ class BM25Index:
         return sorted(ranked, key=lambda item: item[1], reverse=True)[:limit]
 
 
-class VectorIndex:
-    def __init__(
-        self,
-        settings: Settings,
-        documents: list[RetrievalDocument],
-        vectors: list[list[float]],
-        index_version: str,
-    ) -> None:
-        self.documents = {document.id: document for document in documents}
-        self.vectors = {
-            document.id: vector for document, vector in zip(documents, vectors, strict=True)
-        }
-        self.qdrant = None
-        self.collection = f"bazi_knowledge_{index_version}"
-        if settings.vector_backend == "qdrant" and vectors:
-            self._initialize_qdrant(settings, documents, vectors)
-
-    def _initialize_qdrant(
-        self,
-        settings: Settings,
-        documents: list[RetrievalDocument],
-        vectors: list[list[float]],
-    ) -> None:
-        from qdrant_client import QdrantClient, models
-
-        embedded_qdrant = not settings.qdrant_url
-        if settings.qdrant_url:
-            self.qdrant = QdrantClient(
-                url=settings.qdrant_url,
-                api_key=settings.qdrant_api_key or None,
-            )
-        else:
-            settings.qdrant_path.mkdir(parents=True, exist_ok=True)
-            self.qdrant = QdrantClient(path=str(settings.qdrant_path))
-        try:
-            dimension = len(vectors[0])
-            if self.qdrant.collection_exists(self.collection):
-                info = self.qdrant.get_collection(self.collection)
-                configured = info.config.params.vectors.size
-                if configured != dimension:
-                    self.qdrant.delete_collection(self.collection)
-            if not self.qdrant.collection_exists(self.collection):
-                self.qdrant.create_collection(
-                    collection_name=self.collection,
-                    vectors_config=models.VectorParams(
-                        size=dimension, distance=models.Distance.COSINE
-                    ),
-                )
-            points = [
-                models.PointStruct(
-                    id=str(uuid.uuid5(uuid.NAMESPACE_URL, document.id)),
-                    vector=vector,
-                    payload={"document_id": document.id},
-                )
-                for document, vector in zip(documents, vectors, strict=True)
-            ]
-            self.qdrant.upsert(collection_name=self.collection, points=points, wait=True)
-            if embedded_qdrant:
-                for collection in self.qdrant.get_collections().collections:
-                    if (
-                        collection.name.startswith("bazi_knowledge_")
-                        and collection.name != self.collection
-                    ):
-                        self.qdrant.delete_collection(collection.name)
-        except BaseException:
-            self.qdrant.close()
-            self.qdrant = None
-            raise
-
-    def search(self, vector: list[float], allowed: set[str], limit: int) -> list[tuple[str, float]]:
-        if self.qdrant is not None:
-            if not allowed:
-                return []
-            from qdrant_client import models
-
-            response = self.qdrant.query_points(
-                collection_name=self.collection,
-                query=vector,
-                query_filter=models.Filter(
-                    must=[
-                        models.FieldCondition(
-                            key="document_id",
-                            match=models.MatchAny(any=sorted(allowed)),
-                        )
-                    ]
-                ),
-                limit=min(len(allowed), limit),
-                with_payload=True,
-            )
-            hits: list[tuple[str, float]] = []
-            for point in response.points:
-                document_id = str(point.payload["document_id"])
-                if document_id in allowed:
-                    hits.append((document_id, float(point.score)))
-                if len(hits) >= limit:
-                    break
-            return hits
-
-        hits = []
-        for document_id in allowed:
-            candidate = self.vectors[document_id]
-            score = float(sum(left * right for left, right in zip(vector, candidate, strict=True)))
-            hits.append((document_id, score))
-        return sorted(hits, key=lambda item: item[1], reverse=True)[:limit]
-
-    def close(self) -> None:
-        if self.qdrant is not None:
-            self.qdrant.close()
-            self.qdrant = None
-
-
-class LexicalReranker:
-    def __init__(self, rank_weight: float, lexical_weight: float) -> None:
-        self.rank_weight = rank_weight
-        self.lexical_weight = lexical_weight
-
-    def score(self, query: str, documents: list[RetrievalDocument]) -> list[float]:
-        query_tokens = set(tokenize_zh(query))
-        scores: list[float] = []
-        total = max(1, len(documents))
-        for index, document in enumerate(documents):
-            doc_tokens = set(tokenize_zh(f"{document.title} {document.text}"))
-            overlap = len(query_tokens & doc_tokens)
-            lexical = overlap / math.sqrt(max(1, len(query_tokens) * len(doc_tokens)))
-            # The offline fallback should refine a strong fused ranking, not replace it.
-            rank_prior = 1 - index / (total + 1)
-            scores.append(rank_prior * self.rank_weight + lexical * self.lexical_weight)
-        return scores
-
-
-class CrossEncoderReranker:
-    def __init__(
-        self,
-        model_name: str,
-        fallback: LexicalReranker,
-        local_files_only: bool = False,
-        *,
-        device: str = "cpu",
-        batch_size: int = 2,
-        max_length: int = 512,
-    ) -> None:
-        if batch_size < 1 or max_length < 1:
-            raise ValueError("Reranker batch size and maximum length must be positive")
-        self.model_name = model_name
-        self.local_files_only = local_files_only
-        self.device = device
-        self.batch_size = batch_size
-        self.max_length = max_length
-        self.model = None
-        self.fallback = fallback
-        self._lock = threading.Lock()
-        self._disabled = False
-
-    def score(self, query: str, documents: list[RetrievalDocument]) -> list[float]:
-        if not documents:
-            return []
-        with self._lock:
-            if self._disabled:
-                return self.fallback.score(query, documents)
-            try:
-                if self.model is None:
-                    from sentence_transformers import CrossEncoder
-
-                    self.model = CrossEncoder(
-                        self.model_name,
-                        local_files_only=self.local_files_only,
-                        device=self.device,
-                        max_length=self.max_length,
-                    )
-                pairs = [
-                    (
-                        query,
-                        (
-                            f"{doc.title}\n{' '.join(doc.concepts)}\n"
-                            f"{(doc.rerank_text or doc.text)[:900]}"
-                        ),
-                    )
-                    for doc in documents
-                ]
-                return [
-                    float(value)
-                    for value in self.model.predict(
-                        pairs, batch_size=self.batch_size, show_progress_bar=False
-                    )
-                ]
-            except Exception:  # Retry large model failures only after a service restart.
-                self.model = None
-                self._disabled = True
-                logger.warning(
-                    "reranker_fallback",
-                    extra={"provider": self.model_name},
-                    exc_info=True,
-                )
-        return self.fallback.score(query, documents)
-
-
 class KnowledgeGraphIndex:
     def __init__(self, nodes: list[GraphNode], edges: list[GraphEdge]) -> None:
         self.nodes = {node.id: node for node in nodes}
@@ -512,120 +300,37 @@ class KnowledgeGraphIndex:
 
 
 class RetrievalService:
+    """按需查典核验通道：单一的 bm25 词法检索，无向量索引与重排。"""
+
     def __init__(
         self,
         documents: list[RetrievalDocument],
-        embedding_provider: EmbeddingProvider,
         bm25: BM25Index,
-        vectors: VectorIndex,
-        reranker: LexicalReranker | CrossEncoderReranker,
         graph: KnowledgeGraphIndex,
         settings: Settings,
-        http_client: httpx.AsyncClient | None = None,
     ) -> None:
         self.documents = {document.id: document for document in documents}
-        self.embedding_provider = embedding_provider
         self.bm25 = bm25
-        self.vectors = vectors
-        self.reranker = reranker
         self.graph = graph
         self.settings = settings
-        self.http_client = http_client
-        self.model_version = embedding_provider.model_version
+        self.model_version = MODEL_VERSION
         self.index_version = ""
-        self.cache_stats: dict[str, int] = {"hits": 0, "misses": 0}
-        self._lightrag_aliases = self._build_lightrag_aliases(documents)
 
     @classmethod
     async def create(
         cls,
         settings: Settings,
         documents: list[RetrievalDocument],
-        embedding_provider: EmbeddingProvider,
         graph_nodes: list[GraphNode] | None = None,
         graph_edges: list[GraphEdge] | None = None,
-        http_client: httpx.AsyncClient | None = None,
-        *,
-        embed_missing: bool = True,
     ) -> RetrievalService:
-        texts = [cls._embedding_text(doc) for doc in documents]
-        content_hashes = [
-            hashlib.sha256(f"{doc.content_sha256}\n{text}".encode()).hexdigest()
-            for doc, text in zip(documents, texts, strict=True)
-        ]
-        vector_documents = documents
-        vector_hashes = content_hashes
-        cache = await asyncio.to_thread(EmbeddingCache, settings.embedding_cache_path)
-        try:
-            if not embed_missing:
-                cached = await cache.cached(embedding_provider, content_hashes)
-                indexed = [
-                    (doc, content_hash)
-                    for doc, content_hash in zip(documents, content_hashes, strict=True)
-                    if content_hash in cached
-                ]
-                vector_documents = [doc for doc, _ in indexed]
-                vector_hashes = [content_hash for _, content_hash in indexed]
-                embeddings = [cached[content_hash] for content_hash in vector_hashes]
-                cache_stats = {
-                    "hits": len(indexed),
-                    "misses": len(set(content_hashes) - cached.keys()),
-                }
-            else:
-                try:
-                    embeddings, cache_stats = await cache.vectors(
-                        embedding_provider,
-                        content_hashes,
-                        texts,
-                        batch_size=settings.local_embedding_cache_batch_size,
-                    )
-                except Exception:
-                    logger.warning(
-                        "embedding_provider_fallback",
-                        extra={"provider": embedding_provider.model_version},
-                        exc_info=True,
-                    )
-                    from bazi_api.integrations.embeddings import HashEmbeddingProvider
-
-                    embedding_provider = HashEmbeddingProvider()
-                    embeddings, cache_stats = await cache.vectors(
-                        embedding_provider,
-                        content_hashes,
-                        texts,
-                        batch_size=settings.local_embedding_cache_batch_size,
-                    )
-        finally:
-            await asyncio.to_thread(cache.close)
-        lexical_reranker = LexicalReranker(
-            rank_weight=settings.rerank_fused_weight,
-            lexical_weight=settings.rerank_model_weight,
-        )
-        reranker: LexicalReranker | CrossEncoderReranker
-        if settings.reranker_provider == "cross_encoder":
-            reranker = CrossEncoderReranker(
-                settings.reranker_model,
-                lexical_reranker,
-                settings.local_models_only,
-                device=settings.reranker_device,
-                batch_size=settings.reranker_batch_size,
-                max_length=settings.reranker_max_length,
-            )
-        else:
-            reranker = lexical_reranker
         tuning_payload = json.dumps(
             retrieval_tuning(settings), sort_keys=True, separators=(",", ":")
         )
-        vector_payload = "\n".join([embedding_provider.model_version, *sorted(vector_hashes)])
-        vector_index_version = hashlib.sha256(vector_payload.encode("utf-8")).hexdigest()[:16]
-        index_payload = "\n".join(
-            [
-                embedding_provider.model_version,
-                *sorted(content_hashes),
-                tuning_payload,
-                vector_index_version,
-            ]
-        )
-        index_version = hashlib.sha256(index_payload.encode("utf-8")).hexdigest()[:16]
+        content_hashes = sorted(document.content_sha256 for document in documents)
+        index_version = hashlib.sha256(
+            "\n".join([MODEL_VERSION, *content_hashes, tuning_payload]).encode("utf-8")
+        ).hexdigest()[:16]
         bm25 = await asyncio.to_thread(
             BM25Index,
             documents,
@@ -634,34 +339,14 @@ class RetrievalService:
             settings.bm25_k1,
             settings.bm25_b,
         )
-        vectors = await asyncio.to_thread(
-            VectorIndex, settings, vector_documents, embeddings, vector_index_version
-        )
         service = cls(
             documents=documents,
-            embedding_provider=embedding_provider,
             bm25=bm25,
-            vectors=vectors,
-            reranker=reranker,
             graph=KnowledgeGraphIndex(graph_nodes or [], graph_edges or []),
             settings=settings,
-            http_client=http_client,
         )
-        service.cache_stats = cache_stats
-        service.model_version = embedding_provider.model_version
         service.index_version = index_version
         return service
-
-    def close(self) -> None:
-        self.vectors.close()
-
-    @staticmethod
-    def _embedding_text(document: RetrievalDocument) -> str:
-        body = document.normalized_text or document.text
-        return normalize_retrieval_text(
-            f"{document.title}\n{body}\n{' '.join(document.concepts)}\n"
-            f"{' '.join(document.retrieval_terms)}"
-        )
 
     async def search(
         self,
@@ -674,106 +359,29 @@ class RetrievalService:
         allowed_schools: list[str] | None = None,
         preferred_schools: list[str] | None = None,
     ) -> list[RetrievalHit]:
+        if mode != "bm25":
+            raise ValueError(f"unknown mode: {mode}")
         schools = set(allowed_schools or [school])
         allowed = {
             document.id
             for document in self.documents.values()
             if self._eligible(document, chart, schools, evidence_scope)
         }
-        if mode == "bm25":
-            chart_terms = self._chart_query_terms(query, chart)
-            graph_query = " ".join([query, *chart_terms])
-            expanded_terms, related_nodes = self.graph.expand(graph_query, evidence_scope)
-            retrieval_query = normalize_retrieval_text(
-                " ".join([query, *chart_terms, *expanded_terms])
-            )
-            sparse = await asyncio.to_thread(
-                self.bm25.search, retrieval_query, allowed, self.settings.sparse_recall_limit
-            )
-            hits = self._hits_from_single(sparse, "bm25")
-            self._apply_title_boost(query, hits)
-            self._apply_concept_boost(query, hits)
-            self._apply_school_priority(preferred_schools or [], hits)
-            self._apply_graph_boost(related_nodes, hits)
-            self._apply_chart_context_boost(chart_terms, chart, hits)
-            hits = self._diversify_hits(hits, limit)
-            return self._expand_evidence_chain(hits, allowed, limit)
-        if mode == "lightrag":
-            hits = await self._search_lightrag(query, allowed, limit)
-            self._apply_school_priority(preferred_schools or [], hits)
-            return hits
         chart_terms = self._chart_query_terms(query, chart)
         graph_query = " ".join([query, *chart_terms])
         expanded_terms, related_nodes = self.graph.expand(graph_query, evidence_scope)
-        retrieval_query = normalize_retrieval_text(" ".join([query, *chart_terms, *expanded_terms]))
-        if mode == "dense":
-            dense = await self._dense_search(retrieval_query, allowed)
-            unindexed = allowed - self.vectors.documents.keys()
-            if dense and unindexed:
-                sparse_missing = await asyncio.to_thread(
-                    self.bm25.search, retrieval_query, unindexed, self.settings.sparse_recall_limit
-                )
-                hits = [
-                    RetrievalHit(
-                        document=self.documents[document_id],
-                        score=score,
-                        matched_by=sorted(components),
-                        component_scores=raw,
-                    )
-                    for document_id, score, components, raw in self._rrf(
-                        {"dense": dense, "bm25-unindexed": sparse_missing},
-                        self.settings.retrieval_rrf_k,
-                    )
-                ]
-            elif dense:
-                hits = self._hits_from_single(dense, "dense")
-            else:
-                sparse_fallback = await asyncio.to_thread(
-                    self.bm25.search, retrieval_query, allowed, self.settings.sparse_recall_limit
-                )
-                hits = self._hits_from_single(sparse_fallback, "bm25-fallback")
-            hits = self._diversify_hits(hits, limit)
-            self._apply_school_priority(preferred_schools or [], hits)
-            return self._expand_evidence_chain(hits, allowed, limit)
-        dense, sparse = await asyncio.gather(
-            self._dense_search(retrieval_query, allowed),
-            asyncio.to_thread(
-                self.bm25.search,
-                retrieval_query,
-                allowed,
-                self.settings.sparse_recall_limit,
-            ),
+        retrieval_query = normalize_retrieval_text(
+            " ".join([query, *chart_terms, *expanded_terms])
         )
-        fused = self._rrf({"dense": dense, "bm25": sparse}, self.settings.retrieval_rrf_k)
-        hits = [
-            RetrievalHit(
-                document=self.documents[document_id],
-                score=score,
-                matched_by=sorted(components),
-                component_scores=raw,
-            )
-            for document_id, score, components, raw in fused
-        ]
+        sparse = await asyncio.to_thread(
+            self.bm25.search, retrieval_query, allowed, self.settings.sparse_recall_limit
+        )
+        hits = self._hits_from_single(sparse, "bm25")
         self._apply_title_boost(query, hits)
         self._apply_concept_boost(query, hits)
         self._apply_school_priority(preferred_schools or [], hits)
         self._apply_graph_boost(related_nodes, hits)
         self._apply_chart_context_boost(chart_terms, chart, hits)
-        if mode == "hybrid_rerank" and hits:
-            candidates = hits[: self.settings.rerank_limit]
-            remainder = hits[self.settings.rerank_limit :]
-            rerank_scores = await run_sync(
-                self.reranker.score, query, [hit.document for hit in candidates]
-            )
-            for hit, rerank_score in zip(candidates, rerank_scores, strict=True):
-                hit.component_scores["reranker"] = rerank_score
-                hit.score = (
-                    hit.score * self.settings.rerank_fused_weight
-                    + rerank_score * self.settings.rerank_model_weight
-                )
-                hit.matched_by.append("reranker")
-            candidates.sort(key=lambda hit: hit.score, reverse=True)
-            hits = [*candidates, *remainder]
         hits = self._diversify_hits(hits, limit)
         return self._expand_evidence_chain(hits, allowed, limit)
 
@@ -850,149 +458,6 @@ class RetrievalService:
             hit.component_scores["chart_context"] = bonus
             hit.matched_by.append("chart_context")
         hits.sort(key=lambda hit: hit.score, reverse=True)
-
-    async def _dense_search(self, query: str, allowed: set[str]) -> list[tuple[str, float]]:
-        allowed = allowed.intersection(self.vectors.documents)
-        if not allowed:
-            return []
-        try:
-            query_vector = (await self.embedding_provider.embed([query]))[0]
-            return await run_sync(
-                self.vectors.search,
-                query_vector,
-                allowed,
-                self.settings.dense_recall_limit,
-            )
-        except Exception:
-            logger.warning(
-                "dense_retrieval_fallback",
-                extra={"provider": self.embedding_provider.model_version},
-                exc_info=True,
-            )
-            return []
-
-    async def _search_lightrag(
-        self, query: str, allowed: set[str], limit: int
-    ) -> list[RetrievalHit]:
-        if not self.settings.lightrag_base_url:
-            raise ServiceUnavailableError("LightRAG 尚未配置")
-        headers = {"Content-Type": "application/json"}
-        if self.settings.lightrag_api_key:
-            headers["X-API-Key"] = self.settings.lightrag_api_key
-        url = f"{self.settings.lightrag_base_url.rstrip('/')}/query/data"
-        request_payload: dict[str, object] = {
-            "query": query,
-            "mode": "mix",
-            "chunk_top_k": max(limit, 5),
-            "enable_rerank": True,
-        }
-        try:
-            if self.http_client is not None:
-                response = await post_with_retries(
-                    self.http_client,
-                    url,
-                    headers=headers,
-                    payload=request_payload,
-                    timeout=120,
-                    max_retries=self.settings.http_request_retries,
-                    operation="lightrag",
-                )
-            else:
-                async with httpx.AsyncClient() as client:
-                    response = await post_with_retries(
-                        client,
-                        url,
-                        headers=headers,
-                        payload=request_payload,
-                        timeout=120,
-                        max_retries=self.settings.http_request_retries,
-                        operation="lightrag",
-                    )
-            response.raise_for_status()
-        except httpx.HTTPError as exc:
-            logger.warning("lightrag_request_failed", exc_info=True)
-            raise UpstreamServiceError("LightRAG 查询服务暂时不可用") from exc
-        try:
-            payload = response.json()
-        except ValueError as exc:
-            raise InvalidUpstreamResponseError("LightRAG 返回了无效 JSON") from exc
-        if not isinstance(payload, dict):
-            raise InvalidUpstreamResponseError("LightRAG 响应顶层必须是对象")
-        if payload.get("status") != "success":
-            raise InvalidUpstreamResponseError("LightRAG 返回了失败状态")
-        data = payload.get("data")
-        if not isinstance(data, dict):
-            raise InvalidUpstreamResponseError("LightRAG 响应缺少 data 对象")
-        chunks = data.get("chunks", [])
-        entities = data.get("entities", [])
-        if not isinstance(chunks, list) or not isinstance(entities, list):
-            raise InvalidUpstreamResponseError("LightRAG 候选列表格式无效")
-        candidates: list[tuple[str, str]] = []
-        for chunk in chunks:
-            if not isinstance(chunk, dict):
-                raise InvalidUpstreamResponseError("LightRAG chunk 格式无效")
-            item_id = chunk.get("chunk_id", f"chunk-{len(candidates)}")
-            source = chunk.get("file_path", "")
-            if not isinstance(item_id, str) or not isinstance(source, str):
-                raise InvalidUpstreamResponseError("LightRAG chunk 标识格式无效")
-            candidates.append((item_id, source))
-        if not candidates:
-            for entity in entities:
-                if not isinstance(entity, dict):
-                    raise InvalidUpstreamResponseError("LightRAG entity 格式无效")
-                item_id = entity.get("entity_name", f"entity-{len(candidates)}")
-                source = entity.get("file_path", "")
-                if not isinstance(item_id, str) or not isinstance(source, str):
-                    raise InvalidUpstreamResponseError("LightRAG entity 标识格式无效")
-                candidates.append((item_id, source))
-        hits: list[RetrievalHit] = []
-        selected: set[str] = set()
-        rejected = 0
-        for rank, (item_id, source) in enumerate(candidates, start=1):
-            document = self._resolve_lightrag_document(item_id, source)
-            if document is None or document.id not in allowed or document.id in selected:
-                rejected += 1
-                continue
-            selected.add(document.id)
-            hits.append(
-                RetrievalHit(
-                    document=document,
-                    score=1 / rank,
-                    matched_by=["lightrag-mix"],
-                    component_scores={"lightrag": 1 / rank},
-                )
-            )
-            if len(hits) >= limit:
-                break
-        if rejected:
-            logger.warning(
-                "lightrag_untrusted_candidates_rejected",
-                extra={"provider": "lightrag", "hits": rejected},
-            )
-        return hits
-
-    @staticmethod
-    def _build_lightrag_aliases(
-        documents: list[RetrievalDocument],
-    ) -> dict[str, str | None]:
-        aliases: dict[str, str | None] = {}
-        for document in documents:
-            safe_id = re.sub(r"[^A-Za-z0-9._-]+", "-", document.id).strip("-")
-            for alias in {document.id, safe_id}:
-                if alias in aliases and aliases[alias] != document.id:
-                    aliases[alias] = None
-                else:
-                    aliases[alias] = document.id
-        return aliases
-
-    def _resolve_lightrag_document(self, item_id: str, source: str) -> RetrievalDocument | None:
-        filename = source.replace("\\", "/").rsplit("/", 1)[-1]
-        source_alias = filename[:-3] if filename.lower().endswith(".md") else filename
-        for alias in (item_id, source_alias):
-            document_id = self._lightrag_aliases.get(alias)
-            if document_id is not None:
-                return self.documents[document_id]
-        return None
 
     def _apply_graph_boost(self, related_nodes: set[str], hits: list[RetrievalHit]) -> None:
         if not related_nodes:
@@ -1142,23 +607,6 @@ class RetrievalService:
                 component_scores={component: score},
             )
             for document_id, score in ranking
-        ]
-
-    def _rrf(
-        self, rankings: dict[str, list[tuple[str, float]]], k: int
-    ) -> list[tuple[str, float, list[str], dict[str, float]]]:
-        scores: defaultdict[str, float] = defaultdict(float)
-        component_scores: defaultdict[str, list[str]] = defaultdict(list)
-        raw_scores: defaultdict[str, dict[str, float]] = defaultdict(dict)
-        for component, ranking in rankings.items():
-            for rank, (document_id, raw_score) in enumerate(ranking, start=1):
-                scores[document_id] += 1 / (k + rank)
-                component_scores[document_id].append(component)
-                raw_scores[document_id][component] = raw_score
-        ranked = sorted(scores.items(), key=lambda item: item[1], reverse=True)
-        return [
-            (document_id, score, component_scores[document_id], raw_scores[document_id])
-            for document_id, score in ranked
         ]
 
     @staticmethod

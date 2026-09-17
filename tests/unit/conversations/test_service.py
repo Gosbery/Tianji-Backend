@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from datetime import date, time
 from pathlib import Path
-from types import SimpleNamespace
 
 import pytest
 
@@ -15,15 +14,6 @@ from bazi_api.modules.conversations.repository import ConversationRepository
 from bazi_api.modules.conversations.schemas import ChatRequest
 from bazi_api.modules.conversations.service import ChatService
 from bazi_api.modules.observability.repository import TraceRepository
-
-
-class FakeRetrieval:
-    settings = SimpleNamespace(result_limit=6)
-    model_version = "test-model"
-    index_version = "test-index"
-
-    async def search(self, **_: object) -> list[object]:
-        return []
 
 
 class FakeGenerator:
@@ -58,7 +48,6 @@ def chat_request() -> ChatRequest:
 def build_service(database: SQLiteDatabase) -> tuple[ChatService, TraceRepository]:
     traces = TraceRepository(database)
     service = ChatService(
-        retrieval=FakeRetrieval(),  # type: ignore[arg-type]
         generator=FakeGenerator(),  # type: ignore[arg-type]
         conversations=ConversationRepository(database),
         traces=traces,

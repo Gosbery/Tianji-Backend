@@ -19,7 +19,6 @@ from bazi_api.modules.experts.repository import ExpertRepository
 from bazi_api.modules.knowledge.schemas import KnowledgeTopic
 from bazi_api.modules.observability.repository import TraceRepository
 from bazi_api.modules.retrieval.schemas import RetrievalHit
-from bazi_api.modules.retrieval.service import RetrievalService
 
 from .repository import ConversationRepository
 from .schemas import ChatRequest, ChatResponse, Evidence
@@ -75,7 +74,6 @@ def fortune_topic_terms(
 class ChatService:
     def __init__(
         self,
-        retrieval: RetrievalService,
         generator: AnswerGenerator,
         conversations: ConversationRepository,
         traces: TraceRepository,
@@ -83,7 +81,6 @@ class ChatService:
         topics: list[KnowledgeTopic] | None = None,
         experts: ExpertRepository | None = None,
     ) -> None:
-        self.retrieval = retrieval
         self.generator = generator
         self.conversations = conversations
         self.traces = traces
@@ -140,125 +137,27 @@ class ChatService:
             if expert and expert.preferred_schools
             else request.school
         )
-        allowed_schools = expert.allowed_schools if expert else None
         expert_context = self.experts.prompt_context(expert) if self.experts and expert else ""
-        if request.mode == "direct":
-            topic_pack = (
-                build_topic_fact_pack(chart, request.topic_id) if request.topic_id else None
-            )
-            if on_progress is not None:
-                await on_progress(
-                    "话题事实已计算，正在生成解读" if topic_pack else "命盘信息已核验，正在生成解读"
-                )
-            generated = await self.generator.generate_direct(
-                request.question,
-                chart,
-                topic_pack,
-                school=effective_school,
-                history=self._generation_history(history),
-                expert_context=expert_context,
-            )
-            if on_answer_chunk is not None:
-                await on_answer_chunk(generated.answer)
-            if on_progress is not None:
-                await on_progress("回答已生成，正在保存本次分析")
-            evidence = self._chart_evidence(chart)
-            latency_ms = int((time.perf_counter() - started) * 1000)
-            uncertainties = list(dict.fromkeys([*chart.uncertainties, *generated.uncertainties]))
-            message_id = await run_sync(
-                self._persist_answer,
-                session_id,
-                is_new_session,
-                request,
-                generated.answer,
-                evidence,
-                uncertainties,
-                [],
-                latency_ms,
-                generated,
-                chart_fingerprint,
-                on_persist,
-            )
-            logger.info(
-                "chat_answer_persisted",
-                extra={"duration_ms": latency_ms, "hits": 0, "mode": "direct"},
-            )
-            if on_progress is not None:
-                await on_progress("分析完成")
-            return ChatResponse(
-                session_id=session_id,
-                message_id=message_id,
-                answer=generated.answer,
-                evidence=evidence,
-                uncertainties=uncertainties,
-                followups=generated.followups,
-                mode="direct",
-                latency_ms=latency_ms,
-                token_usage=generated.token_usage,
-                policy_decision=generated.policy_decision,
-                citations_validated=generated.citations_validated,
-                degradation_reason=generated.degradation_reason,
-            )
+        topic_pack = build_topic_fact_pack(chart, request.topic_id) if request.topic_id else None
         if on_progress is not None:
-            await on_progress("命盘信息已核验，正在检索相关资料")
-        retrieval_started = time.perf_counter()
-        hits = await self.retrieval.search(
-            query=self._retrieval_query(request.question, history, self.topics),
-            chart=chart,
+            await on_progress(
+                "话题事实已计算，正在生成解读" if topic_pack else "命盘信息已核验，正在生成解读"
+            )
+        generated = await self.generator.generate_direct(
+            request.question,
+            chart,
+            topic_pack,
             school=effective_school,
-            mode=request.mode,
-            limit=self.retrieval.settings.result_limit,
-            evidence_scope=request.evidence_scope,
-            allowed_schools=allowed_schools,
-            preferred_schools=expert.preferred_schools if expert else None,
+            history=self._generation_history(history),
+            expert_context=expert_context,
         )
-        logger.info(
-            "retrieval_completed",
-            extra={
-                "duration_ms": round((time.perf_counter() - retrieval_started) * 1000, 2),
-                "hits": len(hits),
-                "mode": request.mode,
-            },
-        )
+        if on_answer_chunk is not None:
+            await on_answer_chunk(generated.answer)
         if on_progress is not None:
-            await on_progress(f"已检索到 {len(hits)} 条相关依据，正在组织分析")
-        if on_answer_chunk is None:
-            generated = await self.generator.generate(
-                request.question,
-                chart,
-                hits,
-                school=effective_school,
-                evidence_scope=request.evidence_scope,
-                history=self._generation_history(history),
-                expert_context=expert_context,
-            )
-        else:
-            generated = await self.generator.generate_stream(
-                request.question,
-                chart,
-                hits,
-                on_answer_chunk,
-                school=effective_school,
-                evidence_scope=request.evidence_scope,
-                history=self._generation_history(history),
-                expert_context=expert_context,
-            )
-        if on_progress is not None:
-            await on_progress("回答已生成，正在整理引用与不确定性")
-        evidence = evidence_from_hits(hits)
-        evidence.extend(self._chart_evidence(chart))
+            await on_progress("回答已生成，正在保存本次分析")
+        evidence = self._chart_evidence(chart)
         latency_ms = int((time.perf_counter() - started) * 1000)
-        uncertainties = list(
-            dict.fromkeys(
-                [
-                    *chart.uncertainties,
-                    *generated.uncertainties,
-                    *(hit.document.warning for hit in hits if hit.document.warning),
-                ]
-            )
-        )
-        if on_progress is not None:
-            await on_progress("资料整理完成，正在保存本次分析")
+        uncertainties = list(dict.fromkeys([*chart.uncertainties, *generated.uncertainties]))
         message_id = await run_sync(
             self._persist_answer,
             session_id,
@@ -267,7 +166,7 @@ class ChatService:
             generated.answer,
             evidence,
             uncertainties,
-            hits,
+            [],
             latency_ms,
             generated,
             chart_fingerprint,
@@ -275,7 +174,7 @@ class ChatService:
         )
         logger.info(
             "chat_answer_persisted",
-            extra={"duration_ms": latency_ms, "hits": len(hits), "mode": request.mode},
+            extra={"duration_ms": latency_ms, "hits": 0, "mode": request.mode},
         )
         if on_progress is not None:
             await on_progress("分析完成")
@@ -522,8 +421,8 @@ class ChatService:
                 question=request.question,
                 mode=request.mode,
                 evidence_scope=request.evidence_scope,
-                model_version=self.retrieval.model_version,
-                index_version=self.retrieval.index_version,
+                model_version="",
+                index_version="",
                 hits=[hit.model_dump() for hit in hits],
                 latency_ms=latency_ms,
                 token_usage=generated.token_usage,

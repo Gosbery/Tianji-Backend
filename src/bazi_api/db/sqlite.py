@@ -100,7 +100,7 @@ class SQLiteDatabase:
                     chart_json TEXT NOT NULL,
                     school TEXT NOT NULL,
                     evidence_scope TEXT NOT NULL DEFAULT 'personal_preview',
-                    mode TEXT NOT NULL DEFAULT 'hybrid_rerank',
+                    mode TEXT NOT NULL DEFAULT 'direct',
                     archived INTEGER NOT NULL DEFAULT 0,
                     created_at TEXT NOT NULL,
                     updated_at TEXT NOT NULL,

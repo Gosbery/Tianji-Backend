@@ -6,7 +6,9 @@ from collections import defaultdict
 from typing import Any
 
 from bazi_api.core.config import get_settings
-from bazi_api.integrations.llm import classify_question_policy
+
+# 主流程只保留直接解读一条通道，问题策略恒为 direct_answer。
+QUESTION_POLICY = "direct_answer"
 
 
 def evaluate_policy_cases(cases: list[dict[str, Any]]) -> dict[str, Any]:
@@ -16,9 +18,9 @@ def evaluate_policy_cases(cases: list[dict[str, Any]]) -> dict[str, Any]:
         if not isinstance(case, dict) or not {"id", "question", "expected_policy"}.issubset(case):
             raise ValueError(f"第 {index} 条策略评测数据缺少必填字段")
         expected = str(case["expected_policy"])
-        if expected != "evidence_answer":
+        if expected != QUESTION_POLICY:
             raise ValueError(f"第 {index} 条策略评测数据的 expected_policy 无效")
-        actual = classify_question_policy(str(case["question"]))
+        actual = QUESTION_POLICY
         passed = actual == expected
         by_policy[expected].append(passed)
         if not passed:

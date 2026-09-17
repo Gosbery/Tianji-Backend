@@ -4,8 +4,6 @@ from pathlib import Path
 import pytest
 
 from bazi_api.core.config import Settings
-from bazi_api.core.errors import ServiceUnavailableError
-from bazi_api.integrations.embeddings import HashEmbeddingProvider
 from bazi_api.modules.charts.schemas import BirthInput
 from bazi_api.modules.charts.service import ChartCalculator
 from bazi_api.modules.knowledge.repository import KnowledgeRepository
@@ -14,75 +12,41 @@ from bazi_api.modules.retrieval.service import RetrievalService, normalize_retri
 BACKEND_ROOT = Path(__file__).resolve().parents[3]
 
 
-@pytest.mark.asyncio
-async def test_hybrid_retrieval_returns_expected_card(tmp_path: Path) -> None:
-    settings = Settings(
+def build_settings(tmp_path: Path) -> Settings:
+    return Settings(
         knowledge_path=BACKEND_ROOT / "knowledge",
-        vector_backend="memory",
         database_path=tmp_path / "app.db",
-        qdrant_path=tmp_path / "qdrant",
-        embedding_provider="hash",
-        reranker_provider="lexical",
-        embedding_cache_path=tmp_path / "embedding-cache.sqlite3",
     )
+
+
+@pytest.mark.asyncio
+async def test_bm25_retrieval_returns_expected_card(tmp_path: Path) -> None:
+    settings = build_settings(tmp_path)
     repository = KnowledgeRepository(settings.knowledge_path)
     repository.load()
-    service = await RetrievalService.create(
-        settings, repository.documents(), HashEmbeddingProvider()
-    )
+    service = await RetrievalService.create(settings, repository.documents())
     chart = ChartCalculator().calculate(BirthInput(date=date(1990, 1, 1), time=time(12, 0)))
 
-    hits = await service.search("偏财是不是一定代表意外之财？", chart, "基础共识", "hybrid", 5)
+    hits = await service.search("偏财是不是一定代表意外之财？", chart, "基础共识", "bm25", 5)
 
     assert "god-piancai" in {hit.document.id for hit in hits}
     assert all(hit.matched_by for hit in hits)
 
 
 @pytest.mark.asyncio
-async def test_lightrag_mode_requires_explicit_server(tmp_path: Path) -> None:
-    settings = Settings(
-        knowledge_path=BACKEND_ROOT / "knowledge",
-        vector_backend="memory",
-        database_path=tmp_path / "app.db",
-        qdrant_path=tmp_path / "qdrant",
-        embedding_provider="hash",
-        reranker_provider="lexical",
-        embedding_cache_path=tmp_path / "embedding-cache.sqlite3",
-    )
-    repository = KnowledgeRepository(settings.knowledge_path)
-    repository.load()
-    service = await RetrievalService.create(
-        settings, repository.documents(), HashEmbeddingProvider()
-    )
-    chart = ChartCalculator().calculate(BirthInput(date=date(1990, 1, 1), time=time(12, 0)))
-
-    with pytest.raises(ServiceUnavailableError, match="LightRAG 尚未配置"):
-        await service.search("月令是什么？", chart, "基础共识", "lightrag", 5)
-
-
-@pytest.mark.asyncio
 async def test_graph_expansion_is_a_retrieval_hint(tmp_path: Path) -> None:
-    settings = Settings(
-        knowledge_path=BACKEND_ROOT / "knowledge",
-        vector_backend="memory",
-        database_path=tmp_path / "app.db",
-        qdrant_path=tmp_path / "qdrant",
-        embedding_provider="hash",
-        reranker_provider="lexical",
-        embedding_cache_path=tmp_path / "embedding-cache.sqlite3",
-    )
+    settings = build_settings(tmp_path)
     repository = KnowledgeRepository(settings.knowledge_path)
     repository.load()
     service = await RetrievalService.create(
         settings,
         repository.documents(),
-        HashEmbeddingProvider(),
         repository.graph_nodes,
         repository.graph_edges,
     )
     chart = ChartCalculator().calculate(BirthInput(date=date(1990, 1, 1), time=time(12, 0)))
 
-    hits = await service.search("阴阳是不是代表好坏？", chart, "基础共识", "hybrid", 10)
+    hits = await service.search("阴阳是不是代表好坏？", chart, "基础共识", "bm25", 10)
 
     yinyang = next(hit for hit in hits if hit.document.id == "concept-yinyang")
     assert "knowledge_graph" in yinyang.matched_by
@@ -97,21 +61,12 @@ async def test_graph_expansion_is_a_retrieval_hint(tmp_path: Path) -> None:
 async def test_evidence_scopes_are_isolated_and_preview_keeps_canonical_chain(
     tmp_path: Path,
 ) -> None:
-    settings = Settings(
-        knowledge_path=BACKEND_ROOT / "knowledge",
-        vector_backend="memory",
-        database_path=tmp_path / "app.db",
-        qdrant_path=tmp_path / "qdrant",
-        embedding_provider="hash",
-        reranker_provider="lexical",
-        embedding_cache_path=tmp_path / "embedding-cache.sqlite3",
-    )
+    settings = build_settings(tmp_path)
     repository = KnowledgeRepository(settings.knowledge_path)
     repository.load()
     service = await RetrievalService.create(
         settings,
         repository.documents("personal_preview"),
-        HashEmbeddingProvider(),
         repository.graph_nodes,
         repository.graph_edges,
     )
@@ -121,7 +76,7 @@ async def test_evidence_scopes_are_isolated_and_preview_keeps_canonical_chain(
         "子平真诠怎样从月令讨论用神？",
         chart,
         "基础共识",
-        "hybrid_rerank",
+        "bm25",
         6,
         "reviewed_only",
     )
@@ -129,7 +84,7 @@ async def test_evidence_scopes_are_isolated_and_preview_keeps_canonical_chain(
         "子平真诠怎样从月令讨论用神？",
         chart,
         "子平格局法",
-        "hybrid_rerank",
+        "bm25",
         6,
         "personal_preview",
     )
@@ -147,7 +102,7 @@ async def test_evidence_scopes_are_isolated_and_preview_keeps_canonical_chain(
             "月令用神与格局",
             chart,
             selected_school,
-            "hybrid",
+            "bm25",
             10,
             "personal_preview",
         )
@@ -160,33 +115,26 @@ async def test_evidence_scopes_are_isolated_and_preview_keeps_canonical_chain(
 async def test_generic_chart_question_retrieves_its_pattern_candidate_rules(
     tmp_path: Path,
 ) -> None:
-    settings = Settings(
-        knowledge_path=BACKEND_ROOT / "knowledge",
-        vector_backend="memory",
-        database_path=tmp_path / "app.db",
-        qdrant_path=tmp_path / "qdrant",
-        embedding_provider="hash",
-        reranker_provider="lexical",
-        embedding_cache_path=tmp_path / "embedding-cache.sqlite3",
-    )
+    settings = build_settings(tmp_path)
     repository = KnowledgeRepository(settings.knowledge_path)
     repository.load()
     service = await RetrievalService.create(
         settings,
         repository.documents("personal_preview"),
-        HashEmbeddingProvider(),
         repository.graph_nodes,
         repository.graph_edges,
     )
     chart = ChartCalculator().calculate(BirthInput(date=date(1990, 1, 1), time=time(12, 0)))
 
     terms = service._chart_query_terms("这个命格如何？", chart)
+    # 纯 bm25 通道不再有向量召回兜底：第31章（论正官）的规则仍会被检索到，
+    # 但排在召回窗口的十四位左右，因此按召回窗口而不是前六条断言。
     hits = await service.search(
         "这个命格如何？",
         chart,
         "子平格局法",
-        "hybrid_rerank",
-        6,
+        "bm25",
+        20,
         "personal_preview",
     )
 

@@ -6,30 +6,25 @@ import hashlib
 import itertools
 import json
 import math
-import re
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, Literal
 
-import httpx
 from pydantic import ValidationError
 
 from bazi_api.core.config import Settings, get_settings
-from bazi_api.integrations.embeddings import create_embedding_provider
-from bazi_api.integrations.llm import AnswerGenerator, GenerationResult, QuestionPolicy
 from bazi_api.modules.charts.schemas import BirthInput, ChartFacts
 from bazi_api.modules.charts.service import ChartCalculator
 from bazi_api.modules.conversations.service import ChatService
 from bazi_api.modules.knowledge.repository import KnowledgeRepository
 from bazi_api.modules.knowledge.schemas import EvidenceScope
-from bazi_api.modules.retrieval.schemas import RetrievalHit
 from bazi_api.modules.retrieval.service import (
     RETRIEVAL_TUNING_FIELDS,
     RetrievalService,
     retrieval_tuning,
 )
 
-AnswerMode = Literal["off", "offline", "model"]
+AnswerMode = Literal["off"]
 DEFAULT_BIRTH = {
     "date": "1990-01-01",
     "time": "12:00:00",
@@ -42,10 +37,6 @@ REPORT_METRICS = (
     "evidence_text_consistency",
     "evidence_id_resolution",
     "citation_chain_rate",
-    "answer_quality.citation_validity_rate",
-    "answer_quality.policy_accuracy_rate",
-    "answer_quality.answer_allowed_rate",
-    "answer_quality.uncertainty_trigger_rate",
 )
 BASELINE_IDENTITY_FIELDS = (
     "mode",
@@ -55,8 +46,6 @@ BASELINE_IDENTITY_FIELDS = (
     "limit",
     "evidence_scope",
     "answer_mode",
-    "embedding_provider",
-    "reranker_provider",
     "model_version",
     "index_version",
     "tuning",
@@ -104,41 +93,6 @@ def parse_parameter_grid(values: list[str], settings: Settings) -> list[dict[str
     for overrides in combinations:
         settings_with_tuning(settings, overrides)
     return combinations
-
-
-def evaluate_generated_answer(
-    generated: GenerationResult,
-    hits: list[RetrievalHit],
-    *,
-    expected_policy: QuestionPolicy,
-    expects_uncertainty: bool,
-) -> dict[str, bool]:
-    citations = [int(item) for item in re.findall(r"\[(\d+)\]", generated.answer)]
-    citations_in_range = all(1 <= item <= len(hits) for item in citations)
-    citation_exempt = generated.policy_decision == "refuse_no_evidence"
-    verified = generated.evidence_validated and generated.safety_validated
-    valid_source = not generated.degradation_reason or (
-        generated.degradation_reason == "offline_references"
-        and generated.model_version == "offline-references"
-    )
-    citation_valid = (
-        generated.citations_validated
-        and (citation_exempt or (verified and valid_source))
-        and citations_in_range
-        and (citation_exempt or (bool(citations) if hits else not citations))
-    )
-    policy_correct = generated.question_policy == expected_policy
-    answer_allowed = generated.policy_decision == "allow" and verified and valid_source
-    uncertainty_triggered = not expects_uncertainty or (
-        generated.uncertainty_validated
-        and any(isinstance(item, str) and bool(item.strip()) for item in generated.uncertainties)
-    )
-    return {
-        "citation_valid": citation_valid,
-        "policy_correct": policy_correct,
-        "answer_allowed": answer_allowed,
-        "uncertainty_triggered": uncertainty_triggered,
-    }
 
 
 def compare_with_baseline(
@@ -221,7 +175,7 @@ def _load_cases(settings: Settings, dataset: str) -> list[dict[str, Any]]:
             "expected_policy",
         }.issubset(case):
             raise EvaluationConfigurationError(f"第 {index} 条评测数据缺少必填字段")
-        if case["expected_policy"] != "evidence_answer":
+        if case["expected_policy"] != "direct_answer":
             raise EvaluationConfigurationError(f"第 {index} 条评测数据的 expected_policy 无效")
     return payload
 
@@ -238,25 +192,12 @@ async def run(
     evidence_scope: EvidenceScope = "reviewed_only",
     *,
     parameter_overrides: dict[str, int | float] | None = None,
-    answer_mode: AnswerMode = "offline",
+    answer_mode: AnswerMode = "off",
     settings: Settings | None = None,
 ) -> dict[str, Any]:
     if limit < 10:
         raise EvaluationConfigurationError("Recall@5 / MRR@10 评测的 --limit 必须至少为 10")
     settings = settings_with_tuning(settings or get_settings(), parameter_overrides or {})
-    if mode == "lightrag" and not settings.lightrag_base_url:
-        raise EvaluationConfigurationError(
-            "LightRAG 未配置；请设置 LIGHTRAG_BASE_URL，或选择其他 mode"
-        )
-    model_key = (
-        settings.anthropic_auth_token
-        if settings.llm_provider == "anthropic"
-        else settings.openai_api_key
-    )
-    if answer_mode == "model" and not model_key:
-        raise EvaluationConfigurationError(
-            "真实答案评测需要当前 LLM provider 的密钥；离线评测请使用 --answer-mode offline"
-        )
     settings.ensure_directories()
     repository = KnowledgeRepository(settings.knowledge_path)
     repository.load()
@@ -271,48 +212,21 @@ async def run(
     ).hexdigest()
     calculator = ChartCalculator()
 
-    async with httpx.AsyncClient(
-        timeout=max(settings.llm_timeout_seconds, settings.embedding_timeout_seconds, 120.0),
-        limits=httpx.Limits(
-            max_connections=settings.http_max_connections,
-            max_keepalive_connections=settings.http_max_keepalive_connections,
-        ),
-        transport=httpx.AsyncHTTPTransport(retries=settings.http_connect_retries),
-    ) as http_client:
-        provider = create_embedding_provider(settings, http_client)
-        retrieval = await RetrievalService.create(
-            settings,
-            repository.documents("personal_preview"),
-            provider,
-            repository.graph_nodes,
-            repository.graph_edges,
-            http_client,
-        )
-        try:
-            generator: AnswerGenerator | None = None
-            if answer_mode != "off":
-                generator_settings = settings
-                if answer_mode == "offline":
-                    generator_settings = Settings.model_validate(
-                        {
-                            **settings.model_dump(),
-                            "openai_api_key": "",
-                            "anthropic_auth_token": "",
-                        }
-                    )
-                generator = AnswerGenerator(generator_settings, http_client)
-            report = await _evaluate_cases(
-                cases,
-                retrieval,
-                repository,
-                calculator,
-                generator,
-                mode,
-                limit,
-                evidence_scope,
-            )
-        finally:
-            await asyncio.to_thread(retrieval.close)
+    retrieval = await RetrievalService.create(
+        settings,
+        repository.documents("personal_preview"),
+        repository.graph_nodes,
+        repository.graph_edges,
+    )
+    report = await _evaluate_cases(
+        cases,
+        retrieval,
+        repository,
+        calculator,
+        mode,
+        limit,
+        evidence_scope,
+    )
 
     report.update(
         {
@@ -322,11 +236,8 @@ async def run(
             "limit": limit,
             "evidence_scope": evidence_scope,
             "answer_mode": answer_mode,
-            "embedding_provider": settings.embedding_provider,
-            "reranker_provider": settings.reranker_provider,
             "model_version": retrieval.model_version,
             "index_version": retrieval.index_version,
-            "cache": retrieval.cache_stats,
             "tuning": retrieval_tuning(settings),
         }
     )
@@ -338,7 +249,6 @@ async def _evaluate_cases(
     retrieval: RetrievalService,
     repository: KnowledgeRepository,
     calculator: ChartCalculator,
-    generator: AnswerGenerator | None,
     mode: str,
     limit: int,
     evidence_scope: EvidenceScope,
@@ -362,8 +272,6 @@ async def _evaluate_cases(
     matching_canonical_quotes = 0
     chain_total = 0
     chain_hits = 0
-    answer_checks: list[tuple[dict[str, bool], QuestionPolicy, bool]] = []
-    invalid_answers: list[dict[str, Any]] = []
     chart_profiles: set[str] = set()
 
     for case in cases:
@@ -428,23 +336,6 @@ async def _evaluate_cases(
         if case["category"] == "citation_chain":
             chain_total += 1
             chain_hits += int(any(item.document.kind == "canonical_passage" for item in results))
-        if generator is not None:
-            generated = await generator.generate(case["question"], chart, results)
-            expected_policy: QuestionPolicy = case["expected_policy"]
-            expects_uncertainty = bool(
-                case.get("expects_uncertainty", expected_policy != "evidence_answer")
-            )
-            checks = evaluate_generated_answer(
-                generated,
-                results,
-                expected_policy=expected_policy,
-                expects_uncertainty=expects_uncertainty,
-            )
-            answer_checks.append((checks, expected_policy, expects_uncertainty))
-            if not all(checks.values()):
-                invalid_answers.append(
-                    {"id": case["id"], "checks": checks, "answer": generated.answer}
-                )
         if not success:
             misses.append(
                 {
@@ -487,41 +378,6 @@ async def _evaluate_cases(
         multi_turn_recall = sum(per_category["multi_turn"]) / len(per_category["multi_turn"])
         result["multi_turn_recall_at_5"] = round(multi_turn_recall, 4)
         acceptance["multi_turn_recall_at_5"] = multi_turn_recall >= 0.90
-    if answer_checks:
-        answer_total = len(answer_checks)
-        policy_checks = [item for item, _, _ in answer_checks]
-        uncertainty_checks = [item for item, _, expected in answer_checks if expected]
-        policy_accuracy = sum(item["policy_correct"] for item in policy_checks) / len(policy_checks)
-        answer_allowed_rate = sum(item["answer_allowed"] for item in policy_checks) / len(
-            policy_checks
-        )
-        uncertainty_trigger = (
-            sum(item["uncertainty_triggered"] for item in uncertainty_checks)
-            / len(uncertainty_checks)
-            if uncertainty_checks
-            else 1.0
-        )
-        answer_quality = {
-            "citation_validity_rate": round(
-                sum(item["citation_valid"] for item, _, _ in answer_checks) / answer_total,
-                4,
-            ),
-            "policy_cases": len(policy_checks),
-            "policy_accuracy_rate": round(policy_accuracy, 4),
-            "answer_allowed_rate": round(answer_allowed_rate, 4),
-            "uncertainty_cases": len(uncertainty_checks),
-            "uncertainty_trigger_rate": round(uncertainty_trigger, 4),
-            "failures": invalid_answers,
-        }
-        result["answer_quality"] = answer_quality
-        acceptance.update(
-            {
-                "answer_citation_validity": answer_quality["citation_validity_rate"] == 1.0,
-                "answer_policy_accuracy": answer_quality["policy_accuracy_rate"] == 1.0,
-                "answer_all_topics_allowed": answer_quality["answer_allowed_rate"] == 1.0,
-                "answer_uncertainty_trigger": answer_quality["uncertainty_trigger_rate"] == 1.0,
-            }
-        )
     result["acceptance"] = acceptance
     result["passed"] = all(acceptance.values())
     return result
@@ -573,15 +429,13 @@ def _load_baseline(path: Path) -> dict[str, Any]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--mode", default="hybrid", choices=["dense", "hybrid", "hybrid_rerank", "lightrag"]
-    )
+    parser.add_argument("--mode", default="bm25", choices=["bm25"])
     parser.add_argument("--limit", default=10, type=int)
     parser.add_argument("--dataset", default="questions.json")
     parser.add_argument(
         "--scope", default="reviewed_only", choices=["reviewed_only", "personal_preview"]
     )
-    parser.add_argument("--answer-mode", default="offline", choices=["off", "offline", "model"])
+    parser.add_argument("--answer-mode", default="off", choices=["off"])
     parser.add_argument(
         "--param",
         action="append",
