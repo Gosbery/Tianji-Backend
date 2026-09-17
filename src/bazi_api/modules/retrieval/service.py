@@ -666,7 +666,7 @@ class RetrievalService:
     async def search(
         self,
         query: str,
-        chart: ChartFacts,
+        chart: ChartFacts | None,
         school: str,
         mode: str,
         limit: int = 6,
@@ -680,6 +680,24 @@ class RetrievalService:
             for document in self.documents.values()
             if self._eligible(document, chart, schools, evidence_scope)
         }
+        if mode == "bm25":
+            chart_terms = self._chart_query_terms(query, chart)
+            graph_query = " ".join([query, *chart_terms])
+            expanded_terms, related_nodes = self.graph.expand(graph_query, evidence_scope)
+            retrieval_query = normalize_retrieval_text(
+                " ".join([query, *chart_terms, *expanded_terms])
+            )
+            sparse = await asyncio.to_thread(
+                self.bm25.search, retrieval_query, allowed, self.settings.sparse_recall_limit
+            )
+            hits = self._hits_from_single(sparse, "bm25")
+            self._apply_title_boost(query, hits)
+            self._apply_concept_boost(query, hits)
+            self._apply_school_priority(preferred_schools or [], hits)
+            self._apply_graph_boost(related_nodes, hits)
+            self._apply_chart_context_boost(chart_terms, chart, hits)
+            hits = self._diversify_hits(hits, limit)
+            return self._expand_evidence_chain(hits, allowed, limit)
         if mode == "lightrag":
             hits = await self._search_lightrag(query, allowed, limit)
             self._apply_school_priority(preferred_schools or [], hits)
@@ -777,7 +795,9 @@ class RetrievalService:
         hits.sort(key=lambda hit: hit.score, reverse=True)
 
     @staticmethod
-    def _chart_query_terms(query: str, chart: ChartFacts) -> list[str]:
+    def _chart_query_terms(query: str, chart: ChartFacts | None) -> list[str]:
+        if chart is None:
+            return []
         applied_markers = (
             "这个命格",
             "我的命格",
@@ -812,9 +832,9 @@ class RetrievalService:
 
     @staticmethod
     def _apply_chart_context_boost(
-        chart_terms: list[str], chart: ChartFacts, hits: list[RetrievalHit]
+        chart_terms: list[str], chart: ChartFacts | None, hits: list[RetrievalHit]
     ) -> None:
-        if not chart_terms:
+        if not chart_terms or chart is None:
             return
         candidate_terms = {
             term
@@ -1144,7 +1164,7 @@ class RetrievalService:
     @staticmethod
     def _eligible(
         document: RetrievalDocument,
-        chart: ChartFacts,
+        chart: ChartFacts | None,
         schools: set[str],
         evidence_scope: EvidenceScope,
     ) -> bool:
@@ -1155,23 +1175,24 @@ class RetrievalService:
             return False
         if document.school not in {*schools, "基础共识"}:
             return False
-        facts = {
-            "day_master": chart.day_master,
-            "day_master_element": chart.day_master_element,
-            "day_master_yin_yang": chart.day_master_yin_yang,
-        }
-        for condition in document.conditions:
-            if "=" not in condition:
-                continue
-            key, expected = (part.strip() for part in condition.split("=", 1))
-            if key in facts and facts[key] != expected:
-                return False
-        for exclusion in document.exclusions:
-            if "=" not in exclusion:
-                continue
-            key, expected = (part.strip() for part in exclusion.split("=", 1))
-            if key in facts and facts[key] == expected:
-                return False
+        if chart is not None:
+            facts = {
+                "day_master": chart.day_master,
+                "day_master_element": chart.day_master_element,
+                "day_master_yin_yang": chart.day_master_yin_yang,
+            }
+            for condition in document.conditions:
+                if "=" not in condition:
+                    continue
+                key, expected = (part.strip() for part in condition.split("=", 1))
+                if key in facts and facts[key] != expected:
+                    return False
+            for exclusion in document.exclusions:
+                if "=" not in exclusion:
+                    continue
+                key, expected = (part.strip() for part in exclusion.split("=", 1))
+                if key in facts and facts[key] == expected:
+                    return False
         return True
 
     @staticmethod
