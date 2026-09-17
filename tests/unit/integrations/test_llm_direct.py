@@ -8,8 +8,12 @@ import httpx
 import pytest
 
 from bazi_api.core.config import Settings
-from bazi_api.core.errors import ServiceUnavailableError
-from bazi_api.integrations.llm import AnswerGenerator
+from bazi_api.core.errors import (
+    InvalidUpstreamResponseError,
+    ServiceUnavailableError,
+    UpstreamServiceError,
+)
+from bazi_api.integrations.llm import AnswerGenerator, GenerationResult
 from bazi_api.modules.charts.schemas import BirthInput, TopicFactPack
 from bazi_api.modules.charts.service import ChartCalculator
 
@@ -191,3 +195,146 @@ async def test_generate_direct_prompt_drops_evidence_channel_wording(tmp_path: P
         assert wording not in body
     assert "偏财（庚金）藏于年支巳" in body
     assert "不得诊断疾病" in body
+
+
+def anthropic_settings(tmp_path: Path) -> Settings:
+    return make_settings(
+        tmp_path,
+        llm_provider="anthropic",
+        anthropic_auth_token="test-anthropic-key",
+        anthropic_base_url="https://anthropic.invalid",
+        anthropic_chat_model="claude-test",
+    )
+
+
+@pytest.mark.asyncio
+async def test_generate_direct_anthropic_uses_messages_protocol(tmp_path: Path) -> None:
+    captured: dict[str, object] = {}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        captured["url"] = str(request.url)
+        captured["headers"] = dict(request.headers)
+        captured["payload"] = json.loads(request.content)
+        return httpx.Response(
+            200,
+            json={
+                "content": [
+                    {
+                        "type": "text",
+                        "text": json.dumps(
+                            {
+                                "answer": "## 结论\n\n有依据的回答",
+                                "uncertainties": ["仍有边界"],
+                                "followups": ["继续追问"],
+                            },
+                            ensure_ascii=False,
+                        ),
+                    }
+                ],
+                "usage": {"input_tokens": 30, "output_tokens": 12},
+            },
+        )
+
+    generator = AnswerGenerator(
+        anthropic_settings(tmp_path), httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    )
+
+    result = await generator.generate_direct("如何理解正官？", chart(), None)
+
+    headers = captured["headers"]
+    payload = captured["payload"]
+    assert captured["url"] == "https://anthropic.invalid/v1/messages"
+    assert isinstance(headers, dict)
+    assert headers["x-api-key"] == "test-anthropic-key"
+    assert headers["anthropic-version"] == "2023-06-01"
+    assert isinstance(payload, dict)
+    assert payload["model"] == "claude-test"
+    assert payload["thinking"] == {"type": "disabled"}
+    assert "system" in payload
+    assert "response_format" not in payload
+    assert result.answer == "## 结论\n\n有依据的回答"
+    assert result.token_usage == 42
+    assert result.model_version == "claude-test"
+
+
+@pytest.mark.asyncio
+async def test_generate_direct_retry_count_is_bounded_and_maps_to_upstream_error(
+    tmp_path: Path,
+) -> None:
+    requests = 0
+
+    def handler(_: httpx.Request) -> httpx.Response:
+        nonlocal requests
+        requests += 1
+        return httpx.Response(503, headers={"Retry-After": "0"})
+
+    generator = AnswerGenerator(
+        make_settings(tmp_path, http_request_retries=2),
+        httpx.AsyncClient(transport=httpx.MockTransport(handler)),
+    )
+
+    with pytest.raises(UpstreamServiceError):
+        await generator.generate_direct("如何理解正官？", chart(), None)
+
+    assert requests == 3
+
+
+@pytest.mark.asyncio
+async def test_generate_direct_rejects_malformed_success_envelope(tmp_path: Path) -> None:
+    def handler(_: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json={"choices": []})
+
+    generator = AnswerGenerator(
+        make_settings(tmp_path, http_request_retries=0),
+        httpx.AsyncClient(transport=httpx.MockTransport(handler)),
+    )
+
+    with pytest.raises(InvalidUpstreamResponseError):
+        await generator.generate_direct("如何理解正官？", chart(), None)
+
+
+def test_direct_output_gate_rejects_deterministic_and_medical_claims() -> None:
+    deterministic = GenerationResult(
+        answer="命主明年一定发财，已经可以确定",
+        uncertainties=["现实结果仍可能变化"],
+        followups=[],
+    )
+    medical = GenerationResult(
+        answer="建议立即停药，改为每日服用本方剂",
+        uncertainties=["本回答不构成医疗建议"],
+        followups=[],
+    )
+    safe = GenerationResult(
+        answer="若条件成熟仍可能受益",
+        uncertainties=["仍需结合现实条件"],
+        followups=[],
+    )
+
+    assert AnswerGenerator._direct_output_is_trusted(deterministic) is False
+    assert AnswerGenerator._direct_output_is_trusted(medical) is False
+    assert AnswerGenerator._direct_output_is_trusted(safe) is True
+
+
+@pytest.mark.asyncio
+async def test_generate_direct_falls_back_when_safety_gate_rejects_output(
+    tmp_path: Path,
+) -> None:
+    transport, payloads, _ = recording_transport(
+        [
+            httpx.Response(
+                200,
+                json=raw_payload("命主明年一定发财，已经可以确定", ["现实结果仍可能变化"]),
+            )
+        ]
+    )
+    generator = AnswerGenerator(
+        make_settings(tmp_path), httpx.AsyncClient(transport=transport)
+    )
+
+    result = await generator.generate_direct("如何理解财格？", chart(), None)
+
+    assert result.degradation_reason == "direct_validation_failed"
+    assert "一定发财" not in result.answer
+    assert result.uncertainties == ["答案未通过安全与完整性校验。"]
+    assert len(payloads) == 2
+    assert "unsafe_output" in json.dumps(payloads[1], ensure_ascii=False)

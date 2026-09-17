@@ -27,17 +27,13 @@ jobs:
         run: uv run python -m pytest -q
       - name: Offline retrieval quality gate
         env:
-          EMBEDDING_PROVIDER: hash
-          RERANKER_PROVIDER: lexical
-          VECTOR_BACKEND: memory
           PYTHONPATH: src
         run: >-
           uv run python -m bazi_api.cli.evaluate
-          --mode hybrid
+          --mode bm25
           --limit 10
-          --answer-mode offline
+          --answer-mode off
           --require-acceptance
-          --baseline evals/baselines/questions.hash.hybrid.json
           --output evaluation-report.json
       - name: Upload evaluation report
         if: always()

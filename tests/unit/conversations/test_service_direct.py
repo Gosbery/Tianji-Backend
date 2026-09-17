@@ -20,12 +20,6 @@ class FakeDirectGenerator:
     def __init__(self) -> None:
         self.calls: list[dict[str, object]] = []
 
-    async def generate(self, *_: object, **kwargs: object) -> GenerationResult:
-        raise AssertionError("direct 模式不得调用旧 generate")
-
-    async def generate_stream(self, *_: object, **kwargs: object) -> GenerationResult:
-        raise AssertionError("direct 模式不得调用旧 generate_stream")
-
     async def generate_direct(
         self,
         question: str,

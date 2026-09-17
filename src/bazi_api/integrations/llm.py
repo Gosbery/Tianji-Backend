@@ -471,19 +471,6 @@ class AnswerGenerator:
             raise InvalidUpstreamResponseError()
         return message["content"]
 
-    def _anthropic_output_exhausted(self, payload: dict[str, object]) -> bool:
-        if self.provider != "anthropic" or payload.get("stop_reason") != "max_tokens":
-            return False
-        content = payload.get("content")
-        if not isinstance(content, list):
-            return False
-        return not any(
-            isinstance(block, dict)
-            and block.get("type") == "text"
-            and isinstance(block.get("text"), str)
-            for block in content
-        )
-
     @staticmethod
     def _token_usage(usage_payload: object) -> int | None:
         if not isinstance(usage_payload, dict):
