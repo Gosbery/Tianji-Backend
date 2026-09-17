@@ -17,6 +17,7 @@ from bazi_api.integrations.llm import (
     AnswerGenerator,
     GenerationResult,
     _explicit_safety_violation,
+    _strip_markup,
 )
 from bazi_api.modules.charts.schemas import BirthInput, TopicFactPack
 from bazi_api.modules.charts.service import ChartCalculator
@@ -503,6 +504,69 @@ def test_safety_gate_allows_hedged_year_statements(answer: str) -> None:
     ],
 )
 def test_safety_gate_does_not_treat_vision_compounds_as_hedges(answer: str) -> None:
+    assert _violation(answer) is True
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        # 波 3 只给年份断言加了条件例外，结果词在前与“强模态词 + 结果词”两条规则漏了，
+        # 这两类合法条件式表述被误判为违规（整篇答案会被替换成兜底文案）。
+        "你2028年有结婚的可能，但不一定会成行",
+        "2028年是否结婚还不一定，要看条件",
+        # 同形的条件式表述
+        "你2030年有升职的可能，但不一定会实现",
+        "2027年是否买房还不一定，要视条件而定",
+    ],
+)
+def test_safety_gate_allows_hedged_result_before_assertion(answer: str) -> None:
+    assert _violation(answer) is False
+
+
+# 本轮条件例外不得放宽任何真实违规：这 11 条是红线，必须仍判 True。
+_WAVE4_RED_LINES = [
+    "2028年你会结婚",
+    "你2035年会去世",
+    "命主寿元止于63岁",
+    "我何年暴富",
+    "命主明年一定，会结婚",
+    "命主2029年注定破财",
+    "二〇二八年你会结婚",
+    "发财是必然的",
+    "你一定会结婚",
+    "2028年你会结婚，值得重视",
+    "2028年你会结婚，切莫忽视",
+]
+
+
+@pytest.mark.parametrize("answer", _WAVE4_RED_LINES)
+def test_safety_gate_hedge_exception_keeps_red_lines(answer: str) -> None:
+    assert _violation(answer) is True
+
+
+def test_strip_markup_uses_escapes_and_keeps_alphanumerics() -> None:
+    # 零宽字符必须以转义写法（\u200b-\u200f、\ufeff）表达：一旦被编辑器归一化成
+    # 字面隐形字符接 ASCII 连字符，就成了字符区间 U+0023–U+200F，会连带剥掉所有
+    # ASCII 字母数字，令整个安全闸静默失效。
+    assert _strip_markup("2028年\u200b你会结婚") == "2028年你会结婚"
+    # 区间端点之间的字符（U+200C/D/E）也必须被剥掉，证明区间仍然成立。
+    assert _strip_markup("a\u200cb\u200dc\u200ed\u200fe") == "abcde"
+    assert _strip_markup("\ufeff结论") == "结论"
+    assert _strip_markup("#*_` \n") == ""
+    assert _strip_markup("abcXYZ123") == "abcXYZ123"
+    assert _strip_markup("2028年你会结婚") == "2028年你会结婚"
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        # 夹带零宽字符的违规句：_strip_markup 归一化后仍应判违规。
+        "2028年\u200b你会结婚",
+        "2028年你会结\u200d婚",
+        "\ufeff2028年你会结婚",
+    ],
+)
+def test_safety_gate_still_catches_violations_with_invisible_characters(answer: str) -> None:
     assert _violation(answer) is True
 
 

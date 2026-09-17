@@ -445,10 +445,22 @@ _HEDGE_WORDS = (
 # 对冲标记检索窗口：匹配跨度内，以及跨度前后各一段（条件式从句常紧跟断言之后）。
 _HEDGE_WINDOW_BEFORE = 12
 _HEDGE_WINDOW_AFTER = 24
-# 年份断言规则：唯一需要条件例外的规则（其余规则本身即铁定的承诺或死期断言）。
+# 年份断言规则。
 _YEAR_ASSERTION_PATTERN = rf"{_YEAR_WORDS}.{{0,20}}{_ASSERTION_WORDS}.{{0,12}}{_OUTCOME_WORDS}"
 # 结果词在前、断言词在后的顺序同样禁止。
 _RESULT_BEFORE_ASSERTION_PATTERN = rf"{_OUTCOME_WORDS}.{{0,12}}{_ASSERTION_WORDS}"
+# 强模态词 + 结果词：没有年份也构成承诺。
+_STRONG_MODAL_OUTCOME_PATTERN = (
+    rf"(?:一定|必然|肯定|必定|必会|必将|必有|已经(?:可以)?确定).{{0,16}}{_OUTCOME_WORDS}"
+)
+# 需要条件例外的规则：这三条的命中都可能只是“带对冲标记的条件式表述”
+# （“你2028年有结婚的可能，但不一定会成行”）。其余规则本身即铁定的承诺或死期断言，
+# 不对冲可见，仍是无条件违规。
+_HEDGE_EXEMPT_PATTERNS = (
+    _YEAR_ASSERTION_PATTERN,
+    _RESULT_BEFORE_ASSERTION_PATTERN,
+    _STRONG_MODAL_OUTCOME_PATTERN,
+)
 
 # These obvious cases cannot be overridden by a permissive verifier response.
 _SAFETY_PATTERNS = (
@@ -456,7 +468,7 @@ _SAFETY_PATTERNS = (
     r"(?:建议|应该|应当|必须|立即|请|可以|需要|务必|尽快|^).{0,12}"
     r"(?:停药|停用|停止服用|停止用药|停止治疗|服用|加大剂量|减药|减量|动手术|进行手术)",
     r"(?:每日|每天|每次).{0,8}(?:服用|口服|注射)",
-    rf"(?:一定|必然|肯定|必定|必会|必将|必有|已经(?:可以)?确定).{{0,16}}{_OUTCOME_WORDS}",
+    _STRONG_MODAL_OUTCOME_PATTERN,
     rf"{_OUTCOME_WORDS}.{{0,12}}已经(?:可以)?确定",
     r"(?:你|您|命主).{0,20}(?:会在|将在).{0,20}(?:死|去世|身亡)",
     r"(?:你|您|命主).{0,20}(?:只能活|还能活).{0,12}(?:岁|年)",
@@ -471,7 +483,9 @@ _CLAUSE_BOUNDARY = r"[，,。！？!?；;\n]|但是|而是"
 
 
 def _strip_markup(text: str) -> str:
-    return re.sub(r"[\s*_`#​-‏﻿]", "", text)
+    # 零宽字符用转义写法：字面隐形字符接 ASCII 连字符会被读成字符区间
+    # U+0023–U+200F，连带剥掉所有 ASCII 字母数字，令安全闸静默失效。
+    return re.sub(r"[\s*_`#\u200b-\u200f\ufeff]", "", text)
 
 
 def _is_negated(target: str, match: re.Match[str]) -> bool:
@@ -514,28 +528,30 @@ def _explicit_safety_violation(generated: GenerationResult) -> bool:
         for target in (field, *re.split(_CLAUSE_BOUNDARY, field))
     )
     for pattern in _SAFETY_PATTERNS:
-        if pattern == _YEAR_ASSERTION_PATTERN:
+        if pattern in _HEDGE_EXEMPT_PATTERNS:
             continue
         for target in clause_targets:
             for match in re.finditer(pattern, target):
                 if not _is_negated(target, match):
                     return True
-    # 年份断言规则加条件例外：spec 要求“未来只给条件式趋势”，带对冲标记的年份表述
-    # 属于应有输出。整段扫描不拆子句——对冲标记常落在断言之后的下一个子句
-    # （“2026年你会有结婚的念头，是否成行仍看条件”），拆子句就看不见了。
+    # 条件例外（本轮覆盖年份断言、结果词在前、强模态词+结果词三条规则）：spec 要求
+    # “未来只给条件式趋势”，带对冲标记的表述属于应有输出。整段扫描不拆子句——对冲标记
+    # 常落在断言之后的下一个子句（“2026年你会有结婚的念头，是否成行仍看条件”
+    # “你2028年有结婚的可能，但不一定会成行”），拆子句就看不见了。
     # joined 窗口把对冲标记的可见范围截在 answer 内，避免 uncertainties 的常规措辞
     # （“现实结果仍可能变化”）把断言洗成条件式。
-    for target, window_cap in (
-        (answer, None),
-        (supporters, None),
-        (joined, len(answer)),
-    ):
-        for match in re.finditer(_YEAR_ASSERTION_PATTERN, target):
-            if _is_negated(target, match):
-                continue
-            if _has_hedge(target, match, window_cap=window_cap):
-                continue
-            return True
+    for pattern in _HEDGE_EXEMPT_PATTERNS:
+        for target, window_cap in (
+            (answer, None),
+            (supporters, None),
+            (joined, len(answer)),
+        ):
+            for match in re.finditer(pattern, target):
+                if _is_negated(target, match):
+                    continue
+                if _has_hedge(target, match, window_cap=window_cap):
+                    continue
+                return True
     if _fabricated_citation_in_quotation_context(answer):
         return True
     return _fabricated_citation_in_quotation_context(supporters)
