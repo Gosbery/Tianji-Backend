@@ -1,10 +1,32 @@
 from datetime import date, datetime, time
+from typing import Literal
 
 import pytest
 from pydantic import ValidationError
 
-from bazi_api.modules.charts.schemas import BirthInput
+from bazi_api.modules.charts.schemas import BirthInput, PillarFacts
 from bazi_api.modules.charts.service import ChartCalculator
+
+
+def _stub_pillars(branches: list[str]) -> list[PillarFacts]:
+    keys: list[Literal["year", "month", "day", "time"]] = ["year", "month", "day", "time"]
+    labels = ["年柱", "月柱", "日柱", "时柱"]
+    return [
+        PillarFacts(
+            key=keys[index],
+            label=labels[index],
+            stem="甲",
+            branch=branch,
+            stem_element="木",
+            stem_yin_yang="阳",
+            branch_element="木",
+            hidden_stems=[],
+            ten_god_stem="比肩",
+            ten_god_branches=[],
+            nayin="",
+        )
+        for index, branch in enumerate(branches)
+    ]
 
 
 def test_chart_is_deterministic() -> None:
@@ -51,6 +73,34 @@ def test_chart_includes_structural_facts_without_claiming_transformation() -> No
         "寅巳刑候选",
     }
     assert any(item.hidden_stem == "丙" and item.outside_day_master for item in chart.exposed_stems)
+
+
+@pytest.mark.parametrize(
+    ("branches", "forbidden", "expected"),
+    [
+        # 隔角对（组内下标不相邻）不得再标半三合/半三会
+        (["申", "辰", "申", "辰"], "半三合", None),
+        (["亥", "丑", "亥", "丑"], "半三会", None),
+        (["寅", "辰", "寅", "辰"], "半三会", None),
+        (["巳", "未", "巳", "未"], "半三会", None),
+        # 相邻对仍是半合/半会
+        (["寅", "午", "寅", "午"], None, "寅午半三合候选"),
+        (["亥", "子", "亥", "子"], None, "亥子半三会候选"),
+        (["申", "子", "申", "子"], None, "申子半三合候选"),
+        # 三支齐全仍标“全”
+        (["申", "子", "辰", "午"], None, "申子辰全三合候选"),
+    ],
+)
+def test_relations_only_mark_adjacent_pairs_as_partial_harmony(
+    branches: list[str], forbidden: str | None, expected: str | None
+) -> None:
+    relations = ChartCalculator._relations(_stub_pillars(branches))
+    labels = {item.label for item in relations}
+
+    if forbidden is not None:
+        assert not any(forbidden in label for label in labels), labels
+    if expected is not None:
+        assert expected in labels, labels
 
 
 def test_chart_marks_time_boundary_uncertainty() -> None:

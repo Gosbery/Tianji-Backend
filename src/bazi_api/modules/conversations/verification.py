@@ -77,7 +77,8 @@ class VerificationService:
                 "latency_ms": latency_ms,
             },
         )
-        self.traces.add(
+        await run_sync(
+            self.traces.add,
             session_id=session_id,
             question=query,
             mode="bm25",

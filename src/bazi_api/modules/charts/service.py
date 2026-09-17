@@ -363,21 +363,25 @@ class ChartCalculator:
             ("seasonal_meeting", SEASONAL_GROUPS, "三会"),
         ):
             for group in groups:
-                members = [branch for branch in group if branch in present]
-                if len(members) >= 2:
-                    complete = len(members) == len(group)
-                    relations.append(
-                        StructuralRelationFact(
-                            kind=kind,
-                            label=f"{''.join(members)}{'全' if complete else '半'}{suffix}候选",
-                            members=members,
-                            positions=[
-                                key for branch in members for key in branch_positions[branch]
-                            ],
-                            completeness="full" if complete else "partial",
-                            note="组合条件已出现；是否成局或化气仍须审月令、透干和破坏条件。",
-                        )
+                indices = [index for index, branch in enumerate(group) if branch in present]
+                complete = len(indices) == len(group)
+                # 半合须是生旺/旺墓相邻对，半会须是相邻二支；隔角对（如申辰、亥丑）
+                # 不成半局，按组内下标是否相邻判定。
+                if not complete and not (
+                    len(indices) == 2 and indices[1] - indices[0] == 1
+                ):
+                    continue
+                members = [group[index] for index in indices]
+                relations.append(
+                    StructuralRelationFact(
+                        kind=kind,
+                        label=f"{''.join(members)}{'全' if complete else '半'}{suffix}候选",
+                        members=members,
+                        positions=[key for branch in members for key in branch_positions[branch]],
+                        completeness="full" if complete else "partial",
+                        note="组合条件已出现；是否成局或化气仍须审月令、透干和破坏条件。",
                     )
+                )
         return relations
 
     def _pillar(

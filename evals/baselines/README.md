@@ -59,11 +59,20 @@ still match the source text.
 
 ## Reproduction
 
-Run from the backend directory:
+Run from the backend directory. Write the candidate to a temporary path — do **not**
+point `--output` at the pinned baseline file, or the reproduction run would overwrite
+the reference it is supposed to be compared against:
 
 ```bash
 PYTHONPATH=src uv run python -m bazi_api.cli.evaluate --mode bm25 --limit 10 \
-  --output evals/baselines/questions.bm25.json
+  --output /tmp/questions.bm25.candidate.json
+```
+
+Inspect the candidate. Only after confirming the corpus and index really changed for a
+recorded reason, copy it back by hand:
+
+```bash
+cp /tmp/questions.bm25.candidate.json evals/baselines/questions.bm25.json
 ```
 
 CI compares against the baseline and enforces acceptance:

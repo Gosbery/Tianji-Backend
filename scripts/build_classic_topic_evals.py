@@ -87,7 +87,7 @@ def build() -> list[dict[str, object]]:
                     "category": category,
                     "question": question,
                     "expected_ids": passages,
-                    "expected_policy": "evidence_answer",
+                    "expected_policy": "direct_answer",
                     "school": work["school"],
                     "expects_uncertainty": category
                     in {"timing", "health", "relationship", "career", "wealth"},

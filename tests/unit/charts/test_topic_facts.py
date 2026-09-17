@@ -47,6 +47,8 @@ def test_element_distribution_counts_stems_and_hidden_stems() -> None:
 def test_spirit_star_lookup_tables() -> None:
     assert tian_yi_branches("甲") == ["丑", "未"]
     assert tian_yi_branches("丙") == ["亥", "酉"]
+    assert tian_yi_branches("壬") == ["卯", "巳"]
+    assert tian_yi_branches("癸") == ["卯", "巳"]
     assert wenchang_branch("丙") == "申"
     assert peach_blossom_branches("巳") == ["午"]
     assert peach_blossom_branches("寅") == ["卯"]
@@ -96,10 +98,44 @@ def test_social_pack_reports_spirit_stars_with_disclaimer() -> None:
     pack = build_topic_fact_pack(chart(), "topic:social", current_year=2026)
 
     joined = "\n".join(pack.facts)
-    assert "天乙贵人在亥、酉，四柱未见" in joined
+    assert "天乙贵人（日干丙起）在亥、酉，四柱未见" in joined
     assert "桃花（自年支巳起）在午，见于时支" in joined
     assert "天德贵人（子月起）在巳，见于年柱" in joined
     assert "传统神煞" in joined and "仅作参考" in joined
+
+
+def test_family_pack_reports_seal_and_peer_stars_without_day_exposure() -> None:
+    from bazi_api.modules.charts.topic_facts import build_topic_fact_pack
+
+    pack = build_topic_fact_pack(chart(), "topic:family", current_year=2026)
+
+    assert pack is not None
+    assert pack.topic_id == "topic:family"
+    joined = "\n".join(pack.facts)
+    # 印绶代长辈
+    assert "偏印（甲木）透于时柱，又藏于日支寅" in joined
+    assert "正印（乙木）四柱未见" in joined
+    # 比劫代同辈：日柱天干即日主本人，不算“透出”
+    assert "比肩（丙火）透于月柱，又藏于年支巳、日支寅" in joined
+    assert "劫财（丁火）藏于时支午，未透干" in joined
+    assert "透于月柱、日柱" not in joined
+    assert not any("透" in fact and "日柱" in fact for fact in pack.facts)
+    assert "十神配六亲为传统取象方法" in joined
+
+
+def test_study_pack_reports_seal_stars_and_wenchang() -> None:
+    from bazi_api.modules.charts.topic_facts import build_topic_fact_pack
+
+    pack = build_topic_fact_pack(chart(), "topic:study", current_year=2026)
+
+    assert pack is not None
+    assert pack.topic_id == "topic:study"
+    joined = "\n".join(pack.facts)
+    assert "偏印（甲木）透于时柱，又藏于日支寅" in joined
+    assert "正印（乙木）四柱未见" in joined
+    assert "文昌（日干丙起）在申，四柱未见。" in joined
+    assert "传统神煞" in joined and "仅作参考" in joined
+    assert any("流年" in fact and "2026" in fact for fact in pack.facts)
 
 
 def test_health_pack_reports_element_distribution() -> None:

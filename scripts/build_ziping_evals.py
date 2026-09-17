@@ -31,7 +31,7 @@ def case(
     category: str,
     question: str,
     expected_ids: list[str],
-    expected_policy: str = "evidence_answer",
+    expected_policy: str = "direct_answer",
 ) -> dict[str, object]:
     return {
         "id": identifier,

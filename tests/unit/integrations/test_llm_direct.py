@@ -13,7 +13,11 @@ from bazi_api.core.errors import (
     ServiceUnavailableError,
     UpstreamServiceError,
 )
-from bazi_api.integrations.llm import AnswerGenerator, GenerationResult
+from bazi_api.integrations.llm import (
+    AnswerGenerator,
+    GenerationResult,
+    _explicit_safety_violation,
+)
 from bazi_api.modules.charts.schemas import BirthInput, TopicFactPack
 from bazi_api.modules.charts.service import ChartCalculator
 
@@ -338,3 +342,106 @@ async def test_generate_direct_falls_back_when_safety_gate_rejects_output(
     assert result.uncertainties == ["答案未通过安全与完整性校验。"]
     assert len(payloads) == 2
     assert "unsafe_output" in json.dumps(payloads[1], ensure_ascii=False)
+
+
+def _violation(answer: str, uncertainties: list[str] | None = None) -> bool:
+    return _explicit_safety_violation(
+        GenerationResult(
+            answer=answer,
+            uncertainties=uncertainties or ["仍需结合实际条件"],
+            followups=[],
+        )
+    )
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        # 年份 + 断言词 + 结果词
+        "2028年你会结婚",
+        "你2035年会去世",
+        "你2028年必然离婚",
+        "命主2029年注定破财",
+        "2027年你一定会升职",
+        "二〇二八年你会结婚",
+        # 疑问年份词直接接结果词
+        "我何年暴富",
+        "你哪一年能买房",
+        # 寿元类
+        "命主寿元止于63岁",
+        "他寿命只有七十岁",
+        "阳寿仅余十年",
+        # 强化措辞（无年份也属承诺/死期断言）
+        "发大财",
+        "命主终将归西",
+    ],
+)
+def test_safety_gate_rejects_year_assertions_and_death_claims(answer: str) -> None:
+    assert _violation(answer) is True
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        "发财是必然的",
+        "结婚是早晚的事，命中注定如此",
+        "升职已经可以确定",
+    ],
+)
+def test_safety_gate_rejects_result_before_assertion_order(answer: str) -> None:
+    assert _violation(answer) is True
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        "《子平真诠》第3章有云：财旺生官",
+        "按《滴天髓》第十二节所述",
+        "《三命通会》第一卷记载此格",
+        "《穷通宝鉴》第一条即言此理",
+        "《渊海子平》第三篇论用神",
+    ],
+)
+def test_safety_gate_rejects_fabricated_citations_in_direct_channel(answer: str) -> None:
+    assert _violation(answer) is True
+
+
+def test_safety_gate_catches_cross_clause_escape() -> None:
+    # 模态词与结果词被逗号分到不同子句，仍应被整段扫描拦下。
+    assert _violation("命主明年一定，会结婚") is True
+    assert _violation("2028年你必然，暴富") is True
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        "不应承诺2028年你会结婚，也不应断言必然发财",
+        "不能断言你2035年会去世，命理不作死期判断",
+        "不要承诺某人何年暴富",
+        "不得给出寿元止于63岁的结论",
+        "避免把发大财说成必然结果",
+        "没有说你会归西",
+        "未被证明2028年你会结婚",
+    ],
+)
+def test_safety_gate_keeps_negation_whitelist(answer: str) -> None:
+    assert _violation(answer) is False
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        "若条件成熟仍可能受益",
+        "2028年前后若条件成熟，感情有推进空间，但不保证具体结果",
+        "婚姻的时间窗口需结合大运与命局条件观察，不作确定性判断",
+        "传统文献认为此格局利于文书往来，实际仍需个人努力",
+    ],
+)
+def test_safety_gate_keeps_conditional_wording(answer: str) -> None:
+    assert _violation(answer) is False
+
+
+def test_direct_system_prompt_requires_at_least_one_uncertainty() -> None:
+    prompt = AnswerGenerator._direct_system_prompt("基础共识", None)
+
+    assert "uncertainties 至少列出 1 条本答案的适用边界或不确定性" in prompt

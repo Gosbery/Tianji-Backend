@@ -20,7 +20,7 @@ TIAN_YI_NOBLE: dict[str, list[str]] = {
     "甲": ["丑", "未"], "戊": ["丑", "未"], "庚": ["丑", "未"],
     "乙": ["子", "申"], "己": ["子", "申"],
     "丙": ["亥", "酉"], "丁": ["亥", "酉"],
-    "壬": ["巳", "卯"], "癸": ["巳", "卯"],
+    "壬": ["卯", "巳"], "癸": ["卯", "巳"],
     "辛": ["午", "寅"],
 }
 # 文昌（日干 → 地支）。
@@ -120,10 +120,18 @@ def _god_stems(day_master: str, gods: tuple[str, ...]) -> dict[str, str]:
 
 
 def _star_report(chart: ChartFacts, stems: dict[str, str]) -> list[str]:
-    """按天干逐一陈述配星的透干与藏支位置，只报结构，不判定吉凶。"""
+    """按天干逐一陈述配星的透干与藏支位置，只报结构，不判定吉凶。
+
+    “透干”指相对日主而言在四柱天干出现；日柱天干恒等于日主本人，不算透出
+    （与 ``charts/service.py`` 的 ``outside_day_master`` 口径一致）。
+    """
     lines: list[str] = []
     for stem, god in stems.items():
-        visible = [pillar.label for pillar in chart.pillars if pillar.stem == stem]
+        visible = [
+            pillar.label
+            for pillar in chart.pillars
+            if pillar.stem == stem and pillar.key != "day"
+        ]
         hidden = [
             f"{pillar.label.replace('柱', '支')}{pillar.branch}"
             for pillar in chart.pillars
@@ -187,7 +195,7 @@ def _spirit_star_lines(chart: ChartFacts) -> list[str]:
     if present:
         lines.append(f"天乙贵人（日干{chart.day_master}起）在{label}，见于{'、'.join(present)}。")
     else:
-        lines.append(f"天乙贵人在{label}，四柱未见。")
+        lines.append(f"天乙贵人（日干{chart.day_master}起）在{label}，四柱未见。")
 
     year_branch = branches_by_key["year"]
     day_branch = branches_by_key["day"]

@@ -4,7 +4,6 @@ import json
 import logging
 import re
 import uuid
-from collections.abc import Awaitable, Callable
 from dataclasses import dataclass
 from typing import Literal
 
@@ -237,6 +236,7 @@ class AnswerGenerator:
             "answer 必须使用清晰的 Markdown 排版：每个主要部分用“## 标题”单独成行；每段最多三句话；"
             "并列判断和建议使用“- ”或“1. ”列表且每项单独成行；标题、段落和列表之间留一个空行。"
             "回答必须使用自然中文，不得输出 JSON 字段名或内部枚举值。"
+            "uncertainties 至少列出 1 条本答案的适用边界或不确定性，不得留空。"
             "birth 中的 date、time、timezone、gender 均为用户已经提供的输入，不得再次声称缺少"
             "出生日期、出生时间或性别。"
             "luck 是程序计算的大运事实；用户询问当前或下一大运时直接使用，"
@@ -292,108 +292,6 @@ class AnswerGenerator:
                 if isinstance(cycle, dict):
                     cycle.pop("status", None)
         return json.dumps(payload, ensure_ascii=False)
-
-    async def _consume_model_stream(
-        self,
-        endpoint: str,
-        headers: dict[str, str],
-        payload: dict[str, object],
-        on_answer_chunk: Callable[[str], Awaitable[None]],
-    ) -> tuple[str, object]:
-        content = ""
-        emitted_answer = ""
-        usage: object = None
-        async with self.http_client.stream(
-            "POST", endpoint, headers=headers, json=payload, timeout=self.timeout
-        ) as response:
-            response.raise_for_status()
-            async for line in response.aiter_lines():
-                if not line.startswith("data:"):
-                    continue
-                data = line[5:].strip()
-                if not data or data == "[DONE]":
-                    continue
-                try:
-                    event = json.loads(data)
-                except json.JSONDecodeError as exc:
-                    raise InvalidUpstreamResponseError() from exc
-                if not isinstance(event, dict):
-                    continue
-                event_usage = event.get("usage")
-                if isinstance(event_usage, dict):
-                    usage = {**(usage if isinstance(usage, dict) else {}), **event_usage}
-                message = event.get("message")
-                if isinstance(message, dict) and isinstance(message.get("usage"), dict):
-                    usage = {
-                        **(usage if isinstance(usage, dict) else {}),
-                        **message["usage"],
-                    }
-                delta = self._stream_text_delta(event)
-                if not delta:
-                    continue
-                content += delta
-                answer_prefix = self._partial_answer(content)
-                if len(answer_prefix) > len(emitted_answer):
-                    await on_answer_chunk(answer_prefix[len(emitted_answer) :])
-                    emitted_answer = answer_prefix
-        return content, usage
-
-    def _stream_text_delta(self, event: dict[str, object]) -> str:
-        if self.provider == "anthropic":
-            delta = event.get("delta")
-            if isinstance(delta, dict) and delta.get("type") == "text_delta":
-                text = delta.get("text")
-                return text if isinstance(text, str) else ""
-            return ""
-        choices = event.get("choices")
-        if not isinstance(choices, list) or not choices or not isinstance(choices[0], dict):
-            return ""
-        delta = choices[0].get("delta")
-        if not isinstance(delta, dict):
-            return ""
-        text = delta.get("content")
-        return text if isinstance(text, str) else ""
-
-    @staticmethod
-    def _partial_answer(content: str) -> str:
-        match = re.search(r'"answer"\s*:\s*"', content)
-        if not match:
-            return ""
-        result: list[str] = []
-        index = match.end()
-        escapes = {
-            "n": "\n",
-            "r": "\r",
-            "t": "\t",
-            "b": "\b",
-            "f": "\f",
-            '"': '"',
-            "\\": "\\",
-            "/": "/",
-        }
-        while index < len(content):
-            char = content[index]
-            if char == '"':
-                break
-            if char != "\\":
-                result.append(char)
-                index += 1
-                continue
-            if index + 1 >= len(content):
-                break
-            escaped = content[index + 1]
-            if escaped == "u":
-                code = content[index + 2 : index + 6]
-                if len(code) < 4 or not all(item in "0123456789abcdefABCDEF" for item in code):
-                    break
-                result.append(chr(int(code, 16)))
-                index += 6
-                continue
-            if escaped not in escapes:
-                break
-            result.append(escapes[escaped])
-            index += 2
-        return "".join(result)
 
     def _model_request(
         self, system: str, user: str
@@ -508,29 +406,64 @@ class AnswerGenerator:
         return parsed if isinstance(parsed, dict) else {"answer": str(parsed)}
 
 
+_NEGATION_PREFIX = r"(?:不应|不能|不可|不要|不得|禁止|避免|切勿|不建议|没有|未被)"
+# 断言词：把未来结果说成确定会发生。排除“机会/社会/体会/工会/协会”等复合词里的“会”。
+_ASSERTION_WORDS = (
+    r"(?:(?<![机体会社工协])会|将|必然|一定|肯定|必定|注定|铁定|保准|必会|必将|就要|就会)"
+)
+# 结果词：spec 明令不得承诺的具体结果。
+_OUTCOME_WORDS = (
+    r"(?:结婚|离婚|发财|发大财|暴富|大富|破财|破产|升职|升官|加薪|买房|买车|"
+    r"生子|怀孕|考中|考上|中奖|去世|身亡|死亡|重病|癌症|车祸|血光|牢狱|官非|"
+    r"归西|身故|离世|横死|灾祸)"
+)
+# 年份词：公元年、汉字数字年、常见相对年份。
+_YEAR_WORDS = (
+    r"(?:(?:19|20)\d{2}\s*年|[〇零一二三四五六七八九十百千万]+年|今年|明年|后年|来年|次年)"
+)
+# 疑问年份词：这类词直接接结果词，等于“告诉用户某年会发生”。
+_QUERY_TIME_WORDS = r"(?:何年|哪年|哪一年|何时|几时|啥时候|什么时候|什么年份)"
+# 寿元词：寿命与死亡时间的直接表述。
+_LIFESPAN_WORDS = r"(?:寿元|寿命|阳寿|享年|大限)"
+# 这些措辞在命理回答里只可能是承诺或死期断言，本身即违规。
+_ABSOLUTE_PROMISE_WORDS = r"(?:发大财|一夜暴富|归西|命不久矣|寿终正寝)"
+# 编造条文编号：direct 通道无知识库可依据，出现具体篇章/条文编号即违规。
+_FABRICATED_CITATION = r"第[〇零一二三四五六七八九十百千万\d]+(?:章|节|条|篇|卷)"
+
+# These obvious cases cannot be overridden by a permissive verifier response.
+_SAFETY_PATTERNS = (
+    r"(?:你|您|命主|患者|孩子).{0,16}(?:患有|患了|得了|确诊|诊断为)",
+    r"(?:建议|应该|应当|必须|立即|请|可以|需要|务必|尽快|^).{0,12}"
+    r"(?:停药|停用|停止服用|停止用药|停止治疗|服用|加大剂量|减药|减量|动手术|进行手术)",
+    r"(?:每日|每天|每次).{0,8}(?:服用|口服|注射)",
+    rf"(?:一定|必然|肯定|必定|必会|必将|必有|已经(?:可以)?确定).{{0,16}}{_OUTCOME_WORDS}",
+    rf"{_OUTCOME_WORDS}.{{0,12}}已经(?:可以)?确定",
+    r"(?:你|您|命主).{0,20}(?:会在|将在).{0,20}(?:死|去世|身亡)",
+    r"(?:你|您|命主).{0,20}(?:只能活|还能活).{0,12}(?:岁|年)",
+    rf"{_YEAR_WORDS}.{{0,20}}{_ASSERTION_WORDS}.{{0,12}}{_OUTCOME_WORDS}",
+    rf"{_OUTCOME_WORDS}.{{0,12}}{_ASSERTION_WORDS}",
+    rf"{_QUERY_TIME_WORDS}.{{0,16}}{_OUTCOME_WORDS}",
+    rf"{_LIFESPAN_WORDS}.{{0,8}}\d+\s*(?:岁|年)",
+    rf"{_LIFESPAN_WORDS}.{{0,8}}[〇零一二三四五六七八九十百]+(?:岁|年)",
+    _ABSOLUTE_PROMISE_WORDS,
+    _FABRICATED_CITATION,
+)
+_CLAUSE_BOUNDARY = r"[，,。！？!?；;\n]|但是|而是"
+
+
 def _explicit_safety_violation(generated: GenerationResult) -> bool:
-    # These obvious cases cannot be overridden by a permissive verifier response.
-    patterns = (
-        r"(?:你|您|命主|患者|孩子).{0,16}(?:患有|患了|得了|确诊|诊断为)",
-        r"(?:建议|应该|应当|必须|立即|请|可以|需要|务必|尽快|^).{0,12}"
-        r"(?:停药|停用|停止服用|停止用药|停止治疗|服用|加大剂量|减药|减量|动手术|进行手术)",
-        r"(?:每日|每天|每次).{0,8}(?:服用|口服|注射)",
-        r"(?:一定|必然|肯定|必定|必会|必将|必有|已经(?:可以)?确定).{0,16}"
-        r"(?:发财|中奖|大奖|升职|升官|结婚|离婚|成功|上岸|灾祸|重病|确诊|死亡|去世)",
-        r"(?:发财|中奖|大奖|升职|结婚|离婚|成功).{0,12}已经(?:可以)?确定",
-        r"(?:你|您|命主).{0,20}(?:会在|将在).{0,20}(?:死|去世|身亡)",
-        r"(?:你|您|命主).{0,20}(?:只能活|还能活).{0,12}(?:岁|年)",
-    )
     text = "\n".join([generated.answer, *generated.uncertainties, *generated.followups])
     text = re.sub(r"[\s*_`#\u200b-\u200f\ufeff]", "", text)
-    for clause in re.split(r"[，,。！？!?；;\n]|但是|而是", text):
-        for pattern in patterns:
-            for match in re.finditer(pattern, clause):
-                prefix = clause[max(0, match.start() - 8) : match.start()]
+    # 子句级检查保留，同时对整段规范化文本再跑一遍：模态词与结果词被逗号分到
+    # 不同子句时（“你明年一定，会结婚”）只在整段窗口上命中，二者取或。
+    for target in (text, *re.split(_CLAUSE_BOUNDARY, text)):
+        for pattern in _SAFETY_PATTERNS:
+            for match in re.finditer(pattern, target):
+                prefix = target[max(0, match.start() - 8) : match.start()]
                 matched = match.group(0)
-                if re.search(r"(?:不应|不能|不可|不要|不得|禁止|避免|切勿|不建议)", prefix):
+                if re.search(_NEGATION_PREFIX, prefix):
                     continue
-                if re.search(r"(?:不应|不能|不可|不要|不得|禁止|切勿|不建议|没有|未被)", matched):
+                if re.search(_NEGATION_PREFIX, matched):
                     continue
                 return True
     return False
