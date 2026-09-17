@@ -412,6 +412,13 @@ def test_safety_gate_catches_cross_clause_escape() -> None:
     assert _violation("2028年你必然，暴富") is True
 
 
+def test_safety_gate_catches_assertion_split_across_answer_and_uncertainties() -> None:
+    # 断言词在 answer、结果词落在 uncertainties：拼接扫描仍应拦下。
+    assert _violation("命主明年一定", ["会结婚"]) is True
+    # uncertainties 里出现“可能”不能把 answer 里的确定性断言洗成条件式。
+    assert _violation("2028年你会结婚", ["现实结果仍可能变化"]) is True
+
+
 @pytest.mark.parametrize(
     "answer",
     [
@@ -438,6 +445,98 @@ def test_safety_gate_keeps_negation_whitelist(answer: str) -> None:
     ],
 )
 def test_safety_gate_keeps_conditional_wording(answer: str) -> None:
+    assert _violation(answer) is False
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        # 普通枚举（产品提示词要求用“1. ”/“- ”编号列表，这类措辞必然常见）
+        "第一条建议是结合大运观察，第二条是留意流年",
+        "我建议分三步：第一条，先看月令",
+        "命主第一条优势是印星得力",
+        "本报告分为三篇，第一篇讲格局",
+        # 引文语境之外的分段表述
+        "本命局可分为三层来看，第三篇式的罗列并无必要",
+    ],
+)
+def test_safety_gate_allows_plain_enumerations(answer: str) -> None:
+    assert _violation(answer) is False
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        # 真实编造引用：书名号或引文线索词出现在条文编号之前
+        "据《子平真诠》第八章所论，财旺生官需身强",
+        "《滴天髓》第十二节云：财多身弱，富屋贫人",
+        "书中第一条规定此格取用之法",
+    ],
+)
+def test_safety_gate_rejects_citations_in_quotation_context(answer: str) -> None:
+    assert _violation(answer) is True
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        # spec 要求“未来只给条件式趋势”，带对冲标记的年份表述是应有输出
+        "2026年你会有结婚的念头，是否成行仍看条件",
+        "2029年你会结婚，但是否成行取决于大运配合",
+        "2030年你会升职，若流年与大运配合则更稳",
+        "2031年你会有买房的可能，但仍需看具体条件",
+        "2032年你会结婚一事，仍需视情况而定",
+        "2033年你会升职，需视大运而定",
+    ],
+)
+def test_safety_gate_allows_hedged_year_statements(answer: str) -> None:
+    assert _violation(answer) is False
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        # “视”只在对冲用法（视情况/视大运）下才算弱化标记；
+        # “重视/忽视”里的“视”不得把真断言洗白。
+        "2028年你会结婚，值得重视",
+        "2028年你会结婚，切莫忽视",
+    ],
+)
+def test_safety_gate_does_not_treat_vision_compounds_as_hedges(answer: str) -> None:
+    assert _violation(answer) is True
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        "绝不预测你2028年是否会结婚，因为命理不作此类断言",
+        "决不认为2028年你会结婚",
+        "不必把命主寿元止于63岁当作结论",
+        "不作2028年你会结婚的判断",
+        "不予断言你2035年会去世",
+    ],
+)
+def test_safety_gate_negation_whitelist_extended(answer: str) -> None:
+    assert _violation(answer) is False
+
+
+# 真实风格样例：正常命理解读、条件式趋势、编号列表、专家口吻、含否定/拒答的句子。
+# 修前基线：9 条中 6 条被安全闸误判（整篇答案会被替换为兜底文案）。
+_REALISTIC_STYLE_SAMPLES = [
+    "第一条建议是结合大运观察，第二条是留意流年",
+    "我建议分三步：第一条，先看月令",
+    "命主第一条优势是印星得力",
+    "本报告分为三篇，第一篇讲格局",
+    "2026年你会有结婚的念头，是否成行仍看条件",
+    "绝不预测你2028年是否会结婚，因为命理不作此类断言",
+    "从命局看，月令得气，日主偏强，宜以财官为用，结合大运流向逐步观察",
+    "2028年前后若流年与命局配合，感情有推进的空间，需看具体条件，不作确定性判断",
+    "传统典籍多言印星主学业，但身弱逢印仍需辨别，实际仍看个人努力与客观条件",
+]
+
+
+@pytest.mark.parametrize("answer", _REALISTIC_STYLE_SAMPLES)
+def test_safety_gate_keeps_realistic_style_samples(answer: str) -> None:
     assert _violation(answer) is False
 
 

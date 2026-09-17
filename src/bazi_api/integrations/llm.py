@@ -406,7 +406,9 @@ class AnswerGenerator:
         return parsed if isinstance(parsed, dict) else {"answer": str(parsed)}
 
 
-_NEGATION_PREFIX = r"(?:不应|不能|不可|不要|不得|禁止|避免|切勿|不建议|没有|未被)"
+_NEGATION_PREFIX = (
+    r"(?:不应|不能|不可|不要|不得|禁止|避免|切勿|不建议|绝不|决不|不必|不作|不予|没有|未被)"
+)
 # 断言词：把未来结果说成确定会发生。排除“机会/社会/体会/工会/协会”等复合词里的“会”。
 _ASSERTION_WORDS = (
     r"(?:(?<![机体会社工协])会|将|必然|一定|肯定|必定|注定|铁定|保准|必会|必将|就要|就会)"
@@ -427,8 +429,26 @@ _QUERY_TIME_WORDS = r"(?:何年|哪年|哪一年|何时|几时|啥时候|什么�
 _LIFESPAN_WORDS = r"(?:寿元|寿命|阳寿|享年|大限)"
 # 这些措辞在命理回答里只可能是承诺或死期断言，本身即违规。
 _ABSOLUTE_PROMISE_WORDS = r"(?:发大财|一夜暴富|归西|命不久矣|寿终正寝)"
-# 编造条文编号：direct 通道无知识库可依据，出现具体篇章/条文编号即违规。
+# 编造条文编号：direct 通道无知识库可依据。但“第一条建议”“第一篇讲格局”这类普通枚举
+# 与产品提示词要求的编号列表同形，所以只在引文语境（前方窗口内出现书名号或引文线索词）
+# 才判违规；单看“第X条/篇/节/卷”不构成违规。
 _FABRICATED_CITATION = r"第[〇零一二三四五六七八九十百千万\d]+(?:章|节|条|篇|卷)"
+_CITATION_CONTEXT_WINDOW = 24
+_CITATION_CUES = r"(?:《|》|出自|原文|引文|引用|记载|典籍|古籍|经云|书中|卷)"
+# 对冲/条件标记：spec 要求“未来只给条件式趋势”，带这些标记的年份表述是应有输出。
+# “视”只认“视情况/视条件/视大运……”这类对冲用法；裸“视”会撞上“重视/忽视”等复合词，
+# 把“2028年你会结婚，值得重视”这类真断言洗白。
+_HEDGE_WORDS = (
+    r"(?:是否|看条件|取决于|条件式|倾向|可能|未必|不一定|若|如果|除非|仍看|需看|"
+    r"视(?:情况|条件|现实|实际|具体|个人|各人|命局|大运|流年|岁运|情形))"
+)
+# 对冲标记检索窗口：匹配跨度内，以及跨度前后各一段（条件式从句常紧跟断言之后）。
+_HEDGE_WINDOW_BEFORE = 12
+_HEDGE_WINDOW_AFTER = 24
+# 年份断言规则：唯一需要条件例外的规则（其余规则本身即铁定的承诺或死期断言）。
+_YEAR_ASSERTION_PATTERN = rf"{_YEAR_WORDS}.{{0,20}}{_ASSERTION_WORDS}.{{0,12}}{_OUTCOME_WORDS}"
+# 结果词在前、断言词在后的顺序同样禁止。
+_RESULT_BEFORE_ASSERTION_PATTERN = rf"{_OUTCOME_WORDS}.{{0,12}}{_ASSERTION_WORDS}"
 
 # These obvious cases cannot be overridden by a permissive verifier response.
 _SAFETY_PATTERNS = (
@@ -440,33 +460,85 @@ _SAFETY_PATTERNS = (
     rf"{_OUTCOME_WORDS}.{{0,12}}已经(?:可以)?确定",
     r"(?:你|您|命主).{0,20}(?:会在|将在).{0,20}(?:死|去世|身亡)",
     r"(?:你|您|命主).{0,20}(?:只能活|还能活).{0,12}(?:岁|年)",
-    rf"{_YEAR_WORDS}.{{0,20}}{_ASSERTION_WORDS}.{{0,12}}{_OUTCOME_WORDS}",
-    rf"{_OUTCOME_WORDS}.{{0,12}}{_ASSERTION_WORDS}",
+    _YEAR_ASSERTION_PATTERN,
+    _RESULT_BEFORE_ASSERTION_PATTERN,
     rf"{_QUERY_TIME_WORDS}.{{0,16}}{_OUTCOME_WORDS}",
     rf"{_LIFESPAN_WORDS}.{{0,8}}\d+\s*(?:岁|年)",
     rf"{_LIFESPAN_WORDS}.{{0,8}}[〇零一二三四五六七八九十百]+(?:岁|年)",
     _ABSOLUTE_PROMISE_WORDS,
-    _FABRICATED_CITATION,
 )
 _CLAUSE_BOUNDARY = r"[，,。！？!?；;\n]|但是|而是"
 
 
-def _explicit_safety_violation(generated: GenerationResult) -> bool:
-    text = "\n".join([generated.answer, *generated.uncertainties, *generated.followups])
-    text = re.sub(r"[\s*_`#\u200b-\u200f\ufeff]", "", text)
-    # 子句级检查保留，同时对整段规范化文本再跑一遍：模态词与结果词被逗号分到
-    # 不同子句时（“你明年一定，会结婚”）只在整段窗口上命中，二者取或。
-    for target in (text, *re.split(_CLAUSE_BOUNDARY, text)):
-        for pattern in _SAFETY_PATTERNS:
-            for match in re.finditer(pattern, target):
-                prefix = target[max(0, match.start() - 8) : match.start()]
-                matched = match.group(0)
-                if re.search(_NEGATION_PREFIX, prefix):
-                    continue
-                if re.search(_NEGATION_PREFIX, matched):
-                    continue
-                return True
+def _strip_markup(text: str) -> str:
+    return re.sub(r"[\s*_`#​-‏﻿]", "", text)
+
+
+def _is_negated(target: str, match: re.Match[str]) -> bool:
+    prefix = target[max(0, match.start() - 8) : match.start()]
+    return bool(re.search(_NEGATION_PREFIX, prefix)) or bool(
+        re.search(_NEGATION_PREFIX, match.group(0))
+    )
+
+
+def _has_hedge(target: str, match: re.Match[str], *, window_cap: int | None = None) -> bool:
+    end = match.end() + _HEDGE_WINDOW_AFTER
+    if window_cap is not None and match.end() <= window_cap:
+        end = min(end, window_cap)
+    window = target[max(0, match.start() - _HEDGE_WINDOW_BEFORE) : end]
+    return re.search(_HEDGE_WORDS, window) is not None
+
+
+def _fabricated_citation_in_quotation_context(text: str) -> bool:
+    for match in re.finditer(_FABRICATED_CITATION, text):
+        context = text[max(0, match.start() - _CITATION_CONTEXT_WINDOW) : match.start()]
+        if not re.search(_CITATION_CUES, context):
+            continue
+        if _is_negated(text, match):
+            continue
+        return True
     return False
+
+
+def _explicit_safety_violation(generated: GenerationResult) -> bool:
+    # answer 与 uncertainties/followups 分开扫描：年份断言的条件例外只看答案本身，
+    # 不让 uncertainties 的常规措辞（“现实结果仍可能变化”）把断言洗成条件式。
+    answer = _strip_markup(generated.answer)
+    supporters = _strip_markup("\n".join([*generated.uncertainties, *generated.followups]))
+    # 除年份断言外：子句级与整段（含跨字段拼接）都扫一遍。模态词与结果词被逗号
+    # 分到不同子句时（“你明年一定，会结婚”）只在整段窗口上命中，二者取或。
+    joined = answer + supporters
+    clause_targets = tuple(
+        target
+        for field in (answer, supporters, joined)
+        for target in (field, *re.split(_CLAUSE_BOUNDARY, field))
+    )
+    for pattern in _SAFETY_PATTERNS:
+        if pattern == _YEAR_ASSERTION_PATTERN:
+            continue
+        for target in clause_targets:
+            for match in re.finditer(pattern, target):
+                if not _is_negated(target, match):
+                    return True
+    # 年份断言规则加条件例外：spec 要求“未来只给条件式趋势”，带对冲标记的年份表述
+    # 属于应有输出。整段扫描不拆子句——对冲标记常落在断言之后的下一个子句
+    # （“2026年你会有结婚的念头，是否成行仍看条件”），拆子句就看不见了。
+    # joined 窗口把对冲标记的可见范围截在 answer 内，避免 uncertainties 的常规措辞
+    # （“现实结果仍可能变化”）把断言洗成条件式。
+    for target, window_cap in (
+        (answer, None),
+        (supporters, None),
+        (joined, len(answer)),
+    ):
+        for match in re.finditer(_YEAR_ASSERTION_PATTERN, target):
+            if _is_negated(target, match):
+                continue
+            if _has_hedge(target, match, window_cap=window_cap):
+                continue
+            return True
+    if _fabricated_citation_in_quotation_context(answer):
+        return True
+    return _fabricated_citation_in_quotation_context(supporters)
 
 
 def _humanize_internal_labels(text: str) -> str:
