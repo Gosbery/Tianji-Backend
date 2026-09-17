@@ -311,7 +311,9 @@ class TaskRepository:
             "chart": json.loads(row["chart_json"]),
             "school": row["school"],
             "evidence_scope": row["evidence_scope"],
-            "mode": row["mode"],
+            # 检索模式已收敛为单值 direct，tasks.mode 列是历史包袱：存量行可能仍存
+            # 旧字面量（如 hybrid_rerank），读取侧统一归一化，避免响应模型校验失败。
+            "mode": "direct",
             "archived": bool(row["archived"]),
             "created_at": row["created_at"],
             "updated_at": row["updated_at"],

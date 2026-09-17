@@ -14,6 +14,7 @@ from bazi_api.modules.charts.service import ChartCalculator
 from bazi_api.modules.conversations.repository import ConversationRepository
 from bazi_api.modules.experts.schemas import ExpertProfile
 from bazi_api.modules.tasks.repository import TaskRepository
+from bazi_api.modules.tasks.schemas import TaskSummary
 from bazi_api.modules.tasks.service import TaskService
 
 
@@ -135,5 +136,25 @@ def test_enqueue_stores_topic_id(tmp_path: Path) -> None:
         job = repository.enqueue(str(task["id"]), "看下财运", "topic:wealth")
 
         assert job["topic_id"] == "topic:wealth"
+    finally:
+        database.close()
+
+
+def test_legacy_task_mode_is_reported_as_direct(tmp_path: Path) -> None:
+    """mode 已收敛为单值，存量行里的旧字面量必须在读取侧归一化，否则接口 500。"""
+    database = SQLiteDatabase(tmp_path / "legacy.db")
+    try:
+        repository = TaskRepository(database)
+        task = create_task(repository)
+        with database.transaction() as connection:
+            connection.execute(
+                "UPDATE tasks SET mode = 'hybrid_rerank' WHERE id = ?", (task["id"],)
+            )
+
+        restored = repository.get(str(task["id"]))
+
+        assert restored["mode"] == "direct"
+        assert TaskSummary.model_validate(restored).mode == "direct"
+        assert [item["mode"] for item in repository.list()] == ["direct"]
     finally:
         database.close()
